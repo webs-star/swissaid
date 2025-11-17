@@ -587,48 +587,101 @@ footer.site-footer{
 .ft { color:#fff;text-decoration:none;font-size:15px; }
   .ft:hover { text-decoration:underline; }
 
+
+/* ===== Mobile menu dots & responsive behavior ===== */
+
+.mobile-dots {
+  display: none;
+  align-items: center;
+}
+
+.dot-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: transparent;
+  border: none;
+  display: inline-grid;
+  place-items: center;
+  cursor: pointer;
+  font-size: 22px;
+  color: var(--blue);
+}
+
+.dot-btn .dots {
+  line-height: 1;
+  font-weight: 800;
+  transform: translateY(-1px);
+}
+
+/* Slide-down panel */
+.mobile-panel {
+  position: fixed;
+  top: calc(var(--utility-height) + var(--nav-height));
+  left: 0;
+  right: 0;
+  background: #fff;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  z-index: 120;
+  transform-origin: top center;
+  transform: translateY(-12px) scaleY(.98);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform .28s cubic-bezier(.2,.9,.25,1), opacity .28s ease;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.mobile-panel.open {
+  transform: translateY(0) scaleY(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobile-panel .panel-inner {
+  padding: 12px 18px;
+}
+
 /* ======================================== */
-/* MOBILE HEADER — EXACT SAME FORMAT AS LIONS */
+/* MOBILE HEADER — EXACTLY LIKE LIONS */
 /* ======================================== */
+@media (max-width:880px) {
 
-@media (max-width: 880px) {
+  /* Hide desktop navigation */
+  .top-nav, 
+  .side-nav-container { display: none !important; }
 
-  /* Hide desktop elements */
-  .top-nav,
-  .side-nav-container {
-    display: none !important;
-  }
-
-  /* Entire header container (3 rows) */
+  /* Entire header becomes 3 rows */
   .site-header {
     display: flex;
     flex-direction: column;
-    padding: 14px 16px;
-    background: #fff;
-    gap: 14px;
     width: 100%;
+    padding: 14px 16px;
+    gap: 14px;
+    background: #fff;
   }
 
-  /* Row 1 — Logo + Title */
+  /* Row 1: Logo + two-line title */
   .brand {
     display: flex;
     align-items: center;
     gap: 12px;
+    width: 100%;
   }
 
   .brand img {
-    height: 50px;               /* matches Lions */
+    height: 52px;
   }
 
   .brand h1 {
-    font-size: 19px;            /* same visual size */
-    line-height: 1.15;
+    font-size: 20px;
+    line-height: 1.1;
     font-weight: 700;
-    max-width: 150px;           /* forces the 2-line text */
-    margin: 0;
+    max-width: 150px;  /* forces 2 lines */
   }
 
-  /* Row 2 — Join + Donate */
+  /* Row 2: Join + Donate below the brand */
   .nav-actions {
     display: flex;
     gap: 10px;
@@ -636,25 +689,11 @@ footer.site-footer{
   }
 
   .nav-actions a {
-    flex: 1;
-    padding: 10px 0;
+    flex: 1;              /* stretch like Lions */
     text-align: center;
-    border-radius: 6px;
-    font-size: 16px;
-    font-weight: 600;
   }
 
-  .btn-join {
-    background: #0055d4;   /* Lions blue */
-    color: white;
-  }
-
-  .btn-donate {
-    background: #f7c600;   /* Lions yellow */
-    color: black;
-  }
-
-  /* Row 3 — 3-dot menu */
+  /* Row 3: Three-dot menu button (right aligned) */
   .mobile-dots {
     display: flex;
     justify-content: flex-end;
@@ -662,29 +701,26 @@ footer.site-footer{
   }
 
   .dot-btn {
-    width: 42px;
-    height: 42px;
-    display: grid;
-    place-items: center;
-    border: none;
-    background: transparent;
+    width: 48px;
+    height: 48px;
     font-size: 30px;
-    font-weight: 900;
-    cursor: pointer;
   }
 
-  .dot-btn .dots {
-    transform: translateY(-3px);
-  }
 }
 
 /* Extra small phones */
-@media (max-width: 520px) {
+@media (max-width:520px) {
+
   .brand h1 {
-    font-size: 17px;
+    font-size: 18px;
     max-width: 120px;
   }
+
+  .nav-actions {
+    flex-direction: row;
+  }
 }
+
 
 </style>
 </head>
@@ -703,11 +739,11 @@ footer.site-footer{
 <header>
   <div class="site-header" role="banner">
 
-    <!-- Row 1: Logo + Two-line Title -->
+    <!-- Row 1: Logo + Two-line NGO Name -->
     <div class="brand">
       <img src="https://res.cloudinary.com/dwvt4e9o2/image/upload/v1763381089/WhatsApp_Image_2025-11-17_at_9.22.25_AM_c17ghd.jpg" alt="swisslogo" />
 
-      <!-- Force 2-line title like Lions -->
+      <!-- Force two-line title exactly like Lions International -->
       <h1>
         Swiss Aid Connect<br>
         Foundation
@@ -720,7 +756,7 @@ footer.site-footer{
       <a class="btn btn-donate" href="#">Donate</a>
     </div>
 
-    <!-- Row 3: 3-Dot Mobile Menu Button (Lions Style) -->
+    <!-- Row 3: Three-dot Mobile Menu Button -->
     <div class="mobile-dots">
       <button class="dot-btn" id="btnMenu" aria-haspopup="true" aria-controls="mobileMenu" aria-expanded="false">
         <span class="dots">⋮</span>
@@ -729,7 +765,7 @@ footer.site-footer{
 
   </div>
 
-  <!-- Desktop Side Navigation (unchanged) -->
+  <!-- Desktop Side Navigation -->
   <div class="side-nav-container">
     <nav class="side-nav" role="navigation" aria-label="Main navigation">
       <a href="#">About Us</a>
@@ -744,7 +780,6 @@ footer.site-footer{
 <div id="mobileMenu" class="mobile-panel" aria-hidden="true" role="menu">
   <div class="panel-inner" id="mobileMenuInner"></div>
 </div>
-
 
 <main>
   <section class="hero-wrap" aria-labelledby="hero-heading">
