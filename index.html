@@ -79,7 +79,7 @@ html,body{
   display:flex;
   align-items:center;
   gap:12px;
-  min-width:220px;
+ 
 }
 .brand img{ height:90px; width:auto; display:block; }
 .brand h1{
@@ -305,12 +305,6 @@ footer.site-footer{
   font-size:14px;
 }
 
-@media (max-width:880px){
-  nav.side-nav{ display:none }
-  .site-header{ flex-direction:column; height:auto; gap:8px; padding:12px 18px; }
-  .brand img{ height:44px }
-  .top-nav{ font-size:12px; gap:12px }
-}
 @media (max-width:520px){
   .hero-huge{ font-size:28px }
   .hero-sub{ font-size:18px }
@@ -586,6 +580,14 @@ footer.site-footer{
 
 .ft { color:#fff;text-decoration:none;font-size:15px; }
   .ft:hover { text-decoration:underline; }
+
+
+.dot-btn { display:none; }
+@media (max-width:880px) {
+  .dot-btn { display:flex; }
+}
+
+  
 /* ============================== */
 /* FINAL MOBILE LAYOUT (CLEAN)    */
 /* ============================== */
