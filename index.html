@@ -887,31 +887,36 @@ html, body {
   }
 }
 
+
 /* MOBILE MENU BUTTON STYLES */
 .mobile-panel a {
   display: block;
-  padding: 14px 18px;
-  font-size: 22px;      /* slightly smaller as requested */
+  padding: 12px 14px;        /* smaller padding */
+  font-size: 16px;           /* smaller text */
   font-weight: 700;
-  margin-bottom: 10px;
+  margin: 6px auto;          /* centers buttons & reduces spacing */
   border-radius: 10px;
   text-decoration: none;
   text-align: right;
+
+  width: 70%;                /* reduced width */
+  max-width: 300px;          /* prevents overly wide buttons */
 }
+  
+  
 
 /* COLOR MATCHING — UTILITY NAV (first 6 items) */
 .mobile-panel a:nth-child(1) { background:#0b61b6; color:#fff; } /* A.I */
 .mobile-panel a:nth-child(2) { background:#7a2fa6; color:#fff; } /* Portal */
-.mobile-panel a:nth-child(3) { background:#f5c400; color:#111; } /* Shop */
-.mobile-panel a:nth-child(4) { background:#e94e77; color:#fff; } /* Convention */
-.mobile-panel a:nth-child(5) { background:#0b61b6; color:#fff; } /* Find a Club */
+
+
 .mobile-panel a:nth-child(6) { background:#7a2fa6; color:#fff; } /* EN */
 
 /* COLOR MATCHING — MAIN NAV (next 4 items) */
 .mobile-panel a:nth-child(7)  { background:#f5c400; color:#111; } /* About Us */
 .mobile-panel a:nth-child(8)  { background:#0b61b6; color:#fff; } /* Our Impact */
 .mobile-panel a:nth-child(9)  { background:#7a2fa6; color:#fff; } /* Get Involved */
-.mobile-panel a:nth-child(10) { background:#e94e77; color:#fff; } /* Member Center */
+
 
 
 
@@ -1298,16 +1303,16 @@ document.getElementById('btnMenu').addEventListener('click', () => {
       <!-- Utility Nav -->
       <a href="#">A.I</a>
       <a href="#">Portal</a>
-      <a href="#">Shop</a>
-      <a href="#">Convention</a>
-      <a href="#">Find a Club</a>
+     
+     
+     
       <a href="#">EN</a>
 
       <!-- Main Navigation -->
       <a href="#">About Us</a>
       <a href="#">Our Impact</a>
       <a href="#">Get Involved</a>
-      <a href="#" target="_blank" rel="noopener">Member Resource Center ↗</a>
+     
     `;
   }
 });
