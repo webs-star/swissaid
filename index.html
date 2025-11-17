@@ -887,12 +887,11 @@ html, body {
   }
 }
 
-
 /* MOBILE MENU BUTTON STYLES */
 .mobile-panel a {
   display: block;
   padding: 14px 18px;
-  font-size: 24px;
+  font-size: 22px;      /* slightly smaller as requested */
   font-weight: 700;
   margin-bottom: 10px;
   border-radius: 10px;
@@ -900,37 +899,21 @@ html, body {
   text-align: right;
 }
 
-/* COLOR MATCHING DESKTOP NAV */
-.mobile-panel a:nth-child(1) {
-  background: #0b61b6; /* blue */
-  color: #fff;
-}
+/* COLOR MATCHING — UTILITY NAV (first 6 items) */
+.mobile-panel a:nth-child(1) { background:#0b61b6; color:#fff; } /* A.I */
+.mobile-panel a:nth-child(2) { background:#7a2fa6; color:#fff; } /* Portal */
+.mobile-panel a:nth-child(3) { background:#f5c400; color:#111; } /* Shop */
+.mobile-panel a:nth-child(4) { background:#e94e77; color:#fff; } /* Convention */
+.mobile-panel a:nth-child(5) { background:#0b61b6; color:#fff; } /* Find a Club */
+.mobile-panel a:nth-child(6) { background:#7a2fa6; color:#fff; } /* EN */
 
-.mobile-panel a:nth-child(2) {
-  background: #7a2fa6; /* purple */
-  color: #fff;
-}
+/* COLOR MATCHING — MAIN NAV (next 4 items) */
+.mobile-panel a:nth-child(7)  { background:#f5c400; color:#111; } /* About Us */
+.mobile-panel a:nth-child(8)  { background:#0b61b6; color:#fff; } /* Our Impact */
+.mobile-panel a:nth-child(9)  { background:#7a2fa6; color:#fff; } /* Get Involved */
+.mobile-panel a:nth-child(10) { background:#e94e77; color:#fff; } /* Member Center */
 
-.mobile-panel a:nth-child(3) {
-  background: #f5c400; /* yellow */
-  color: #111;
-}
 
-.mobile-panel a:nth-child(4) {
-  background: #e94e77; /* pink */
-  color: #fff;
-}
-
-/* JOIN + DONATE inside mobile menu */
-.mobile-panel .join-btn {
-  background: var(--blue);
-  color: #fff;
-}
-
-.mobile-panel .donate-btn {
-  background: var(--yellow);
-  color: #111;
-}
 
 
 
@@ -1304,7 +1287,6 @@ html, body {
 
 <script>
 
-
 document.getElementById('btnMenu').addEventListener('click', () => {
   const menu = document.getElementById('mobileMenu');
   const inner = document.getElementById('mobileMenuInner');
@@ -1313,13 +1295,19 @@ document.getElementById('btnMenu').addEventListener('click', () => {
 
   if (inner.innerHTML.trim() === "") {
     inner.innerHTML = `
-      <a href="#" class="mobile-link">About Us</a>
-      <a href="#" class="mobile-link">Our Impact</a>
-      <a href="#" class="mobile-link">Get Involved</a>
-      <a href="#" class="mobile-link">Member Resource Center ↗</a>
+      <!-- Utility Nav -->
+      <a href="#">A.I</a>
+      <a href="#">Portal</a>
+      <a href="#">Shop</a>
+      <a href="#">Convention</a>
+      <a href="#">Find a Club</a>
+      <a href="#">EN</a>
 
-      <a href="#" class="mobile-link join-btn">Join</a>
-      <a href="#" class="mobile-link donate-btn">Donate</a>
+      <!-- Main Navigation -->
+      <a href="#">About Us</a>
+      <a href="#">Our Impact</a>
+      <a href="#">Get Involved</a>
+      <a href="#" target="_blank" rel="noopener">Member Resource Center ↗</a>
     `;
   }
 });
