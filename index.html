@@ -581,7 +581,7 @@ footer.site-footer{
 .ft { color:#fff;text-decoration:none;font-size:15px; }
   .ft:hover { text-decoration:underline; }
 
-
+/* Desktop: hide mobile menu */
 .dot-btn { display:none; }
 
 
@@ -590,13 +590,13 @@ footer.site-footer{
 /* ============================== */
 @media (max-width:880px) {
 
-  /* Hide desktop stuff */
+  /* Hide desktop navigation */
   .top-nav,
   .side-nav-container {
     display:none !important;
   }
 
-  /* Auto-height header so nothing overflows */
+  /* HEADER */
   .site-header {
     position:fixed;
     top:var(--utility-height);
@@ -610,72 +610,76 @@ footer.site-footer{
     z-index:200;
   }
 
-  /* BRAND ROW — FIXED */
+  /* BRAND ROW — FLEX VERSION (STABLE) */
   .brand {
-    display:flex;                         /* ← CHANGED from grid to flex */
+    display:flex;
     align-items:center;
-    justify-content:space-between;        /* ← keeps dots inside screen */
+    justify-content:space-between;   /* keeps dots inside */
     width:100%;
     gap:8px;
+    min-width:0;                      /* prevents pushing content out */
   }
 
   .brand img {
-    height:46px;
+    height:42px;                     /* reduced slightly for safety */
+    flex-shrink:0;                   /* prevent squish */
   }
 
   .brand h1 {
-    font-size:16px;
+    font-size:15px;
     line-height:1.05;
     margin:0;
-    max-width:95px;                       /* ← reduced to prevent pushing menu */
+    max-width:115px;                 /* safe limit */
     overflow:hidden;
-    text-overflow:ellipsis;               /* ← clean cut, no overflow */
-    white-space:nowrap;                   /* ← single line to protect layout */
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    flex-shrink:1;                   /* allows it to adjust */
   }
 
-  /* MENU BUTTON — FIXED */
+  /* MENU BUTTON — FINAL SIZE */
   .dot-btn {
     display:flex !important;
-    width:34px;                            /* ← smaller, fits any screen */
-    height:34px;
-    font-size:26px;
+    width:32px;
+    height:32px;
+    font-size:22px;                  /* smaller = fits all screens */
     justify-content:center;
     align-items:center;
     background:none;
     border:none;
     padding:0;
     cursor:pointer;
-    flex-shrink:0;                         /* ← stops overflow 100% */
+    flex-shrink:0;                   /* never gets pushed out */
   }
 
   .dots {
-    line-height:0.9;
+    line-height:0.8;
   }
 
-  /* JOIN + DONATE — FIXED */
+  /* JOIN + DONATE — FINAL STYLING */
   .nav-actions {
     display:flex;
     width:100%;
-    gap:12px;
-    justify-content:flex-start;            /* ← stops stretching */
+    gap:10px;
+    justify-content:flex-start;      /* no stretching */
   }
 
   .nav-actions a {
-    flex:0 0 auto;                         /* ← STOP stretching wide */
-    padding:10px 14px !important;          /* ← normal button size */
-    font-size:16px !important;
+    flex:0 0 auto;                   /* natural width */
+    padding:9px 14px !important;
+    font-size:15px !important;
     text-align:center;
-    border-radius:8px !important;
-    width:auto;                            /* ← natural width */
+    border-radius:7px !important;
+    width:auto;
   }
 
   .btn {
-    padding:10px 14px !important;
+    padding:9px 14px !important;
   }
 }
 
+
 /* ========================= */
-/* MOBILE PANEL FIX          */
+/* MOBILE PANEL — FIX        */
 /* ========================= */
 .mobile-panel {
   position:fixed;
