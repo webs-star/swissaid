@@ -588,6 +588,144 @@ footer.site-footer{
   .ft:hover { text-decoration:underline; }
 
 
+
+/* ===== Mobile menu dots & responsive behavior ===== */
+
+.mobile-dots {
+  display: none;
+  align-items: center;
+}
+
+.dot-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: transparent;
+  border: none;
+  display: inline-grid;
+  place-items: center;
+  cursor: pointer;
+  font-size: 22px;
+  color: var(--blue);
+}
+
+.dot-btn .dots {
+  line-height: 1;
+  font-weight: 800;
+  transform: translateY(-1px);
+}
+
+/* Slide-down panel */
+.mobile-panel {
+  position: fixed;
+  top: calc(var(--utility-height) + var(--nav-height));
+  left: 0;
+  right: 0;
+  background: #fff;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  z-index: 120;
+  transform-origin: top center;
+  transform: translateY(-12px) scaleY(.98);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform .28s cubic-bezier(.2,.9,.25,1), opacity .28s ease;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.mobile-panel.open {
+  transform: translateY(0) scaleY(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobile-panel .panel-inner {
+  padding: 12px 18px;
+}
+
+/* ======================================== */
+/* MOBILE HEADER — EXACTLY LIKE LIONS */
+/* ======================================== */
+@media (max-width:880px) {
+
+  /* Hide desktop navigation */
+  .top-nav, 
+  .side-nav-container { display: none !important; }
+
+  /* Entire header becomes 3 rows */
+  .site-header {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 14px 16px;
+    gap: 14px;
+    background: #fff;
+  }
+
+  /* Row 1: Logo + two-line title */
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .brand img {
+    height: 52px;
+  }
+
+  .brand h1 {
+    font-size: 20px;
+    line-height: 1.1;
+    font-weight: 700;
+    max-width: 150px;  /* forces 2 lines */
+  }
+
+  /* Row 2: Join + Donate below the brand */
+  .nav-actions {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .nav-actions a {
+    flex: 1;              /* stretch like Lions */
+    text-align: center;
+  }
+
+  /* Row 3: Three-dot menu button (right aligned) */
+  .mobile-dots {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+  }
+
+  .dot-btn {
+    width: 48px;
+    height: 48px;
+    font-size: 30px;
+  }
+
+}
+
+/* Extra small phones */
+@media (max-width:520px) {
+
+  .brand h1 {
+    font-size: 18px;
+    max-width: 120px;
+  }
+
+  .nav-actions {
+    flex-direction: row;
+  }
+}
+
+
+</style>
+</head>
+<body>
 <!-- Top Utility Nav -->
 <div class="top-nav">
   <a href="#">A.I</a>
@@ -643,7 +781,6 @@ footer.site-footer{
 <div id="mobileMenu" class="mobile-panel" aria-hidden="true" role="menu">
   <div class="panel-inner" id="mobileMenuInner"></div>
 </div>
-
 
 
 <main>
