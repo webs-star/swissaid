@@ -588,10 +588,6 @@ footer.site-footer{
   .ft:hover { text-decoration:underline; }
 
 
-
-
-
-
 /* ===== Mobile menu dots & responsive behavior ===== */
 
 /* Dot menu buttons (hidden by default on desktop) */
@@ -676,13 +672,15 @@ footer.site-footer{
   /* show ⋮ button */
   .mobile-dots { display: flex; }
 
-  /* header flex: brand left, buttons+dots right */
+  /* header flex: brand left, buttons + dot right, wrap if needed */
   .site-header {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap; /* allow wrapping */
     padding: 8px 14px;
-    height: var(--nav-height);
+    height: auto; /* adjust height for wrap */
+    gap: 8px;
   }
 
   /* group nav-actions + dot */
@@ -690,6 +688,7 @@ footer.site-footer{
     display: flex;
     align-items: center;
     gap: 8px;
+    flex-wrap: wrap; /* prevent overflow */
   }
 
   /* move dot button to right of Join/Donate buttons */
@@ -718,8 +717,13 @@ footer.site-footer{
   .mobile-panel .panel-inner {
     padding: 10px 14px;
   }
+  
+  /* stack buttons on very small screens */
+  .nav-actions {
+    justify-content: center;
+    width: 100%;
+  }
 }
-
 
 
 
