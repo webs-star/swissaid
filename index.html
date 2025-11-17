@@ -888,38 +888,39 @@ html, body {
 }
 
 
-
-/* MOBILE MENU BUTTON STYLES — CLEAN, TRANSPARENT */
+/* BASE MOBILE MENU BUTTON STYLE (clean text links) */
 .mobile-panel a {
   display: block;
-  padding: 12px 14px;        /* smaller padding */
-  font-size: 16px;           /* smaller text */
+  padding: 12px 14px;
+  font-size: 16px;
   font-weight: 700;
-  margin: 6px auto;          /* centers buttons & reduces spacing */
+  margin: 6px auto;
   border-radius: 10px;
   text-decoration: none;
   text-align: right;
 
-  width: 70%;                /* reduced width */
+  width: 70%;
   max-width: 300px;
 
-  background: transparent !important; /* clear background */
-  color: #111 !important;             /* clean text */
-  border: 1px solid #ddd;             /* subtle outline like EN */
-}
-
-/* REMOVE ALL PREVIOUS COLOR MATCHING */
-.mobile-panel a:nth-child(1),
-.mobile-panel a:nth-child(2),
-.mobile-panel a:nth-child(6),
-.mobile-panel a:nth-child(7),
-.mobile-panel a:nth-child(8),
-.mobile-panel a:nth-child(9) {
-  background: transparent !important;
-  color: #111 !important;
+  background: transparent !important;  /* NO CARD BACKGROUND */
+  border: none !important;             /* NO BORDER */
 }
 
 
+/* --------------------------------------------- */
+/* TEXT COLORS ONLY — NO BACKGROUND, NO CARDS    */
+/* --------------------------------------------- */
+
+/* Utility Nav */
+.mobile-panel a:nth-child(1) { color:#0b61b6 !important; } /* A.I */
+.mobile-panel a:nth-child(2) { color:#7a2fa6 !important; } /* Portal */
+
+.mobile-panel a:nth-child(6) { color:#7a2fa6 !important; } /* EN */
+
+/* Main Nav */
+.mobile-panel a:nth-child(7) { color:#f5c400 !important; } /* About Us */
+.mobile-panel a:nth-child(8) { color:#0b61b6 !important; } /* Our Impact */
+.mobile-panel a:nth-child(9) { color:#7a2fa6 !important; } /* Get Involved */
 
 
   
