@@ -586,83 +586,18 @@ footer.site-footer{
 
 .ft { color:#fff;text-decoration:none;font-size:15px; }
   .ft:hover { text-decoration:underline; }
-
-
-/* ===== Mobile menu dots & responsive behavior ===== */
-
-/* Make top-right menu button inside brand row */
-.brand {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;   /* pushes menu to right */
-  width: 100%;
-}
-
-.brand h1 {
-  flex: 1;
-}
-
-/* New big dashes menu icon */
-.dot-btn {
-  width: 44px;
-  height: 44px;
-  border: none;
-  background: transparent;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 36px;      /* bigger dashes */
-  font-weight: 900;
-  padding: 0;
-  margin-left: 10px;
-  cursor: pointer;
-}
-
-.dots {
-  line-height: 0.7;      /* makes the ≡ thicker visually */
-  transform: translateY(-1px);
-}
-
-
-/* Slide-down panel */
-.mobile-panel {
-  position: fixed;
-  top: calc(var(--utility-height) + var(--nav-height));
-  left: 0;
-  right: 0;
-  background: #fff;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
-  border-bottom: 1px solid rgba(0,0,0,0.06);
-  z-index: 120;
-  transform-origin: top center;
-  transform: translateY(-12px) scaleY(.98);
-  opacity: 0;
-  pointer-events: none;
-  transition: transform .28s cubic-bezier(.2,.9,.25,1), opacity .28s ease;
-  max-height: 60vh;
-  overflow-y: auto;
-}
-
-.mobile-panel.open {
-  transform: translateY(0) scaleY(1);
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.mobile-panel .panel-inner {
-  padding: 12px 18px;
-}
-
-/* ======================================== */
-/* MOBILE HEADER —  */
-/* ======================================== */
+/* ============================== */
+/* FINAL MOBILE LAYOUT (CLEAN)    */
+/* ============================== */
 @media (max-width:880px) {
 
-  /* Hide desktop navigation */
-  .top-nav, 
-  .side-nav-container { display: none !important; }
+  /* HIDE DESKTOP NAV */
+  .top-nav,
+  .side-nav-container {
+    display: none !important;
+  }
 
-  /* Entire header becomes 3 rows */
+  /* HEADER MAIN WRAPPER */
   .site-header {
     display: flex;
     flex-direction: column;
@@ -672,120 +607,79 @@ footer.site-footer{
     background: #fff;
   }
 
-  /* Row 1: Logo + two-line title */
+  /* BRAND ROW — Logo | Title | Menu */
   .brand {
-    display: flex;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
     align-items: center;
-    gap: 12px;
     width: 100%;
+    gap: 6px;
+    padding: 0;
   }
 
   .brand img {
-    height: 55px;
+    height: 48px;
+    width: auto;
   }
 
   .brand h1 {
-    font-size: 20px;
-    line-height: 1.1;
+    font-size: 18px;
+    line-height: 1.05;
     font-weight: 700;
-    max-width: 150px;  /* forces 2 lines */
+    margin: 0;
+    max-width: 130px;
+    word-break: break-word;
   }
 
-  /* Row 2: Join + Donate below the brand */
+  /* MENU BUTTON */
+  .dot-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  .dots {
+    line-height: 0.8;
+  }
+
+  /* BUTTON ROW — Join & Donate */
   .nav-actions {
     display: flex;
     gap: 10px;
     width: 100%;
   }
 
+  /* MOBILE BUTTON STYLE (FINAL NATURAL WIDTH) */
   .nav-actions a {
-    flex: 1;              /* stretch like Lions */
+    flex: 0 0 auto;
+    width: auto;
+    padding: 8px 14px;
+    font-size: 15px;
+    border-radius: 6px;
     text-align: center;
   }
 
- /* Make top-right menu button inside brand row */
-.brand {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;   /* pushes menu to right */
-  width: 100%;
+  /* remove desktop padding */
+  .btn {
+    padding: 0;
+  }
 }
 
-.brand h1 {
-  flex: 1;
-}
-
-/* New big dashes menu icon */
-.dot-btn {
-  width: 44px;
-  height: 44px;
-  border: none;
-  background: transparent;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 36px;      /* bigger dashes */
-  font-weight: 900;
-  padding: 0;
-  margin-left: 10px;
-  cursor: pointer;
-}
-
-.dots {
-  line-height: 0.7;      /* makes the ≡ thicker visually */
-  transform: translateY(-1px);
-}
-
-/* Extra small phones */
+/* ============================== */
+/* SMALLER MOBILE (extra refinement) */
+/* ============================== */
 @media (max-width:520px) {
 
   .brand h1 {
-    font-size: 18px;
-    max-width: 120px;
+    font-size: 17px;
+    max-width: 115px;
   }
-
-  .nav-actions {
-    flex-direction: row;
-  }
-}
-
-
-
-@media (max-width: 880px) {
-
-  .nav-actions a {
-    padding: 8px 0 !important; /* reduce button height */
-    font-size: 15px !important;
-    border-radius: 6px !important;
-  }
-
-  .btn {
-    padding: 0 !important; /* remove the desktop padding */
-  }
-}
-
-  @media (max-width:880px) {
-
-  /* Make buttons auto width (Lions style) */
-  .nav-actions {
-    justify-content: flex-start;
-    gap: 10px;
-  }
-
-  .nav-actions a {
-    flex: 0 0 auto;       /* ❗ no stretching */
-    width: auto;          /* ❗ natural width */
-    padding: 8px 14px !important;
-    font-size: 15px !important;
-    border-radius: 6px !important;
-  }
-}
-.brand {
-  display: grid;
-  grid-template-columns: auto 1fr auto;  /* LEFT | MIDDLE | RIGHT */
-  align-items: center;
-  width: 100%;
-  gap: 10px;
 }
 
 </style>
