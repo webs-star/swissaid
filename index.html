@@ -625,16 +625,17 @@ footer.site-footer{
     flex-shrink:0;                   /* prevent squish */
   }
 
-  .brand h1 {
+ .brand h1 {
     font-size:15px;
     line-height:1.05;
     margin:0;
-    max-width:115px;                 /* safe limit */
+    max-width:115px;
     overflow:hidden;
     text-overflow:ellipsis;
-    white-space:nowrap;
-    flex-shrink:1;                   /* allows it to adjust */
-  }
+    white-space:normal;   /* ✅ Allow wrapping */
+    flex-shrink:1;
+}
+
 
   /* MENU BUTTON — FINAL SIZE */
   .dot-btn {
