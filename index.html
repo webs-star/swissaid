@@ -587,8 +587,6 @@ footer.site-footer{
 .ft { color:#fff;text-decoration:none;font-size:15px; }
   .ft:hover { text-decoration:underline; }
 
-
-
 /* ===== Mobile menu dots & responsive behavior ===== */
 
 .mobile-dots {
@@ -597,12 +595,12 @@ footer.site-footer{
 }
 
 .dot-btn {
-  width: 42px;
-  height: 42px;
-  border-radius: 10px;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
   background: transparent;
   border: none;
-  display: inline-grid;
+  display: grid;
   place-items: center;
   cursor: pointer;
   font-size: 22px;
@@ -612,7 +610,6 @@ footer.site-footer{
 .dot-btn .dots {
   line-height: 1;
   font-weight: 800;
-  transform: translateY(-1px);
 }
 
 /* Slide-down panel */
@@ -645,25 +642,25 @@ footer.site-footer{
 }
 
 /* ======================================== */
-/* MOBILE HEADER — EXACTLY LIKE LIONS */
+/* MOBILE HEADER — EXACT LIONS LAYOUT */
 /* ======================================== */
 @media (max-width:880px) {
 
-  /* Hide desktop navigation */
+  /* Hide desktop nav */
   .top-nav, 
   .side-nav-container { display: none !important; }
 
-  /* Entire header becomes 3 rows */
+  /* HEADER becomes 2 rows */
   .site-header {
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding: 14px 16px;
-    gap: 14px;
+    padding: 12px 16px;
     background: #fff;
+    gap: 12px;
   }
 
-  /* Row 1: Logo + two-line title */
+  /* ROW 1 — Logo + Title + ⋮ on the same row */
   .brand {
     display: flex;
     align-items: center;
@@ -671,57 +668,49 @@ footer.site-footer{
     width: 100%;
   }
 
+  /* Put ⋮ on the far right of row 1 */
+  .mobile-dots {
+    display: flex;
+    margin-left: auto;
+  }
+
   .brand img {
-    height: 52px;
+    height: 46px;
   }
 
   .brand h1 {
-    font-size: 20px;
+    font-size: 18px;
     line-height: 1.1;
     font-weight: 700;
-    max-width: 150px;  /* forces 2 lines */
+    max-width: 140px;
   }
 
-  /* Row 2: Join + Donate below the brand */
+  /* ROW 2 — Buttons normal size */
   .nav-actions {
     display: flex;
-    gap: 10px;
+    gap: 8px;
     width: 100%;
   }
 
   .nav-actions a {
-    flex: 1;              /* stretch like Lions */
-    text-align: center;
+    flex: 1;
+    padding: 8px 0;     /* FIX: reduce button size */
+    font-size: 14px;    /* FIX: reduce text size */
   }
-
-  /* Row 3: Three-dot menu button (right aligned) */
-  .mobile-dots {
-    display: flex;
-    justify-content: flex-end;
-    width: 100%;
-  }
-
-  .dot-btn {
-    width: 48px;
-    height: 48px;
-    font-size: 30px;
-  }
-
 }
 
-/* Extra small phones */
+/* Extra small screens */
 @media (max-width:520px) {
-
   .brand h1 {
-    font-size: 18px;
+    font-size: 17px;
     max-width: 120px;
   }
 
-  .nav-actions {
-    flex-direction: row;
+  .nav-actions a {
+    padding: 7px 0;
+    font-size: 13px;
   }
 }
-
 
 </style>
 </head>
@@ -735,20 +724,21 @@ footer.site-footer{
   <a href="#">Find a Club</a>
   <a href="#">EN</a>
 </div>
-
 <!-- Main Header -->
 <header>
   <div class="site-header" role="banner">
 
-    <!-- Row 1: Logo + Two-line NGO Name -->
+    <!-- Row 1: Logo + Title + ⋮ -->
     <div class="brand">
-      <img src="https://res.cloudinary.com/dwvt4e9o2/image/upload/v1763381089/WhatsApp_Image_2025-11-17_at_9.22.25_AM_c17ghd.jpg" alt="swisslogo" />
+      <img src="YOUR-LOGO" alt="swisslogo">
+      <h1>Swiss Aid Connect<br>Foundation</h1>
 
-      <!-- Force two-line title exactly like Lions International -->
-      <h1>
-        Swiss Aid Connect<br>
-        Foundation
-      </h1>
+      <!-- 3 dots on the same row -->
+      <div class="mobile-dots">
+        <button class="dot-btn" id="btnMenu">
+          <span class="dots">⋮</span>
+        </button>
+      </div>
     </div>
 
     <!-- Row 2: Join + Donate -->
@@ -756,6 +746,8 @@ footer.site-footer{
       <a class="btn btn-join" href="#">Join</a>
       <a class="btn btn-donate" href="#">Donate</a>
     </div>
+
+  </div>
 
     <!-- Row 3: Three-dot Mobile Menu Button -->
     <div class="mobile-dots">
