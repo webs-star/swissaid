@@ -888,7 +888,8 @@ html, body {
 }
 
 
-/* MOBILE MENU BUTTON STYLES */
+
+/* MOBILE MENU BUTTON STYLES — CLEAN, TRANSPARENT */
 .mobile-panel a {
   display: block;
   padding: 12px 14px;        /* smaller padding */
@@ -900,24 +901,23 @@ html, body {
   text-align: right;
 
   width: 70%;                /* reduced width */
-  max-width: 300px;          /* prevents overly wide buttons */
+  max-width: 300px;
+
+  background: transparent !important; /* clear background */
+  color: #111 !important;             /* clean text */
+  border: 1px solid #ddd;             /* subtle outline like EN */
 }
-  
-  
 
-/* COLOR MATCHING — UTILITY NAV (first 6 items) */
-.mobile-panel a:nth-child(1) { background:#0b61b6; color:#fff; } /* A.I */
-.mobile-panel a:nth-child(2) { background:#7a2fa6; color:#fff; } /* Portal */
-
-
-.mobile-panel a:nth-child(6) { background:#7a2fa6; color:#fff; } /* EN */
-
-/* COLOR MATCHING — MAIN NAV (next 4 items) */
-.mobile-panel a:nth-child(7)  { background:#f5c400; color:#111; } /* About Us */
-.mobile-panel a:nth-child(8)  { background:#0b61b6; color:#fff; } /* Our Impact */
-.mobile-panel a:nth-child(9)  { background:#7a2fa6; color:#fff; } /* Get Involved */
-
-
+/* REMOVE ALL PREVIOUS COLOR MATCHING */
+.mobile-panel a:nth-child(1),
+.mobile-panel a:nth-child(2),
+.mobile-panel a:nth-child(6),
+.mobile-panel a:nth-child(7),
+.mobile-panel a:nth-child(8),
+.mobile-panel a:nth-child(9) {
+  background: transparent !important;
+  color: #111 !important;
+}
 
 
 
