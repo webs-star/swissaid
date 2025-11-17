@@ -624,7 +624,7 @@ footer.site-footer{
   }
 
   .brand img {
-    height:38px;
+    height:50px;
     width:auto;
     flex-shrink:0;
   }
@@ -812,9 +812,26 @@ html, body {
 }
 
 
+/* FORCE the menu button to stay hidden on desktop */
+@media (min-width:881px) {
+  .dot-btn {
+    display: none !important;
+  }
+}
 
+/* Larger logo on desktop */
+@media (min-width:881px) {
+  .brand img {
+    height:140px !important;  /* bigger and stable */
+  }
+}
 
-
+@media (max-width:880px) {
+  .dot-btn .dots {
+    font-size: 42px !important;
+    line-height: 0.8;
+  }
+}
   
 </style>
 </head>
