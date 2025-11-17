@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Swiss Aid Connect Foundation</title>
 <style>
-:root{
+:root{ 
   --blue:#0b61b6;
   --yellow:#f5c400;
   --purple:#7a2fa6;
@@ -15,16 +15,20 @@
   --max-width:1180px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%; font-family: "Segoe UI", Roboto, system-ui, -apple-system, "Helvetica Neue", Arial; color:#222; line-height:1.35;}
+html,body{
+  height:100%;
+  font-family: "Segoe UI", Roboto, system-ui, -apple-system, "Helvetica Neue", Arial;
+  color:#222;
+  line-height:1.35;
+}
 
 /* Top utility nav */
 .top-nav {
   position:fixed;
-  top:0;
-  right:0;
-  left:0;
+  top:0; right:0; left:0;
   height:var(--utility-height);
-  background:rgba(255,255,255,0.95);
+  background:rgba(255,255,255,0.72);
+  backdrop-filter: blur(12px);
   display:flex;
   justify-content:flex-end;
   align-items:center;
@@ -41,21 +45,20 @@ html,body{height:100%; font-family: "Segoe UI", Roboto, system-ui, -apple-system
 }
 .top-nav a:hover{ text-decoration:underline }
 
-/* Fixed header: logo + Join/Donate */
+/* Fixed header */
 .site-header{
   position:fixed;
   top:var(--utility-height);
-  left:0;
-  right:0;
+  left:0; right:0;
   height:var(--nav-height);
   display:flex;
   align-items:center;
   justify-content:space-between;
-  background:rgba(255,255,255,0.95);
+  background:rgba(255,255,255,0.72);
+  backdrop-filter: blur(12px);
   border-bottom:1px solid rgba(0,0,0,0.06);
   z-index:90;
   padding:0 18px;
-  backdrop-filter: blur(4px);
 }
 
 /* Logo + NGO name */
@@ -69,9 +72,11 @@ html,body{height:100%; font-family: "Segoe UI", Roboto, system-ui, -apple-system
 .brand h1{
   font-size:30px;
   letter-spacing:0.2px;
-  color:#333;
+  color:#222;
   font-weight:700;
 }
+
+
 
 /* Horizontal nav */
 .side-nav-container{
@@ -115,7 +120,10 @@ html,body{height:100%; font-family: "Segoe UI", Roboto, system-ui, -apple-system
   color:#111;
 }
 
-/* Right-side Join & Donate buttons */
+
+
+
+/* Join & Donate buttons */
 .nav-actions{
   display:flex;
   align-items:center;
@@ -141,6 +149,7 @@ html,body{height:100%; font-family: "Segoe UI", Roboto, system-ui, -apple-system
   color:#111;
   box-shadow:0 4px 12px rgba(0,0,0,0.08);
 }
+
 
 
 .hero-slider {
@@ -566,10 +575,131 @@ footer.site-footer{
   .ft:hover { text-decoration:underline; }
 
 
+
+
+
+
+
+
+
+
+
+/* ===== Mobile menu dots & responsive behavior ===== */
+
+/* Dot menu buttons (hidden by default) */
+.mobile-dots {
+  display:none;
+  gap:10px;
+  align-items:center;
+}
+
+/* Single dot button style */
+.dot-btn {
+  width:42px;
+  height:42px;
+  border-radius:10px;
+  background:transparent;
+  border:none;
+  display:inline-grid;
+  place-items:center;
+  cursor:pointer;
+  font-size:22px;
+  color:var(--blue);
+  margin-left:8px;
+}
+
+/* larger visible 3-dot glyph inside button for clarity */
+.dot-btn .dots {
+  display:block;
+  line-height:1;
+  font-weight:800;
+  transform:translateY(-1px);
+}
+
+/* Slide-down menu panel (hidden by default) */
+.mobile-panel {
+  position:fixed;
+  left:0;
+  right:0;
+  background:#fff;
+  box-shadow:0 10px 30px rgba(0,0,0,0.12);
+  border-bottom:1px solid rgba(0,0,0,0.06);
+  z-index:120;
+  transform-origin:top center;
+  transform:translateY(-12px) scaleY(.98);
+  opacity:0;
+  pointer-events:none;
+  transition:transform .28s cubic-bezier(.2,.9,.25,1), opacity .28s ease;
+  max-height:60vh;
+  overflow:auto;
+}
+
+/* visible state */
+.mobile-panel.open {
+  transform:translateY(0) scaleY(1);
+  opacity:1;
+  pointer-events:auto;
+}
+
+/* menu list inside panel */
+.mobile-panel .panel-inner {
+  padding:12px 18px;
+}
+
+/* style for cloned links */
+.mobile-panel .panel-inner a {
+  display:block;
+  padding:10px 12px;
+  border-radius:8px;
+  text-decoration:none;
+  color:#111;
+  font-weight:600;
+  margin:6px 0;
+}
+.mobile-panel .panel-inner a:hover {
+  background:rgba(11,97,182,0.06);
+}
+
+/* position the two panels so they don't overlap: top-menu sits under top utility bar; left-menu sits under side-nav */
+.mobile-top-panel { top: calc(var(--utility-height)); } /* directly under top utility (since top-nav vanished on mobile) */
+.mobile-side-panel { top: calc(var(--utility-height) + var(--nav-height)); } /* under fixed header */
+
+/* small screen show/hide */
+@media (max-width:880px) {
+  /* hide original navs */
+  .top-nav { display:none !important; }
+  .side-nav-container { display:none !important; }
+
+  /* show dot buttons in header, to the right of logo/title */
+  .mobile-dots { display:flex; }
+
+  /* slightly reduce header padding on small screens */
+  .site-header { padding:8px 14px; height:var(--nav-height); }
+
+  /* adjust .brand sizing on small screens */
+  .brand img { height:44px; }
+  .brand h1 { font-size:18px; }
+
+  /* ensure hero margin accounts for panels: if panel open it still sits above hero */
+  .hero-wrap { margin-top: calc(var(--utility-height) + var(--nav-height) + var(--side-nav-height)); }
+}
+
+/* on extra small phones: make dot buttons more visible */
+@media (max-width:520px) {
+  .dot-btn { width:44px; height:44px; font-size:24px; border-radius:10px; }
+  .mobile-panel .panel-inner { padding:10px 14px; }
+}
+
+
+
+
+
+
+
+
 </style>
 </head>
 <body>
-
 <!-- Top Utility Nav -->
 <div class="top-nav">
   <a href="#">A.I</a>
@@ -587,27 +717,46 @@ footer.site-footer{
       <img src="https://res.cloudinary.com/dwvt4e9o2/image/upload/v1763381089/WhatsApp_Image_2025-11-17_at_9.22.25_AM_c17ghd.jpg" alt="swisslogo" />
       <h1>Swiss Aid Connect Foundation</h1>
     </div>
+
+    <!-- ⭐ MOBILE DOT BUTTONS (two vertical ⋮ buttons) -->
+    <div class="mobile-dots">
+      <!-- Button 1 = top utility menu -->
+      <button class="dot-btn" id="btnTopMenu" aria-haspopup="true" aria-controls="mobileTopPanel" aria-expanded="false" title="Open utility menu">
+        <span class="dots" aria-hidden="true">⋮</span>
+      </button>
+
+      <!-- Button 2 = side horizontal nav -->
+      <button class="dot-btn" id="btnSideMenu" aria-haspopup="true" aria-controls="mobileSidePanel" aria-expanded="false" title="Open main navigation">
+        <span class="dots" aria-hidden="true">⋮</span>
+      </button>
+    </div>
+    <!-- ⭐ END dot buttons -->
+
     <div class="nav-actions">
       <a class="btn btn-join" href="#">Join</a>
       <a class="btn btn-donate" href="#">Donate</a>
     </div>
   </div>
 
- 
- 
- <div class="side-nav-container">
-  <nav class="side-nav" role="navigation" aria-label="Main navigation">
-    <a href="#">About Us</a>
-    <a href="#">Our Impact</a>
-    <a href="#">Get Involved</a>
-    <a href="#" target="_blank" rel="noopener">Member Resource Center ↗</a>
-  </nav>
-</div>
- 
- 
+  <!-- Horizontal Left Navigation -->
+  <div class="side-nav-container">
+    <nav class="side-nav" role="navigation" aria-label="Main navigation">
+      <a href="#">About Us</a>
+      <a href="#">Our Impact</a>
+      <a href="#">Get Involved</a>
+      <a href="#" target="_blank" rel="noopener">Member Resource Center ↗</a>
+    </nav>
+  </div>
 </header>
 
+<!-- ⭐ MOBILE PANELS (stay hidden until ⋮ buttons are clicked) -->
+<div id="mobileTopPanel" class="mobile-panel mobile-top-panel" aria-hidden="true" role="menu" aria-label="Utility menu">
+  <div class="panel-inner" id="mobileTopInner"></div>
+</div>
 
+<div id="mobileSidePanel" class="mobile-panel mobile-side-panel" aria-hidden="true" role="menu" aria-label="Main navigation">
+  <div class="panel-inner" id="mobileSideInner"></div>
+</div>
 
 
 <main>
