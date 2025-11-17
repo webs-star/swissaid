@@ -832,7 +832,36 @@ html, body {
     line-height: 0.8;
   }
 }
-  
+
+
+
+
+@media (min-width:881px) {
+  .brand h1 {
+    font-size: 26px !important;
+    line-height: 1.15 !important;
+    max-width: 260px !important; /* remove squish */
+  }
+}
+
+
+@media (max-width:880px) {
+  .brand h1 {
+    font-size: 18px !important;
+    line-height: 1.1 !important;
+    max-width: 150px !important;
+  }
+}
+
+  @media (min-width:881px) {
+  .nav-actions {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 14px !important;
+    align-items: center !important;
+  }
+}
+
 </style>
 </head>
 <body>
