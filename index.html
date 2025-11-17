@@ -588,148 +588,6 @@ footer.site-footer{
   .ft:hover { text-decoration:underline; }
 
 
-/* ===== Mobile menu dots & responsive behavior ===== */
-
-/* Dot menu buttons (hidden by default on desktop) */
-.mobile-dots {
-  display: none;
-  align-items: center;
-}
-
-/* Single dot button style */
-.dot-btn {
-  width: 42px;
-  height: 42px;
-  border-radius: 10px;
-  background: transparent;
-  border: none;
-  display: inline-grid;
-  place-items: center;
-  cursor: pointer;
-  font-size: 22px;
-  color: var(--blue);
-}
-
-/* three-dot glyph */
-.dot-btn .dots {
-  display: block;
-  line-height: 1;
-  font-weight: 800;
-  transform: translateY(-1px);
-}
-
-/* Slide-down mobile panel */
-.mobile-panel {
-  position: fixed;
-  top: calc(var(--utility-height) + var(--nav-height));
-  left: 0;
-  right: 0;
-  background: #fff;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
-  border-bottom: 1px solid rgba(0,0,0,0.06);
-  z-index: 120;
-  transform-origin: top center;
-  transform: translateY(-12px) scaleY(.98);
-  opacity: 0;
-  pointer-events: none;
-  transition: transform .28s cubic-bezier(.2,.9,.25,1), opacity .28s ease;
-  max-height: 60vh;
-  overflow: auto;
-}
-
-/* visible state */
-.mobile-panel.open {
-  transform: translateY(0) scaleY(1);
-  opacity: 1;
-  pointer-events: auto;
-}
-
-/* menu links inside panel */
-.mobile-panel .panel-inner {
-  padding: 12px 18px;
-}
-
-.mobile-panel .panel-inner a {
-  display: block;
-  padding: 10px 12px;
-  border-radius: 8px;
-  text-decoration: none;
-  color: #111;
-  font-weight: 600;
-  margin: 6px 0;
-}
-
-.mobile-panel .panel-inner a:hover {
-  background: rgba(11,97,182,0.06);
-}
-
-/* ===== Mobile Responsive Rules ===== */
-@media (max-width:880px) {
-
-  /* hide desktop navs */
-  .top-nav, .side-nav-container { display: none !important; }
-
-  /* show ⋮ button */
-  .mobile-dots { display: flex; }
-
-  /* header flex: brand left, buttons + dot right, wrap if needed */
-  .site-header {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap; /* allow wrapping */
-    padding: 8px 14px;
-    height: auto; /* adjust height for wrap */
-    gap: 8px;
-  }
-
-  /* group nav-actions + dot */
-  .nav-actions {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex-wrap: wrap; /* prevent overflow */
-  }
-
-  /* move dot button to right of Join/Donate buttons */
-  .mobile-dots {
-    order: 2; /* ensures it comes after nav-actions */
-  }
-
-  /* brand adjustments */
-  .brand img { height: 44px; }
-  .brand h1 { font-size: 18px; }
-
-  /* hero margin */
-  .hero-wrap {
-    margin-top: calc(var(--utility-height) + var(--nav-height));
-  }
-}
-
-/* extra small phones */
-@media (max-width:520px) {
-  .dot-btn {
-    width: 44px;
-    height: 44px;
-    font-size: 24px;
-    border-radius: 10px;
-  }
-  .mobile-panel .panel-inner {
-    padding: 10px 14px;
-  }
-  
-  /* stack buttons on very small screens */
-  .nav-actions {
-    justify-content: center;
-    width: 100%;
-  }
-}
-
-
-
-</style>
-</head>
-<body>
 <!-- Top Utility Nav -->
 <div class="top-nav">
   <a href="#">A.I</a>
@@ -743,29 +601,34 @@ footer.site-footer{
 <!-- Main Header -->
 <header>
   <div class="site-header" role="banner">
-    <!-- Logo + NGO Name -->
+
+    <!-- Row 1: Logo + Two-line NGO Name -->
     <div class="brand">
       <img src="https://res.cloudinary.com/dwvt4e9o2/image/upload/v1763381089/WhatsApp_Image_2025-11-17_at_9.22.25_AM_c17ghd.jpg" alt="swisslogo" />
-      <h1>Swiss Aid Connect Foundation</h1>
+
+      <!-- Force two-line title exactly like Lions International -->
+      <h1>
+        Swiss Aid Connect<br>
+        Foundation
+      </h1>
     </div>
 
-    <!-- Right side: Join/Donate + Mobile Dots -->
-    <div class="header-right">
-      <div class="nav-actions">
-        <a class="btn btn-join" href="#">Join</a>
-        <a class="btn btn-donate" href="#">Donate</a>
-      </div>
-
-      <!-- Mobile Dot Button -->
-      <div class="mobile-dots">
-        <button class="dot-btn" id="btnMenu" aria-haspopup="true" aria-controls="mobileMenu" aria-expanded="false">
-          <span class="dots">⋮</span>
-        </button>
-      </div>
+    <!-- Row 2: Join + Donate -->
+    <div class="nav-actions">
+      <a class="btn btn-join" href="#">Join</a>
+      <a class="btn btn-donate" href="#">Donate</a>
     </div>
+
+    <!-- Row 3: Three-dot Mobile Menu Button -->
+    <div class="mobile-dots">
+      <button class="dot-btn" id="btnMenu" aria-haspopup="true" aria-controls="mobileMenu" aria-expanded="false">
+        <span class="dots">⋮</span>
+      </button>
+    </div>
+
   </div>
 
-  <!-- Horizontal Left Navigation -->
+  <!-- Desktop Side Navigation -->
   <div class="side-nav-container">
     <nav class="side-nav" role="navigation" aria-label="Main navigation">
       <a href="#">About Us</a>
