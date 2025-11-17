@@ -584,6 +584,7 @@ footer.site-footer{
 
 
 
+
 /* ===== Mobile menu dots & responsive behavior ===== */
 
 /* Dot menu buttons (hidden by default) */
@@ -608,7 +609,7 @@ footer.site-footer{
   margin-left:8px;
 }
 
-/* larger visible 3-dot glyph inside button for clarity */
+/* larger visible 3-dot glyph inside button */
 .dot-btn .dots {
   display:block;
   line-height:1;
@@ -616,9 +617,10 @@ footer.site-footer{
   transform:translateY(-1px);
 }
 
-/* Slide-down menu panel (hidden by default) */
+/* Slide-down mobile menu panel */
 .mobile-panel {
   position:fixed;
+  top:calc(var(--utility-height) + var(--nav-height));
   left:0;
   right:0;
   background:#fff;
@@ -660,34 +662,44 @@ footer.site-footer{
   background:rgba(11,97,182,0.06);
 }
 
-/* position the two panels so they don't overlap: top-menu sits under top utility bar; left-menu sits under side-nav */
-.mobile-top-panel { top: calc(var(--utility-height)); } /* directly under top utility (since top-nav vanished on mobile) */
-.mobile-side-panel { top: calc(var(--utility-height) + var(--nav-height)); } /* under fixed header */
+/* ===== Mobile Responsive Rules ===== */
 
-/* small screen show/hide */
 @media (max-width:880px) {
+
   /* hide original navs */
   .top-nav { display:none !important; }
   .side-nav-container { display:none !important; }
 
-  /* show dot buttons in header, to the right of logo/title */
+  /* show ⋮ button */
   .mobile-dots { display:flex; }
 
-  /* slightly reduce header padding on small screens */
-  .site-header { padding:8px 14px; height:var(--nav-height); }
+  /* adjust header */
+  .site-header {
+    padding:8px 14px;
+    height:var(--nav-height);
+  }
 
-  /* adjust .brand sizing on small screens */
+  /* brand adjustments */
   .brand img { height:44px; }
   .brand h1 { font-size:18px; }
 
-  /* ensure hero margin accounts for panels: if panel open it still sits above hero */
-  .hero-wrap { margin-top: calc(var(--utility-height) + var(--nav-height) + var(--side-nav-height)); }
+  /* hero no longer pushed down too far */
+  .hero-wrap {
+    margin-top: calc(var(--utility-height) + var(--nav-height));
+  }
 }
 
-/* on extra small phones: make dot buttons more visible */
+/* extra small phones */
 @media (max-width:520px) {
-  .dot-btn { width:44px; height:44px; font-size:24px; border-radius:10px; }
-  .mobile-panel .panel-inner { padding:10px 14px; }
+  .dot-btn {
+    width:44px;
+    height:44px;
+    font-size:24px;
+    border-radius:10px;
+  }
+  .mobile-panel .panel-inner {
+    padding:10px 14px;
+  }
 }
 
 
@@ -710,6 +722,7 @@ footer.site-footer{
   <a href="#">EN</a>
 </div>
 
+
 <!-- Main Header -->
 <header>
   <div class="site-header" role="banner">
@@ -718,19 +731,13 @@ footer.site-footer{
       <h1>Swiss Aid Connect Foundation</h1>
     </div>
 
-    <!-- ⭐ MOBILE DOT BUTTONS (two vertical ⋮ buttons) -->
+    <!-- ⭐ SINGLE MOBILE DOT BUTTON -->
     <div class="mobile-dots">
-      <!-- Button 1 = top utility menu -->
-      <button class="dot-btn" id="btnTopMenu" aria-haspopup="true" aria-controls="mobileTopPanel" aria-expanded="false" title="Open utility menu">
-        <span class="dots" aria-hidden="true">⋮</span>
-      </button>
-
-      <!-- Button 2 = side horizontal nav -->
-      <button class="dot-btn" id="btnSideMenu" aria-haspopup="true" aria-controls="mobileSidePanel" aria-expanded="false" title="Open main navigation">
-        <span class="dots" aria-hidden="true">⋮</span>
+      <button class="dot-btn" id="btnMenu" aria-haspopup="true" aria-controls="mobileMenu" aria-expanded="false">
+        <span class="dots">⋮</span>
       </button>
     </div>
-    <!-- ⭐ END dot buttons -->
+    <!-- ⭐ END dot button -->
 
     <div class="nav-actions">
       <a class="btn btn-join" href="#">Join</a>
@@ -749,13 +756,9 @@ footer.site-footer{
   </div>
 </header>
 
-<!-- ⭐ MOBILE PANELS (stay hidden until ⋮ buttons are clicked) -->
-<div id="mobileTopPanel" class="mobile-panel mobile-top-panel" aria-hidden="true" role="menu" aria-label="Utility menu">
-  <div class="panel-inner" id="mobileTopInner"></div>
-</div>
-
-<div id="mobileSidePanel" class="mobile-panel mobile-side-panel" aria-hidden="true" role="menu" aria-label="Main navigation">
-  <div class="panel-inner" id="mobileSideInner"></div>
+<!-- ⭐ SINGLE MOBILE MENU PANEL -->
+<div id="mobileMenu" class="mobile-panel" aria-hidden="true" role="menu">
+  <div class="panel-inner" id="mobileMenuInner"></div>
 </div>
 
 
@@ -781,8 +784,6 @@ footer.site-footer{
     </div>
   </section>
 </main>
-
-
 
 
 
