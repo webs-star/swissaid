@@ -842,7 +842,35 @@ html, body {
 }
 
 
+@media (min-width:881px) {
+  .brand h1 {
+    white-space: nowrap !important;   /* force single line */
+    max-width: 100% !important;       /* allow title to stretch */
+    overflow: hidden;                 /* prevent overflow */
+    text-overflow: ellipsis;
+  }
+}
 
+@media (max-width:880px) {
+  .brand h1 {
+    white-space: normal !important;  /* allow wrapping */
+    max-width: 150px !important;     /* you already have this, keep it */
+  }
+}
+
+
+  @media (min-width:881px) {
+  .nav-actions {
+    flex-wrap: nowrap !important;   /* prevents stacking */
+  }
+
+  .nav-actions .btn {
+    flex: 0 0 auto !important;      /* fixed width, not allowed to expand */
+    white-space: nowrap !important; /* keeps text in one line */
+  }
+}
+
+  
 </style>
 </head>
 <body>
