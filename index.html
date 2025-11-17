@@ -794,80 +794,82 @@ html, body {
   .nav-actions .btn { padding: 8px 10px; font-size: 13px; }
 }
 
-/* ----------------------------------------- */
-/* DESKTOP (≥881px)                          */
-/* ----------------------------------------- */
+/* ============================================================
+   DESKTOP (≥881px)
+============================================================ */
 @media (min-width:881px) {
 
-  /* Hide menu dots */
-  .dot-btn { display: none !important; }
+  /* Hide menu button */
+  .dot-btn { display:none !important; }
 
-  /* Larger logo */
+  /* Large desktop logo */
   .brand img {
-    height: 140px !important;
+    height:140px !important;
   }
 
-  /* Larger title */
+  /* Large single-line desktop title */
   .brand h1 {
-    font-size: 35px !important;
-    line-height: 1.15 !important;
-    max-width: 280px !important;
+    font-size:35px !important;
+    line-height:1.15 !important;
+    white-space:nowrap !important;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    max-width:100% !important;
   }
 
-  /* Keep JOIN + DONATE on one line */
+  /* Keep JOIN + DONATE in one perfect row */
   .nav-actions {
-    display: flex !important;
-    flex-direction: row !important;
-    gap: 14px !important;
-    align-items: center !important;
+    display:flex !important;
+    flex-direction:row !important;
+    align-items:center !important;
+    gap:14px !important;
+    flex-wrap:nowrap !important;
+  }
+
+  .nav-actions .btn {
+    white-space:nowrap !important;
+    flex:0 0 auto !important;
   }
 }
 
-/* ----------------------------------------- */
-/* MOBILE (≤880px)                           */
-/* ----------------------------------------- */
+/* ============================================================
+   MOBILE (≤880px)
+============================================================ */
 @media (max-width:880px) {
 
   /* Bigger menu icon */
   .dot-btn .dots {
-    font-size: 42px !important;
-    line-height: 0.8;
+    font-size:42px !important;
+    line-height:0.8;
   }
 
-  /* Larger mobile title */
+  /* Larger mobile logo */
+  .brand img {
+    height:65px !important;
+  }
+
+  /* Larger, 2-line mobile title */
   .brand h1 {
-    font-size: 30px !important;
-    line-height: 1.1 !important;
-    max-width: 150px !important;
+    font-size:28px !important;
+    line-height:1.15 !important;
+    white-space:normal !important;   /* allows 2 lines */
+    max-width:180px !important;      /* increased for bigger font */
+    overflow-wrap:break-word;
   }
 }
 
+/* ============================================================
+   VERY SMALL PHONES (≤420px)
+============================================================ */
+@media (max-width:420px) {
 
-@media (min-width:881px) {
+  .brand img {
+    height:55px !important;
+  }
+
   .brand h1 {
-    white-space: nowrap !important;   /* force single line */
-    max-width: 100% !important;       /* allow title to stretch */
-    overflow: hidden;                 /* prevent overflow */
-    text-overflow: ellipsis;
-  }
-}
-
-@media (max-width:880px) {
-  .brand h1 {
-    white-space: normal !important;  /* allow wrapping */
-    max-width: 150px !important;     /* you already have this, keep it */
-  }
-}
-
-
-  @media (min-width:881px) {
-  .nav-actions {
-    flex-wrap: nowrap !important;   /* prevents stacking */
-  }
-
-  .nav-actions .btn {
-    flex: 0 0 auto !important;      /* fixed width, not allowed to expand */
-    white-space: nowrap !important; /* keeps text in one line */
+    font-size:24px !important;
+    max-width:160px !important;
   }
 }
 
