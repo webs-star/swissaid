@@ -73,33 +73,48 @@ html,body{height:100%; font-family: "Segoe UI", Roboto, system-ui, -apple-system
   font-weight:700;
 }
 
-/* Horizontal left nav below header */
+/* Horizontal nav */
 .side-nav-container{
-  position:fixed;       /* make it fixed so it stays below header */
-  top: calc(var(--utility-height) + var(--nav-height)); /* right below header */
+  position:fixed;
+  top: calc(var(--utility-height) + var(--nav-height));
   left:0;
   width:100%;
   height:var(--side-nav-height);
-  background:#fff;      /* solid background so it’s visible */
+  background:rgba(255,255,255,0.72);
+  backdrop-filter: blur(12px);
   border-top:1px solid rgba(0,0,0,0.06);
   border-bottom:1px solid rgba(0,0,0,0.06);
   display:flex;
   align-items:center;
   padding:0 18px;
-  z-index:85;           /* above hero */
+  z-index:85;
 }
+
 .side-nav{
   display:flex;
   gap:16px;
 }
+
 .side-nav a{
   text-decoration:none;
-  color:#0b61b6; /* make it a visible color */
   font-weight:600;
-  padding:8px 12px;
+  padding:12px 18px; /* slightly larger padding */
   border-radius:6px;
+  font-size:1.5rem; /* 1.5× larger */
+  transition: background 0.3s, color 0.3s;
 }
-.side-nav a:hover{ background:rgba(11,97,182,0.1) }
+
+/* Assign different colors to each link */
+.side-nav a:nth-of-type(1){ color:#0b61b6; }   /* About Us */
+.side-nav a:nth-of-type(2){ color:#7a2fa6; }   /* Our Impact */
+.side-nav a:nth-of-type(3){ color:#f5c400; }   /* Get Involved */
+.side-nav a:nth-of-type(4){ color:#e94e77; }   /* Member Resource Center */
+
+.side-nav a:hover{
+  background:rgba(0,0,0,0.08);
+  color:#111;
+}
+
 /* Right-side Join & Donate buttons */
 .nav-actions{
   display:flex;
