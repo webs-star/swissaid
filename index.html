@@ -736,7 +736,23 @@ footer.site-footer{
   }
 }
 
-  
+  @media (max-width:880px) {
+
+  /* Make buttons auto width (Lions style) */
+  .nav-actions {
+    justify-content: flex-start;
+    gap: 10px;
+  }
+
+  .nav-actions a {
+    flex: 0 0 auto;       /* ❗ no stretching */
+    width: auto;          /* ❗ natural width */
+    padding: 8px 14px !important;
+    font-size: 15px !important;
+    border-radius: 6px !important;
+  }
+}
+
 </style>
 </head>
 <body>
