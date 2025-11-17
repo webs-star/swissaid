@@ -583,8 +583,6 @@ footer.site-footer{
 
 /* Desktop: hide mobile menu */
 .dot-btn { display:none; }
-
-
 /* ============================== */
 /* FIXED MOBILE HEADER — FINAL    */
 /* ============================== */
@@ -605,76 +603,71 @@ footer.site-footer{
     padding:12px 14px;
     display:flex;
     flex-direction:column;
-    gap:12px;
+    gap:10px;
     height:auto !important;
     z-index:200;
   }
 
-  /* BRAND ROW — FLEX VERSION (STABLE) */
+  /* BRAND ROW — FLEX VERSION (FULLY FIXED) */
   .brand {
     display:flex;
     align-items:center;
-    justify-content:space-between;   /* keeps dots inside */
     width:100%;
-    gap:8px;
-    min-width:0;                      /* prevents pushing content out */
+    gap:6px;
+    flex:1;
+    min-width:0; /* prevent overflow */
   }
 
   .brand img {
-    height:42px;                     /* reduced slightly for safety */
-    flex-shrink:0;                   /* prevent squish */
+    height:38px;
+    width:auto;
+    flex-shrink:0;
   }
 
- .brand h1 {
-    font-size:15px;
-    line-height:1.05;
+  .brand h1 {
+    font-size:14px;
+    line-height:1.1;
     margin:0;
-    max-width:115px;
+    max-width:95px;  /* <<< smaller so dots stay inside */
+    white-space:normal;
     overflow:hidden;
     text-overflow:ellipsis;
-    white-space:normal;   /* ✅ Allow wrapping */
-    flex-shrink:1;
-}
+    flex-shrink:1;   /* allow to shrink instead of pushing dots out */
+  }
 
-
-  /* MENU BUTTON — FINAL SIZE */
+  /* MENU BUTTON — NOW ALWAYS INSIDE */
   .dot-btn {
-    display:flex !important;
+    margin-left:auto;  /* <<< keeps dots on right INSIDE screen */
     width:32px;
     height:32px;
-    font-size:22px;                  /* smaller = fits all screens */
+    font-size:22px;
+    display:flex !important;
     justify-content:center;
     align-items:center;
     background:none;
     border:none;
     padding:0;
     cursor:pointer;
-    flex-shrink:0;                   /* never gets pushed out */
+    flex-shrink:0;
   }
 
   .dots {
     line-height:0.8;
   }
 
-  /* JOIN + DONATE — FINAL STYLING */
+  /* JOIN + DONATE */
   .nav-actions {
     display:flex;
     width:100%;
     gap:10px;
-    justify-content:flex-start;      /* no stretching */
   }
 
   .nav-actions a {
-    flex:0 0 auto;                   /* natural width */
+    flex:0 0 auto;
     padding:9px 14px !important;
     font-size:15px !important;
-    text-align:center;
     border-radius:7px !important;
     width:auto;
-  }
-
-  .btn {
-    padding:9px 14px !important;
   }
 }
 
@@ -704,7 +697,7 @@ footer.site-footer{
   padding:18px;
 }
 
-  
+
 </style>
 </head>
 <body>
