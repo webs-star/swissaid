@@ -873,6 +873,67 @@ html, body {
   }
 }
 
+  /* MOBILE — hide side nav */
+@media (max-width:880px){
+  .side-nav-container {
+    display:none !important;
+  }
+}
+
+/* DESKTOP — show side nav */
+@media (min-width:881px){
+  .side-nav-container {
+    display:block !important;
+  }
+}
+
+
+/* MOBILE MENU BUTTON STYLES */
+.mobile-panel a {
+  display: block;
+  padding: 14px 18px;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  text-decoration: none;
+  text-align: center;
+}
+
+/* COLOR MATCHING DESKTOP NAV */
+.mobile-panel a:nth-child(1) {
+  background: #0b61b6; /* blue */
+  color: #fff;
+}
+
+.mobile-panel a:nth-child(2) {
+  background: #7a2fa6; /* purple */
+  color: #fff;
+}
+
+.mobile-panel a:nth-child(3) {
+  background: #f5c400; /* yellow */
+  color: #111;
+}
+
+.mobile-panel a:nth-child(4) {
+  background: #e94e77; /* pink */
+  color: #fff;
+}
+
+/* JOIN + DONATE inside mobile menu */
+.mobile-panel .join-btn {
+  background: var(--blue);
+  color: #fff;
+}
+
+.mobile-panel .donate-btn {
+  background: var(--yellow);
+  color: #111;
+}
+
+
+
   
 </style>
 </head>
@@ -1243,29 +1304,27 @@ html, body {
 
 <script>
 
-document.addEventListener("DOMContentLoaded", () => {
-  const btn = document.getElementById("btnMenu");
-  const panel = document.getElementById("mobileMenu");
-  const panelInner = document.getElementById("mobileMenuInner");
 
-  // Clone top-nav and side-nav links into mobile panel (exclude Join/Donate)
-  const utilityLinks = document.querySelectorAll(".top-nav a");
-  const sideLinks = document.querySelectorAll(".side-nav a");
+document.getElementById('btnMenu').addEventListener('click', () => {
+  const menu = document.getElementById('mobileMenu');
+  const inner = document.getElementById('mobileMenuInner');
 
-  utilityLinks.forEach(a => panelInner.appendChild(a.cloneNode(true)));
-  sideLinks.forEach(a => panelInner.appendChild(a.cloneNode(true)));
+  menu.classList.toggle('open');
 
-  // Toggle mobile panel
-  btn.addEventListener("click", () => {
-    panel.classList.toggle("open");
-  });
+  if (inner.innerHTML.trim() === "") {
+    inner.innerHTML = `
+      <a href="#" class="mobile-link">About Us</a>
+      <a href="#" class="mobile-link">Our Impact</a>
+      <a href="#" class="mobile-link">Get Involved</a>
+      <a href="#" class="mobile-link">Member Resource Center ↗</a>
+
+      <a href="#" class="mobile-link join-btn">Join</a>
+      <a href="#" class="mobile-link donate-btn">Donate</a>
+    `;
+  }
 });
 
 
-
-
-
-document.getElementById('year').textContent = new Date().getFullYear();
 </script>
 
 </body>
