@@ -590,29 +590,39 @@ footer.site-footer{
 
 /* ===== Mobile menu dots & responsive behavior ===== */
 
-.mobile-dots {
-  display: none;
+/* Make top-right menu button inside brand row */
+.brand {
+  display: flex;
   align-items: center;
+  justify-content: space-between;   /* pushes menu to right */
+  width: 100%;
 }
 
+.brand h1 {
+  flex: 1;
+}
+
+/* New big dashes menu icon */
 .dot-btn {
-  width: 42px;
-  height: 42px;
-  border-radius: 10px;
-  background: transparent;
+  width: 44px;
+  height: 44px;
   border: none;
-  display: inline-grid;
-  place-items: center;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 36px;      /* bigger dashes */
+  font-weight: 900;
+  padding: 0;
+  margin-left: 10px;
   cursor: pointer;
-  font-size: 22px;
-  color: var(--blue);
 }
 
-.dot-btn .dots {
-  line-height: 1;
-  font-weight: 800;
+.dots {
+  line-height: 0.7;      /* makes the ≡ thicker visually */
   transform: translateY(-1px);
 }
+
 
 /* Slide-down panel */
 .mobile-panel {
@@ -693,19 +703,37 @@ footer.site-footer{
     text-align: center;
   }
 
-  /* Row 3: Three-dot menu button (right aligned) */
-  .mobile-dots {
-    display: flex;
-    justify-content: flex-end;
-    width: 100%;
-  }
+ /* Make top-right menu button inside brand row */
+.brand {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;   /* pushes menu to right */
+  width: 100%;
+}
 
-  .dot-btn {
-    width: 40px;
-    height: 40px;
-    font-size: 20px;
-  }
+.brand h1 {
+  flex: 1;
+}
 
+/* New big dashes menu icon */
+.dot-btn {
+  width: 44px;
+  height: 44px;
+  border: none;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 36px;      /* bigger dashes */
+  font-weight: 900;
+  padding: 0;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.dots {
+  line-height: 0.7;      /* makes the ≡ thicker visually */
+  transform: translateY(-1px);
 }
 
 /* Extra small phones */
@@ -771,15 +799,20 @@ footer.site-footer{
   <div class="site-header" role="banner">
 
     <!-- Row 1: Logo + Two-line NGO Name -->
-    <div class="brand">
-      <img src="https://res.cloudinary.com/dwvt4e9o2/image/upload/v1763381089/WhatsApp_Image_2025-11-17_at_9.22.25_AM_c17ghd.jpg" alt="swisslogo" />
+ <div class="brand">
+  <img src="https://res.cloudinary.com/dwvt4e9o2/image/upload/v1763381089/WhatsApp_Image_2025-11-17_at_9.22.25_AM_c17ghd.jpg" alt="swisslogo" />
 
-      <!-- Force two-line title exactly like Lions International -->
-      <h1>
-        Swiss Aid Connect<br>
-        Foundation
-      </h1>
-    </div>
+  <h1>
+    Swiss Aid Connect<br>
+    Foundation
+  </h1>
+
+  <!-- MENU BUTTON MOVED HERE -->
+  <button class="dot-btn" id="btnMenu" aria-haspopup="true" aria-controls="mobileMenu" aria-expanded="false">
+    <span class="dots">≡</span>
+  </button>
+</div>
+
 
     <!-- Row 2: Join + Donate -->
     <div class="nav-actions">
@@ -787,10 +820,7 @@ footer.site-footer{
       <a class="btn btn-donate" href="#">Donate</a>
     </div>
 
-    <!-- Row 3: Three-dot Mobile Menu Button -->
-    <div class="mobile-dots">
-      <button class="dot-btn" id="btnMenu" aria-haspopup="true" aria-controls="mobileMenu" aria-expanded="false">
-        <span class="dots">⋮</span>
+
       </button>
     </div>
 
