@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Swiss Aid Connect – About Us</title>
+
+<style>
+/* ----------------------------------------
+   ROOT + GLOBAL
+---------------------------------------- */
+:root{
+  --blue:#0C2856;
+  --blue-light:#0F3A7E;
+  --bg:#f8f9fb;
+  --text:#1b1b1b;
+  --muted:#6f7680;
+  --white:#ffffff;
+  --radius:14px;
+  --maxw:1200px;
+  font-family: "Inter", Arial, sans-serif;
+}
+
+*{box-sizing:border-box; margin:0; padding:0;}
+body{background:var(--bg); color:var(--text); line-height:1.55;}
+
+/* ----------------------------------------
+   HEADER + NAV
+---------------------------------------- */
+header{
+  background:var(--blue);
+  color:white;
+  padding:18px 24px;
+  position:sticky; top:0;
+  z-index:50;
+}
+
+.header-wrap{
+  max-width:var(--maxw);
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.logo-mark{
+  width:48px; height:48px;
+  border-radius:10px;
+  background:rgba(255,255,255,0.15);
+  display:grid; place-items:center;
+  font-weight:700; font-size:18px;
+}
+
+.site-title{font-weight:700; font-size:18px;}
+.site-sub{font-size:12px; opacity:.8;}
+
+/* desktop nav */
+nav{
+  display:flex;
+  gap:28px;
+}
+
+nav a{
+  color:white;
+  text-decoration:none;
+  font-weight:600;
+}
+
+/* hamburger button */
+.menu-btn{
+  display:none;
+  flex-direction:column;
+  gap:6px;
+  background:none;
+  border:0;
+  cursor:pointer;
+}
+
+.menu-btn span{
+  width:32px; height:4px;
+  background:white;
+  border-radius:4px;
+}
+
+/* mobile nav drawer */
+.mobile-nav{
+  position:fixed;
+  top:70px;
+  right:0;
+  width:250px;
+  height:100vh;
+  background:var(--blue);
+  transform:translateX(100%);
+  transition:.35s ease;
+  padding:30px 20px;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+  z-index:30;
+}
+
+.mobile-nav.show{
+  transform:translateX(0);
+}
+
+.mobile-nav a{
+  color:white;
+  text-decoration:none;
+  font-size:17px;
+  font-weight:600;
+}
+
+/* ----------------------------------------
+   HERO SECTION
+---------------------------------------- */
+.hero{
+  position:relative;
+  height:300px;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+}
+
+.hero video{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  object-fit:cover;
+  filter:brightness(0.45);
+}
+
+.hero-content{
+  position:relative;
+  z-index:2;
+  color:white;
+  padding:0 24px;
+  max-width:var(--maxw);
+  margin:auto;
+}
+
+.hero-content h1{font-size:34px; margin-bottom:8px;}
+.hero-content p{max-width:550px;}
+
+/* ----------------------------------------
+   QUICK LINKS (DESKTOP)
+---------------------------------------- */
+.quick-container{
+  background:white;
+  padding:16px 24px;
+  box-shadow:0 2px 10px rgba(0,0,0,0.07);
+  margin:auto;
+}
+
+.quick-links{
+  max-width:var(--maxw);
+  margin:auto;
+  display:flex;
+  gap:18px;
+  flex-wrap:wrap;
+}
+
+.quick-links button{
+  background:none;
+  border:0;
+  font-weight:600;
+  cursor:pointer;
+  color:var(--blue);
+  padding:10px 14px;
+  border-radius:8px;
+}
+
+.quick-links button.active{
+  background:var(--blue);
+  color:white;
+}
+
+/* ----------------------------------------
+   MOBILE QUICK LINKS PANEL
+---------------------------------------- */
+.mobile-quicklinks{
+  display:none;
+  flex-direction:column;
+  gap:14px;
+  margin-top:20px;
+}
+
+.mobile-quicklinks button{
+  background:rgba(255,255,255,0.15);
+  border:0;
+  padding:12px;
+  color:white;
+  border-radius:8px;
+  text-align:left;
+}
+
+/* ----------------------------------------
+   CONTENT SECTION
+---------------------------------------- */
+section.content{
+  max-width:var(--maxw);
+  margin:40px auto;
+  padding:0 24px;
+}
+
+.card{
+  background:white;
+  padding:24px;
+  border-radius:var(--radius);
+  box-shadow:0 4px 14px rgba(0,0,0,0.06);
+  margin-bottom:26px;
+}
+
+.card h2{margin-bottom:10px;}
+.lead{color:var(--muted); margin-bottom:16px;}
+
+/* accordion */
+.accordion{
+  border-top:1px solid #ddd;
+  margin-top:10px;
+}
+
+.acc-item{border-bottom:1px solid #ddd;}
+
+.acc-head{
+  padding:14px;
+  cursor:pointer;
+  font-weight:600;
+  display:flex;
+  justify-content:space-between;
+}
+
+.acc-body{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .35s ease;
+  padding:0 14px;
+}
+
+.acc-body.open{
+  max-height:500px;
+  padding:14px;
+}
+
+/* ----------------------------------------
+   RESPONSIVE
+---------------------------------------- */
+@media(max-width:900px){
+  nav{display:none;}
+  .menu-btn{display:flex;}
+  .mobile-quicklinks{display:flex;}
+  .quick-container{display:none;}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-wrap">
+
+    <div class="logo">
+      <div class="logo-mark">SAC</div>
+      <div>
+        <div class="site-title">Swiss Aid Connect</div>
+        <div class="site-sub">Humanitarian Impact</div>
+      </div>
+    </div>
+
+    <button class="menu-btn" id="menuBtn">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav>
+      <a href="#org">Our Organization</a>
+      <a href="#history">Our History</a>
+      <a href="#leaders">Our Leaders</a>
+      <a href="#values">Core Values</a>
+      <a href="#membership">Membership</a>
+      <a href="#foundation">Foundation & Giving</a>
+      <a href="#media">News & Media</a>
+    </nav>
+
+  </div>
+</header>
+
+<div class="mobile-nav" id="mobileNav">
+  <a href="#org">Our Organization</a>
+  <a href="#history">Our History</a>
+  <a href="#leaders">Our Leaders</a>
+  <a href="#values">Core Values</a>
+  <a href="#membership">Membership</a>
+  <a href="#foundation">Foundation & Giving</a>
+  <a href="#media">News & Media</a>
+</div>
+
+<section class="hero">
+  <video autoplay muted loop>
+    <source src="video.mp4" type="video/mp4">
+  </video>
+
+  <div class="hero-content">
+    <h1>About Swiss Aid Connect</h1>
+    <p>We are a transparent, community-driven humanitarian NGO creating measurable and sustainable impact.</p>
+  </div>
+</section>
+
+<section class="content" id="about">
+
+  <div class="card section" id="org">
+    <h2>Our Organization</h2>
+    <p class="lead">Swiss Aid Connect is a humanitarian nonprofit committed to delivering practical solutions, transparency, and measurable results for vulnerable communities.</p>
+    <div class="accordion">
+      <div class="acc-item">
+        <div class="acc-head">Who We Are <span>+</span></div>
+        <div class="acc-body">We are a volunteer‑driven, community‑focused organization working to improve access to education, basic needs, and economic empowerment.</div>
+      </div>
+      <div class="acc-item">
+        <div class="acc-head">What We Do <span>+</span></div>
+        <div class="acc-body">Our programs focus on youth empowerment, community health, food support, mentorship, and emergency relief where needed.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card section" id="history">
+    <h2>Our History</h2>
+    <p class="lead">Founded in 2025, Swiss Aid Connect began with a mission to restore dignity and opportunity to underserved communities.</p>
+    <div class="accordion">
+      <div class="acc-item">
+        <div class="acc-head">How We Started <span>+</span></div>
+        <div class="acc-body">A small team of dedicated volunteers came together to address urgent local needs and build long‑term solutions for vulnerable families.</div>
+      </div>
+      <div class="acc-item">
+        <div class="acc-head">Our Growth <span>+</span></div>
+        <div class="acc-body">With the support of partners and communities, we expanded programs across education, food aid, capacity building, and youth support.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card section" id="leaders">
+    <h2>Our Leaders</h2>
+    <p class="lead">Meet the dedicated people who guide our mission and ensure accountability.</p>
+    <div class="accordion">
+      <div class="acc-item">
+        <div class="acc-head">Board of Directors <span>+</span></div>
+        <div class="acc-body">Our board provides governance, strategic direction, and transparent oversight of all programs and finances.</div>
+      </div>
+      <div class="acc-item">
+        <div class="acc-head">Executive Team <span>+</span></div>
+        <div class="acc-body">Our executive team manages operations, partnerships, and program implementation with professionalism and passion.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card section" id="values">
+    <h2>Core Values</h2>
+    <p class="lead">Our work is driven by strong values that shape every decision and every project.</p>
+    <ul>
+      <li>Integrity & Transparency</li>
+      <li>Community First</li>
+      <li>Inclusivity & Respect</li>
+      <li>Sustainability</li>
+      <li>Accountability</li>
+    </ul>
+  </div>
+
+  <div class="card section" id="membership">
+    <h2>Membership</h2>
+    <p class="lead">Join our mission and become part of a community creating real change.</p>
+    <div class="accordion">
+      <div class="acc-item">
+        <div class="acc-head">Why Become a Member? <span>+</span></div>
+        <div class="acc-body">Members help guide community impact programs, support fundraising efforts, and participate in humanitarian initiatives.</div>
+      </div>
+      <div class="acc-item">
+        <div class="acc-head">Who Can Join? <span>+</span></div>
+        <div class="acc-body">Anyone with a passion for community service and humanitarian work is welcome to join.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card section" id="foundation">
+    <h2>Foundation & Giving</h2>
+    <p class="lead">Every contribution supports life‑changing programs and community development.</p>
+    <div class="accordion">
+      <div class="acc-item">
+        <div class="acc-head">Transparency <span>+</span></div>
+        <div class="acc-body">We maintain open reporting, clear financial tracking, and responsible use of donations.</div>
+      </div>
+      <div class="acc-item">
+        <div class="acc-head">Ways to Give <span>+</span></div>
+        <div class="acc-body">Support through donations, sponsorships, partnerships, or volunteering.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card section" id="media">
+    <h2>News & Media</h2>
+    <p class="lead">Stay updated with our press releases, community stories, and project highlights.</p>
+    <div class="accordion">
+      <div class="acc-item">
+        <div class="acc-head">Press Center <span>+</span></div>
+        <div class="acc-body">Read official announcements, humanitarian updates, and public statements.</div>
+      </div>
+      <div class="acc-item">
+        <div class="acc-head">Social Media <span>+</span></div>
+        <div class="acc-body">Follow our community impact stories and updates across our social platforms.</div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<script>
+/* MOBILE MENU */
+const menuBtn = document.getElementById('menuBtn');
+const mobileNav = document.getElementById('mobileNav');
+menuBtn.addEventListener('click',()=>{
+  mobileNav.classList.toggle('show');
+});
+
+/* ACCORDION */
+const accHeads = document.querySelectorAll('.acc-head');
+accHeads.forEach(h=>{
+  h.addEventListener('click',()=>{
+    const body = h.nextElementSibling;
+    body.classList.toggle('open');
+  });
+});
+</script>
+
+</body>
+</html>
