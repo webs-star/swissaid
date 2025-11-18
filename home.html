@@ -1310,13 +1310,12 @@ document.getElementById('btnMenu').addEventListener('click', () => {
         inner.innerHTML = `
             <a href="#">A.I</a>
             <a href="#">Portal</a>
-            
             <a href="#" id="mobileLangToggle">${languageText}</a>
 
-            <a href="#about-section">About Us</a>
-            <a href="#impact-heading">Our Impact</a>
-            <a href="#join-us-heading">Get Involved</a>
-            <a href="#" target="_blank" rel="noopener">Member Resource Center ↗</a>
+            <a href="#about-section" data-key="about-us-nav">About Us</a>
+            <a href="#impact-heading" data-key="our-impact-nav">Our Impact</a>
+            <a href="#join-us-heading" data-key="get-involved-nav">Get Involved</a>
+            <a href="#" target="_blank" rel="noopener" data-key="resource-center-nav">Member Resource Center ↗</a>
         `;
         
         // Add event listener to the newly created mobile language link
@@ -1331,39 +1330,26 @@ document.getElementById('btnMenu').addEventListener('click', () => {
             let nextLang;
 
             switch (currentLang) {
-                case 'en':
-                    nextLang = 'fr';
-                    break;
-                case 'fr':
-                    nextLang = 'de';
-                    break;
-                case 'de':
-                    nextLang = 'es';
-                    break;
-                case 'es':
-                    nextLang = 'sw';
-                    break;
-                case 'sw':
-                    nextLang = 'en';
-                    break;
-                default:
-                    nextLang = 'en';
+                case 'en': nextLang = 'fr'; break;
+                case 'fr': nextLang = 'de'; break;
+                case 'de': nextLang = 'es'; break;
+                case 'es': nextLang = 'sw'; break;
+                case 'sw': nextLang = 'en'; break;
+                default: nextLang = 'en';
             }
             
             // 1. Call the main switch function to change all text on the page
             switchLanguage(nextLang); 
             localStorage.setItem('userLang', nextLang);
             
-            // 2. Update the mobile button text immediately
-            mobileLangToggle.textContent = nextLang.toUpperCase();
+            // 2. The switchLanguage function (Block #1) will handle updating the text content
         });
 
         // Apply current translation to the new mobile links
-        // (This relies on the updated switchLanguage function handling all 5 languages)
+        // This ensures the menu links are translated immediately upon first open
         switchLanguage(currentLang);
     }
 });
-
 
 // START OF LANGUAGE SCRIPT
 
@@ -1746,54 +1732,20 @@ function switchLanguage(langCode) {
     if (inner && inner.innerHTML.trim() !== "") {
         const mobileLinks = inner.querySelectorAll('a');
         mobileLinks.forEach(link => {
-            const originalText = link.textContent.trim();
-            let newText = originalText;
-
-            // Check against known mobile menu texts
-            switch (originalText) {
-                case 'A.I': newText = 'A.I'; break;
-                case 'Portal': newText = 'Portal'; break;
-                // Handle all language codes in the mobile menu text
-                case 'EN': 
-                case 'FR':
-                case 'DE': 
-                case 'ES':
-                case 'SW':
-                    newText = langCode.toUpperCase(); 
-                    break; 
-                case 'About Us': 
-                case 'À Propos': 
-                case 'Über uns':
-                case 'Sobre Nosotros':
-                case 'Kuhusu Sisi':
-                    newText = languageData['about-us-nav']; 
-                    break;
-                case 'Our Impact': 
-                case 'Notre Impact':
-                case 'Unser Einfluss':
-                case 'Nuestro Impacto':
-                case 'Athari Yetu':
-                    newText = languageData['our-impact-nav']; 
-                    break;
-                case 'Get Involved': 
-                case 'S\'Impliquer':
-                case 'Mitmachen':
-                case 'Participa':
-                case 'Shiriki':
-                    newText = languageData['get-involved-nav']; 
-                    break;
-                default:
-                    // Try to find the link in the static side-nav for a resource center match
-                    if (originalText.includes('Member Resource Center') || originalText.includes('Centre de Ressources') || originalText.includes('Mitglieder-Ressourcenzentrum') || originalText.includes('Centro de Recursos') || originalText.includes('Kituo cha Rasilimali')) {
-                        newText = languageData['resource-center-nav'];
-                    }
-                    break;
+            const dataKey = link.getAttribute('data-key');
+            
+            if (link.id === 'mobileLangToggle') {
+                // Update the language toggle text
+                link.textContent = langCode.toUpperCase();
+            } else if (dataKey && languageData[dataKey]) {
+                // Translate the navigation links using their data-key
+                link.textContent = languageData[dataKey];
+            } else if (link.textContent === 'A.I' || link.textContent === 'Portal') {
+                // Keep static links as is
             }
-            link.textContent = newText;
         });
     }
-}
-
+} // End of switchLanguage function
 // Language Cycling Logic (EN -> FR -> DE -> ES -> SW -> EN)
 const langToggle = document.getElementById('langToggle');
 if (langToggle) {
