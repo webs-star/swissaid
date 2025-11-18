@@ -1,0 +1,1120 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Swiss Aid Connect Foundation</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root{ 
+  --blue:#0b61b6;
+  --yellow:#f5c400;
+  --purple:#7a2fa6;
+  --utility-height:32px;
+  --nav-height:84px;
+  --side-nav-height:48px;
+  --max-width:1180px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{
+  height:100%;
+  font-family: "Segoe UI", Roboto, system-ui, -apple-system, "Helvetica Neue", Arial;
+  color:#222;
+  line-height:1.35;
+}
+
+/* Top utility nav */
+.top-nav {
+  position:fixed;
+  top:0; right:0; left:0;
+  height:var(--utility-height);
+  background:rgba(255,255,255,0.72);
+  backdrop-filter: blur(12px);
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+  padding:0 18px;
+  border-bottom:1px solid rgba(0,0,0,0.06);
+  z-index:100;
+  font-size:14px;
+  gap:16px;
+}
+.top-nav a{
+  text-decoration:none;
+  color:#333;
+  font-weight:600;
+}
+.top-nav a:hover{ text-decoration:underline }
+
+/* Fixed header */
+.site-header{
+  position:fixed;
+  top:var(--utility-height);
+  left:0; right:0;
+  height:var(--nav-height);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:rgba(255,255,255,0.72);
+  backdrop-filter: blur(12px);
+  border-bottom:1px solid rgba(0,0,0,0.06);
+  z-index:95;
+  padding:0 18px;
+}
+
+/* Logo + NGO name */
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  min-width:220px;
+}
+.brand img{ height:76px; width:auto; display:block; }
+
+
+.brand h1 {
+  font-size:30px;
+  letter-spacing:0.2px;
+  color:#222;
+  font-weight:700;
+  white-space: nowrap;   /* <<< KEEP NAME ON ONE LINE */
+}
+
+
+/* Horizontal nav */
+.side-nav-container{
+  position:fixed;
+  top: calc(var(--utility-height) + var(--nav-height));
+  left:0;
+  width:100%;
+  height:var(--side-nav-height);
+  background:rgba(255,255,255,0.72);
+  backdrop-filter: blur(12px);
+  border-top:1px solid rgba(0,0,0,0.06);
+  border-bottom:1px solid rgba(0,0,0,0.06);
+  display:flex;
+  align-items:center;
+  padding:0 18px;
+  z-index:85;
+}
+
+.side-nav{
+  display:flex;
+  gap:16px;
+}
+
+.side-nav a{
+  text-decoration:none;
+  font-weight:600;
+  padding:12px 18px;
+  border-radius:6px;
+  font-size:1.3rem;
+  transition: background 0.3s, color 0.3s;
+}
+
+.side-nav a:nth-of-type(1){ color:#0b61b6; }
+.side-nav a:nth-of-type(2){ color:#7a2fa6; }
+.side-nav a:nth-of-type(3){ color:#f5c400; }
+.side-nav a:nth-of-type(4){ color:#e94e77; }
+
+.side-nav a:hover{
+  background:rgba(0,0,0,0.08);
+  color:#111;
+}
+
+/* Join & Donate buttons */
+.nav-actions{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.btn {
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 18px;
+  border-radius:8px;
+  font-weight:700;
+  text-decoration:none;
+  cursor:pointer;
+  border:none;
+}
+.btn-join{
+  background:var(--blue);
+  color:#fff;
+}
+.btn-donate{
+  background:var(--yellow);
+  color:#111;
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* HERO WRAP */
+.hero-wrap {
+  position:relative;
+  height: calc(100vh - var(--utility-height) - var(--nav-height) - var(--side-nav-height));
+  margin-top: calc(var(--utility-height) + var(--nav-height) + var(--side-nav-height));
+  overflow:hidden;
+}
+
+
+
+.hero-slider {
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  z-index:0;
+}
+
+
+.hero-slide {
+  position:absolute;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  opacity:0;
+  animation:fade 25s infinite;
+}
+
+/* Different animation delays for each slide */
+.slide1 { animation-delay:0s; }
+.slide2 { animation-delay:5s; }
+.slide3 { animation-delay:10s; }
+.slide4 { animation-delay:15s; }
+.slide5 { animation-delay:20s; }
+
+/* Fade-in-out animation */
+@keyframes fade {
+  0% { opacity:0; transform:scale(1.1) rotate(0deg);}
+  10% { opacity:1; transform:scale(1) rotate(0deg);}
+  20% { opacity:1; transform:scale(1) rotate(0deg);}
+  30% { opacity:0; transform:scale(1.05) rotate(2deg);}
+  100% { opacity:0;}
+}
+
+/* Optional: add different effects for each slide */
+.slide1 { animation-name:fade; }
+.slide2 { animation-name:fade-rotate; }
+.slide3 { animation-name:fade-zoom; }
+.slide4 { animation-name:fade-slide; }
+.slide5 { animation-name:fade-flip; }
+
+@keyframes fade-rotate {
+  0%,30%{ opacity:0; transform:rotate(-5deg);}
+  10%,20%{ opacity:1; transform:rotate(0deg);}
+  100%{ opacity:0; transform:rotate(5deg);}
+}
+
+@keyframes fade-zoom {
+  0%,30%{ opacity:0; transform:scale(1.2);}
+  10%,20%{ opacity:1; transform:scale(1);}
+  100%{ opacity:0; transform:scale(1.1);}
+}
+
+@keyframes fade-slide {
+  0%,30%{ opacity:0; transform:translateX(-100px);}
+  10%,20%{ opacity:1; transform:translateX(0);}
+  100%{ opacity:0; transform:translateX(100px);}
+}
+
+@keyframes fade-flip {
+  0%,30%{ opacity:0; transform:rotateY(90deg);}
+  10%,20%{ opacity:1; transform:rotateY(0);}
+  100%{ opacity:0; transform:rotateY(-90deg);}
+}
+
+
+
+
+
+
+
+
+
+.hero-overlay{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.45));
+  z-index:1;
+}
+.hero-inner{
+  position:relative;
+  z-index:2;
+  width:100%;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:28px;
+}
+.hero-content{
+  max-width:1200px;
+  width:100%;
+  color:#fff;
+}
+.hero-huge{
+  font-weight:800;
+  font-size:clamp(34px, 7vw, 64px);
+  line-height:0.98;
+  letter-spacing:-1px;
+  margin-bottom:18px;
+  text-shadow:0 10px 30px rgba(0,0,0,0.45);
+}
+.hero-sub{
+  display:block;
+  font-weight:800;
+  font-size:clamp(20px, 3.5vw, 34px);
+  color:var(--yellow);
+  margin-bottom:22px;
+  text-shadow:0 6px 20px rgba(0,0,0,0.35);
+}
+.hero-ctas{
+  margin-top:8px;
+  display:flex;
+  gap:14px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+.hero-ctas .cta{
+  padding:14px 24px;
+  border-radius:10px;
+  font-weight:700;
+  font-size:16px;
+  text-decoration:none;
+  display:inline-block;
+}
+.cta-primary{ background:var(--blue); color:#fff }
+.cta-outline{ background:rgba(255,255,255,0.12); color:#fff; border:1px solid rgba(255,255,255,0.14) }
+
+footer.site-footer{
+  background:#fafafa;
+  padding:36px 18px;
+  border-top:1px solid rgba(0,0,0,0.05);
+  text-align:center;
+  color:#444;
+  font-size:14px;
+}
+
+
+@media (max-width:520px) {
+  .hero-huge {
+    font-size: 28px;
+  }
+  .hero-sub {
+    font-size: 18px;
+  }
+
+}
+
+.hero-wrap {
+  position:relative;
+  height: calc(100vh - var(--utility-height) - var(--nav-height) - var(--side-nav-height));
+  margin-top: calc(var(--utility-height) + var(--nav-height) + var(--side-nav-height));
+  overflow:hidden;
+  z-index:0;
+}
+
+
+
+.impact-section {
+  padding:80px 18px;
+  background:linear-gradient(180deg, #f0f8ff 0%, #e6f2ff 100%);
+  text-align:center;
+}
+
+.impact-container {
+  max-width:1200px;
+  margin:0 auto;
+}
+
+.impact-title {
+  font-size:clamp(28px,5vw,42px);
+  font-weight:800;
+  color:var(--blue);
+  margin-bottom:40px;
+}
+
+.impact-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:32px;
+  justify-items:center;
+}
+
+.impact-card {
+  padding:28px 20px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  color:#fff;
+  font-weight:600;
+}
+
+/* Different shapes and backgrounds for each card */
+.impact-card:nth-child(1) {
+  background:#0b61b6;
+  border-radius:50% 20% 50% 20%;
+  box-shadow:0 6px 18px rgba(11,97,182,0.3);
+}
+.impact-card:nth-child(2) {
+  background:#f5c400;
+  border-radius:20% 50% 20% 50%;
+  color:#111;
+  box-shadow:0 6px 18px rgba(245,196,0,0.3);
+}
+.impact-card:nth-child(3) {
+  background:#7a2fa6;
+  border-radius:15% 15% 50% 50%;
+  box-shadow:0 6px 18px rgba(122,47,166,0.3);
+}
+.impact-card:nth-child(4) {
+  background:#e94e77;
+  border-radius:40% 10% 40% 10%;
+  box-shadow:0 6px 18px rgba(233,78,119,0.3);
+}
+
+/* Hover effects */
+.impact-card:hover {
+  transform:translateY(-10px) rotate(-2deg);
+  box-shadow:0 12px 24px rgba(0,0,0,0.2);
+}
+
+/* Card content */
+.impact-card h3 {
+  font-size:36px;
+  margin-bottom:12px;
+}
+
+.impact-card p {
+  font-size:18px;
+}
+
+
+.about-section {
+  padding:100px 18px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background: 
+    rgba(255, 255, 255, 0.3), /* subtle white overlay to lighten image */
+    url('https://cdn.pixabay.com/photo/2016/11/29/03/53/technology-1868563_1280.jpg') center/cover no-repeat;
+  color:#111; /* darker text for contrast */
+  position:relative;
+  overflow:hidden;
+  border-radius:30px;
+}
+
+
+
+.about-section::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  background: rgba(0,0,0,0.35); /* dark overlay for text readability */
+  z-index:1;
+}
+
+.about-container {
+  display:flex;
+  max-width:1200px;
+  gap:60px;
+  align-items:center;
+  flex-wrap:wrap;
+  position:relative;
+  z-index:2; /* bring above overlay */
+}
+
+.about-text {
+  flex:1;
+  min-width:300px;
+}
+
+.about-title {
+  font-size:clamp(32px,6vw,48px);
+  font-weight:800;
+  color:#fff;
+  margin-bottom:20px;
+}
+
+.about-subtitle {
+  font-size:20px;
+  margin-bottom:30px;
+  line-height:1.5;
+}
+
+.btn-learn {
+  display:inline-block;
+  padding:14px 28px;
+  background:#f5c400;
+  color:#111;
+  font-weight:700;
+  border-radius:10px;
+  text-decoration:none;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.btn-learn:hover {
+  transform:translateY(-4px);
+  box-shadow:0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* Star-shaped image with smaller points */
+.about-image {
+  flex:1;
+  min-width:300px;
+  clip-path: polygon(
+    50% 0%, 55% 10%, 60% 0%, 65% 10%, 
+    70% 0%, 75% 10%, 80% 0%, 85% 10%, 
+    90% 0%, 95% 10%, 100% 50%, 95% 90%, 
+    90% 100%, 85% 90%, 80% 100%, 75% 90%, 
+    70% 100%, 65% 90%, 60% 100%, 55% 90%, 
+    50% 100%, 45% 90%, 40% 100%, 35% 90%, 
+    30% 100%, 25% 90%, 20% 100%, 15% 90%, 
+    10% 100%, 5% 90%, 0% 50%, 5% 10%, 10% 0%, 
+    15% 10%, 20% 0%, 25% 10%, 30% 0%, 35% 10%, 
+    40% 0%, 45% 10%
+  );
+  overflow:hidden;
+  max-height:600px; /* optional max height */
+}
+
+.about-image img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+
+
+
+
+.serve-section {
+  padding:100px 18px;
+  background:#fefefe;
+  position:relative;
+}
+
+.serve-container {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  max-width:1200px;
+  margin:0 auto;
+  gap:40px;
+  flex-wrap:wrap;
+}
+
+.serve-text {
+  flex:1;
+  min-width:280px;
+}
+
+.serve-title {
+  font-size:clamp(28px,5vw,42px);
+  font-weight:800;
+  color:#0b61b6;
+  margin-bottom:20px;
+}
+
+
+.serve-paragraph {
+  font-size:18px;
+  color:#333;
+  line-height:1.8;
+  text-align:center; /* center text for trapezoid symmetry */
+}
+
+.serve-paragraph .line {
+  display:block;
+  margin:0 auto 12px auto;
+}
+
+/* Smooth 8-shape widths */
+.line1 { max-width:100%; }
+.line2 { max-width:75%; }
+.line3 { max-width:50%; }
+.line4 { max-width:75%; }
+.line5 { max-width:100%; }
+
+
+
+
+.serve-btn {
+  display:inline-block;
+  padding:14px 24px;
+  background:#7a2fa6;
+  color:#fff;
+  font-weight:700;
+  border-radius:12px;
+  text-decoration:none;
+  margin-top:20px;
+}
+
+.serve-image {
+  flex:1;
+  min-width:280px;
+  display:flex;
+  justify-content:center;
+  position:relative;
+}
+
+.serve-image img {
+  width:100%;
+  max-width:500px;
+  height:auto;
+  object-fit:cover;
+  clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%); /* trapezium shape */
+}
+
+
+
+
+.join-btn-green:hover { background:#049C58 !important; }
+.join-btn-blue:hover { background:#1E56B9 !important; }
+
+
+
+.ft { color:#fff;text-decoration:none;font-size:15px; }
+  .ft:hover { text-decoration:underline; }
+
+/* HIDE MOBILE MENU BUTTON ON DESKTOP */
+@media (min-width:881px) {
+  .dot-btn {
+    display: none !important;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+/* ================================
+   MOBILE FIX – FOR SCREENS < 880px
+   ================================ */
+@media (max-width: 880px) {
+
+  /* Hide desktop nav + desktop side menu */
+  .side-nav-container {
+    display: none !important;
+  }
+
+  /* Make header auto-height on phone */
+  .site-header {
+    height: auto;
+    padding: 12px 16px;
+    flex-wrap: wrap;
+    row-gap: 12px;
+  }
+
+  /* Brand row (logo + name + burger) */
+  .brand {
+    width: 100%;
+    justify-content: space-between;
+    min-width: 0;
+  }
+
+  .brand img {
+    height: 58px;       /* reduce logo size on phone */
+  }
+
+  .brand h1 {
+    font-size: 24px;
+    line-height: 1.1;
+  }
+
+  /* Mobile menu (burger button) */
+  .dot-btn {
+    display: block !important;
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    background: #0b61b6;
+    color: #fff;
+    font-size: 26px;
+    border: none;
+    cursor: pointer;
+  }
+
+  .dots {
+    position: relative;
+    top: -2px;
+  }
+
+  /* Move Join + Donate below logo on phone */
+  .nav-actions {
+    width: 100%;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .btn {
+    padding: 8px 14px;
+    font-size: 14px;
+  }
+
+  /* Adjust hero so it doesn't get covered */
+  .hero-wrap {
+    margin-top: calc(var(--utility-height) + 160px) !important;
+    height: calc(100vh - var(--utility-height) - 160px) !important;
+  }
+
+  /* Reduce hero text sizes */
+  .hero-huge {
+    font-size: 26px !important;
+  }
+  .hero-sub {
+    font-size: 16px !important;
+  }
+
+  /* Utility nav stays visible but becomes compact */
+  .top-nav {
+    padding: 0 12px;
+    gap: 10px;
+    font-size: 12px;
+  }
+
+  /* Mobile menu panel layout */
+  .mobile-panel {
+    position: fixed;
+    top: calc(var(--utility-height) + 70px);
+    right: 0;
+    width: 85%;
+    max-width: 320px;
+    background: white;
+    height: calc(100% - var(--utility-height) - 70px);
+    box-shadow: -4px 0 20px rgba(0,0,0,0.15);
+    transform: translateX(100%);
+    transition: transform 0.35s ease;
+    z-index: 200;
+  }
+
+  .mobile-panel.open {
+    transform: translateX(0);
+  }
+
+  .panel-inner a {
+    display: block;
+    padding: 16px 20px;
+    border-bottom: 1px solid #eee;
+    font-size: 18px;
+    text-decoration: none;
+    color: #333;
+  }
+}
+
+
+
+
+
+
+</style>
+</head>
+<body>
+<!-- Top Utility Nav -->
+<div class="top-nav">
+  <a href="#">A.I</a>
+  <a href="#">Portal</a>
+  <a href="#">Shop</a>
+  <a href="#">Convention</a>
+  <a href="#">Find a Club</a>
+  
+</div>
+
+<!-- Main Header -->
+<header>
+  <div class="site-header" role="banner">
+
+    <!-- Row 1: Logo + Two-line NGO Name -->
+ <div class="brand">
+  <img src="https://res.cloudinary.com/dwvt4e9o2/image/upload/v1763476964/Screenshot_73_e5hyu9.png" alt="swisslogo" />
+<h1>Swiss Aid Connect Foundation</h1>
+
+
+  <!-- MENU BUTTON MOVED HERE -->
+  <button class="dot-btn" id="btnMenu" aria-haspopup="true" aria-controls="mobileMenu" aria-expanded="false">
+    <span class="dots">≡</span>
+  </button>
+</div>
+
+
+    <!-- Row 2: Join + Donate -->
+    <div class="nav-actions">
+      <a class="btn btn-join" href="#">Join</a>
+      <a class="btn btn-donate" href="#">Donate</a>
+    </div>
+
+  </div>
+
+  <!-- Desktop Side Navigation -->
+  <div class="side-nav-container">
+    <nav class="side-nav" role="navigation" aria-label="Main navigation">
+      <a href="https://webs-star.github.io/swissaid/about">About Us</a>
+      <a href="#">Our Impact</a>
+      <a href="#">Get Involved</a>
+      <a href="#" target="_blank" rel="noopener">Member Resource Center ↗</a>
+    </nav>
+  </div>
+  
+  
+  
+<!-- Mobile Menu Panel -->
+<div id="mobileMenu" class="mobile-panel" aria-hidden="true" role="menu">
+  <div class="panel-inner" id="mobileMenuInner"></div>
+</div>
+  
+</header>
+
+
+<main>
+  <section class="hero-wrap" aria-labelledby="hero-heading">
+    <div class="hero-slider">
+      <img src="https://cdn.pixabay.com/photo/2025/10/15/04/31/mahonia-9895458_640.jpg" class="hero-slide slide1" alt="Slide 1">
+      <img src="https://cdn.pixabay.com/photo/2015/11/23/03/36/medical-emergency-1057706_1280.jpg" class="hero-slide slide2" alt="Slide 2">
+      <img src="https://cdn.pixabay.com/photo/2016/11/14/03/16/book-1822474_640.jpg" class="hero-slide slide3" alt="Slide 3">
+      <img src="https://cdn.pixabay.com/photo/2020/03/03/04/52/pill-4897529_640.jpg" class="hero-slide slide4" alt="Slide 4">
+      <img src="https://cdn.pixabay.com/photo/2013/12/06/10/21/disability-224130_640.jpg" class="hero-slide slide5" alt="Slide 5">
+    </div>
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <div class="hero-content">
+        <h2 id="hero-heading" class="hero-huge">We are serving a world in need.</h2>
+        <span class="hero-sub">One act of kindness at a time.</span>
+        <div class="hero-ctas" role="group" aria-label="Primary calls to action">
+          <a class="cta cta-primary" href="#">Our Programs</a>
+          <a class="cta cta-outline" href="#">Volunteer</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+
+
+
+
+
+
+
+<section class="impact-section" aria-labelledby="impact-heading">
+  <div class="impact-container">
+    <h2 id="impact-heading" class="impact-title">Our Global Impact</h2>
+    <div class="impact-grid">
+      <div class="impact-card">
+        <h3>100+</h3>
+        <p>Countries Reached</p>
+      </div>
+      <div class="impact-card">
+        <h3>1M+</h3>
+        <p>Lives Touched</p>
+      </div>
+      <div class="impact-card">
+        <h3>500+</h3>
+        <p>Projects Completed</p>
+      </div>
+      <div class="impact-card">
+        <h3>10K+</h3>
+        <p>Volunteers Engaged</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="about-section" aria-labelledby="about-heading">
+  <div class="about-container">
+    <div class="about-text">
+      <h2 id="about-heading" class="about-title">Making Change Happen</h2>
+      <p class="about-subtitle">Connecting communities, empowering lives, inspiring hope.</p>
+      <a class="btn btn-learn" href="#">Learn More</a>
+    </div>
+    <div class="about-image">
+      <img src="https://cdn.pixabay.com/photo/2016/11/14/03/16/book-1822474_640.jpg" alt="About Us Image">
+    </div>
+  </div>
+</section>
+
+
+<section class="serve-section" aria-labelledby="serve-heading">
+  <div class="serve-container">
+    <div class="serve-text">
+      <h2 id="serve-heading" class="serve-title">Making a Difference</h2>
+      <p class="serve-paragraph">
+        <span class="line line1">We bring hope and support to communities worldwide, delivering education, health, and sustainable projects that uplift lives.</span>
+        <span class="line line2">Our programs reach remote areas, ensuring no one is left behind.</span>
+        <span class="line line3">With dedicated volunteers and partners, we create lasting impact across generations.</span>
+        <span class="line line4">Join us in building brighter futures through hands-on community initiatives.</span>
+        <span class="line line5">Every effort counts, and together we transform lives for the better.</span>
+      </p>
+      <a href="#" class="serve-btn">Learn More</a>
+    </div>
+    <div class="serve-image">
+      <img src="https://cdn.pixabay.com/photo/2015/11/23/03/36/medical-emergency-1057706_1280.jpg" alt="Serving communities">
+    </div>
+  </div>
+</section>
+
+
+
+
+
+<section style="background:#0F2B56;padding:60px 0;color:#fff;font-family:Arial, sans-serif;">
+  <div style="max-width:1200px;margin:auto;padding:0 20px;">
+
+    <!-- Heading -->
+    <h2 style="font-size:40px;margin:0 0 10px;font-weight:700;">Join us.</h2>
+    <div style="width:80px;height:4px;background:#F5C22D;margin-bottom:45px;"></div>
+
+    <!-- Grid container -->
+    <div style="
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
+      gap:30px;
+    ">
+
+      <!-- Card 1 -->
+      <div style="background:#fff;border-radius:6px;overflow:hidden;display:flex;flex-direction:column;">
+        <img src="https://cdn.pixabay.com/photo/2013/12/06/10/21/disability-224130_640.jpg" alt="" style="width:100%;display:block;">
+        <a href="#" class="join-btn-green" style="
+          display:block;
+          padding:20px;
+          text-align:left;
+          color:#fff;
+          font-size:20px;
+          font-weight:600;
+          text-decoration:none;
+          clip-path:polygon(0 0,100% 0,88% 100%,0% 100%);
+          background:#04C26A;
+          transition:0.3s;
+        ">Learn more</a>
+      </div>
+
+      <!-- Card 2 -->
+      <div style="background:#fff;border-radius:6px;overflow:hidden;display:flex;flex-direction:column;">
+        <img src="https://cdn.pixabay.com/photo/2016/11/14/03/16/book-1822474_640.jpg" alt="" style="width:100%;display:block;">
+        <a href="#" class="join-btn-blue" style="
+          display:block;
+          padding:20px;
+          text-align:left;
+          color:#fff;
+          font-size:20px;
+          font-weight:600;
+          text-decoration:none;
+          clip-path:polygon(0 0,100% 0,88% 100%,0% 100%);
+          background:#2C70E4;
+          transition:0.3s;
+        ">Learn more</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+<section style="padding:60px 0;background:#F8F8F8;font-family:Arial, sans-serif;">
+  <div style="max-width:1200px;margin:auto;padding:0 20px;">
+
+    <!-- Heading -->
+    <h2 style="font-size:36px;margin:0 0 10px;font-weight:700;color:#111;">
+      Stay connected with our mission.
+    </h2>
+    <div style="width:70px;height:4px;background:#F5C22D;margin-bottom:25px;"></div>
+
+    <!-- Subtitle -->
+    <p style="font-size:18px;color:#333;max-width:650px;line-height:1.6;">
+      Follow us on 
+      <a href="#" style="color:#2C70E4;text-decoration:none;font-weight:600;">social media</a>
+      and see how Swiss Aid Connect Foundation is creating lasting change in communities across the world.
+    </p>
+
+    <!-- Icons Row -->
+    <div style="display:flex;gap:40px;align-items:center;flex-wrap:wrap;margin-top:40px;">
+
+      <!-- Facebook -->
+      <div style="text-align:center;">
+        <a href="#" target="_blank">
+          <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" width="55">
+        </a>
+        <p style="font-size:13px;color:#333;margin-top:10px;">Swiss Aid Connect<br>Foundation</p>
+      </div>
+
+      <!-- Instagram -->
+      <div style="text-align:center;">
+        <a href="#" target="_blank">
+          <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" width="55">
+        </a>
+        <p style="font-size:13px;color:#333;margin-top:10px;">Swiss Aid Connect<br>Foundation</p>
+      </div>
+
+      <!-- X / Twitter -->
+      <div style="text-align:center;">
+        <a href="#" target="_blank">
+          <img src="https://cdn-icons-png.flaticon.com/512/5968/5968958.png" width="55">
+        </a>
+        <p style="font-size:13px;color:#333;margin-top:10px;">Swiss Aid Connect<br>Foundation</p>
+      </div>
+
+      <!-- LinkedIn -->
+      <div style="text-align:center;">
+        <a href="#" target="_blank">
+          <img src="https://cdn-icons-png.flaticon.com/512/3536/3536505.png" width="55">
+        </a>
+        <p style="font-size:13px;color:#333;margin-top:10px;">Swiss Aid Connect<br>Foundation</p>
+      </div>
+
+      <!-- YouTube -->
+      <div style="text-align:center;">
+        <a href="#" target="_blank">
+          <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" width="55">
+        </a>
+        <p style="font-size:13px;color:#333;margin-top:10px;">Swiss Aid Connect<br>Foundation</p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+
+
+
+
+
+<section>
+<footer style="background:#0C2856;color:#fff;font-family:Arial, sans-serif;padding:60px 0 40px;">
+  <div style="max-width:1300px;margin:auto;padding:0 30px;">
+
+    <!-- Top Grid -->
+    <div style="display:grid;grid-template-columns:2fr 1fr;gap:30px;">
+
+      <!-- Left columns -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:30px;">
+
+        <!-- NEWS -->
+        <div>
+          <h4 style="font-size:15px;font-weight:700;color:#F5C22D;letter-spacing:1px;margin-bottom:15px;">NEWS</h4>
+          <p><a class="ft" href="#">Press Center</a></p>
+          <p><a class="ft" href="#">Foundation Blog</a></p>
+          <p><a class="ft" href="#">Annual Reports</a></p>
+        </div>
+
+        <!-- MEDIA -->
+        <div>
+          <h4 style="font-size:15px;font-weight:700;color:#F5C22D;letter-spacing:1px;margin-bottom:15px;">MEDIA</h4>
+          <p><a class="ft" href="#">Video Library</a></p>
+          <p><a class="ft" href="#">Logos & Branding</a></p>
+          <p><a class="ft" href="#">Media Guidelines</a></p>
+        </div>
+
+        <!-- CONNECT -->
+        <div>
+          <h4 style="font-size:15px;font-weight:700;color:#F5C22D;letter-spacing:1px;margin-bottom:15px;">CONNECT</h4>
+          <p><a class="ft" href="#">Careers</a></p>
+          <p><a class="ft" href="#">Contact Support</a></p>
+          <p><a class="ft" href="#">Partnerships</a></p>
+          <p><a class="ft" href="#">Privacy Policy</a></p>
+        </div>
+
+      </div>
+
+      <!-- Right Side: Social + Address -->
+      <div style="text-align:left;">
+        <div style="font-size:22px;display:flex;gap:15px;margin-bottom:15px;">
+          <a class="ft" href="#">📘</a>
+          <a class="ft" href="#">📷</a>
+          <a class="ft" href="#">💼</a>
+          <a class="ft" href="#">✖</a>
+          <a class="ft" href="#">▶</a>
+          <a class="ft" href="#">📱</a>
+        </div>
+
+        <img src="https://res.cloudinary.com/dwvt4e9o2/image/upload/v1763381089/WhatsApp_Image_2025-11-17_at_9.22.25_AM_c17ghd.jpg" alt="Swiss Aid Connect Foundation" style="height:35px;margin:10px 0;display:block;">
+
+        <p style="margin:0;line-height:1.6;">
+          Swiss Aid Connect Foundation<br>
+          45 Example Avenue<br>
+          Zurich, Switzerland 8001<br>
+          +41 44 555 88 99
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Also of Interest -->
+    <div style="margin-top:40px;font-size:15px;">
+      <span style="color:#F5C22D;font-weight:700;letter-spacing:1px;">ALSO OF INTEREST</span>
+      &nbsp;&nbsp; <a class="ft" href="#">Find a Local Program</a> &nbsp;&bull;&nbsp;
+      <a class="ft" href="#">Make a Donation</a> &nbsp;&bull;&nbsp;
+      <a class="ft" href="#">Impact Results</a>
+    </div>
+
+    <!-- Separator Line -->
+    <div style="border-bottom:1px solid rgba(255,255,255,0.3);margin:35px 0;"></div>
+
+    <!-- Disclaimers -->
+    <p style="font-size:13px;line-height:1.7;max-width:900px;">
+      All donations accepted on this website support Swiss Aid Connect Foundation, an independent nonprofit humanitarian organization. The foundation operates programs in health, education, food security, and social support. Details are provided for informational purposes only and may be updated at any time.
+    </p>
+
+  </div>
+
+ 
+
+</footer>
+</section>
+
+
+
+
+
+
+<footer class="site-footer">
+  © <span id="year"></span> Swiss Aid Connect Foundation • All rights reserved.
+</footer>
+
+<script>
+
+document.getElementById('btnMenu').addEventListener('click', () => {
+  const menu = document.getElementById('mobileMenu');
+  const inner = document.getElementById('mobileMenuInner');
+
+  menu.classList.toggle('open');
+
+  if (inner.innerHTML.trim() === "") {
+    inner.innerHTML = `
+      <!-- Utility Nav -->
+      <a href="#">A.I</a>
+      <a href="#">Portal</a>
+     
+     
+     
+      <a href="#">EN</a>
+
+      <!-- Main Navigation -->
+      <a href="#">About Us</a>
+      <a href="#">Our Impact</a>
+      <a href="#">Get Involved</a>
+     
+    `;
+  }
+});
+
+
+
+</script>
+
+</body>
+</html>
