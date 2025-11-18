@@ -925,6 +925,11 @@ html, body {
 
 
   
+  @media (min-width:881px) {
+  .side-nav-container {
+    top: calc(var(--utility-height) + 150px) !important;
+  }
+}
 </style>
 </head>
 <body>
@@ -974,12 +979,14 @@ html, body {
       
     </nav>
   </div>
-</header>
 
 <!-- Mobile Menu Panel -->
 <div id="mobileMenu" class="mobile-panel" aria-hidden="true" role="menu">
   <div class="panel-inner" id="mobileMenuInner"></div>
 </div>
+  
+</header>
+
 
 <main>
   <section class="hero-wrap" aria-labelledby="hero-heading">
@@ -1777,68 +1784,6 @@ if (langToggle) {
     });
 }
 
-
-// Mobile Menu button handler
-document.getElementById('btnMenu').addEventListener('click', () => {
-    const menu = document.getElementById('mobileMenu');
-    const inner = document.getElementById('mobileMenuInner');
-
-    menu.classList.toggle('open');
-
-    if (inner.innerHTML.trim() === "") {
-        // Mobile menu content must be exactly as in your original script,
-        // but adding the language toggle logic
-        const currentLang = document.getElementById('langToggle').getAttribute('data-lang') || 'en';
-        const languageText = currentLang.toUpperCase();
-
-        inner.innerHTML = `
-            <a href="#">A.I</a>
-            <a href="#">Portal</a>
-            <a href="#" id="mobileLangToggle">${languageText}</a>
-
-            <a href="#">About Us</a>
-            <a href="#">Our Impact</a>
-            <a href="#">Get Involved</a>
-            <a href="#" target="_blank" rel="noopener">Member Resource Center ↗</a>
-        `;
-        
-        // Add event listener to the newly created mobile language link
-        const mobileLangToggle = document.getElementById('mobileLangToggle');
-        mobileLangToggle.addEventListener('click', (e) => {
-            e.preventDefault();
-            // Simulate the same cycling logic as the desktop button
-            const currentLang = document.getElementById('langToggle').getAttribute('data-lang');
-            let nextLang;
-
-            switch (currentLang) {
-                case 'en':
-                    nextLang = 'fr';
-                    break;
-                case 'fr':
-                    nextLang = 'de';
-                    break;
-                case 'de':
-                    nextLang = 'es';
-                    break;
-                case 'es':
-                    nextLang = 'sw';
-                    break;
-                case 'sw':
-                    nextLang = 'en';
-                    break;
-                default:
-                    nextLang = 'en';
-            }
-            switchLanguage(nextLang);
-            localStorage.setItem('userLang', nextLang);
-            // Update the mobile button text immediately
-            mobileLangToggle.textContent = nextLang.toUpperCase();
-        });
-
-        // Apply current translation to the new mobile links
-        switchLanguage(currentLang);
-    }
-});
 
 
 // Initial language load based on user preference or default to English
