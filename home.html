@@ -1294,28 +1294,75 @@ html, body {
 
 <script>
 
+// Mobile Menu button handler
 document.getElementById('btnMenu').addEventListener('click', () => {
-  const menu = document.getElementById('mobileMenu');
-  const inner = document.getElementById('mobileMenuInner');
+    const menu = document.getElementById('mobileMenu');
+    const inner = document.getElementById('mobileMenuInner');
 
-  menu.classList.toggle('open');
+    // Toggle the menu's visibility class
+    menu.classList.toggle('open');
 
-  if (inner.innerHTML.trim() === "") {
-    inner.innerHTML = `
-      <!-- Utility Nav -->
-      <a href="#">A.I</a>
-      <a href="#">Portal</a>
-      <a href="#" id="langToggle" data-lang="en">EN</a> </div>
-      <!-- Main Navigation -->
-      <a href="#">About Us</a>
-      <a href="#">Our Impact</a>
-      <a href="#">Get Involved</a>
-     
-    `;
-  }
+    // Only generate the content the first time the menu is opened
+    if (inner.innerHTML.trim() === "") {
+        const currentLang = document.getElementById('langToggle').getAttribute('data-lang') || 'en';
+        const languageText = currentLang.toUpperCase();
+
+        inner.innerHTML = `
+            <a href="#">A.I</a>
+            <a href="#">Portal</a>
+            
+            <a href="#" id="mobileLangToggle">${languageText}</a>
+
+            <a href="#about-section">About Us</a>
+            <a href="#impact-heading">Our Impact</a>
+            <a href="#join-us-heading">Get Involved</a>
+            <a href="#" target="_blank" rel="noopener">Member Resource Center ↗</a>
+        `;
+        
+        // Add event listener to the newly created mobile language link
+        const mobileLangToggle = document.getElementById('mobileLangToggle');
+        
+        // This is the listener that cycles the languages (EN -> FR -> DE -> ES -> SW -> EN)
+        mobileLangToggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            // Get the current language from the desktop toggle's attribute
+            const currentLang = document.getElementById('langToggle').getAttribute('data-lang');
+            let nextLang;
+
+            switch (currentLang) {
+                case 'en':
+                    nextLang = 'fr';
+                    break;
+                case 'fr':
+                    nextLang = 'de';
+                    break;
+                case 'de':
+                    nextLang = 'es';
+                    break;
+                case 'es':
+                    nextLang = 'sw';
+                    break;
+                case 'sw':
+                    nextLang = 'en';
+                    break;
+                default:
+                    nextLang = 'en';
+            }
+            
+            // 1. Call the main switch function to change all text on the page
+            switchLanguage(nextLang); 
+            localStorage.setItem('userLang', nextLang);
+            
+            // 2. Update the mobile button text immediately
+            mobileLangToggle.textContent = nextLang.toUpperCase();
+        });
+
+        // Apply current translation to the new mobile links
+        // (This relies on the updated switchLanguage function handling all 5 languages)
+        switchLanguage(currentLang);
+    }
 });
-
-
 
 
 // START OF LANGUAGE SCRIPT
