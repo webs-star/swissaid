@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Swiss Aid Connect Foundation</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
 
 :root{ 
@@ -713,6 +713,33 @@ footer.site-footer{
 }
 
 
+@media (max-width: 880px) {
+  .top-nav {
+    display: none !important;
+  }
+}
+
+
+@media (max-width: 880px) {
+
+  /* Mobile menu links (inside 3-dashes menu) */
+  .mobile-panel a {
+    display: block;
+    padding: 16px 20px;
+    font-size: 18px;
+
+    background: transparent !important;  /* CLEAR */
+    color: #0b61b6 !important;           /* BLUE TEXT */
+
+    border: none;
+    border-bottom: 1px solid #eee;
+  }
+
+  /* Optional hover */
+  .mobile-panel a:hover {
+    background: rgba(0, 0, 0, 0.05);     /* light tap feedback */
+  }
+}
 
 
 
@@ -796,9 +823,13 @@ footer.site-footer{
   clip-path: polygon(10% 0, 90% 0, 100% 100%, 0 100%);
 }
 
-
-.about-img.capsule {
-  border-radius: 120px;
+.about-img.round-diamond {
+  clip-path: polygon(
+    50% 0%, 85% 25%, 100% 50%,
+    85% 75%, 50% 100%, 15% 75%,
+    0% 50%, 15% 25%
+  );
+  border-radius: 20px;
 }
 
 
@@ -866,6 +897,233 @@ footer.site-footer{
 
 
 
+
+
+
+.floating-home-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 58px;
+  height: 58px;
+
+  background: #134d9c;
+  border-radius: 50%;
+  border: none;
+
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 9999;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.floating-home-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.35);
+}
+
+.floating-home-btn svg {
+  pointer-events: none;
+}
+
+  
+/* Hero Background */
+.focus-hero {
+  width: 100%;
+  padding: 120px 20px;
+  text-align: center;
+  color: #fff;
+  background: 
+    linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+    url("https://cdn.pixabay.com/photo/2020/03/03/04/52/pill-4897529_640.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 0 0 20px 20px;
+}
+
+.focus-hero h2 {
+  font-size: 2.6rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.focus-hero p {
+  font-size: 1.2rem;
+  max-width: 650px;
+  margin: auto;
+  opacity: 0.9;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+  .focus-hero {
+    padding: 90px 20px;
+  }
+  .focus-hero h2 {
+    font-size: 2rem;
+  }
+  .focus-hero p {
+    font-size: 1rem;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+/* ===========================
+   GRID LAYOUT
+=========================== */
+.focus-grid {
+  max-width: 1250px;
+  margin: 50px auto;
+  padding: 0 20px;
+  display: grid;
+  gap: 35px;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+}
+
+/* ===========================
+   CARD DESIGN
+=========================== */
+.focus-card {
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 6px 25px rgba(0,0,0,0.08);
+  padding-bottom: 25px;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.focus-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+}
+
+/* Card Top (gradient bar like Lions) */
+.focus-card-top {
+  padding: 40px 20px 60px;
+  position: relative;
+}
+
+.focus-icon {
+  font-size: 42px;
+  color: white;
+  margin-bottom: 10px;
+}
+
+/* “Learn more” ribbon */
+.focus-ribbon {
+  position: absolute;
+  bottom: -18px;
+  left: 0;
+  padding: 10px 20px;
+  font-weight: 700;
+  color: #000;
+  background: #fdd835; /* yellow ribbon */
+  clip-path: polygon(0 0, 85% 0, 100% 100%, 0 100%);
+}
+
+/* Headings + Text */
+.focus-card h3 {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 25px 20px 10px;
+}
+
+.focus-card p {
+  font-size: 16px;
+  color: #555;
+  margin: 0 20px;
+  line-height: 1.6;
+}
+
+/* ===========================
+   GRADIENT BACKGROUNDS
+=========================== */
+.education-bg {
+  background: linear-gradient(135deg, #ffd75a, #e9a300);
+}
+
+.environment-bg {
+  background: linear-gradient(135deg, #4dcc5b, #009c49);
+}
+
+.health-bg {
+  background: linear-gradient(135deg, #5cb7ff, #0066d6);
+}
+
+.humanitarian-bg {
+  background: linear-gradient(135deg, #d998ff, #7b2ab8);
+}
+
+.youth-bg {
+  background: linear-gradient(135deg, #ff7f60, #cc3300);
+}
+
+/* ===========================
+   ANIMATIONS
+=========================== */
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUp .8s ease forwards;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===========================
+   FLOATING HOME BUTTON
+=========================== */
+.floating-home-btn {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  background: #0C2856;
+  border: none;
+  padding: 14px 16px;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+  cursor: pointer;
+  z-index: 9999;
+  transition: background .2s;
+}
+
+.floating-home-btn:hover {
+  background: #134d9c;
+}
+
+
+
+.focus-icon i {
+  font-size: 46px;
+  padding: 18px;
+  border-radius: 50%;
+  border: 3px solid rgba(255,255,255,0.85);
+}
+
+#focusPage {
+    position: relative;
+    padding-top: calc(var(--header-height, 170px) + 20px);
+}
+
+
 </style>
 </head>
 <body>
@@ -884,8 +1142,13 @@ footer.site-footer{
 
     <!-- Row 1: Logo + Two-line NGO Name -->
  <div class="brand">
+
+ 
+
+
   <img src="https://res.cloudinary.com/dwvt4e9o2/image/upload/v1763476964/Screenshot_73_e5hyu9.png" alt="swisslogo" />
 <h1>Swiss Aid Connect Foundation</h1>
+
 
 
   <!-- MENU BUTTON MOVED HERE -->
@@ -903,26 +1166,25 @@ footer.site-footer{
 
   </div>
 
+
   <!-- Desktop Side Navigation -->
   <div class="side-nav-container">
     <nav class="side-nav" role="navigation" aria-label="Main navigation">
-    <a href="#" data-key="about-us-nav">About Us</a>
-
-
-      <a href="#">Our Impact</a>
+       <a href="#" data-key="about-us-nav">About Us</a>
+      <a href="#" data-key="focus-nav">Our Focus Areas</a>
       <a href="#">Get Involved</a>
       
     </nav>
   </div>
-  
-  
-  
+
 <!-- Mobile Menu Panel -->
 <div id="mobileMenu" class="mobile-panel" aria-hidden="true" role="menu">
   <div class="panel-inner" id="mobileMenuInner"></div>
 </div>
+
   
 </header>
+
 
 
 <main>
@@ -1139,6 +1401,9 @@ footer.site-footer{
 
 
 
+
+
+
 <section id="aboutPage" class="about-fullpage" style="display:none;">
   <div class="about-wrapper">
 
@@ -1183,7 +1448,7 @@ footer.site-footer{
     <!-- Block 3: White Card BG -->
     <!-- ========================= -->
     <div class="about-block alt-left bg-whitecard">
-      <div class="about-img capsule">
+      <div class="about-img round-diamond">
         <img src="https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?w=800" alt="">
       </div>
       <div class="about-text">
@@ -1215,23 +1480,90 @@ footer.site-footer{
 
 
   </div>
+  <button class="floating-home-btn" id="floatHomeBtn" aria-label="Home">
+  <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M3 12l9-9 9 9"/>
+    <path d="M9 21V9h6v12"/>
+  </svg>
+</button>
+
 </section>
 
 
+<section id="focusPage" class="focus-section" style="display:none;">
+<div class="focus-wrapper">
 
 
+  <!-- Top Hero Background -->
+  <div class="focus-hero">
+    <h2>Our Focus Areas</h2>
+    <p>Building stronger, healthier, and more sustainable communities.</p>
+  </div>
 
+  <!-- Focus Card Grid -->
+  <div class="focus-grid">
 
+    <!-- Education -->
+    <div class="focus-card fade-up">
+      <div class="focus-card-top education-bg">
+        <div class="focus-icon"><i class="fas fa-graduation-cap"></i></div>
+        <span class="focus-ribbon">Education</span>
+      </div>
+      <h3>Education</h3>
+      <p>We expand access to quality education, empowering children and youth through learning.</p>
+    </div>
 
+    <!-- Environment -->
+    <div class="focus-card fade-up">
+      <div class="focus-card-top environment-bg">
+        <div class="focus-icon"><i class="fas fa-tree"></i></div>
+        <span class="focus-ribbon">Environment</span>
+      </div>
+      <h3>Environment</h3>
+      <p>We strengthen environmental conservation, climate action, and community sustainability.</p>
+    </div>
 
+    <!-- Health -->
+    <div class="focus-card fade-up">
+      <div class="focus-card-top health-bg">
+        <div class="focus-icon"><i class="fas fa-stethoscope"></i></div>
+        <span class="focus-ribbon">Health</span>
+      </div>
+      <h3>Health</h3>
+      <p>We enhance access to essential healthcare and support well-being for all.</p>
+    </div>
 
+    <!-- Humanitarian Assistance -->
+    <div class="focus-card fade-up">
+      <div class="focus-card-top humanitarian-bg">
+        <div class="focus-icon"><i class="fas fa-hands-helping"></i></div>
+        <span class="focus-ribbon">Humanitarian Aid</span>
+      </div>
+      <h3>Humanitarian Aid</h3>
+      <p>We respond to emergencies with lifesaving relief, food, water, and shelter.</p>
+    </div>
 
+    <!-- Youth Empowerment -->
+    <div class="focus-card fade-up">
+      <div class="focus-card-top youth-bg">
+        <div class="focus-icon"><i class="fas fa-people-group"></i></div>
+        <span class="focus-ribbon">Youth Empowerment</span>
+      </div>
+      <h3>Youth Empowerment</h3>
+      <p>We equip young people with leadership, life skills, and opportunities for growth.</p>
+    </div>
 
+  </div>
 
-
-
-
-
+  <!-- Floating Home Button -->
+  <button class="floating-home-btn floatHomeBtn" aria-label="Home">
+    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 12l9-9 9 9"/>
+      <path d="M9 21V9h6v12"/>
+    </svg>
+  </button>
+</div>
+</section>
 
 
 
@@ -1322,16 +1654,6 @@ footer.site-footer{
 
 
 
-
-
-
-
-
- 
-
-
-
-
 <script>
 
 // Mobile Menu button handler
@@ -1353,7 +1675,8 @@ document.getElementById('btnMenu').addEventListener('click', () => {
             <a href="#" id="mobileLangToggle">${languageText}</a>
 
              <a href="#" data-key="about-us-nav">About Us</a>
-            <a href="#impact-heading" data-key="our-impact-nav">Our Impact</a>
+             <a href="#impact-heading" data-key="our-impact-nav">Our Focus Areas</a>
+
             <a href="#join-us-heading" data-key="get-involved-nav">Get Involved</a>
            
         `;
@@ -1829,112 +2152,92 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('year').textContent = new Date().getFullYear();
 });
 
+document.addEventListener("DOMContentLoaded", () => {
 
+  /* ============================================================
+     ELEMENT REFERENCES
+  ============================================================ */
+  const aboutPage = document.getElementById("aboutPage");
+  const focusPage = document.getElementById("focusPage");
+  const floatHomeBtns = document.querySelectorAll(".floatHomeBtn");
 
-document.addEventListener('DOMContentLoaded', () => {
+  /* ============================================================
+     KEEP HEADER & FOOTER, HIDE EVERYTHING ELSE
+  ============================================================ */
+  function hideAllExceptPage(activePageId) {
 
-  // Utility: returns true if element is a footer we should keep visible
-  function isFooter(el) {
-    if (!el) return false;
-    // keep any <footer> or element with class 'site-footer'
-    return el.tagName && el.tagName.toLowerCase() === 'footer' || el.classList?.contains('site-footer');
+    const elements = document.querySelectorAll(
+      "body > *:not(header):not(footer):not(#aboutPage):not(#focusPage)"
+    );
+
+    // Hide all normal content
+    elements.forEach(el => el.style.display = "none");
+
+    // Hide both overlays first
+    aboutPage.style.display = "none";
+    focusPage.style.display = "none";
+
+    // Show only the requested overlay
+    const page = document.getElementById(activePageId);
+    if (page) page.style.display = "block";
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
-  // Hide all main content except header and footers
-  function hideAllContentExceptHeaderFooter() {
-    // Hide all top-level sections and main, but skip header and footer
-    document.querySelectorAll('body > *').forEach(el => {
-      if (el.tagName.toLowerCase() === 'header') return;      // keep header
-      if (isFooter(el)) return;                              // keep footer(s)
-      // Now hide everything else (sections, main, divs etc.)
-      el.style.display = 'none';
-    });
+  /* ============================================================
+     RESTORE ALL CONTENT (HOME VIEW)
+  ============================================================ */
+  function restoreAll() {
+    const elements = document.querySelectorAll(
+      "body > *:not(header):not(footer):not(#aboutPage):not(#focusPage)"
+    );
+
+    elements.forEach(el => el.style.display = "");
+
+    aboutPage.style.display = "none";
+    focusPage.style.display = "none";
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
-  // Show homepage content (undo hide). We unset inline style so CSS controls layout again.
-  function showAllMainContent() {
-    document.querySelectorAll('body > *').forEach(el => {
-      if (el.tagName.toLowerCase() === 'header') return;     // header left alone
-      if (isFooter(el)) return;                              // footer left alone
-      el.style.display = '';                                 // remove inline hide
-    });
-  }
-
-  // Show About page only (header + footer remain)
-  function showAbout() {
-    hideAllContentExceptHeaderFooter();
-
-    const about = document.getElementById('aboutPage');
-    if (!about) {
-      console.warn('showAbout: #aboutPage not found');
-      return;
-    }
-
-    about.style.display = 'block';   // show About
-    // ensure header remains visible (in case your header was hidden by other code)
-    document.querySelector('header')?.style?.setProperty('display', ''); 
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    console.log('showAbout() executed');
-  }
-
-  // Show home (undo About-only view)
-  function showHome() {
-    // hide about
-    const about = document.getElementById('aboutPage');
-    if (about) about.style.display = 'none';
-
-    // restore other main sections
-    showAllMainContent();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    console.log('showHome() executed');
-  }
-
-  // Expose to global if you want to call from console / other scripts
-  window.showAbout = showAbout;
-  window.showHome  = showHome;
-
-  // Delegated click handler: listens for ANY click and finds the nearest <a data-key="...">
-  document.addEventListener('click', (e) => {
-    const a = e.target.closest && e.target.closest('a[data-key]');
-    if (!a) return; // not a nav click we care about
+  /* ============================================================
+     NAVIGATION HANDLERS (CLICK DELEGATION)
+  ============================================================ */
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest("a[data-key]");
+    if (!a) return;
 
     const key = a.dataset.key;
-    // debug
-    console.log('nav click:', key, a);
 
-    if (key === 'about-us-nav') {
+    if (key === "about-us-nav") {
       e.preventDefault();
-      showAbout();
-      // close mobile panel if present
-      document.getElementById('mobileMenu')?.classList?.remove('open');
-      return;
+      hideAllExceptPage("aboutPage");
     }
 
-    // If you later add handlers for other nav keys, handle them here:
-    if (key === 'home') {
+    if (key === "focus-nav") {
       e.preventDefault();
-      showHome();
-      return;
+      hideAllExceptPage("focusPage");
+    }
+
+    if (key === "home") {
+      e.preventDefault();
+      restoreAll();
     }
   });
 
-  // Optional: if you have a desktop "About" link with a different attribute (e.g. data-about)
-  // uncomment and add:
-  /*
-  document.querySelectorAll('a[data-about]').forEach(link => {
-    link.addEventListener('click', e => {
-      e.preventDefault();
-      showAbout();
-    });
+  /* ============================================================
+     FLOATING HOME BUTTONS (BOTH ABOUT + FOCUS)
+  ============================================================ */
+  floatHomeBtns.forEach(btn => {
+    btn.addEventListener("click", () => restoreAll());
   });
-  */
 
-}); // DOMContentLoaded
-
-
+});
 
 
 </script>
+
+
 
 
 </body>
