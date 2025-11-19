@@ -731,6 +731,54 @@ footer.site-footer{
 
 
 
+
+/* =======================
+   MOBILE MENU COLORS
+   =======================*/
+@media (max-width: 880px) {
+
+  /* Entire mobile panel background */
+  .mobile-panel {
+    background: #002b5c; /* deep blue */
+  }
+
+  /* Each link inside the mobile menu */
+  .mobile-panel a {
+    display: block;
+    padding: 16px;
+    margin: 6px 0;
+    border-radius: 10px;
+
+    font-size: 17px;
+    font-weight: 600;
+
+    background: #ffffff;       /* button background */
+    color: #002b5c !important; /* text color */
+    text-decoration: none;
+
+    transition: 0.2s;
+  }
+
+  /* Hover effect */
+  .mobile-panel a:hover {
+    background: #ffcc00; /* yellow */
+    color: #000 !important;
+  }
+
+  /* Join button special */
+  .mobile-panel a.btn-join {
+    background: #28a745; 
+    color: #fff !important;
+  }
+
+  /* Donate button special */
+  .mobile-panel a.btn-donate {
+    background: #d9534f;
+    color: #fff !important;
+  }
+}
+
+  
 </style>
 </head>
 <body>
@@ -1116,6 +1164,11 @@ document.getElementById('btnMenu').addEventListener('click', () => {
         const currentLang = document.getElementById('langToggle').getAttribute('data-lang') || 'en';
         const languageText = currentLang.toUpperCase();
 
+
+
+
+
+      
         inner.innerHTML = `
             <a href="#">A.I</a>
             <a href="#">Portal</a>
