@@ -608,19 +608,6 @@ footer.site-footer{
     display: none !important;
   }
 
-
-
-@media (max-width:880px) {
-  .brand h1 {
-    white-space: normal !important;
-    font-size: 22px !important;
-    line-height: 1.15;
-    max-width: 150px;   /* forces wrapping */
-  }
-}
-
-
-
   /* Make header auto-height on phone */
   .site-header {
     height: auto;
@@ -637,7 +624,7 @@ footer.site-footer{
   }
 
   .brand img {
-    height: 66px;       /* reduce logo size on phone */
+    height: 58px;       /* reduce logo size on phone */
   }
 
   .brand h1 {
@@ -726,10 +713,154 @@ footer.site-footer{
 }
 
 
-@media (max-width: 880px) {
-  .top-nav {
-    display: none !important;
+
+
+
+.about-fullpage {
+  padding: 0;                     /* full page, no outer margin */
+  background: #ffffff;
+  min-height: 100vh;
+}
+
+.about-wrapper {
+  max-width: none;                /* remove width restriction */
+  margin: 0;
+  padding: 0;
+}
+
+.about-main-title {
+  font-size: 42px;
+  font-weight: 800;
+  color: #0C2856;
+  text-align: center;
+  margin: 0;                      /* remove big top margin */
+  padding: 110px 20px 45px;       /* space inside instead */
+  letter-spacing: -0.5px;
+}
+
+/* ===============================
+   ABOUT — IMAGE BLOCK LAYOUT
+================================*/
+.about-block {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+
+  padding: 80px 40px;             /* inner spacing only */
+  margin: 0;                      /* remove outer margins */
+  width: 100%;                    /* full width */
+  max-width: 100%;                /* force full page */
+
+  border-bottom: 1px solid #e4e7ec;
+  border-radius: 0;               /* no rounded edges (full page) */
+  box-sizing: border-box;
+}
+
+.about-block:last-child {
+  border-bottom: none;
+}
+
+/* Text */
+.about-text h3 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #134d9c;
+  margin-bottom: 12px;
+}
+
+.about-text p {
+  font-size: 17px;
+  line-height: 1.75;
+  color: #444;
+}
+
+/* IMAGE SHAPES */
+.about-img {
+  width: 320px;
+  height: 320px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.about-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.about-img.circle {
+  border-radius: 50%;
+}
+
+.about-img.trapezium {
+  clip-path: polygon(10% 0, 90% 0, 100% 100%, 0 100%);
+}
+
+
+.about-img.capsule {
+  border-radius: 120px;
+}
+
+
+
+
+.about-img.blob {
+  border-radius: 37% 63% 66% 34% / 44% 38% 62% 56%;
+}
+
+/* ALTERNATE BLOCKS */
+.about-block.alt-left {
+  flex-direction: row;
+}
+
+.about-block.alt-right {
+  flex-direction: row-reverse;
+}
+
+.about-block.alt-top,
+.about-block.alt-bottom {
+  flex-direction: column;
+  text-align: center;
+}
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 780px) {
+  .about-block {
+    flex-direction: column !important;
+    text-align: center;
+    padding: 60px 25px;           /* mobile-friendly */
   }
+
+  .about-img {
+    width: 240px;
+    height: 240px;
+  }
+}
+
+/* BACKGROUNDS */
+.bg-blue {
+  background: linear-gradient(135deg, #e7f0ff, #f4f8ff);
+}
+
+.bg-grey {
+  background: #f5f5f5 url('https://www.transparenttextures.com/patterns/cubes.png');
+}
+
+.bg-whitecard {
+  background: #ffffff;
+  box-shadow: 0 4px 25px rgba(0,0,0,0.06);
+  border-radius: 14px;
+}
+
+.bg-beige {
+  background: #faf5ef;
+  border-left: 6px solid #d8c4a8;
+  border-radius: 10px;
+}
+
+
+.about-fullpage {
+  padding-top: 40px;
 }
 
 
@@ -742,9 +873,8 @@ footer.site-footer{
 <div class="top-nav">
   <a href="#">A.I</a>
   <a href="#">Portal</a>
-  <a href="#">Shop</a>
-  <a href="#">Convention</a>
-  <a href="#">Find a Club</a>
+  
+  <a href="#" id="langToggle" data-lang="en">EN</a> 
   
 </div>
 
@@ -776,20 +906,24 @@ footer.site-footer{
   <!-- Desktop Side Navigation -->
   <div class="side-nav-container">
     <nav class="side-nav" role="navigation" aria-label="Main navigation">
-      <a href="https://webs-star.github.io/swissaid/about">About Us</a>
+    <a href="#" data-key="about-us-nav">About Us</a>
+
+
       <a href="#">Our Impact</a>
       <a href="#">Get Involved</a>
-      <a href="#" target="_blank" rel="noopener">Member Resource Center ↗</a>
+      
     </nav>
   </div>
   
-</header>
   
   
 <!-- Mobile Menu Panel -->
 <div id="mobileMenu" class="mobile-panel" aria-hidden="true" role="menu">
   <div class="panel-inner" id="mobileMenuInner"></div>
 </div>
+  
+</header>
+
 
 <main>
   <section class="hero-wrap" aria-labelledby="hero-heading">
@@ -1005,12 +1139,106 @@ footer.site-footer{
 
 
 
+<section id="aboutPage" class="about-fullpage" style="display:none;">
+  <div class="about-wrapper">
+
+    <h2 class="about-main-title">About Us</h2>
+
+
+    <!-- ========================= -->
+    <!-- Block 1: Blue Gradient BG -->
+    <!-- ========================= -->
+    <div class="about-block alt-left bg-blue">
+      <div class="about-img circle">
+        <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=800" alt="">
+      </div>
+      <div class="about-text">
+        <h3>Who We Are</h3>
+        <p>
+          Swiss Aid Connect Foundation is a humanitarian organization committed to uplifting
+          vulnerable communities through service, compassion, and sustainable development.
+        </p>
+      </div>
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- Block 2: Grey Pattern BG -->
+    <!-- ========================= -->
+    <div class="about-block alt-right bg-grey">
+      <div class="about-img trapezium">
+        <img src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=800" alt="">
+      </div>
+      <div class="about-text">
+        <h3>Our Mission</h3>
+        <p>
+          To bring hope, health, education, and empowerment to disadvantaged individuals
+          and communities across the world.
+        </p>
+      </div>
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- Block 3: White Card BG -->
+    <!-- ========================= -->
+    <div class="about-block alt-left bg-whitecard">
+      <div class="about-img capsule">
+        <img src="https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?w=800" alt="">
+      </div>
+      <div class="about-text">
+        <h3>Our Vision</h3>
+        <p>
+          A world where every person—regardless of background—has the opportunity, dignity,
+          and resources to thrive.
+        </p>
+      </div>
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- Block 4: Warm Beige BG -->
+    <!-- ========================= -->
+    <div class="about-block alt-bottom bg-beige">
+      <div class="about-text">
+        <h3>What We Do</h3>
+        <p>
+          We operate programs focused on healthcare support, clean water access,
+          disability inclusion, quality education, and rapid emergency response in crises.
+        </p>
+      </div>
+
+      <div class="about-img blob">
+        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=800" alt="">
+      </div>
+    </div>
+
+
+  </div>
+</section>
 
 
 
 
-<section>
-<footer style="background:#0C2856;color:#fff;font-family:Arial, sans-serif;padding:60px 0 40px;">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<footer class="site-footer" style="background:#0C2856;color:#fff;font-family:Arial, sans-serif;padding:60px 0 40px;">
   <div style="max-width:1300px;margin:auto;padding:0 30px;">
 
     <!-- Top Grid -->
@@ -1088,49 +1316,626 @@ footer.site-footer{
   </div>
 
  
+© <span id="year"></span> Swiss Aid Connect Foundation • All rights reserved.
 
 </footer>
-</section>
 
 
 
 
 
 
-<footer class="site-footer">
-  © <span id="year"></span> Swiss Aid Connect Foundation • All rights reserved.
-</footer>
+
+
+ 
+
+
+
 
 <script>
 
+// Mobile Menu button handler
 document.getElementById('btnMenu').addEventListener('click', () => {
-  const menu = document.getElementById('mobileMenu');
-  const inner = document.getElementById('mobileMenuInner');
+    const menu = document.getElementById('mobileMenu');
+    const inner = document.getElementById('mobileMenuInner');
 
-  menu.classList.toggle('open');
+    // Toggle the menu's visibility class
+    menu.classList.toggle('open');
 
-  if (inner.innerHTML.trim() === "") {
-    inner.innerHTML = `
-      <!-- Utility Nav -->
-      <a href="#">A.I</a>
-      <a href="#">Portal</a>
-     
-     
-     
-      <a href="#">EN</a>
+    // Only generate the content the first time the menu is opened
+    if (inner.innerHTML.trim() === "") {
+        const currentLang = document.getElementById('langToggle').getAttribute('data-lang') || 'en';
+        const languageText = currentLang.toUpperCase();
 
-      <!-- Main Navigation -->
-      <a href="#">About Us</a>
-      <a href="#">Our Impact</a>
-      <a href="#">Get Involved</a>
-     
-    `;
-  }
+        inner.innerHTML = `
+            <a href="#">A.I</a>
+            <a href="#">Portal</a>
+            <a href="#" id="mobileLangToggle">${languageText}</a>
+
+             <a href="#" data-key="about-us-nav">About Us</a>
+            <a href="#impact-heading" data-key="our-impact-nav">Our Impact</a>
+            <a href="#join-us-heading" data-key="get-involved-nav">Get Involved</a>
+           
+        `;
+        
+        // Add event listener to the newly created mobile language link
+        const mobileLangToggle = document.getElementById('mobileLangToggle');
+        
+        // This is the listener that cycles the languages (EN -> FR -> DE -> ES -> SW -> EN)
+        mobileLangToggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            // Get the current language from the desktop toggle's attribute
+            const currentLang = document.getElementById('langToggle').getAttribute('data-lang');
+            let nextLang;
+
+            switch (currentLang) {
+                case 'en': nextLang = 'fr'; break;
+                case 'fr': nextLang = 'de'; break;
+                case 'de': nextLang = 'es'; break;
+                case 'es': nextLang = 'sw'; break;
+                case 'sw': nextLang = 'en'; break;
+                default: nextLang = 'en';
+            }
+            
+            // 1. Call the main switch function to change all text on the page
+            switchLanguage(nextLang); 
+            localStorage.setItem('userLang', nextLang);
+            
+            // 2. The switchLanguage function (Block #1) will handle updating the text content
+        });
+
+        // Apply current translation to the new mobile links
+        // This ensures the menu links are translated immediately upon first open
+        switchLanguage(currentLang);
+    }
+});
+
+// START OF LANGUAGE SCRIPT
+
+const translations = {
+    // English (Default)
+    'en': {
+        'org-line1': 'Swiss Aid Connect',
+        'org-line2': 'Foundation',
+        'join-btn': 'Join',
+        'donate-btn': 'Donate',
+        'about-us-nav': 'About Us',
+        'our-impact-nav': 'Our Impact',
+        'get-involved-nav': 'Get Involved',
+        'resource-center-nav': 'Member Resource Center ↗',
+        'hero-heading': 'We are serving a world in need.',
+        'hero-sub': 'One act of kindness at a time.',
+        'programs-cta': 'Our Programs',
+        'volunteer-cta': 'Volunteer',
+        'impact-title': 'Our Global Impact',
+        'impact-countries': 'Countries Reached',
+        'impact-lives': 'Lives Touched',
+        'impact-projects': 'Projects Completed',
+        'impact-volunteers': 'Volunteers Engaged',
+        'about-title': 'Making Change Happen',
+        'about-subtitle': 'Connecting communities, empowering lives, inspiring hope.',
+        'learn-more-btn': 'Learn More',
+        'serve-title': 'Making a Difference',
+        'serve-p1': 'We bring hope and support to communities worldwide, delivering education, health, and sustainable projects that uplift lives.',
+        'serve-p2': 'Our programs reach remote areas, ensuring no one is left behind.',
+        'serve-p3': 'With dedicated volunteers and partners, we create lasting impact across generations.',
+        'serve-p4': 'Join us in building brighter futures through hands-on community initiatives.',
+        'serve-p5': 'Every effort counts, and together we transform lives for the better.',
+        'join-us-heading': 'Join us.',
+        'social-heading': 'Stay connected with our mission.',
+        'social-sub': 'Follow us on social media and see how Swiss Aid Connect Foundation is creating lasting change in communities across the world.',
+        'news-footer-title': 'NEWS',
+        'news-press': 'Press Center',
+        'news-blog': 'Foundation Blog',
+        'news-reports': 'Annual Reports',
+        'media-footer-title': 'MEDIA',
+        'media-video': 'Video Library',
+        'media-logos': 'Logos & Branding',
+        'media-guidelines': 'Media Guidelines',
+        'connect-footer-title': 'CONNECT',
+        'connect-careers': 'Careers',
+        'connect-support': 'Contact Support',
+        'connect-partnerships': 'Partnerships',
+        'connect-privacy': 'Privacy Policy',
+        'interest-footer-title': 'ALSO OF INTEREST',
+        'interest-program': 'Find a Local Program',
+        'interest-donation': 'Make a Donation',
+        'interest-results': 'Impact Results',
+        'disclaimer-text': 'All donations accepted on this website support Swiss Aid Connect Foundation, an independent nonprofit humanitarian organization. The foundation operates programs in health, education, food security, and social support. Details are provided for informational purposes only and may be updated at any time.',
+        'footer-copyright': 'Swiss Aid Connect Foundation • All rights reserved.'
+    },
+    // French
+    'fr': {
+        'org-line1': 'Swiss Aid Connect',
+        'org-line2': 'Fondation',
+        'join-btn': 'Adhérer',
+        'donate-btn': 'Faire un Don',
+        'about-us-nav': 'À Propos',
+        'our-impact-nav': 'Notre Impact',
+        'get-involved-nav': 'S\'Impliquer',
+        'resource-center-nav': 'Centre de Ressources Membres ↗',
+        'hero-heading': 'Nous servons un monde dans le besoin.',
+        'hero-sub': 'Un acte de gentillesse à la fois.',
+        'programs-cta': 'Nos Programmes',
+        'volunteer-cta': 'Bénévole',
+        'impact-title': 'Notre Impact Global',
+        'impact-countries': 'Pays Atteints',
+        'impact-lives': 'Vies Touchées',
+        'impact-projects': 'Projets Réalisés',
+        'impact-volunteers': 'Bénévoles Engagés',
+        'about-title': 'Agir pour le Changement',
+        'about-subtitle': 'Connecter les communautés, autonomiser les vies, inspirer l\'espoir.',
+        'learn-more-btn': 'En Savoir Plus',
+        'serve-title': 'Faire la Différence',
+        'serve-p1': 'Nous apportons espoir et soutien aux communautés du monde entier, en offrant éducation, santé et projets durables qui améliorent les vies.',
+        'serve-p2': 'Nos programmes atteignent les zones reculées, veillant à ce que personne ne soit laissé pour compte.',
+        'serve-p3': 'Avec des bénévoles et des partenaires dédiés, nous créons un impact durable à travers les générations.',
+        'serve-p4': 'Rejoignez-nous pour construire des avenirs plus radieux grâce à des initiatives communautaires pratiques.',
+        'serve-p5': 'Chaque effort compte, et ensemble nous transformons des vies pour le meilleur.',
+        'join-us-heading': 'Adhérez.',
+        'social-heading': 'Restez connecté à notre mission.',
+        'social-sub': 'Suivez-nous sur les réseaux sociaux et voyez comment Swiss Aid Connect Foundation crée un changement durable dans les communautés à travers le monde.',
+        'news-footer-title': 'NOUVELLES',
+        'news-press': 'Centre de Presse',
+        'news-blog': 'Blog de la Fondation',
+        'news-reports': 'Rapports Annuels',
+        'media-footer-title': 'MÉDIAS',
+        'media-video': 'Vidéothèque',
+        'media-logos': 'Logos et Image de Marque',
+        'media-guidelines': 'Directives Média',
+        'connect-footer-title': 'CONTACT',
+        'connect-careers': 'Carrières',
+        'connect-support': 'Contacter le Support',
+        'connect-partnerships': 'Partenariats',
+        'connect-privacy': 'Politique de Confidentialité',
+        'interest-footer-title': 'ÉGALEMENT D\'INTÉRÊT',
+        'interest-program': 'Trouver un Programme Local',
+        'interest-donation': 'Faire un Don',
+        'interest-results': 'Résultats d\'Impact',
+        'disclaimer-text': 'Tous les dons acceptés sur ce site Web soutiennent Swiss Aid Connect Foundation, une organisation humanitaire indépendante à but non lucratif. La fondation gère des programmes dans les domaines de la santé, de l\'éducation, de la sécurité alimentaire et du soutien social. Les détails sont fournis à titre informatif uniquement et peuvent être mis à jour à tout moment.',
+        'footer-copyright': 'Fondation Swiss Aid Connect • Tous droits réservés.'
+    },
+    // German
+    'de': {
+        'org-line1': 'Swiss Aid Connect',
+        'org-line2': 'Stiftung',
+        'join-btn': 'Beitreten',
+        'donate-btn': 'Spenden',
+        'about-us-nav': 'Über uns',
+        'our-impact-nav': 'Unser Einfluss',
+        'get-involved-nav': 'Mitmachen',
+        'resource-center-nav': 'Mitglieder-Ressourcenzentrum ↗',
+        'hero-heading': 'Wir dienen einer bedürftigen Welt.',
+        'hero-sub': 'Eine freundliche Tat nach der anderen.',
+        'programs-cta': 'Unsere Programme',
+        'volunteer-cta': 'Freiwillige',
+        'impact-title': 'Unser Globaler Einfluss',
+        'impact-countries': 'Länder Erreicht',
+        'impact-lives': 'Leben Berührt',
+        'impact-projects': 'Projekte Abgeschlossen',
+        'impact-volunteers': 'Freiwillige Engagiert',
+        'about-title': 'Wandel Schaffen',
+        'about-subtitle': 'Gemeinschaften verbinden, Leben stärken, Hoffnung inspirieren.',
+        'learn-more-btn': 'Mehr Erfahren',
+        'serve-title': 'Einen Unterschied Machen',
+        'serve-p1': 'Wir bringen Hoffnung und Unterstützung zu Gemeinschaften weltweit, indem wir Bildung, Gesundheit und nachhaltige Projekte liefern, die das Leben verbessern.',
+        'serve-p2': 'Unsere Programme erreichen abgelegene Gebiete und stellen sicher, dass niemand zurückgelassen wird.',
+        'serve-p3': 'Mit engagierten Freiwilligen und Partnern schaffen wir eine dauerhafte Wirkung über Generationen hinweg.',
+        'serve-p4': 'Bauen Sie mit uns hellere Zukünfte durch hands-on Gemeinschaftsinitiativen auf.',
+        'serve-p5': 'Jeder Beitrag zählt, und gemeinsam verändern wir Leben zum Besseren.',
+        'join-us-heading': 'Machen Sie mit.',
+        'social-heading': 'Bleiben Sie mit unserer Mission verbunden.',
+        'social-sub': 'Folgen Sie uns in den sozialen Medien und sehen Sie, wie die Swiss Aid Connect Foundation nachhaltige Veränderungen in Gemeinschaften auf der ganzen Welt schafft.',
+        'news-footer-title': 'NACHRICHTEN',
+        'news-press': 'Pressezentrum',
+        'news-blog': 'Stiftungsblog',
+        'news-reports': 'Jahresberichte',
+        'media-footer-title': 'MEDIEN',
+        'media-video': 'Videobibliothek',
+        'media-logos': 'Logos & Branding',
+        'media-guidelines': 'Medienrichtlinien',
+        'connect-footer-title': 'KONTAKT',
+        'connect-careers': 'Karriere',
+        'connect-support': 'Kontaktieren Sie den Support',
+        'connect-partnerships': 'Partnerschaften',
+        'connect-privacy': 'Datenschutzrichtlinie',
+        'interest-footer-title': 'AUCH INTERESSANT',
+        'interest-program': 'Finden Sie ein lokales Programm',
+        'interest-donation': 'Machen Sie eine Spende',
+        'interest-results': 'Wirkungsergebnisse',
+        'disclaimer-text': 'Alle auf dieser Website akzeptierten Spenden unterstützen die Swiss Aid Connect Foundation, eine unabhängige gemeinnützige humanitäre Organisation. Die Stiftung betreibt Programme in den Bereichen Gesundheit, Bildung, Ernährungssicherheit und soziale Unterstützung. Die Details dienen nur zu Informationszwecken und können jederzeit aktualisiert werden.',
+        'footer-copyright': 'Swiss Aid Connect Stiftung • Alle Rechte vorbehalten.'
+    },
+    // Spanish (Castilian)
+    'es': {
+        'org-line1': 'Swiss Aid Connect',
+        'org-line2': 'Fundación',
+        'join-btn': 'Únete',
+        'donate-btn': 'Dona',
+        'about-us-nav': 'Sobre Nosotros',
+        'our-impact-nav': 'Nuestro Impacto',
+        'get-involved-nav': 'Participa',
+        'resource-center-nav': 'Centro de Recursos para Miembros ↗',
+        'hero-heading': 'Estamos sirviendo a un mundo en necesidad.',
+        'hero-sub': 'Un acto de bondad a la vez.',
+        'programs-cta': 'Nuestros Programas',
+        'volunteer-cta': 'Voluntario',
+        'impact-title': 'Nuestro Impacto Global',
+        'impact-countries': 'Países Alcanzados',
+        'impact-lives': 'Vidas Tocadas',
+        'impact-projects': 'Proyectos Completados',
+        'impact-volunteers': 'Voluntarios Involucrados',
+        'about-title': 'Haciendo que el Cambio Suceda',
+        'about-subtitle': 'Conectando comunidades, empoderando vidas, inspirando esperanza.',
+        'learn-more-btn': 'Saber Más',
+        'serve-title': 'Marcando la Diferencia',
+        'serve-p1': 'Brindamos esperanza y apoyo a comunidades de todo el mundo, ofreciendo educación, salud y proyectos sostenibles que elevan vidas.',
+        'serve-p2': 'Nuestros programas llegan a áreas remotas, asegurando que nadie se quede atrás.',
+        'serve-p3': 'Con voluntarios y socios dedicados, creamos un impacto duradero a través de generaciones.',
+        'serve-p4': 'Únete a nosotros para construir futuros más brillantes a través de iniciativas comunitarias prácticas.',
+        'serve-p5': 'Cada esfuerzo cuenta, y juntos transformamos vidas para mejor.',
+        'join-us-heading': 'Únete.',
+        'social-heading': 'Mantente conectado con nuestra misión.',
+        'social-sub': 'Síguenos en las redes sociales y mira cómo Swiss Aid Connect Foundation está creando un cambio duradero en comunidades de todo el mundo.',
+        'news-footer-title': 'NOTICIAS',
+        'news-press': 'Centro de Prensa',
+        'news-blog': 'Blog de la Fundación',
+        'news-reports': 'Informes Anuales',
+        'media-footer-title': 'MEDIOS',
+        'media-video': 'Videoteca',
+        'media-logos': 'Logotipos y Marca',
+        'media-guidelines': 'Directrices para Medios',
+        'connect-footer-title': 'CONECTAR',
+        'connect-careers': 'Carreras',
+        'connect-support': 'Contactar Soporte',
+        'connect-partnerships': 'Asociaciones',
+        'connect-privacy': 'Política de Privacidad',
+        'interest-footer-title': 'TAMBIÉN DE INTERÉS',
+        'interest-program': 'Encuentra un Programa Local',
+        'interest-donation': 'Haz una Donación',
+        'interest-results': 'Resultados de Impacto',
+        'disclaimer-text': 'Todas las donaciones aceptadas en este sitio web apoyan a Swiss Aid Connect Foundation, una organización humanitaria sin fines de lucro independiente. La fundación opera programas de salud, educación, seguridad alimentaria y apoyo social. Los detalles se proporcionan solo con fines informativos y pueden actualizarse en cualquier momento.',
+        'footer-copyright': 'Swiss Aid Connect Foundation • Todos los derechos reservados.'
+    },
+    // Swahili (Kiswahili)
+    'sw': {
+        'org-line1': 'Swiss Aid Connect',
+        'org-line2': 'Foundation (Msingi)',
+        'join-btn': 'Jiunge',
+        'donate-btn': 'Toa Mchango',
+        'about-us-nav': 'Kuhusu Sisi',
+        'our-impact-nav': 'Athari Yetu',
+        'get-involved-nav': 'Shiriki',
+        'resource-center-nav': 'Kituo cha Rasilimali Wanachama ↗',
+        'hero-heading': 'Tunahudumia ulimwengu wenye uhitaji.',
+        'hero-sub': 'Kitendo kimoja cha ukarimu kwa wakati mmoja.',
+        'programs-cta': 'Programu Zetu',
+        'volunteer-cta': 'Jitolee',
+        'impact-title': 'Athari Yetu Duniani',
+        'impact-countries': 'Nchi Zilizofikiwa',
+        'impact-lives': 'Maisha Yaliyoguswa',
+        'impact-projects': 'Miradi Iliyokamilika',
+        'impact-volunteers': 'Wajitoleaji Walioshirikishwa',
+        'about-title': 'Kuleta Mabadiliko',
+        'about-subtitle': 'Kuunganisha jamii, kuwezesha maisha, kuhamasisha matumaini.',
+        'learn-more-btn': 'Jifunze Zaidi',
+        'serve-title': 'Kuleta Tofauti',
+        'serve-p1': 'Tunaleta matumaini na msaada kwa jamii ulimwenguni kote, tukitoa elimu, afya, na miradi endelevu inayoinua maisha.',
+        'serve-p2': 'Programu zetu hufika maeneo ya mbali, tukihakikisha hakuna anayeachwa nyuma.',
+        'serve-p3': 'Pamoja na wajitoleaji na washirika waliojitolea, tunaleta athari ya kudumu kwa vizazi vyote.',
+        'serve-p4': 'Ungana nasi katika kujenga mustakabali mzuri kupitia mipango ya jamii inayotekelezwa kwa vitendo.',
+        'serve-p5': 'Kila juhudi huhesabika, na kwa pamoja tunabadilisha maisha kuwa bora.',
+        'join-us-heading': 'Jiunge nasi.',
+        'social-heading': 'Ungana na dhamira yetu.',
+        'social-sub': 'Tufuate kwenye mitandao ya kijamii uone jinsi Swiss Aid Connect Foundation inavyoleta mabadiliko ya kudumu katika jamii ulimwenguni kote.',
+        'news-footer-title': 'HABARI',
+        'news-press': 'Kituo cha Waandishi',
+        'news-blog': 'Blogu ya Msingi',
+        'news-reports': 'Ripoti za Mwaka',
+        'media-footer-title': 'VYOMBO VYA HABARI',
+        'media-video': 'Maktaba ya Video',
+        'media-logos': 'Nembo na Chapa',
+        'media-guidelines': 'Miongozo ya Vyombo vya Habari',
+        'connect-footer-title': 'UNGANA',
+        'connect-careers': 'Nafasi za Kazi',
+        'connect-support': 'Wasiliana na Usaidizi',
+        'connect-partnerships': 'Ushirikiano',
+        'connect-privacy': 'Sera ya Faragha',
+        'interest-footer-title': 'YA KUVUTIA PIA',
+        'interest-program': 'Tafuta Programu ya Mitaa',
+        'interest-donation': 'Toa Mchango',
+        'interest-results': 'Matokeo ya Athari',
+        'disclaimer-text': 'Michango yote inayopokelewa kwenye tovuti hii inaunga mkono Swiss Aid Connect Foundation, shirika huru la kibinadamu lisilo la faida. Msingi hutoa programu za afya, elimu, usalama wa chakula, na msaada wa kijamii. Maelezo hutolewa kwa madhumuni ya habari tu na yanaweza kusasishwa wakati wowote.',
+        'footer-copyright': 'Swiss Aid Connect Foundation • Haki zote zimehifadhiwa.'
+    }
+};
+
+// Map of HTML elements to their corresponding translation keys
+// ... (TEXT MAPPINGS remain the same) ...
+const textMappings = [
+    { selector: '.brand h1 span:first-child', key: 'org-line1' },
+    { selector: '.brand h1 span:last-child', key: 'org-line2' },
+    { selector: '.btn-join', key: 'join-btn' },
+    { selector: '.btn-donate', key: 'donate-btn' },
+    { selector: '.side-nav a:nth-child(1)', key: 'about-us-nav' },
+    { selector: '.side-nav a:nth-child(2)', key: 'our-impact-nav' },
+    { selector: '.side-nav a:nth-child(3)', key: 'get-involved-nav' },
+    { selector: '.side-nav a:nth-child(4)', key: 'resource-center-nav' },
+    { selector: '#hero-heading', key: 'hero-heading' },
+    { selector: '.hero-sub', key: 'hero-sub' },
+    { selector: '.hero-ctas .cta-primary', key: 'programs-cta' },
+    { selector: '.hero-ctas .cta-outline', key: 'volunteer-cta' },
+    { selector: '#impact-heading', key: 'impact-title' },
+    { selector: '.impact-grid .impact-card:nth-child(1) p', key: 'impact-countries' },
+    { selector: '.impact-grid .impact-card:nth-child(2) p', key: 'impact-lives' },
+    { selector: '.impact-grid .impact-card:nth-child(3) p', key: 'impact-projects' },
+    { selector: '.impact-grid .impact-card:nth-child(4) p', key: 'impact-volunteers' },
+    { selector: '#about-heading', key: 'about-title' },
+    { selector: '.about-subtitle', key: 'about-subtitle' },
+    { selector: '.about-section .btn-learn', key: 'learn-more-btn' },
+    { selector: '#serve-heading', key: 'serve-title' },
+    { selector: '.serve-paragraph .line1', key: 'serve-p1' },
+    { selector: '.serve-paragraph .line2', key: 'serve-p2' },
+    { selector: '.serve-paragraph .line3', key: 'serve-p3' },
+    { selector: '.serve-paragraph .line4', key: 'serve-p4' },
+    { selector: '.serve-paragraph .line5', key: 'serve-p5' },
+    { selector: '.serve-btn', key: 'learn-more-btn' },
+    { selector: 'section:nth-child(7) > div > h2', key: 'join-us-heading' }, // Join us. section
+    { selector: '.join-btn-green', key: 'learn-more-btn' },
+    { selector: '.join-btn-blue', key: 'learn-more-btn' },
+    { selector: 'section:nth-child(8) > div > h2', key: 'social-heading' }, // Stay connected section
+    { selector: 'section:nth-child(8) > div > p:nth-of-type(1)', key: 'social-sub', innerHTML: true }, // Subtitle must handle the <a> tag
+    // Social icons
+    { selector: 'section:nth-child(8) .social-p:nth-child(1)', key: 'org-line1' },
+    { selector: 'section:nth-child(8) .social-p:nth-child(2)', key: 'org-line2' },
+    { selector: 'section:nth-child(8) > div > div > div:nth-child(1) p', key: 'org-line1-2' },
+    { selector: 'section:nth-child(8) > div > div > div:nth-child(2) p', key: 'org-line1-2' },
+    { selector: 'section:nth-child(8) > div > div > div:nth-child(3) p', key: 'org-line1-2' },
+    { selector: 'section:nth-child(8) > div > div > div:nth-child(4) p', key: 'org-line1-2' },
+    { selector: 'section:nth-child(8) > div > div > div:nth-child(5) p', key: 'org-line1-2' },
+
+    // Footer
+    { selector: 'footer h4:nth-child(1)', key: 'news-footer-title' },
+    { selector: 'footer p a:nth-child(1)', key: 'news-press' },
+    { selector: 'footer p a:nth-child(2)', key: 'news-blog' },
+    { selector: 'footer p a:nth-child(3)', key: 'news-reports' },
+    { selector: 'footer h4:nth-child(4)', key: 'media-footer-title' },
+    { selector: 'footer p a:nth-child(4)', key: 'media-video' },
+    { selector: 'footer p a:nth-child(5)', key: 'media-logos' },
+    { selector: 'footer p a:nth-child(6)', key: 'media-guidelines' },
+    { selector: 'footer h4:nth-child(7)', key: 'connect-footer-title' },
+    { selector: 'footer p a:nth-child(7)', key: 'connect-careers' },
+    { selector: 'footer p a:nth-child(8)', key: 'connect-support' },
+    { selector: 'footer p a:nth-child(9)', key: 'connect-partnerships' },
+    { selector: 'footer p a:nth-child(10)', key: 'connect-privacy' },
+    { selector: 'footer .social-p-address', key: 'org-line1-2-address' },
+    { selector: 'footer > div > div > div:nth-child(2) p', key: 'org-line1-2-address' },
+    { selector: 'footer > div > div:nth-child(2) > p', key: 'org-line1-2-address' }, // The address block text
+
+    { selector: 'footer div:nth-child(3) span', key: 'interest-footer-title' },
+    { selector: 'footer div:nth-child(3) a:nth-child(1)', key: 'interest-program' },
+    { selector: 'footer div:nth-child(3) a:nth-child(2)', key: 'interest-donation' },
+    { selector: 'footer div:nth-child(3) a:nth-child(3)', key: 'interest-results' },
+    { selector: 'footer > div > p:nth-child(6)', key: 'disclaimer-text' },
+    { selector: '.site-footer', key: 'footer-copyright-full' } // The final footer
+];
+
+/**
+ * Switches the language of the page content.
+ * @param {string} langCode - The target language code ('en', 'fr', 'de', 'es', 'sw').
+ */
+function switchLanguage(langCode) {
+    const languageData = translations[langCode];
+    if (!languageData) return;
+
+    const langToggle = document.getElementById('langToggle');
+    if (langToggle) {
+        langToggle.textContent = langCode.toUpperCase();
+        langToggle.setAttribute('data-lang', langCode);
+    }
+
+    // 1. Translate elements based on the hardcoded textMappings array
+    textMappings.forEach(mapping => {
+        document.querySelectorAll(mapping.selector).forEach(element => {
+            const translation = languageData[mapping.key];
+            if (translation) {
+                // Special handling for the social media subtitle to preserve the inner <a> tag
+                if (mapping.key === 'social-sub') {
+                    const socialMediaLink = element.querySelector('a');
+                    const [part1, part2] = translation.split('social media');
+                    // Rebuild HTML with preserved link
+                    element.innerHTML = `${part1} <a href="#" style="color:#2C70E4;text-decoration:none;font-weight:600;">social media</a> ${part2}`;
+                } else if (mapping.key === 'org-line1-2-address') {
+                    // Special handling for the address block to preserve <br> and address lines
+                    // Note: This relies on the translation being structured to split on "Foundation" (or similar marker)
+                    const [line1, line2] = translation.split('Foundation');
+                    const currentAddress = element.innerHTML.split('<br>');
+                    element.innerHTML = `${line1} Foundation<br>${currentAddress[1]}<br>${currentAddress[2]}<br>${currentAddress[3]}`;
+                } else if (mapping.key === 'org-line1-2') {
+                    // Special handling for social icon names
+                    element.innerHTML = `${languageData['org-line1']}<br>${languageData['org-line2']}`;
+                } else if (mapping.key === 'footer-copyright-full') {
+                    // Special handling for the site footer to retain the dynamic year
+                    const year = document.getElementById('year').textContent;
+                    element.textContent = `© ${year} ${languageData['footer-copyright']}`;
+                }
+                else {
+                    element.textContent = translation;
+                }
+            }
+        });
+    });
+
+    // 2. Update dynamic mobile menu content if it's already generated
+    const inner = document.getElementById('mobileMenuInner');
+    if (inner && inner.innerHTML.trim() !== "") {
+        const mobileLinks = inner.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            const dataKey = link.getAttribute('data-key');
+            
+            if (link.id === 'mobileLangToggle') {
+                // Update the language toggle text
+                link.textContent = langCode.toUpperCase();
+            } else if (dataKey && languageData[dataKey]) {
+                // Translate the navigation links using their data-key
+                link.textContent = languageData[dataKey];
+            } else if (link.textContent === 'A.I' || link.textContent === 'Portal') {
+                // Keep static links as is
+            }
+        });
+    }
+} // End of switchLanguage function
+// Language Cycling Logic (EN -> FR -> DE -> ES -> SW -> EN)
+const langToggle = document.getElementById('langToggle');
+if (langToggle) {
+    langToggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        const currentLang = langToggle.getAttribute('data-lang');
+        let nextLang;
+
+        switch (currentLang) {
+            case 'en':
+                nextLang = 'fr';
+                break;
+            case 'fr':
+                nextLang = 'de';
+                break;
+            case 'de':
+                nextLang = 'es'; // New link
+                break;
+            case 'es':
+                nextLang = 'sw'; // New link
+                break;
+            case 'sw':
+                nextLang = 'en'; // Cycle back to start
+                break;
+            default:
+                nextLang = 'en';
+        }
+        switchLanguage(nextLang);
+        localStorage.setItem('userLang', nextLang);
+    });
+}
+
+
+
+// Initial language load based on user preference or default to English
+document.addEventListener('DOMContentLoaded', () => {
+    const savedLang = localStorage.getItem('userLang') || 'en';
+    switchLanguage(savedLang);
+
+    // Initialize the year for the footer
+    document.getElementById('year').textContent = new Date().getFullYear();
 });
 
 
 
+document.addEventListener('DOMContentLoaded', () => {
+
+  // Utility: returns true if element is a footer we should keep visible
+  function isFooter(el) {
+    if (!el) return false;
+    // keep any <footer> or element with class 'site-footer'
+    return el.tagName && el.tagName.toLowerCase() === 'footer' || el.classList?.contains('site-footer');
+  }
+
+  // Hide all main content except header and footers
+  function hideAllContentExceptHeaderFooter() {
+    // Hide all top-level sections and main, but skip header and footer
+    document.querySelectorAll('body > *').forEach(el => {
+      if (el.tagName.toLowerCase() === 'header') return;      // keep header
+      if (isFooter(el)) return;                              // keep footer(s)
+      // Now hide everything else (sections, main, divs etc.)
+      el.style.display = 'none';
+    });
+  }
+
+  // Show homepage content (undo hide). We unset inline style so CSS controls layout again.
+  function showAllMainContent() {
+    document.querySelectorAll('body > *').forEach(el => {
+      if (el.tagName.toLowerCase() === 'header') return;     // header left alone
+      if (isFooter(el)) return;                              // footer left alone
+      el.style.display = '';                                 // remove inline hide
+    });
+  }
+
+  // Show About page only (header + footer remain)
+  function showAbout() {
+    hideAllContentExceptHeaderFooter();
+
+    const about = document.getElementById('aboutPage');
+    if (!about) {
+      console.warn('showAbout: #aboutPage not found');
+      return;
+    }
+
+    about.style.display = 'block';   // show About
+    // ensure header remains visible (in case your header was hidden by other code)
+    document.querySelector('header')?.style?.setProperty('display', ''); 
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    console.log('showAbout() executed');
+  }
+
+  // Show home (undo About-only view)
+  function showHome() {
+    // hide about
+    const about = document.getElementById('aboutPage');
+    if (about) about.style.display = 'none';
+
+    // restore other main sections
+    showAllMainContent();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    console.log('showHome() executed');
+  }
+
+  // Expose to global if you want to call from console / other scripts
+  window.showAbout = showAbout;
+  window.showHome  = showHome;
+
+  // Delegated click handler: listens for ANY click and finds the nearest <a data-key="...">
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest && e.target.closest('a[data-key]');
+    if (!a) return; // not a nav click we care about
+
+    const key = a.dataset.key;
+    // debug
+    console.log('nav click:', key, a);
+
+    if (key === 'about-us-nav') {
+      e.preventDefault();
+      showAbout();
+      // close mobile panel if present
+      document.getElementById('mobileMenu')?.classList?.remove('open');
+      return;
+    }
+
+    // If you later add handlers for other nav keys, handle them here:
+    if (key === 'home') {
+      e.preventDefault();
+      showHome();
+      return;
+    }
+  });
+
+  // Optional: if you have a desktop "About" link with a different attribute (e.g. data-about)
+  // uncomment and add:
+  /*
+  document.querySelectorAll('a[data-about]').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      showAbout();
+    });
+  });
+  */
+
+}); // DOMContentLoaded
+
+
+
+
 </script>
+
 
 </body>
 </html>
