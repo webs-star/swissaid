@@ -729,34 +729,27 @@ footer.site-footer{
 }
 
 
-
 @media (max-width: 880px) {
 
-  /* Mobile panel background */
-  .mobile-panel {
-    background: #ffffff; /* keep white for clean contrast */
-  }
-
-  /* All links inside the hidden mobile menu */
+  /* Mobile menu links (inside 3-dashes menu) */
   .mobile-panel a {
     display: block;
     padding: 16px 20px;
     font-size: 18px;
-    text-decoration: none;
 
-    background: #0b61b6;   /* BLUE */
-    color: #ffffff !important;
-    border-radius: 8px;
-    margin: 8px 12px;
+    background: transparent !important;  /* CLEAR */
+    color: #0b61b6 !important;           /* BLUE TEXT */
 
     border: none;
+    border-bottom: 1px solid #eee;
   }
 
   /* Optional hover */
   .mobile-panel a:hover {
-    background: #084b8d; /* darker blue */
+    background: rgba(0, 0, 0, 0.05);     /* light tap feedback */
   }
 }
+
 
 
   
