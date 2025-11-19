@@ -7,7 +7,17 @@
 <title>Swiss Aid Connect Foundation</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
+
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Swiss Aid Connect Foundation</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
+
 :root{ 
   --blue:#0b61b6;
   --yellow:#f5c400;
@@ -17,18 +27,6 @@
   --side-nav-height:48px;
   --max-width:1180px;
 }
-
-/* Apply Poppins to the whole site */
-body, * {
-  font-family: 'Poppins', sans-serif;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-weight: 600; /* bold but not too heavy */
-}
-<body translate="no"> 
-    </body>
-
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{
   height:100%;
@@ -61,20 +59,19 @@ html,body{
 .top-nav a:hover{ text-decoration:underline }
 
 /* Fixed header */
-.site-header {
-  position: fixed;
-  top: var(--utility-height);
-  left: 0;
-  right: 0;
-  height: auto;                /* allow natural height */
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: rgba(255,255,255,0.72);
+.site-header{
+  position:fixed;
+  top:var(--utility-height);
+  left:0; right:0;
+  height:var(--nav-height);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:rgba(255,255,255,0.72);
   backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(0,0,0,0.06);
-  z-index: 90;
-  padding: 0 18px;
+  border-bottom:1px solid rgba(0,0,0,0.06);
+  z-index:95;
+  padding:0 18px;
 }
 
 /* Logo + NGO name */
@@ -82,16 +79,18 @@ html,body{
   display:flex;
   align-items:center;
   gap:12px;
- 
+  min-width:220px;
 }
-.brand img{ height:90px; width:auto; display:block; }
-.brand h1{
+.brand img{ height:76px; width:auto; display:block; }
+
+
+.brand h1 {
   font-size:30px;
   letter-spacing:0.2px;
   color:#222;
-  font-weight:800;
+  font-weight:700;
+  white-space: nowrap;   /* <<< KEEP NAME ON ONE LINE */
 }
-
 
 
 /* Horizontal nav */
@@ -119,25 +118,21 @@ html,body{
 .side-nav a{
   text-decoration:none;
   font-weight:600;
-  padding:12px 18px; /* slightly larger padding */
+  padding:12px 18px;
   border-radius:6px;
-  font-size:1.5rem; /* 1.5× larger */
+  font-size:1.3rem;
   transition: background 0.3s, color 0.3s;
 }
 
-/* Assign different colors to each link */
-.side-nav a:nth-of-type(1){ color:#0b61b6; }   /* About Us */
-.side-nav a:nth-of-type(2){ color:#7a2fa6; }   /* Our Impact */
-.side-nav a:nth-of-type(3){ color:#f5c400; }   /* Get Involved */
-.side-nav a:nth-of-type(4){ color:#e94e77; }   /* Member Resource Center */
+.side-nav a:nth-of-type(1){ color:#0b61b6; }
+.side-nav a:nth-of-type(2){ color:#7a2fa6; }
+.side-nav a:nth-of-type(3){ color:#f5c400; }
+.side-nav a:nth-of-type(4){ color:#e94e77; }
 
 .side-nav a:hover{
   background:rgba(0,0,0,0.08);
   color:#111;
 }
-
-
-
 
 /* Join & Donate buttons */
 .nav-actions{
@@ -164,6 +159,14 @@ html,body{
   background:var(--yellow);
   color:#111;
   box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* HERO WRAP */
+.hero-wrap {
+  position:relative;
+  height: calc(100vh - var(--utility-height) - var(--nav-height) - var(--side-nav-height));
+  margin-top: calc(var(--utility-height) + var(--nav-height) + var(--side-nav-height));
+  overflow:hidden;
 }
 
 
@@ -588,348 +591,141 @@ footer.site-footer{
 .ft { color:#fff;text-decoration:none;font-size:15px; }
   .ft:hover { text-decoration:underline; }
 
-/* Desktop: hide mobile menu */
-.dot-btn { display:none; }
-/* ============================== */
-/* FIXED MOBILE HEADER — FINAL    */
-/* ============================== */
-@media (max-width:880px) {
+/* HIDE MOBILE MENU BUTTON ON DESKTOP */
+@media (min-width:881px) {
+  .dot-btn {
+    display: none !important;
+  }
+}
 
-  /* Hide desktop navigation */
-  .top-nav,
+
+
+
+
+
+
+
+
+
+/* ================================
+   MOBILE FIX – FOR SCREENS < 880px
+   ================================ */
+@media (max-width: 880px) {
+
+  /* Hide desktop nav + desktop side menu */
   .side-nav-container {
-    display:none !important;
+    display: none !important;
   }
 
-  /* HEADER */
+  /* Make header auto-height on phone */
   .site-header {
-    position:fixed;
-    top:var(--utility-height);
-    left:0; right:0;
-    background:#fff;
-    padding:12px 14px;
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-    height:auto !important;
-    z-index:200;
+    height: auto;
+    padding: 12px 16px;
+    flex-wrap: wrap;
+    row-gap: 12px;
   }
 
-  /* BRAND ROW — FLEX VERSION (FULLY FIXED) */
+  /* Brand row (logo + name + burger) */
   .brand {
-    display:flex;
-    align-items:center;
-    width:100%;
-    gap:6px;
-    flex:1;
-    min-width:0; /* prevent overflow */
+    width: 100%;
+    justify-content: space-between;
+    min-width: 0;
   }
 
   .brand img {
-    height:50px;
-    width:auto;
-    flex-shrink:0;
+    height: 58px;       /* reduce logo size on phone */
   }
 
   .brand h1 {
-    font-size:14px;
-    line-height:1.1;
-    margin:0;
-    max-width:95px;  /* <<< smaller so dots stay inside */
-    white-space:normal;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    flex-shrink:1;   /* allow to shrink instead of pushing dots out */
+    font-size: 24px;
+    line-height: 1.1;
   }
 
-  /* MENU BUTTON — NOW ALWAYS INSIDE */
+  /* Mobile menu (burger button) */
   .dot-btn {
-    margin-left:auto;  /* <<< keeps dots on right INSIDE screen */
-    width:32px;
-    height:32px;
-    font-size:22px;
-    display:flex !important;
-    justify-content:center;
-    align-items:center;
-    background:none;
-    border:none;
-    padding:0;
-    cursor:pointer;
-    flex-shrink:0;
+    display: block !important;
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    background: #0b61b6;
+    color: #fff;
+    font-size: 26px;
+    border: none;
+    cursor: pointer;
   }
 
   .dots {
-    line-height:0.8;
+    position: relative;
+    top: -2px;
   }
 
-  /* JOIN + DONATE */
+  /* Move Join + Donate below logo on phone */
   .nav-actions {
-    display:flex;
-    width:100%;
-    gap:10px;
+    width: 100%;
+    justify-content: center;
+    gap: 10px;
   }
 
-  .nav-actions a {
-    flex:0 0 auto;
-    padding:9px 14px !important;
-    font-size:15px !important;
-    border-radius:7px !important;
-    width:auto;
-  }
-}
-
-
-/* ========================= */
-/* MOBILE PANEL — FIX        */
-/* ========================= */
-.mobile-panel {
-  position:fixed;
-  top:calc(var(--utility-height) + 110px);
-  left:0; right:0;
-  background:#fff;
-  transform:translateY(-12px);
-  opacity:0;
-  pointer-events:none;
-  transition:.25s ease;
-  z-index:500;
-}
-
-.mobile-panel.open {
-  transform:translateY(0);
-  opacity:1;
-  pointer-events:auto;
-}
-
-.mobile-panel .panel-inner {
-  padding:18px;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* ----------------------------------------- */
-/* GLOBAL SAFETY — Prevent overflow          */
-/* ----------------------------------------- */
-html, body {
-  max-width: 100%;
-  overflow-x: hidden;
-  -webkit-overflow-scrolling: touch;
-}
-
-/* Flex safety */
-.site-header,
-.brand {
-  min-width: 0;
-  box-sizing: border-box;
-}
-
-/* Brand row */
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  width: 100%;
-  padding-right: 8px;
-  font-weight:800;
-}
-
-/* Logo (mobile baseline) */
-.brand img {
-  max-width: 100%;
-  height: 75px;
-  flex: 0 0 auto;
-}
-
-/* Title baseline */
-.brand h1 {
-  margin: 0;
-  white-space: normal;
-  overflow-wrap: break-word;
-  word-break: break-word;
-  flex: 1 1 auto;
-  min-width: 0;
-  max-width: calc(100% - 56px);
-  font-size: 14px;
-  line-height: 1.05;
-}
-
-/* Menu button (mobile baseline) */
-.dot-btn {
-  flex: 0 0 40px;
-  width: 40px;
-  height: 40px;
-  margin-left: 6px;
-  display: flex !important;
-  align-items: center;
-  justify-content: center;
-}
-
-/* JOIN / DONATE safety */
-.nav-actions {
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.nav-actions .btn {
-  white-space: nowrap;
-  max-width: 46vw;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  box-sizing: border-box;
-}
-
-/* Very small phones */
-@media (max-width:420px) {
-  .brand img { height: 32px; }
-  .brand h1 { font-size: 12.5px; max-width: calc(100% - 48px); }
-  .site-header { padding: 8px 10px; }
-  .nav-actions .btn { padding: 8px 10px; font-size: 13px; }
-}
-
-/* ============================================================
-   DESKTOP (≥881px)
-============================================================ */
-@media (min-width:881px) {
-
-  /* Hide menu button */
-  .dot-btn { display:none !important; }
-
-  /* Large desktop logo */
-  .brand img {
-    height:140px !important;
+  .btn {
+    padding: 8px 14px;
+    font-size: 14px;
   }
 
-  /* Large single-line desktop title */
-  .brand h1 {
-    font-size:35px !important;
-    line-height:1.15 !important;
-    white-space:nowrap !important;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    max-width:100% !important;
+  /* Adjust hero so it doesn't get covered */
+  .hero-wrap {
+    margin-top: calc(var(--utility-height) + 160px) !important;
+    height: calc(100vh - var(--utility-height) - 160px) !important;
   }
 
-  /* Keep JOIN + DONATE in one perfect row */
-  .nav-actions {
-    display:flex !important;
-    flex-direction:row !important;
-    align-items:center !important;
-    gap:14px !important;
-    flex-wrap:nowrap !important;
+  /* Reduce hero text sizes */
+  .hero-huge {
+    font-size: 26px !important;
+  }
+  .hero-sub {
+    font-size: 16px !important;
   }
 
-  .nav-actions .btn {
-    white-space:nowrap !important;
-    flex:0 0 auto !important;
-  }
-}
-
-/* ============================================================
-   MOBILE (≤880px)
-============================================================ */
-@media (max-width:880px) {
-
-  /* Bigger menu icon */
-  .dot-btn .dots {
-    font-size:42px !important;
-    line-height:0.8;
+  /* Utility nav stays visible but becomes compact */
+  .top-nav {
+    padding: 0 12px;
+    gap: 10px;
+    font-size: 12px;
   }
 
-  /* Larger mobile logo */
-  .brand img {
-    height:65px !important;
+  /* Mobile menu panel layout */
+  .mobile-panel {
+    position: fixed;
+    top: calc(var(--utility-height) + 70px);
+    right: 0;
+    width: 85%;
+    max-width: 320px;
+    background: white;
+    height: calc(100% - var(--utility-height) - 70px);
+    box-shadow: -4px 0 20px rgba(0,0,0,0.15);
+    transform: translateX(100%);
+    transition: transform 0.35s ease;
+    z-index: 200;
   }
 
-  /* Larger, 2-line mobile title */
-  .brand h1 {
-    font-size:28px !important;
-    line-height:1.15 !important;
-    white-space:normal !important;   /* allows 2 lines */
-    max-width:180px !important;      /* increased for bigger font */
-    overflow-wrap:break-word;
-  }
-}
-
-/* ============================================================
-   VERY SMALL PHONES (≤420px)
-============================================================ */
-@media (max-width:420px) {
-
-  .brand img {
-    height:75px !important;
+  .mobile-panel.open {
+    transform: translateX(0);
   }
 
-  .brand h1 {
-    font-size:24px !important;
-    max-width:160px !important;
-  }
-}
-
-  /* MOBILE — hide side nav */
-@media (max-width:880px){
-  .side-nav-container {
-    display:none !important;
-  }
-}
-
-/* DESKTOP — show side nav */
-@media (min-width:881px){
-  .side-nav-container {
-    display:block !important;
+  .panel-inner a {
+    display: block;
+    padding: 16px 20px;
+    border-bottom: 1px solid #eee;
+    font-size: 18px;
+    text-decoration: none;
+    color: #333;
   }
 }
 
 
-/* BASE MOBILE MENU BUTTON STYLE (clean text links) */
-.mobile-panel a {
-  display: block;
-  padding: 12px 14px;
-  font-size: 16px;
-  font-weight: 700;
-  margin: 6px auto;
-  border-radius: 10px;
-  text-decoration: none;
-  text-align: right;
-
-  width: 70%;
-  max-width: 300px;
-
-  background: transparent !important;  /* NO CARD BACKGROUND */
-  border: none !important;             /* NO BORDER */
-}
 
 
-/* --------------------------------------------- */
-/* TEXT COLORS ONLY — NO BACKGROUND, NO CARDS    */
-/* --------------------------------------------- */
-
-/* Utility Nav */
-.mobile-panel a:nth-child(1) { color:#0b61b6 !important; } /* A.I */
-.mobile-panel a:nth-child(2) { color:#7a2fa6 !important; } /* Portal */
-
-.mobile-panel a:nth-child(6) { color:#7a2fa6 !important; } /* EN */
-
-/* Main Nav */
-.mobile-panel a:nth-child(7) { color:#f5c400 !important; } /* About Us */
-.mobile-panel a:nth-child(8) { color:#0b61b6 !important; } /* Our Impact */
-.mobile-panel a:nth-child(9) { color:#7a2fa6 !important; } /* Get Involved */
 
 
-  
-  @media (min-width:881px) {
-  .side-nav-container {
-    top: calc(var(--utility-height) + 150px) !important;
-  }
-}
 </style>
 </head>
 <body>
