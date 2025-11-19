@@ -832,9 +832,13 @@ footer.site-footer{
   clip-path: polygon(10% 0, 90% 0, 100% 100%, 0 100%);
 }
 
-
-.about-img.capsule {
-  border-radius: 120px;
+.about-img.round-diamond {
+  clip-path: polygon(
+    50% 0%, 85% 25%, 100% 50%,
+    85% 75%, 50% 100%, 15% 75%,
+    0% 50%, 15% 25%
+  );
+  border-radius: 20px;
 }
 
 
@@ -1224,7 +1228,7 @@ footer.site-footer{
     <!-- Block 3: White Card BG -->
     <!-- ========================= -->
     <div class="about-block alt-left bg-whitecard">
-      <div class="about-img capsule">
+      <div class="about-img round-diamond">
         <img src="https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?w=800" alt="">
       </div>
       <div class="about-text">
