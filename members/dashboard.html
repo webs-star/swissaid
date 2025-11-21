@@ -16,6 +16,7 @@
   --muted: #475569;
 }
 
+/* GLOBAL */
 body {
   margin: 0;
   font-family: Inter, system-ui, sans-serif;
@@ -25,6 +26,7 @@ body {
   min-height: 100vh;
 }
 
+/* SIDEBAR */
 .sidebar {
   width: 260px;
   background: var(--brand);
@@ -38,14 +40,44 @@ body {
   height: 100vh;
 }
 
-.sidebar img { width: 65px; margin-bottom: 10px; }
-.sidebar-title { font-weight: 700; font-size: 19px; margin-bottom: 30px; }
-.nav-link { color: #fff; text-decoration: none; padding: 12px 14px; border-radius: 10px; display: block; margin-bottom: 6px; font-weight: 500; transition: 0.2s; }
-.nav-link:hover { background: rgba(255,255,255,0.1); }
-.active { background: rgba(255,255,255,0.18); }
+.sidebar img {
+  width: 65px;
+  margin-bottom: 10px;
+}
 
-.main { flex: 1; display: flex; flex-direction: column; }
+.sidebar-title {
+  font-weight: 700;
+  font-size: 19px;
+  margin-bottom: 30px;
+}
 
+.nav-link {
+  color: #fff;
+  text-decoration: none;
+  padding: 12px 14px;
+  border-radius: 10px;
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+.nav-link:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.active {
+  background: rgba(255,255,255,0.18);
+}
+
+/* MAIN AREA */
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* TOP BAR */
 .topbar {
   background: #fff;
   padding: 14px 24px;
@@ -55,62 +87,155 @@ body {
   border-bottom: 1px solid #e2e8f0;
 }
 
-.topbar a { text-decoration: none; color: var(--brand); font-weight: 600; margin-right: 16px; }
-.topbar button { background: var(--accent); border: none; padding: 8px 14px; border-radius: 8px; cursor: pointer; font-weight: 600; }
+.topbar a {
+  text-decoration: none;
+  color: var(--brand);
+  font-weight: 600;
+  margin-right: 16px;
+}
 
-.content { padding: 30px; }
-.card { background: #fff; padding: 22px; border-radius: 14px; margin-bottom: 30px; box-shadow: 0 4px 24px rgba(0,0,0,0.06); }
-.card h2, .card h3 { margin: 0 0 10px; color: var(--brand); }
-.small { font-size: 14px; color: var(--muted); }
-.actions a { display: inline-block; margin-right: 8px; margin-top: 12px; padding: 10px 15px; border-radius: 8px; text-decoration: none; font-weight: 600; background: #eef2ff; color: var(--brand); }
+.topbar button {
+  background: var(--accent);
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
 
-/* =========================== MOBILE =========================== */
-@media (max-width:880px) {
-  body { flex-direction: column; overflow-x:hidden; }
+/* CONTENT AREA */
+.content {
+  padding: 30px;
+}
 
-  .sidebar { position: fixed; left:-260px; top:0; height:100vh; width:260px; transition:0.3s; z-index:9999; }
-  .sidebar.show { left:0; }
+.card {
+  background: #fff;
+  padding: 22px;
+  border-radius: 14px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+}
 
-  .topbar { justify-content: space-between; }
+.card h2, .card h3 {
+  margin: 0 0 10px;
+  color: var(--brand);
+}
 
-  /* hide account + logout */
-  .topbar a, .topbar button { display:none!important; }
+.small {
+  font-size: 14px;
+  color: var(--muted);
+}
 
-  /* Blue text no bg */
-  .mobile-menu-btn {
-    display:flex;
-    font-size:32px;
-    color:var(--brand);
-    background:transparent;
-    border:none;
-    cursor:pointer;
+/* Action buttons */
+.actions a {
+  display: inline-block;
+  margin-right: 8px;
+  margin-top: 12px;
+  padding: 10px 15px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  background: #eef2ff;
+  color: var(--brand);
+}
+
+
+
+
+
+
+
+/* ================= MOBILE MENU DROPDOWN ================== */
+@media (max-width: 880px) {
+
+  /* Hide the sidebar entirely on mobile */
+  .sidebar {
+    display: none !important;
   }
 
-  .main { width:100%; }
+  /* Hide account + logout buttons */
+  .topbar a,
+  .topbar button {
+    display: none !important;
+  }
+
+  /* Mobile menu button */
+  .mobile-menu-btn {
+    display: flex;
+    font-size: 32px;
+    color: var(--brand);
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  /* Dropdown menu */
+  .mobile-menu {
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 220px;
+    background: #ffffff;
+    padding: 10px 0;
+    border-radius: 10px;
+    z-index: 10000;
+  }
+
+  .mobile-menu a,
+  .mobile-menu button {
+    display: block;
+    padding: 12px 20px;
+    text-decoration: none;
+    color: var(--brand);
+    font-weight: 600;
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .mobile-menu a:hover,
+  .mobile-menu button:hover {
+    background: #f2f2f2;
+  }
+
 }
+
+
 </style>
 </head>
 <body>
 
-<aside class="sidebar">
-  <img src="https://res.cloudinary.com/dwvt4e9o2/image/upload/v1763476964/Screenshot_73_e5hyu9.png">
-  <div class="sidebar-title">Swiss Aid Connect</div>
-  <a class="nav-link active" href="dashboard.html">Dashboard</a>
-  <a class="nav-link" href="profile.html">My Profile</a>
-  <a class="nav-link" href="events.html">Events</a>
-  <a class="nav-link" href="announcements.html">Announcements</a>
-  <a class="nav-link" href="/">Website Home</a>
-</aside>
+<header class="topbar">
 
-<div class="main">
-  <header class="topbar">
-    <div class="mobile-menu-btn" id="menuBtn">≡</div>
-  </header>
+  <a href="profile.html">My Account</a>
+  <button id="logoutBtn">Logout</button>
 
+  <button class="mobile-menu-btn" id="menuBtn">≡</button>
+
+  <!-- MOBILE DROPDOWN -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="dashboard.html">Dashboard</a>
+    <a href="profile.html">My Profile</a>
+    <a href="events.html">Events</a>
+    <a href="announcements.html">Announcements</a>
+    <a href="/">Website Home</a>
+    <a href="profile.html">My Account</a>
+    <button id="mobileLogout">Logout</button>
+  </div>
+
+</header>
+
+
+  <!-- CONTENT -->
   <main class="content">
+
     <div class="card">
       <h2 id="welcome">Welcome</h2>
       <p class="small" id="memberSummary">Loading profile…</p>
+
       <div class="actions">
         <a href="profile.html">Edit Profile</a>
         <a href="events.html">View Events</a>
@@ -120,15 +245,116 @@ body {
 
     <div class="card">
       <h3>My Event Activity</h3>
-      <div id="joinedEvents"><p class="small">Loading joined events…</p></div>
+      <div id="joinedEvents">
+        <p class="small">Loading joined events…</p>
+      </div>
     </div>
+
   </main>
 </div>
 
+
+<!-- FIREBASE -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
 <script>
-document.getElementById("menuBtn").addEventListener("click", ()=>{
-  document.querySelector(".sidebar").classList.toggle("show");
+const firebaseConfig = {
+  apiKey: "AIzaSyAQNayCzqw8NwIRaky4o21TPMXvL1ED5Mc",
+  authDomain: "swissaid-1e9c9.firebaseapp.com",
+  databaseURL: "https://swissaid-1e9c9-default-rtdb.firebaseio.com",
+  projectId: "swissaid-1e9c9",
+  storageBucket: "swissaid-1e9c9.firebasestorage.app",
+  messagingSenderId: "598813811284",
+  appId: "1:598813811284:web:d4a9ebf46da0fb290043c1"
+};
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db = firebase.database();
+
+auth.onAuthStateChanged(async user => {
+  if (!user) {
+    window.location.href = "/#joinPage";
+    return;
+  }
+
+  document.getElementById("welcome").textContent =
+    `Welcome, ${user.displayName || user.email}`;
+
+
+
+const snap = await db.ref("members/" + user.uid).once("value");
+  const profile = snap.val() || {};
+
+  document.getElementById("memberSummary").textContent =
+    `${profile.fullName || '—'} · ${profile.country || '—'} · Joined: ${profile.joinedAt || '—'}`;
+
+
+
+
+
+
+
+  
+// Load events the user joined
+const userEventsSnap = await db
+  .ref("eventSignups")
+  .once("value");
+
+const allEvents = userEventsSnap.val() || {};
+let joined = [];
+
+// Loop through eventId → users → userId
+Object.keys(allEvents).forEach(eventId => {
+  const users = allEvents[eventId];
+  if (users[user.uid]) {
+    joined.push(users[user.uid]);
+  }
 });
+
+let html = "";
+
+if (joined.length > 0) {
+  html = joined.map(e => `
+    <li>
+      <strong>${e.eventTitle}</strong><br>
+      <span class="small">Joined: ${e.joinedAt}</span>
+    </li>
+  `).join("");
+} else {
+  html = "<li>No joined events yet</li>";
+}
+
+document.getElementById("joinedEvents").innerHTML =
+  `<ul class="small">${html}</ul>`;
+
+
+
+
+document.getElementById("logoutBtn").addEventListener("click", async () => {
+  await auth.signOut();
+  window.location.href = "/#joinPage";
+});
+ }); 
+
+
+
+
+
+document.getElementById("menuBtn").addEventListener("click", () => {
+  const menu = document.getElementById("mobileMenu");
+  menu.style.display = (menu.style.display === "block") ? "none" : "block";
+});
+
+// Mobile logout
+document.getElementById("mobileLogout").addEventListener("click", async () => {
+  await auth.signOut();
+  window.location.href = "/#joinPage";
+});
+
+
+  
 </script>
 
 </body>
