@@ -1,27 +1,133 @@
- <!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Members — Events</title>
+<title>Swiss Aid — Events</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
 <style>
-:root{--brand:#0C2856;--bg:#f8fafc}
-body{font-family:Inter,Arial;background:var(--bg);margin:0;color:#0f1724}
-.header{background:var(--brand);color:#fff;padding:12px 18px;display:flex;justify-content:space-between;align-items:center}
-.container{max-width:1000px;margin:26px auto;padding:0 18px}
-.card{background:#fff;padding:16px;border-radius:12px;box-shadow:0 8px 20px rgba(2,6,23,0.05);margin-bottom:14px}
-.btn{background:var(--brand);color:#fff;padding:8px 12px;border-radius:8px;border:none;cursor:pointer}
-.small{font-size:13px;color:#475569}
+:root {
+  --brand: #0C2856;
+  --accent: #F5C22D;
+  --bg: #f2f5f9;
+  --text: #0f172a;
+  --muted: #475569;
+  --card-bg: #ffffff;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, system-ui, sans-serif;
+}
+
+/* ===== HEADER (same as dashboard) ===== */
+.header {
+  background: var(--brand);
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 3px 20px rgba(0,0,0,0.18);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-left img {
+  height: 44px;
+}
+
+.header .nav-links a {
+  color: #fff;
+  margin-right: 16px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.header button {
+  background: var(--accent);
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* ===== LAYOUT ===== */
+.container {
+  max-width: 1000px;
+  margin: 32px auto;
+  padding: 0 20px;
+}
+
+/* ===== EVENTS CARDS ===== */
+.card {
+  background: var(--card-bg);
+  border-radius: 14px;
+  padding: 22px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+  margin-bottom: 20px;
+}
+
+.card h3 {
+  margin: 0 0 8px 0;
+  color: var(--brand);
+  font-size: 20px;
+}
+
+.small {
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.btn {
+  background: var(--brand);
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+}
 </style>
 </head>
-<body>
-<header class="header"><a href="dashboard.html" style="color:#fff;text-decoration:none;font-weight:700">← Dashboard</a><div style="color:#fff">Events</div></header>
 
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-left">
+    <img src="https://res.cloudinary.com/dwvt4e9o2/image/upload/v1763476964/Screenshot_73_e5hyu9.png" alt="Swiss Aid Logo">
+    <div style="color:#fff; font-size:18px; font-weight:700;">Swiss Aid Connect Foundation</div>
+  </div>
+
+  <div class="nav-links">
+    <a href="dashboard.html">Dashboard</a>
+    <a href="events.html">Events</a>
+    <a href="announcements.html">Announcements</a>
+    <button id="logoutBtn">Logout</button>
+  </div>
+</header>
+
+<!-- MAIN -->
 <main class="container">
-  <div id="eventsList" aria-live="polite"><p class="small">Loading events…</p></div>
+  <h2 style="color:var(--brand); margin-bottom:20px;">Member Events</h2>
+  <div id="eventsList" aria-live="polite">
+    <p class="small">Loading events…</p>
+  </div>
 </main>
 
+<!-- FIREBASE -->
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
@@ -36,43 +142,67 @@ const firebaseConfig = {
   messagingSenderId: "598813811284",
   appId: "1:598813811284:web:d4a9ebf46da0fb290043c1"
 };
+
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.database();
 
-auth.onAuthStateChanged(user=>{
-  if(!user) return window.location.href='/#joinPage';
+/* ===== AUTH ===== */
+auth.onAuthStateChanged(user => {
+  if (!user) return window.location.href = '/#joinPage';
   loadEvents();
 });
 
-async function loadEvents(){
-  const snap = await db.ref('events').orderByChild('date').once('value');
+/* ===== LOAD EVENTS ===== */
+async function loadEvents() {
+  const snap = await db.ref('events').once('value');
+  console.log("EVENTS SNAPSHOT:", snap.val()); // <-- IMPORTANT
+  
   const events = snap.val() || {};
   const container = document.getElementById('eventsList');
-  if(!Object.keys(events).length){
-    container.innerHTML = '<div class="card"><p class="small">No events yet.</p></div>';
+
+  if (!Object.keys(events).length) {
+    container.innerHTML = '<div class="card"><p class="small">No events available.</p></div>';
     return;
   }
-  container.innerHTML = Object.keys(events).reverse().map(id=>{
+
+  container.innerHTML = Object.keys(events).reverse().map(id => {
     const e = events[id];
     return `
       <div class="card">
         <h3>${e.title}</h3>
         <p class="small">${e.date || ''} · ${e.location || ''}</p>
         <p>${e.description || ''}</p>
-        <button class="btn" onclick="joinEvent('${id}', '${(e.title||'').replace(/'/g,\"\\'\")}')">Join</button>
+        <button class="btn" onclick="joinEvent('${id}', '${(e.title||'').replace(/'/g,"\\'")}')">Join Event</button>
       </div>
     `;
   }).join('');
 }
 
-async function joinEvent(eventId, title){
+
+/* ===== JOIN EVENT ===== */
+async function joinEvent(eventId, title) {
   const user = auth.currentUser;
-  if(!user) return window.location.href='/#joinPage';
-  const payload = { uid: user.uid, email: user.email, eventTitle: title, joinedAt: new Date().toISOString() };
+  if (!user) return window.location.href = '/#joinPage';
+
+  const payload = {
+    uid: user.uid,
+    email: user.email,
+    eventTitle: title,
+    joinedAt: new Date().toISOString()
+  };
+
   await db.ref(`eventSignups/${eventId}/${user.uid}`).set(payload);
-  alert('You joined: ' + title);
+
+  alert('Successfully joined: ' + title);
 }
+
+/* ===== LOGOUT ===== */
+document.getElementById('logoutBtn').addEventListener('click', async () => {
+  await auth.signOut();
+  window.location.href = "/#joinPage";
+});
 </script>
+
 </body>
 </html>
