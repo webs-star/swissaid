@@ -3,45 +3,152 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Members — Profile</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<title>Swiss Aid — Member Profile</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
-:root{--brand:#0C2856;--bg:#f8fafc}
-body{font-family:Inter,Arial;background:var(--bg);margin:0;color:#0f1724}
-.header{background:var(--brand);color:#fff;padding:12px 18px;display:flex;justify-content:space-between;align-items:center}
-.container{max-width:900px;margin:26px auto;padding:0 18px}
-.card{background:#fff;padding:18px;border-radius:12px;box-shadow:0 8px 20px rgba(2,6,23,0.05)}
-label{display:block;margin-top:10px;font-weight:600}
-input,select{width:100%;padding:10px;border-radius:8px;border:1px solid #d1d5db;margin-top:6px;box-sizing:border-box}
-.save{background:var(--brand);color:#fff;padding:10px 14px;border:none;border-radius:8px;margin-top:12px;cursor:pointer}
-.small{font-size:13px;color:#475569}
+:root {
+  --brand: #0C2856;
+  --accent: #F5C22D;
+  --bg: #f2f5f9;
+  --text: #0f172a;
+  --muted: #475569;
+  --card-bg: #ffffff;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* ===== HEADER (same as dashboard) ===== */
+.header {
+  background: var(--brand);
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 3px 20px rgba(0,0,0,0.18);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-left img {
+  height: 44px;
+}
+
+.header .nav-links a {
+  color: #fff;
+  margin-right: 16px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.header button {
+  background: var(--accent);
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* ===== LAYOUT ===== */
+.container {
+  max-width: 900px;
+  margin: 32px auto;
+  padding: 0 20px;
+}
+
+.card {
+  background: var(--card-bg);
+  border-radius: 14px;
+  padding: 22px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+}
+
+h2 {
+  margin: 0 0 12px 0;
+  color: var(--brand);
+}
+
+label {
+  display: block;
+  margin-top: 16px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+input, select {
+  width: 100%;
+  margin-top: 6px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  font-size: 15px;
+}
+
+button.saveBtn {
+  margin-top: 24px;
+  padding: 12px 18px;
+  background: var(--brand);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
 </style>
 </head>
+
 <body>
+
+<!-- HEADER -->
 <header class="header">
-  <a href="dashboard.html" style="color:#fff;text-decoration:none;font-weight:700">← Dashboard</a>
-  <div style="color:#fff">Profile</div>
+  <div class="header-left">
+    <img src="https://res.cloudinary.com/dwvt4e9o2/image/upload/v1763476964/Screenshot_73_e5hyu9.png" alt="Swiss Aid Logo">
+    <div style="color:#fff; font-size:18px; font-weight:700;">Swiss Aid Connect Foundation</div>
+  </div>
+
+  <div class="nav-links">
+    <a href="dashboard.html">Dashboard</a>
+    <a href="events.html">Events</a>
+    <a href="announcements.html">Announcements</a>
+    <button id="logoutBtn">Logout</button>
+  </div>
 </header>
 
+<!-- MAIN -->
 <main class="container">
   <div class="card">
     <h2>My Profile</h2>
-    <p class="small">Update your details. We store minimal data.</p>
 
-    <label for="fullName">Full name</label>
-    <input id="fullName" placeholder="Your full name" />
+    <label>Full Name</label>
+    <input id="fullName" type="text" placeholder="Your full name">
 
-    <label for="phone">Phone</label>
-    <input id="phone" placeholder="+254..." />
+    <label>Country</label>
+    <input id="country" type="text" placeholder="Your country">
 
-    <label for="country">Country</label>
-    <input id="country" placeholder="Country" />
+    <label>Phone Number</label>
+    <input id="phone" type="text" placeholder="Phone number">
 
-    <button id="saveBtn" class="save">Save Profile</button>
-    <p id="status" class="small"></p>
+    <label>Bio</label>
+    <input id="bio" type="text" placeholder="Short bio">
+
+    <button class="saveBtn" id="saveProfileBtn">Save Changes</button>
   </div>
 </main>
 
+<!-- FIREBASE -->
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
@@ -56,35 +163,50 @@ const firebaseConfig = {
   messagingSenderId: "598813811284",
   appId: "1:598813811284:web:d4a9ebf46da0fb290043c1"
 };
+
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.database();
 
-auth.onAuthStateChanged(async user=>{
-  if(!user) return window.location.href='/#joinPage';
+/* ===== LOAD PROFILE ===== */
+auth.onAuthStateChanged(async user => {
+  if (!user) {
+    window.location.href = "/#joinPage";
+    return;
+  }
 
-  // populate fields
-  const ref = db.ref('members/' + user.uid);
-  const snap = await ref.once('value');
-  const data = snap.val() || {};
-  document.getElementById('fullName').value = data.fullName || '';
-  document.getElementById('phone').value = data.phone || '';
-  document.getElementById('country').value = data.country || '';
+  const snap = await db.ref(`members/${user.uid}`).once("value");
+  const profile = snap.val() || {};
+
+  document.getElementById("fullName").value = profile.fullName || "";
+  document.getElementById("country").value  = profile.country || "";
+  document.getElementById("phone").value    = profile.phone || "";
+  document.getElementById("bio").value      = profile.bio || "";
 });
 
-document.getElementById('saveBtn').addEventListener('click', async ()=>{
+/* ===== SAVE PROFILE ===== */
+document.getElementById("saveProfileBtn").addEventListener("click", async () => {
   const user = auth.currentUser;
-  if(!user) return window.location.href='/#joinPage';
+  if (!user) return;
 
-  const payload = {
-    fullName: document.getElementById('fullName').value || '',
-    phone: document.getElementById('phone').value || '',
-    country: document.getElementById('country').value || '',
-    updatedAt: new Date().toISOString()
+  const data = {
+    fullName: document.getElementById("fullName").value,
+    country:  document.getElementById("country").value,
+    phone:    document.getElementById("phone").value,
+    bio:      document.getElementById("bio").value,
+    joinedAt: new Date().toISOString().split("T")[0]
   };
-  await db.ref('members/' + user.uid).update(payload);
-  document.getElementById('status').textContent = 'Profile saved.';
+
+  await db.ref(`members/${user.uid}`).update(data);
+  alert("Profile updated successfully!");
+});
+
+/* ===== LOGOUT ===== */
+document.getElementById("logoutBtn").addEventListener("click", async () => {
+  await auth.signOut();
+  window.location.href = "/#joinPage";
 });
 </script>
+
 </body>
 </html>
