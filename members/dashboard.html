@@ -218,6 +218,20 @@ auth.onAuthStateChanged(async user => {
     `Welcome, ${user.displayName || user.email}`;
 
 
+
+const snap = await db.ref("members/" + user.uid).once("value");
+  const profile = snap.val() || {};
+
+  document.getElementById("memberSummary").textContent =
+    `${profile.fullName || '—'} · ${profile.country || '—'} · Joined: ${profile.joinedAt || '—'}`;
+
+
+
+
+
+
+
+  
 // Load events the user joined
 const userEventsSnap = await db
   .ref("eventSignups")
