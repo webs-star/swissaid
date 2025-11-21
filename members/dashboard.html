@@ -152,54 +152,58 @@ body {
 
   body {
     flex-direction: column;
+    overflow-x: hidden;
   }
 
-  /* Hide sidebar on mobile */
+  /* Hide sidebar off-screen */
   .sidebar {
     position: fixed;
     left: -260px;
     top: 0;
     height: 100vh;
-    transition: 0.3s;
+    width: 260px;
+    transition: 0.3s ease;
     z-index: 9999;
   }
 
-  /* Sidebar visible when active */
+  /* When opened */
   .sidebar.show {
     left: 0;
   }
 
-  /* Replace topbar links with hamburger */
+  /* Topbar layout change */
   .topbar {
     justify-content: space-between;
   }
 
+  /* --- HIDE ACCOUNT + LOGOUT ON MOBILE --- */
   .topbar a,
   .topbar button {
-    display: none !important; /* hide My Account + Logout */
+    display: none !important;
   }
+  /* --------------------------------------- */
 
-  /* Hamburger Button */
+  /* Hamburger menu button */
   .mobile-menu-btn {
     display: flex;
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     border-radius: 8px;
     justify-content: center;
     align-items: center;
     background: var(--brand);
     color: #fff;
-    font-size: 24px;
+    font-size: 26px;
     cursor: pointer;
   }
 
-  /* Make content full width */
+  /* Content should span full width */
   .main {
     width: 100%;
   }
-
 }
 
+/* Ensure sidebar stays on top of everything */
 .sidebar {
   z-index: 9999;
 }
@@ -231,6 +235,9 @@ body {
 
     <a href="profile.html">My Account</a>
     <button id="logoutBtn">Logout</button>
+<div class="mobile-menu-btn" onclick="toggleMenu()">☰</div>
+
+    
   </header>
 
   <!-- CONTENT -->
