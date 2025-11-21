@@ -3,24 +3,118 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Members — Announcements</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<title>Swiss Aid — Announcements</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
-:root{--brand:#0C2856;--bg:#f8fafc}
-body{font-family:Inter,Arial;background:var(--bg);margin:0;color:#0f1724}
-.header{background:var(--brand);color:#fff;padding:12px 18px;display:flex;justify-content:space-between;align-items:center}
-.container{max-width:1000px;margin:26px auto;padding:0 18px}
-.card{background:#fff;padding:16px;border-radius:12px;box-shadow:0 8px 20px rgba(2,6,23,0.05);margin-bottom:14px}
-.small{font-size:13px;color:#475569}
+:root {
+  --brand: #0C2856;
+  --accent: #F5C22D;
+  --bg: #f2f5f9;
+  --text: #0f172a;
+  --muted: #475569;
+  --card-bg: #ffffff;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* ===== HEADER (same as dashboard and profile) ===== */
+.header {
+  background: var(--brand);
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 3px 20px rgba(0,0,0,0.18);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-left img {
+  height: 44px;
+}
+
+.header .nav-links a {
+  color: #fff;
+  margin-right: 16px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.header button {
+  background: var(--accent);
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* ===== CONTENT ===== */
+.container {
+  max-width: 900px;
+  margin: 32px auto;
+  padding: 0 20px;
+}
+
+.card {
+  background: var(--card-bg);
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+  margin-bottom: 20px;
+}
+
+.card h3 {
+  margin: 0 0 8px 0;
+  color: var(--brand);
+}
+
+.small {
+  font-size: 14px;
+  color: var(--muted);
+}
 </style>
 </head>
-<body>
-<header class="header"><a href="dashboard.html" style="color:#fff;text-decoration:none;font-weight:700">← Dashboard</a><div style="color:#fff">Announcements</div></header>
 
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-left">
+    <img src="https://res.cloudinary.com/dwvt4e9o2/image/upload/v1763476964/Screenshot_73_e5hyu9.png" alt="Swiss Aid Logo">
+    <div style="color:#fff; font-size:18px; font-weight:700;">Swiss Aid Connect Foundation</div>
+  </div>
+
+  <div class="nav-links">
+    <a href="dashboard.html">Dashboard</a>
+    <a href="events.html">Events</a>
+    <a href="profile.html">My Profile</a>
+    <button id="logoutBtn">Logout</button>
+  </div>
+</header>
+
+<!-- MAIN -->
 <main class="container">
-  <div id="annList"><p class="small">Loading announcements…</p></div>
+  <h2 style="color:var(--brand); margin-bottom:18px;">Announcements</h2>
+
+  <div id="annList">
+    <p class="small">Loading announcements…</p>
+  </div>
 </main>
 
+<!-- FIREBASE -->
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
@@ -39,21 +133,45 @@ firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.database();
 
-auth.onAuthStateChanged(user=>{
-  if(!user) return window.location.href='/#joinPage';
-  loadAnnouncements();
+/* ===== AUTH GUARD ===== */
+auth.onAuthStateChanged(user => {
+  if (!user) window.location.href = '/#joinPage';
+  else loadAnnouncements();
 });
 
-async function loadAnnouncements(){
+/* ===== LOAD ANNOUNCEMENTS ===== */
+async function loadAnnouncements() {
   const snap = await db.ref('announcements').orderByChild('createdAt').once('value');
   const anns = snap.val() || {};
   const container = document.getElementById('annList');
-  if(!Object.keys(anns).length) { container.innerHTML = '<div class="card"><p class="small">No announcements yet.</p></div>'; return; }
-  container.innerHTML = Object.keys(anns).reverse().map(id=>{
-    const a = anns[id];
-    return `<div class="card"><h3>${a.title}</h3><p class="small">${a.createdAt}</p><p>${a.body}</p></div>`;
-  }).join('');
+
+  if (!Object.keys(anns).length) {
+    container.innerHTML =
+      '<div class="card"><p class="small">No announcements yet.</p></div>';
+    return;
+  }
+
+  container.innerHTML = Object.keys(anns)
+    .reverse()
+    .map(id => {
+      const a = anns[id];
+      return `
+        <div class="card">
+          <h3>${a.title}</h3>
+          <p class="small">${a.createdAt}</p>
+          <p>${a.body}</p>
+        </div>
+      `;
+    }).join('');
 }
+
+/* ===== LOGOUT ===== */
+document.getElementById('logoutBtn').addEventListener('click', async () => {
+  await auth.signOut();
+  window.location.href = "/#joinPage";
+});
 </script>
+
 </body>
 </html>
+
