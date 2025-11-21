@@ -138,6 +138,70 @@ body {
   background: #eef2ff;
   color: var(--brand);
 }
+
+
+
+
+
+
+
+
+
+/* =============== MOBILE RESPONSIVE (max 880px) =============== */
+@media (max-width: 880px) {
+
+  body {
+    flex-direction: column;
+  }
+
+  /* Hide sidebar on mobile */
+  .sidebar {
+    position: fixed;
+    left: -260px;
+    top: 0;
+    height: 100vh;
+    transition: 0.3s;
+    z-index: 9999;
+  }
+
+  /* Sidebar visible when active */
+  .sidebar.show {
+    left: 0;
+  }
+
+  /* Replace topbar links with hamburger */
+  .topbar {
+    justify-content: space-between;
+  }
+
+  .topbar a,
+  .topbar button {
+    display: none !important; /* hide My Account + Logout */
+  }
+
+  /* Hamburger Button */
+  .mobile-menu-btn {
+    display: flex;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    justify-content: center;
+    align-items: center;
+    background: var(--brand);
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+  }
+
+  /* Make content full width */
+  .main {
+    width: 100%;
+  }
+
+}
+
+
+  
 </style>
 </head>
 <body>
@@ -160,6 +224,8 @@ body {
 
   <!-- TOP BAR -->
   <header class="topbar">
+    <div class="mobile-menu-btn" id="menuBtn">≡</div>
+
     <a href="profile.html">My Account</a>
     <button id="logoutBtn">Logout</button>
   </header>
@@ -272,6 +338,21 @@ document.getElementById("logoutBtn").addEventListener("click", async () => {
   window.location.href = "/#joinPage";
 });
  }); 
+
+
+
+
+
+
+
+
+// MOBILE MENU TOGGLE
+document.getElementById("menuBtn").addEventListener("click", () => {
+  document.querySelector(".sidebar").classList.toggle("show");
+});
+
+
+  
 </script>
 
 </body>
