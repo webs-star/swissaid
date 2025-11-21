@@ -2551,6 +2551,8 @@ const firebaseConfig = {
 
 
 
+
+
 // LOGIN
 document.getElementById("emailLoginBtn").addEventListener("click", async () => {
   const email = document.getElementById("emailInput").value;
@@ -2560,7 +2562,7 @@ document.getElementById("emailLoginBtn").addEventListener("click", async () => {
     await auth.signInWithEmailAndPassword(email, pass);
 
     // REDIRECT TO MEMBERS DASHBOARD
-    window.location.href = "/members/dashboard.html";
+    window.location.href = "/swissaid/members/dashboard.html";
 
   } catch (err) {
     alert(err.message);
@@ -2577,7 +2579,7 @@ document.getElementById("emailSignupBtn").addEventListener("click", async () => 
     await auth.createUserWithEmailAndPassword(email, pass);
 
     // REDIRECT TO MEMBERS DASHBOARD
-    window.location.href = "/members/dashboard.html";
+    window.location.href = "/swissaid/members/dashboard.html";
 
   } catch (err) {
     alert(err.message);
@@ -2593,7 +2595,7 @@ document.getElementById("googleBtn").addEventListener("click", async () => {
     await auth.signInWithPopup(googleProvider);
 
     // REDIRECT TO MEMBERS DASHBOARD
-    window.location.href = "/members/dashboard.html";
+    window.location.href = "/swissaid/members/dashboard.html";
 
   } catch (err) {
     alert(err.message);
@@ -2611,46 +2613,6 @@ document.getElementById("logoutBtn").addEventListener("click", async () => {
     alert(err.message);
   }
 });
-
-
-
-
-
-document.getElementById("logoutBtn").addEventListener("click", async () => {
-  try {
-    await auth.signOut();
-    alert("Logged out!");
-  } catch (err) {
-    alert(err.message);
-  }
-});
-
-
-
-
-auth.onAuthStateChanged(user => {
-  if (user) {
-    console.log("User is logged in:", user.email);
-
-    // Show logout
-    document.getElementById("logoutBtn").style.display = "inline-block";
-
-    // OPTIONAL: hide join button
-    const joinLink = document.querySelector("[data-key='join-nav']");
-    if (joinLink) joinLink.style.display = "none";
-
-  } else {
-    console.log("User is logged out.");
-
-    // Hide logout
-    document.getElementById("logoutBtn").style.display = "none";
-
-    // OPTIONAL: show join link again
-    const joinLink = document.querySelector("[data-key='join-nav']");
-    if (joinLink) joinLink.style.display = "";
-  }
-});
-
 
 
 
