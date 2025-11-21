@@ -144,9 +144,6 @@ body {
 
 
 
-
-
-
 /* =============== MOBILE RESPONSIVE (max 880px) =============== */
 @media (max-width: 880px) {
 
@@ -155,35 +152,42 @@ body {
     overflow-x: hidden;
   }
 
-  /* Hide sidebar off-screen */
+  /* Sidebar becomes dropdown menu instead of sliding panel */
   .sidebar {
-    position: fixed;
-    left: -260px;
-    top: 0;
-    height: 100vh;
-    width: 260px;
-    transition: 0.3s ease;
-    z-index: 9999;
-  }
-
-  /* When opened */
-  .sidebar.show {
+    position: absolute;
+    top: 60px; /* below topbar */
     left: 0;
+    width: 100%;
+    height: auto;
+    background: #ffffff;         /* white background */
+    color: var(--brand);         /* blue text */
+    padding: 10px 20px;
+    display: none;               /* hidden by default */
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
   }
 
-  /* Topbar layout change */
-  .topbar {
-    justify-content: space-between;
+  .sidebar.show {
+    display: block;
   }
 
-  /* --- HIDE ACCOUNT + LOGOUT ON MOBILE --- */
+  /* Make nav links blue on white */
+  .nav-link {
+    color: var(--brand);
+    background: transparent;
+    border: 1px solid #e2e8f0;
+  }
+
+  .nav-link:hover {
+    background: #f1f5ff;
+  }
+
+  /* Hide desktop account + logout */
   .topbar a,
   .topbar button {
     display: none !important;
   }
-  /* --------------------------------------- */
 
-  /* Hamburger menu button */
+  /* THREE DASHES BUTTON */
   .mobile-menu-btn {
     display: flex;
     width: 44px;
@@ -191,24 +195,21 @@ body {
     border-radius: 8px;
     justify-content: center;
     align-items: center;
-    background: var(--brand);
-    color: #fff;
-    font-size: 26px;
+    background: transparent;
+    color: var(--brand); /* blue */
+    font-size: 32px;
+    font-weight: 900;
     cursor: pointer;
   }
 
-  /* Content should span full width */
-  .main {
-    width: 100%;
-  }
 }
 
-/* Ensure sidebar stays on top of everything */
-.sidebar {
-  z-index: 9999;
+/* PC view: hide mobile button */
+.mobile-menu-btn {
+  display: none;
 }
 
-  
+
 </style>
 </head>
 <body>
@@ -229,13 +230,14 @@ body {
 <!-- MAIN AREA -->
 <div class="main">
 
-  <!-- TOP BAR -->
-  <header class="topbar">
-   
+ <header class="topbar">
     <a href="profile.html">My Account</a>
     <button id="logoutBtn">Logout</button>
 
-  <div class="mobile-menu-btn" id="menuBtn">≡</div>
+    <!-- MOBILE ONLY -->
+    <div class="mobile-menu-btn" id="menuBtn">≡</div>
+</header>
+
     
   </header>
 
