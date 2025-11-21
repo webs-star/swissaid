@@ -181,7 +181,7 @@ auth.onAuthStateChanged(async user=>{
   const snap = await db.ref('admins/' + user.uid).once('value');
   if(!snap.exists()){
     alert('Access denied — admin only');
-    return window.location.href='/swiss/members/dashboard.html';
+    return window.location.href='/swissaid/members/dashboard.html';
   }
 });
 
