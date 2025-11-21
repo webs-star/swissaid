@@ -227,36 +227,37 @@ const profile = snap.val() || {};
 document.getElementById("memberSummary").textContent =
   `${profile.fullName || '—'} · ${profile.country || '—'} · Joined: ${profile.joinedAt || '—'}`;
 
-// Load event signups for this user
-const eventsSnap = await db
+// Load events the user joined
+const userEventsSnap = await db
   .ref("eventSignups")
-  .orderByChild("uid")
-  .equalTo(user.uid)
   .once("value");
 
-const events = eventsSnap.val() || {};
+const allEvents = userEventsSnap.val() || {};
+let joined = [];
+
+// Loop through eventId → users → userId
+Object.keys(allEvents).forEach(eventId => {
+  const users = allEvents[eventId];
+  if (users[user.uid]) {
+    joined.push(users[user.uid]);
+  }
+});
 
 let html = "";
 
-// If user has joined events
-if (Object.keys(events).length) {
-  html = Object.keys(events)
-    .map(id => {
-      const e = events[id];
-      return `
-        <li>
-          <strong>${e.eventTitle || "Untitled Event"}</strong><br>
-          <span class="small">Joined: ${e.joinedAt || ""}</span>
-        </li>
-      `;
-    })
-    .join("");
+if (joined.length > 0) {
+  html = joined.map(e => `
+    <li>
+      <strong>${e.eventTitle}</strong><br>
+      <span class="small">Joined: ${e.joinedAt}</span>
+    </li>
+  `).join("");
 } else {
   html = "<li>No joined events yet</li>";
 }
 
-// Insert into page
-document.getElementById("joinedEvents").innerHTML = `<ul class="small">${html}</ul>`;
+document.getElementById("joinedEvents").innerHTML =
+  `<ul class="small">${html}</ul>`;
 
 // Logout
 document.getElementById("logoutBtn").addEventListener("click", async () => {
