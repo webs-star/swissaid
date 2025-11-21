@@ -226,15 +226,41 @@ auth.onAuthStateChanged(async user => {
   document.getElementById("memberSummary").textContent =
     `${profile.fullName || '—'} · ${profile.country || '—'} · Joined: ${profile.joinedAt || '—'}`;
 
-  const events = await db.ref("eventSignups").orderByChild("uid").equalTo(user.uid).once("value");
-  const list = events.val() || {};
-  const html = Object.keys(list).length
-    ? Object.keys(list).map(id => `<li>${list[id].eventTitle}</li>`).join("")
-    : "<li>No joined events</li>";
 
-  document.getElementById("joinedEvents").innerHTML = `<ul class="small">${html}</ul>`;
-});
 
+const eventsSnap = await db
+  .ref("eventSignups")
+  .orderByChild("uid")
+  .equalTo(user.uid)
+  .once("value");
+
+const events = eventsSnap.val() || {};
+
+let html = "";
+
+// If user has joined events
+if (Object.keys(events).length) {
+  html = Object.keys(events)
+    .map(id => {
+      const e = events[id];
+      return `
+        <li>
+          <strong>${e.eventTitle || "Untitled Event"}</strong>
+          <br>
+          <span class="small">Joined: ${e.joinedAt || ""}</span>
+        </li>
+      `;
+    })
+    .join("");
+} else {
+  html = "<li>No joined events yet</li>";
+}
+
+document.getElementById("joinedEvents").innerHTML = `<ul class="small">${html}</ul>`;
+
+
+
+  
 document.getElementById("logoutBtn").addEventListener("click", async () => {
   await auth.signOut();
   window.location.href = "/#joinPage";
