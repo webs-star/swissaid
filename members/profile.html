@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Members — Profile</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--brand:#0C2856;--bg:#f8fafc}
+body{font-family:Inter,Arial;background:var(--bg);margin:0;color:#0f1724}
+.header{background:var(--brand);color:#fff;padding:12px 18px;display:flex;justify-content:space-between;align-items:center}
+.container{max-width:900px;margin:26px auto;padding:0 18px}
+.card{background:#fff;padding:18px;border-radius:12px;box-shadow:0 8px 20px rgba(2,6,23,0.05)}
+label{display:block;margin-top:10px;font-weight:600}
+input,select{width:100%;padding:10px;border-radius:8px;border:1px solid #d1d5db;margin-top:6px;box-sizing:border-box}
+.save{background:var(--brand);color:#fff;padding:10px 14px;border:none;border-radius:8px;margin-top:12px;cursor:pointer}
+.small{font-size:13px;color:#475569}
+</style>
+</head>
+<body>
+<header class="header">
+  <a href="dashboard.html" style="color:#fff;text-decoration:none;font-weight:700">← Dashboard</a>
+  <div style="color:#fff">Profile</div>
+</header>
+
+<main class="container">
+  <div class="card">
+    <h2>My Profile</h2>
+    <p class="small">Update your details. We store minimal data.</p>
+
+    <label for="fullName">Full name</label>
+    <input id="fullName" placeholder="Your full name" />
+
+    <label for="phone">Phone</label>
+    <input id="phone" placeholder="+254..." />
+
+    <label for="country">Country</label>
+    <input id="country" placeholder="Country" />
+
+    <button id="saveBtn" class="save">Save Profile</button>
+    <p id="status" class="small"></p>
+  </div>
+</main>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyAQNayCzqw8NwIRaky4o21TPMXvL1ED5Mc",
+  authDomain: "swissaid-1e9c9.firebaseapp.com",
+  databaseURL: "https://swissaid-1e9c9-default-rtdb.firebaseio.com",
+  projectId: "swissaid-1e9c9",
+  storageBucket: "swissaid-1e9c9.firebasestorage.app",
+  messagingSenderId: "598813811284",
+  appId: "1:598813811284:web:d4a9ebf46da0fb290043c1"
+};
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db = firebase.database();
+
+auth.onAuthStateChanged(async user=>{
+  if(!user) return window.location.href='/#joinPage';
+
+  // populate fields
+  const ref = db.ref('members/' + user.uid);
+  const snap = await ref.once('value');
+  const data = snap.val() || {};
+  document.getElementById('fullName').value = data.fullName || '';
+  document.getElementById('phone').value = data.phone || '';
+  document.getElementById('country').value = data.country || '';
+});
+
+document.getElementById('saveBtn').addEventListener('click', async ()=>{
+  const user = auth.currentUser;
+  if(!user) return window.location.href='/#joinPage';
+
+  const payload = {
+    fullName: document.getElementById('fullName').value || '',
+    phone: document.getElementById('phone').value || '',
+    country: document.getElementById('country').value || '',
+    updatedAt: new Date().toISOString()
+  };
+  await db.ref('members/' + user.uid).update(payload);
+  document.getElementById('status').textContent = 'Profile saved.';
+});
+</script>
+</body>
+</html>
