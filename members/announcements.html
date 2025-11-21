@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Members — Announcements</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--brand:#0C2856;--bg:#f8fafc}
+body{font-family:Inter,Arial;background:var(--bg);margin:0;color:#0f1724}
+.header{background:var(--brand);color:#fff;padding:12px 18px;display:flex;justify-content:space-between;align-items:center}
+.container{max-width:1000px;margin:26px auto;padding:0 18px}
+.card{background:#fff;padding:16px;border-radius:12px;box-shadow:0 8px 20px rgba(2,6,23,0.05);margin-bottom:14px}
+.small{font-size:13px;color:#475569}
+</style>
+</head>
+<body>
+<header class="header"><a href="dashboard.html" style="color:#fff;text-decoration:none;font-weight:700">← Dashboard</a><div style="color:#fff">Announcements</div></header>
+
+<main class="container">
+  <div id="annList"><p class="small">Loading announcements…</p></div>
+</main>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyAQNayCzqw8NwIRaky4o21TPMXvL1ED5Mc",
+  authDomain: "swissaid-1e9c9.firebaseapp.com",
+  databaseURL: "https://swissaid-1e9c9-default-rtdb.firebaseio.com",
+  projectId: "swissaid-1e9c9",
+  storageBucket: "swissaid-1e9c9.firebasestorage.app",
+  messagingSenderId: "598813811284",
+  appId: "1:598813811284:web:d4a9ebf46da0fb290043c1"
+};
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db = firebase.database();
+
+auth.onAuthStateChanged(user=>{
+  if(!user) return window.location.href='/#joinPage';
+  loadAnnouncements();
+});
+
+async function loadAnnouncements(){
+  const snap = await db.ref('announcements').orderByChild('createdAt').once('value');
+  const anns = snap.val() || {};
+  const container = document.getElementById('annList');
+  if(!Object.keys(anns).length) { container.innerHTML = '<div class="card"><p class="small">No announcements yet.</p></div>'; return; }
+  container.innerHTML = Object.keys(anns).reverse().map(id=>{
+    const a = anns[id];
+    return `<div class="card"><h3>${a.title}</h3><p class="small">${a.createdAt}</p><p>${a.body}</p></div>`;
+  }).join('');
+}
+</script>
+</body>
+</html>
