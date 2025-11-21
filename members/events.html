@@ -155,7 +155,8 @@ auth.onAuthStateChanged(user => {
 
 /* ===== LOAD EVENTS ===== */
 async function loadEvents() {
-  const snap = await db.ref('events').orderByChild('date').once('value');
+const snap = await db.ref('events').once('value');
+
   const events = snap.val() || {};
   const container = document.getElementById('eventsList');
 
