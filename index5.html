@@ -1133,86 +1133,151 @@ footer.site-footer{
 
 
 
-/* Full-page overlay */
-.join-section {
-  position: relative;
-  padding-top:120px; /* makes sure header never overlaps */
-  min-height: 100vh;
-  background: #f7f9fc;
-  z-index: 5;
+
+/* ============================================= */
+/* JOIN PAGE — NO HEADER OVERLAP (NO JS VERSION) */
+/* ============================================= */
+
+/* The exact height of your header */
+:root {
+  --header-height: 170px; /* ← change this to match your real header height */
 }
 
+#joinPage {
+  position: relative;
+  display: none;
+
+  /* Push ENTIRE join page BELOW header */
+  margin-top: var(--header-height);
+}
+
+/* container with drawings + overlay */
+.join-bg-box {
+  position: relative;
+  width: 100%;
+  min-height: calc(100vh - var(--header-height));
+  overflow: hidden;
+}
+
+/* background SVG drawings */
+.join-bg-svg {
+  position: absolute;
+  top: 0; 
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150%;
+  height: auto;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* readability overlay */
+.join-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(255,255,255,0.86), rgba(255,255,255,0.92));
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* content wrapper */
 .join-wrapper {
-  max-width: 500px;
-  margin: auto;
-  padding: 20px;
+  position: relative;
+  z-index: 3;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 36px 22px 80px;
+}
+
+/* typography */
+.join-title {
+  font-size: 28px;
+  margin: 6px 0 6px;
+  color: #0c2856;
+  font-weight: 700;
   text-align: center;
 }
 
-.join-title {
-  font-size: 32px;
-  font-weight: bold;
-}
-
 .join-sub {
-  color: #555;
-  margin-bottom: 30px;
+  color: #334155;
+  text-align: center;
+  margin-bottom: 16px;
 }
 
-/* Card */
+/* card styling */
 .join-card {
-  background: white;
-  padding: 25px;
-  margin: 25px 0;
-  border-radius: 14px;
-  box-shadow: 0 4px 18px rgba(0,0,0,0.1);
+  background: rgba(255,255,255,0.95);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(12,40,86,0.08);
+  margin-bottom: 18px;
+  border: 1px solid rgba(12,40,86,0.04);
 }
 
+/* inputs and buttons */
 .join-input {
   width: 100%;
-  padding: 14px;
+  padding: 12px 14px;
   margin: 10px 0;
   border-radius: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #d1d5db;
 }
 
 .join-btn {
   width: 100%;
-  padding: 13px;
+  padding: 12px;
+  margin-top: 8px;
+  border-radius: 10px;
   background: #0C2856;
   color: white;
+  font-weight: 600;
   border: none;
-  border-radius: 10px;
-  margin-top: 10px;
   cursor: pointer;
-  font-size: 16px;
 }
 
 .join-btn.alt {
   background: #F5C22D;
-  color: black;
+  color: #0c2856;
 }
 
-/* Google Button */
 .google-btn {
   width: 100%;
-  padding: 12px;
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 12px;
-  border: 1px solid #ccc;
-  background: white;
+  justify-content: center;
+  padding: 10px;
   border-radius: 10px;
+  border: 1px solid #d1d5db;
+  background: white;
   cursor: pointer;
 }
 
-
-#joinPage {
-    position: relative;
-    padding-top: calc(var(--header-height, 170px) + 20px);
+/* floating home button */
+.floating-home-btn {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 99999;
+  border-radius: 16px;
+  padding: 10px 12px;
+  background: #0C2856;
+  border: none;
+  color: white;
 }
 
+/* responsive adjustments */
+@media (max-width: 720px) {
+  .join-bg-svg {
+    width: 200%;
+  }
+  .join-wrapper {
+    padding: 28px 16px 60px;
+  }
+  .join-title {
+    font-size: 22px;
+  }
+}
 
 </style>
 </head>
@@ -1664,53 +1729,83 @@ footer.site-footer{
 
 
 
+
+
+<!-- JOIN / LOGIN PAGE (REPLACE your old joinPage block with this) -->
 <section id="joinPage" class="join-section" style="display:none;">
-  <div class="join-wrapper">
+  <div class="join-bg-box">
 
-    <h2 class="join-title">Join Us / Login Portal</h2>
-    <p class="join-sub">Create an account or sign in</p>
-	<button id="logoutBtn" style="display:none;">Logout</button>
+    <!-- Big visible SVG illustration (real drawings) -->
+    <svg class="join-bg-svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false" role="img">
+      <!-- Background panel -->
+      <rect x="0" y="0" width="1600" height="900" fill="#f6fbff"/>
+      <!-- Big colored shapes (bold, visible) -->
+      <g transform="translate(0,0)">
+        <path d="M0 0 L1600 0 L1600 280 Q1000 360 600 240 Q300 140 0 240 Z" fill="#0C2856" opacity="0.95"/>
+        <circle cx="350" cy="200" r="150" fill="#F5C22D" opacity="1"/>
+        <path d="M1200 120 C1300 40 1500 80 1580 160 L1580 380 C1450 280 1300 330 1200 420 Z" fill="#1A3D7C" opacity="0.18"/>
+        <path d="M0 620 C450 480 850 760 1600 640 L1600 900 L0 900 Z" fill="#1A3D7C" opacity="0.85"/>
+        <path d="M0 690 C420 820 860 540 1600 760 L1600 900 L0 900 Z" fill="#F5C22D" opacity="0.5"/>
+      </g>
 
+      <!-- DRAWN ICONS — big and clear -->
+      <g transform="translate(120,320) scale(1.05)">
+        <!-- stylized hand/heart icon (big) -->
+        <path d="M220 40 C220 10 190 0 170 20 L150 40 L120 20 C100 0 70 10 70 40 L70 120 C70 150 100 170 130 150 L160 130 L170 140 L200 130 C230 120 240 80 220 40 Z" fill="#ffffff" stroke="#0C2856" stroke-width="6"/>
+        <path d="M175 75 C170 60 150 60 145 75 C140 90 160 105 175 120 C190 105 210 90 205 75 C200 60 185 60 175 75 Z" fill="#F5C22D" stroke="#d9a800" stroke-width="4"/>
+      </g>
 
-    <!-- Email Login / Signup -->
-    <div class="join-card">
+      <g transform="translate(1050,280) scale(1.2)">
+        <!-- big user / people icon -->
+        <circle cx="50" cy="50" r="40" fill="#ffffff" stroke="#0C2856" stroke-width="6"/>
+        <path d="M10 120 C10 90 40 70 80 70 C120 70 150 90 150 120 L150 140 L10 140 Z" fill="#ffffff" stroke="#0C2856" stroke-width="6"/>
+      </g>
 
-      <h3>Email Login</h3>
+      <!-- subtle overlay vignette for contrast -->
+      <defs>
+        <linearGradient id="v" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0" stop-color="#ffffff" stop-opacity="0"/>
+          <stop offset="1" stop-color="#000000" stop-opacity="0.02"/>
+        </linearGradient>
+      </defs>
+      <rect x="0" y="0" width="1600" height="900" fill="url(#v)"/>
+    </svg>
 
-      <input id="emailInput" type="email" placeholder="Email" class="join-input">
-      <input id="passwordInput" type="password" placeholder="Password" class="join-input">
+    <!-- translucent panel on top of SVG so text is readable -->
+    <div class="join-overlay"></div>
 
-      <button id="emailLoginBtn" class="join-btn">Login</button>
-      <button id="emailSignupBtn" class="join-btn alt">Create Account</button>
-    </div>
+    <!-- actual content card(s) -->
+    <div class="join-wrapper" role="region" aria-labelledby="join-heading">
+      <h2 id="join-heading" class="join-title">Join Us / Login Portal</h2>
+      <p class="join-sub">Create an account or sign in</p>
+      <button id="logoutBtn" style="display:none;" class="join-logout">Logout</button>
 
-    <!-- Google Login -->
-    <div class="join-card">
-      <h3>Or continue with</h3>
+      <div class="join-card" aria-live="polite">
+        <h3>Email Login</h3>
+        <input id="emailInput" type="email" placeholder="Email" class="join-input" autocomplete="email" />
+        <input id="passwordInput" type="password" placeholder="Password" class="join-input" autocomplete="current-password" />
+        <button id="emailLoginBtn" class="join-btn">Login</button>
+        <button id="emailSignupBtn" class="join-btn alt">Create Account</button>
+      </div>
 
-      <button id="googleBtn" class="google-btn">
-        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" />
-        Continue with Google
+      <div class="join-card">
+        <h3>Or continue with</h3>
+        <button id="googleBtn" class="google-btn" aria-label="Continue with Google">
+          <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="" />
+          Continue with Google
+        </button>
+      </div>
+
+      <button class="floating-home-btn floatHomeBtn" aria-label="Return to site">
+        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 12l9-9 9 9"/>
+          <path d="M9 21V9h6v12"/>
+        </svg>
       </button>
     </div>
 
-    <!-- Floating Home Button (Return to site) -->
-    <button class="floating-home-btn floatHomeBtn">
-      <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M3 12l9-9 9 9"/>
-        <path d="M9 21V9h6v12"/>
-      </svg>
-    </button>
-
   </div>
 </section>
-
-
-
-
-
-
-
 
 
 
