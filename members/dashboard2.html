@@ -249,11 +249,13 @@ body {
     display: none !important;
   }
 }
-/* FORCE MOBILE NAV LINKS TO BE BLUE */
+
+/* FINAL ENFORCEMENT — MOBILE NAV TEXT MUST BE BLUE */
 @media (max-width: 880px) {
   .mobile-nav a,
   .mobile-nav button {
-    color: var(--brand) !important;   /* Blue text */
+    color: var(--brand) !important;       /* Force blue */
+    -webkit-text-fill-color: var(--brand) !important; /* Safari fix */
   }
 }
 
