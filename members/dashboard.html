@@ -359,7 +359,9 @@ auth.onAuthStateChanged(async user => {
 
   document.getElementById("joinedEvents").innerHTML = `<ul class="small">${html}</ul>`;
 
-}
+  window.location.href = "/#joinPage";
+  };
+});
 
 document.getElementById("mobileToggle").onclick = () => {
   document.getElementById("mobileMenu").classList.toggle("show");
