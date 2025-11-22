@@ -138,6 +138,77 @@ body {
   background: #eef2ff;
   color: var(--brand);
 }
+
+
+
+
+
+
+/* ================= MOBILE NAV (max 880px) ================= */
+@media (max-width: 880px) {
+
+  /* Hide sidebar entirely */
+  .sidebar {
+    display: none !important;
+  }
+
+  /* Top bar adjustments */
+  .topbar {
+    justify-content: space-between;
+  }
+
+  /* Hide My Account + Logout on phone */
+  .topbar a,
+  .topbar button {
+    display: none !important;
+  }
+
+  /* SHOW hamburger button */
+  .mobile-menu-btn {
+    display: block;
+    font-size: 40px;
+    font-weight: 800;
+    line-height: 1;
+    background: none;
+    border: none;
+    color: var(--brand); /* BLUE TEXT */
+    cursor: pointer;
+    margin-top: -4px; /* push slightly upward */
+  }
+
+  /* Mobile dropdown container */
+  .mobile-nav {
+    display: none;
+    flex-direction: column;
+    background: #fff;
+    padding: 18px 22px;
+    border-bottom: 1px solid #dbe1e8;
+  }
+
+  .mobile-nav a,
+  .mobile-nav button {
+    font-size: 18px;
+    padding: 12px 0;
+    background: none;
+    border: none;
+    color: var(--brand);
+    text-align: left;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .mobile-nav.show {
+    display: flex;
+  }
+}
+
+/* Hide mobile controls on PC */
+.mobile-menu-btn,
+.mobile-nav {
+  display: none;
+}
+
+  
 </style>
 </head>
 <body>
@@ -163,6 +234,18 @@ body {
 
   <!-- TOP BAR -->
   <header class="topbar">
+<button class="mobile-menu-btn">≡</button>
+
+<div class="mobile-nav" id="mobileMenu">
+  <a href="dashboard.html">Dashboard</a>
+  <a href="profile.html">My Profile</a>
+  <a href="events.html">Events</a>
+  <a href="announcements.html">Announcements</a>
+  <a href="https://webs-star.github.io/swissaid/">Website Home</a>
+  <button onclick="logoutBtn.click()">Logout</button>
+</div>
+
+    
     <a href="profile.html">My Account</a>
     <button id="logoutBtn">Logout</button>
   </header>
