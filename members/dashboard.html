@@ -6,6 +6,7 @@
 <title>Swiss Aid — Dashboard</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
 :root {
   --brand: #0C2856;
@@ -181,13 +182,6 @@ body {
 
   .mobile-nav.show { display: flex; }
 
-  /* *** FORCE MOBILE NAV TEXT TO BLUE *** */
-  .mobile-nav a,
-  .mobile-nav button {
-    color: var(--brand) !important;
-    -webkit-text-fill-color: var(--brand) !important;
-  }
-
   .mobile-nav a,
   .mobile-nav button {
     font-size: 18px;
@@ -196,6 +190,7 @@ body {
     background: none;
     border: none;
     text-align: left;
+    color: var(--brand) !important;
     width: 100%;
     text-decoration: none;
   }
@@ -206,45 +201,15 @@ body {
   }
 }
 
-/* DESKTOP */
 @media (min-width: 881px) {
   .mobile-nav { display: none !important; }
   .mobile-menu-btn { display: none !important; }
   .topbar-brand { display: none !important; }
 }
 
-/* FINAL HARD OVERRIDE for BUTTON specifically */
-.mobile-nav button {
-  background: none !important;
-  border: none !important;
-  color: var(--brand) !important;
-  -webkit-text-fill-color: var(--brand) !important;
-  font-size: 18px;
-  font-weight: 600;
-  padding: 12px 0;
-  text-align: left;
-  width: 100%;
-  cursor: pointer;
-  box-shadow: none !important;
-}
 
 
-  /* ===== MOBILE NAV TEXT BLUE — FINAL ===== */
-@media (max-width: 880px) {
-  .mobile-menu a,
-  .mobile-menu li a,
-  nav.mobile-nav a {
-    color: #0C2856 !important;   /* Swiss Blue */
-  }
-
-  /* Optional: make hover also blue */
-  .mobile-menu a:hover {
-    color: #0C2856 !important;
-  }
-}
-
-
-.mobile-nav button {
+  .mobile-nav button {
     background: none !important;
     border: none !important;
     color: var(--brand) !important;
@@ -256,10 +221,7 @@ body {
     cursor: pointer;
 }
 
-  
 </style>
-
-
 </head>
 
 <body>
@@ -273,9 +235,9 @@ body {
   <a class="nav-link" href="events.html">Events</a>
   <a class="nav-link" href="announcements.html">Announcements</a>
   <a class="nav-link" href="https://webs-star.github.io/swissaid/">Website Home</a>
- <a class="nav-link" href="https://webs-star.github.io/swissaid/members/Admin">ADMIN ONLY</a>
 <button id="logoutBtnDesktop">Logout</button>
 
+  
 </aside>
 
 <div class="main">
@@ -295,7 +257,7 @@ body {
     <a href="events.html">Events</a>
     <a href="announcements.html">Announcements</a>
     <a href="https://webs-star.github.io/swissaid/">Website Home</a>
-    <button id="logoutBtnMobile">Logout</button>
+  <button id="logoutBtnDesktop">Logout</button>
 
   </div>
 
@@ -374,8 +336,10 @@ auth.onAuthStateChanged(async user => {
     : "<li>No joined events yet</li>";
 
   document.getElementById("joinedEvents").innerHTML = `<ul class="small">${html}</ul>`;
-window.location.href = "https://webs-star.github.io/swissaid/#joinPage";
 
+  document.getElementById("logoutBtn").onclick = async () => {
+    await auth.signOut();
+    window.location.href = "https://webs-star.github.io/swissaid/#joinPage";
 
   };
 });
@@ -385,11 +349,7 @@ document.getElementById("mobileToggle").onclick = () => {
 };
 
 
-
-
-
-
-// LOGOUT (Desktop & Mobile)
+  // LOGOUT (Desktop & Mobile)
 function doLogout() {
   auth.signOut()
     .then(() => {
@@ -401,9 +361,6 @@ function doLogout() {
 document.getElementById("logoutBtnDesktop")?.addEventListener("click", doLogout);
 document.getElementById("logoutBtnMobile")?.addEventListener("click", doLogout);
 
-
-
-  
 </script>
 
 </body>
