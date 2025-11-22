@@ -235,7 +235,7 @@ body {
   <a class="nav-link" href="events.html">Events</a>
   <a class="nav-link" href="announcements.html">Announcements</a>
   <a class="nav-link" href="https://webs-star.github.io/swissaid/">Website Home</a>
-<button id="logoutBtnDesktop">Logout</button>
+<button id="logoutBtnDesktop" class="nav-link">Logout</button>
 
   
 </aside>
@@ -301,23 +301,32 @@ firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.database();
 
+
+// ===============================
+//   AUTH STATE CHECK
+// ===============================
 auth.onAuthStateChanged(async user => {
+
   if (!user) {
-    window.location.href = "/#joinPage";
+    window.location.href = "https://webs-star.github.io/swissaid/#joinPage";
     return;
   }
 
+  // Welcome text
   document.getElementById("welcome").textContent =
     `Welcome, ${user.displayName || user.email}`;
 
+  // Load profile
   const snap = await db.ref("members/" + user.uid).once("value");
   const profile = snap.val() || {};
 
   document.getElementById("memberSummary").textContent =
     `${profile.fullName || '—'} · ${profile.country || '—'} · Joined: ${profile.joinedAt || '—'}`;
 
+  // Load joined events
   const eventSnap = await db.ref("eventSignups").once("value");
   const events = eventSnap.val() || {};
+
   let joined = [];
 
   Object.keys(events).forEach(id => {
@@ -337,29 +346,36 @@ auth.onAuthStateChanged(async user => {
 
   document.getElementById("joinedEvents").innerHTML = `<ul class="small">${html}</ul>`;
 
-  document.getElementById("logoutBtn").onclick = async () => {
-    await auth.signOut();
-    window.location.href = "https://webs-star.github.io/swissaid/#joinPage";
-
-  };
 });
 
-document.getElementById("mobileToggle").onclick = () => {
-  document.getElementById("mobileMenu").classList.toggle("show");
-};
 
-
-  // LOGOUT (Desktop & Mobile)
+// ===============================
+//          LOGOUT
+// ===============================
 function doLogout() {
   auth.signOut()
     .then(() => {
-      window.location.href = "/";   // Go back to website home
+      window.location.href = "https://webs-star.github.io/swissaid/#joinPage";
     })
     .catch(err => alert(err.message));
 }
 
-document.getElementById("logoutBtnDesktop")?.addEventListener("click", doLogout);
-document.getElementById("logoutBtnMobile")?.addEventListener("click", doLogout);
+// Desktop logout button
+const logoutDesktop = document.getElementById("logoutBtnDesktop");
+if (logoutDesktop) logoutDesktop.addEventListener("click", doLogout);
+
+// Mobile logout button
+const logoutMobile = document.getElementById("logoutBtnMobile");
+if (logoutMobile) logoutMobile.addEventListener("click", doLogout);
+
+
+// ===============================
+//    MOBILE MENU TOGGLE
+// ===============================
+document.getElementById("mobileToggle").onclick = () => {
+  document.getElementById("mobileMenu").classList.toggle("show");
+};
+
 
 </script>
 
