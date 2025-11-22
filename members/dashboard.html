@@ -141,52 +141,55 @@ body {
 
 
 
-
 /* =============================== */
-/*      FULL MOBILE CSS (≤880px)   */
+/*      MOBILE (≤880px)            */
 /* =============================== */
 @media (max-width: 880px) {
 
   /* ------------------------------ */
-  /* HIDE SIDEBAR COMPLETELY        */
+  /* HIDE SIDEBAR                   */
   /* ------------------------------ */
   .sidebar {
     display: none !important;
   }
 
   /* ------------------------------ */
-  /* TOPBAR ADJUSTMENTS             */
+  /* TOPBAR                         */
   /* ------------------------------ */
   .topbar {
+    display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 16px 20px;
     position: sticky;
     top: 0;
+    background: #fff;
+    border-bottom: 1px solid #dbe1e8;
     z-index: 1000;
   }
 
-  /* Hide all desktop topbar items except hamburger */
+  /* Hide My Account + Logout on phone */
   .topbar a,
   .topbar button:not(.mobile-menu-btn) {
     display: none !important;
   }
 
   /* ------------------------------ */
-  /* HAMBURGER (≡) BUTTON           */
+  /* HAMBURGER BUTTON               */
   /* ------------------------------ */
   .mobile-menu-btn {
     display: block !important;
     font-size: 42px;
     font-weight: 800;
-    color: var(--brand);     /* blue text */
+    color: var(--brand);   /* blue */
     background: none;
     border: none;
     cursor: pointer;
-    margin-top: -6px;        /* lift slightly */
+    margin-top: -6px;
   }
 
   /* ------------------------------ */
-  /* MOBILE NAVIGATION DROPDOWN     */
+  /* MOBILE NAV MENU                */
   /* ------------------------------ */
   .mobile-nav {
     display: none;
@@ -208,12 +211,13 @@ body {
     background: none;
     border: none;
     text-align: left;
-    color: var(--brand);    /* blue text */
+    color: var(--brand);  /* blue text */
     text-decoration: none;
+    width: 100%;
   }
 
   /* ------------------------------ */
-  /* CONTENT SPACING FOR PHONE      */
+  /* CONTENT SPACING                */
   /* ------------------------------ */
   .content {
     padding: 20px 18px;
@@ -229,15 +233,18 @@ body {
   }
 }
 
-/* PC default (mobile-only items hidden) */
+/* =============================== */
+/* DESKTOP: keep hamburger hidden  */
+/* =============================== */
 .mobile-menu-btn {
   display: none;
 }
+
 .mobile-nav {
   display: none;
 }
 
-/* Ensure body layout stays normal on mobile */
+/* Fix body layout reset for mobile */
 @media (max-width: 880px) {
   body {
     display: block !important;
