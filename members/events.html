@@ -99,25 +99,108 @@ body {
   font-weight: 600;
   font-size: 14px;
 }
+
+
+
+/* Hide mobile menu on desktop */
+.mobile-menu-btn {
+  display: none;
+}
+
+/* ================= MOBILE NAV (max 880px) ================= */
+@media (max-width: 880px) {
+
+  /* Auto height header */
+  .header {
+    height: auto !important;
+  }
+
+  /* Hide desktop nav */
+  .nav-links {
+    display: none !important;
+  }
+
+  /* Show mobile 3-dashes button */
+  .mobile-menu-btn {
+    display: block !important;
+    font-size: 40px;
+    line-height: 1;
+    color: #fff !important;
+    background: none !important;
+    border: none !important;
+    padding: 0;
+    margin-top: -4px;  /* pushes slightly upward */
+    cursor: pointer;
+    z-index: 99999;
+  }
+
+  /* Mobile dropdown menu */
+  .mobile-nav {
+    display: none;
+    flex-direction: column;
+    background: var(--brand);
+    padding: 15px 24px;
+  }
+
+  .mobile-nav a,
+  .mobile-nav button {
+    color: #fff !important;
+    text-decoration: none;
+    padding: 10px 0;
+    font-size: 17px;
+    text-align: left;
+    background: none;
+    border: none;
+  }
+
+  .mobile-nav.show {
+    display: flex !important;
+  }
+}
+
+/* ================= DESKTOP (min 881px) ================= */
+@media (min-width: 881px) {
+  .mobile-menu-btn {
+    display: none !important;
+  }
+  .mobile-nav {
+    display: none !important;
+  }
+  .nav-links {
+    display: flex !important;
+  }
+}
+  
 </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
 <header class="header">
   <div class="header-left">
     <img src="https://res.cloudinary.com/dwvt4e9o2/image/upload/v1763476964/Screenshot_73_e5hyu9.png" alt="Swiss Aid Logo">
     <div style="color:#fff; font-size:18px; font-weight:700;">Swiss Aid Connect Foundation</div>
   </div>
 
+  <!-- DESKTOP NAV -->
   <div class="nav-links">
     <a href="dashboard.html">Dashboard</a>
     <a href="events.html">Events</a>
     <a href="announcements.html">Announcements</a>
     <button id="logoutBtn">Logout</button>
   </div>
+
+  <!-- MOBILE BUTTON -->
+  <button class="mobile-menu-btn" id="menuToggle">≡</button>
 </header>
+
+<!-- MOBILE NAV MENU -->
+<div class="mobile-nav" id="mobileNav">
+  <a href="dashboard.html">Dashboard</a>
+  <a href="events.html">Events</a>
+  <a href="announcements.html">Announcements</a>
+  <button id="logoutBtnMobile">Logout</button>
+</div>
 
 <!-- MAIN -->
 <main class="container">
@@ -202,6 +285,13 @@ document.getElementById('logoutBtn').addEventListener('click', async () => {
   await auth.signOut();
   window.location.href = "/#joinPage";
 });
+
+
+
+document.getElementById("menuToggle").addEventListener("click", () => {
+  document.getElementById("mobileNav").classList.toggle("show");
+});
+  
 </script>
 
 </body>
