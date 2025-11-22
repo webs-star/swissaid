@@ -239,7 +239,12 @@ body {
 }
 
 
-  
+  @media (max-width: 880px) {
+  body {
+    display: block !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -263,9 +268,11 @@ body {
 <!-- MAIN AREA -->
 <div class="main">
 
-  <!-- TOP BAR -->
-  <header class="topbar">
-<button class="mobile-menu-btn">≡</button>
+<header class="topbar">
+  <button class="mobile-menu-btn">≡</button>
+  <a href="profile.html">My Account</a>
+  <button id="logoutBtn">Logout</button>
+</header>
 
 <div class="mobile-nav" id="mobileMenu">
   <a href="dashboard.html">Dashboard</a>
@@ -275,11 +282,6 @@ body {
   <a href="https://webs-star.github.io/swissaid/">Website Home</a>
   <button onclick="logoutBtn.click()">Logout</button>
 </div>
-
-    
-    <a href="profile.html">My Account</a>
-    <button id="logoutBtn">Logout</button>
-  </header>
 
   <!-- CONTENT -->
   <main class="content">
