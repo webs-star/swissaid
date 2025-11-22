@@ -6,7 +6,6 @@
 <title>Swiss Aid — Dashboard</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
 <style>
 :root {
   --brand: #0C2856;
@@ -182,6 +181,13 @@ body {
 
   .mobile-nav.show { display: flex; }
 
+  /* *** FORCE MOBILE NAV TEXT TO BLUE *** */
+  .mobile-nav a,
+  .mobile-nav button {
+    color: var(--brand) !important;
+    -webkit-text-fill-color: var(--brand) !important;
+  }
+
   .mobile-nav a,
   .mobile-nav button {
     font-size: 18px;
@@ -190,7 +196,6 @@ body {
     background: none;
     border: none;
     text-align: left;
-    color: var(--brand) !important;
     width: 100%;
     text-decoration: none;
   }
@@ -201,12 +206,30 @@ body {
   }
 }
 
+/* DESKTOP */
 @media (min-width: 881px) {
   .mobile-nav { display: none !important; }
   .mobile-menu-btn { display: none !important; }
   .topbar-brand { display: none !important; }
 }
+
+/* FINAL HARD OVERRIDE for BUTTON specifically */
+.mobile-nav button {
+  background: none !important;
+  border: none !important;
+  color: var(--brand) !important;
+  -webkit-text-fill-color: var(--brand) !important;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 12px 0;
+  text-align: left;
+  width: 100%;
+  cursor: pointer;
+  box-shadow: none !important;
+}
 </style>
+
+
 </head>
 
 <body>
