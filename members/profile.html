@@ -114,41 +114,46 @@ button.saveBtn {
 
 
   
-
-
 /* ================= MOBILE NAV (max 880px) ================= */
 @media (max-width: 880px) {
 
-  /* Hide desktop nav links */
+  /* Force header to auto-height so items never hide */
+  .header {
+    height: auto !important;
+  }
+
+  /* Hide desktop nav completely on phones */
   .nav-links {
     display: none !important;
   }
 
-  /* Show mobile button (text only, blue color) */
+  /* Show hamburger icon */
   .mobile-menu-btn {
     display: block !important;
-    font-size: 32px;
-    font-weight: 700;
-    color: var(--brand); /* blue text */
+    font-size: 40px;
+    line-height: 1;
+    color: #0C2856 !important; /* blue text only */
     background: none !important;
     border: none !important;
+    padding: 0;
+    margin: 0;
     cursor: pointer;
+    z-index: 99999;
   }
 
-  /* MOBILE DROPDOWN MENU */
+  /* Mobile dropdown */
   .mobile-nav {
     display: none;
     flex-direction: column;
-    background: #ffffff;      /* white background */
+    background: var(--brand);
     padding: 15px 24px;
-    border-bottom: 1px solid #d3dce6;
   }
 
   .mobile-nav a,
   .mobile-nav button {
-    color: var(--brand);      /* blue text */
+    color: #fff;
     text-decoration: none;
-    padding: 12px 0;
+    padding: 10px 0;
     font-size: 17px;
     text-align: left;
     background: none;
@@ -156,10 +161,24 @@ button.saveBtn {
   }
 
   .mobile-nav.show {
-    display: flex;
+    display: flex !important;
   }
 }
 
+/* ================= DESKTOP (min 881px) ================= */
+@media (min-width: 881px) {
+  .mobile-menu-btn {
+    display: none !important;
+  }
+
+  .mobile-nav {
+    display: none !important;
+  }
+
+  .nav-links {
+    display: flex !important;
+  }
+}
 
 </style>
 </head>
