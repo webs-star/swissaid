@@ -112,32 +112,38 @@ button.saveBtn {
 }
 
 
-
-  
-/* ================= MOBILE NAV (max 880px) ================= */
+/* ================= MOBILE FIX ================= */
 @media (max-width: 880px) {
 
-  /* Force header to auto-height so items never hide */
-  .header {
-    height: auto !important;
+  /* Shrink logo so hamburger fits */
+  .header-left img {
+    height: 32px !important;
   }
 
-  /* Hide desktop nav completely on phones */
+  .header-left div {
+    font-size: 14px !important;
+  }
+
+  /* Hide desktop nav */
   .nav-links {
     display: none !important;
   }
 
-  /* Show hamburger icon */
+  /* Make header items fit */
+  .header {
+    padding: 10px 14px !important;
+  }
+
+  /* Always show hamburger icon */
   .mobile-menu-btn {
     display: block !important;
+    position: absolute;
+    right: 16px;
+    top: 18px;
     font-size: 40px;
-    line-height: 1;
-    color: #0C2856 !important; /* blue text only */
+    color: #fff !important; /* WHITE so it's visible on dark header */
     background: none !important;
     border: none !important;
-    padding: 0;
-    margin: 0;
-    cursor: pointer;
     z-index: 99999;
   }
 
@@ -149,21 +155,11 @@ button.saveBtn {
     padding: 15px 24px;
   }
 
-  .mobile-nav a,
-  .mobile-nav button {
-    color: #fff;
-    text-decoration: none;
-    padding: 10px 0;
-    font-size: 17px;
-    text-align: left;
-    background: none;
-    border: none;
-  }
-
   .mobile-nav.show {
     display: flex !important;
   }
 }
+
 
 /* ================= DESKTOP (min 881px) ================= */
 @media (min-width: 881px) {
