@@ -108,8 +108,7 @@ button.saveBtn {
   cursor: pointer;
 }
 
-
-  /* ================= MOBILE NAV (max 880px) ================= */
+/* ================= MOBILE NAV (max 880px) ================= */
 @media (max-width: 880px) {
 
   /* Hide nav links + logout */
@@ -151,6 +150,7 @@ button.saveBtn {
     display: flex;
   }
 }
+
 
 </style>
 </head>
@@ -264,12 +264,11 @@ document.getElementById("logoutBtn").addEventListener("click", async () => {
   window.location.href = "/#joinPage";
 });
 
-
-
 document.getElementById("menuToggle").addEventListener("click", () => {
   document.getElementById("mobileNav").classList.toggle("show");
 });
-  
+
+
 </script>
 
 </body>
