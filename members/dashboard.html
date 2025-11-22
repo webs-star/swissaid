@@ -26,7 +26,7 @@ body {
   min-height: 100vh;
 }
 
-/* SIDEBAR */
+/* SIDEBAR (desktop only) */
 .sidebar {
   width: 260px;
   background: var(--brand);
@@ -62,22 +62,27 @@ body {
   transition: 0.2s;
 }
 
-.nav-link:hover {
-  background: rgba(255,255,255,0.1);
+.nav-link:hover { background: rgba(255,255,255,0.1); }
+.active { background: rgba(255,255,255,0.18); }
+
+.sidebar button {
+  margin-top: 20px;
+  background: var(--accent);
+  border: none;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
 }
 
-.active {
-  background: rgba(255,255,255,0.18);
-}
-
-/* MAIN AREA */
+/* MAIN */
 .main {
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
-/* TOP BAR */
+/* TOPBAR */
 .topbar {
   background: #fff;
   padding: 14px 24px;
@@ -85,28 +90,16 @@ body {
   justify-content: flex-end;
   align-items: center;
   border-bottom: 1px solid #e2e8f0;
+  position: sticky;
+  top: 0;
+  z-index: 50;
 }
 
-.topbar a {
-  text-decoration: none;
-  color: var(--brand);
-  font-weight: 600;
-  margin-right: 16px;
-}
+.mobile-menu-btn { display: none; }
+.topbar-brand { display: none; }
 
-.topbar button {
-  background: var(--accent);
-  border: none;
-  padding: 8px 14px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 600;
-}
-
-/* CONTENT AREA */
-.content {
-  padding: 30px;
-}
+/* CONTENT */
+.content { padding: 30px; }
 
 .card {
   background: #fff;
@@ -121,12 +114,8 @@ body {
   color: var(--brand);
 }
 
-.small {
-  font-size: 14px;
-  color: var(--muted);
-}
+.small { font-size: 14px; color: var(--muted); }
 
-/* Action buttons */
 .actions a {
   display: inline-block;
   margin-right: 8px;
@@ -139,69 +128,59 @@ body {
   color: var(--brand);
 }
 
-
-
 /* =============================== */
 /*      MOBILE (≤880px)            */
 /* =============================== */
 @media (max-width: 880px) {
 
-  /* ------------------------------ */
-  /* HIDE SIDEBAR                   */
-  /* ------------------------------ */
-  .sidebar {
-    display: none !important;
-  }
+  .sidebar { display: none !important; }
 
-  /* ------------------------------ */
-  /* TOPBAR                         */
-  /* ------------------------------ */
   .topbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 16px 20px;
-    position: sticky;
-    top: 0;
     background: #fff;
     border-bottom: 1px solid #dbe1e8;
+    position: sticky;
+    top: 0;
     z-index: 1000;
   }
 
-  /* Hide My Account + Logout on phone */
-  .topbar a,
-  .topbar button:not(.mobile-menu-btn) {
-    display: none !important;
+  .topbar-brand {
+    display: flex !important;
+    align-items: center;
+    gap: 12px;
   }
 
-  /* ------------------------------ */
-  /* HAMBURGER BUTTON               */
-  /* ------------------------------ */
+  .topbar-brand img { width: 70px; }
+
+  .topbar-brand span {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--brand);
+  }
+
   .mobile-menu-btn {
     display: block !important;
-    font-size: 42px;
+    font-size: 44px;
     font-weight: 800;
-    color: var(--brand);   /* blue */
+    color: var(--brand);
     background: none;
     border: none;
     cursor: pointer;
-    margin-top: -6px;
+    margin-left: auto;
   }
 
-  /* ------------------------------ */
-  /* MOBILE NAV MENU                */
-  /* ------------------------------ */
   .mobile-nav {
     display: none;
     flex-direction: column;
-    background: #ffffff;
+    background: white;
     border-bottom: 1px solid #dbe1e8;
     padding: 18px 22px;
   }
 
-  .mobile-nav.show {
-    display: flex;
-  }
+  .mobile-nav.show { display: flex; }
 
   .mobile-nav a,
   .mobile-nav button {
@@ -211,145 +190,29 @@ body {
     background: none;
     border: none;
     text-align: left;
-    color: var(--brand);  /* blue text */
-    text-decoration: none;
+    color: var(--brand) !important;
     width: 100%;
+    text-decoration: none;
   }
 
-  /* ------------------------------ */
-  /* CONTENT SPACING                */
-  /* ------------------------------ */
-  .content {
-    padding: 20px 18px;
-  }
-
-  .card {
-    padding: 18px;
-  }
-
-  .actions a {
-    padding: 9px 12px;
-    font-size: 15px;
-  }
-}
-
-/* =============================== */
-/* DESKTOP: keep hamburger hidden  */
-/* =============================== */
-.mobile-menu-btn {
-  display: none;
-}
-
-.mobile-nav {
-  display: none;
-}
-
-/* Fix body layout reset for mobile */
-@media (max-width: 880px) {
-  body {
-    display: block !important;
-  }
-}
-
-
-
-
-/* Keep logo + title visible on mobile */
-@media (max-width: 880px) {
-
-  .topbar-brand {
-    display: flex !important;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .topbar-brand img {
-    width: 50px;
-  }
-
-  .topbar-brand span {
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--brand);
-  }
-
-  /* Hide only account + logout */
   .topbar a,
   .topbar button:not(.mobile-menu-btn) {
     display: none !important;
   }
 }
 
-
-
-
-
-
-
-/* ========================================= */
-/* DESKTOP — hide logo/title in topbar       */
-/* ========================================= */
-.topbar-brand {
-  display: none; /* desktop should NOT show topbar logo/title */
+@media (min-width: 881px) {
+  .mobile-nav { display: none !important; }
+  .mobile-menu-btn { display: none !important; }
+  .topbar-brand { display: none !important; }
 }
-
-
-/* ========================================= */
-/* MOBILE (≤880px) — show logo + title       */
-/* ========================================= */
-@media (max-width: 880px) {
-
-  /* Sidebar hidden on phone */
-  .sidebar {
-    display: none !important;
-  }
-
-  /* Topbar layout */
-  .topbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px 20px;
-  }
-
-  /* Show brand on phone */
-  .topbar-brand {
-    display: flex !important;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .topbar-brand img {
-    width: 42px;
-  }
-
-  .topbar-brand span {
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--brand);
-  }
-
-  /* Hide "My Account" + "Logout" on phone */
-  .topbar a,
-  .topbar button:not(.mobile-menu-btn) {
-    display: none !important;
-  }
-
-  /* Hamburger visible */
-  .mobile-menu-btn {
-    display: block !important;
-  }
-}
-
-  
 </style>
 </head>
+
 <body>
 
-<!-- SIDEBAR -->
 <aside class="sidebar">
   <img src="https://res.cloudinary.com/dwvt4e9o2/image/upload/v1763476964/Screenshot_73_e5hyu9.png">
-
   <div class="sidebar-title">Swiss Aid Connect Foundation</div>
 
   <a class="nav-link active" href="dashboard.html">Dashboard</a>
@@ -357,26 +220,21 @@ body {
   <a class="nav-link" href="events.html">Events</a>
   <a class="nav-link" href="announcements.html">Announcements</a>
   <a class="nav-link" href="https://webs-star.github.io/swissaid/">Website Home</a>
+
   <button id="logoutBtn">Logout</button>
 </aside>
 
-
-<!-- MAIN WRAPPER -->
 <div class="main">
 
- <header class="topbar">
-  <button class="mobile-menu-btn" id="mobileToggle">≡</button>
+  <header class="topbar">
+    <div class="topbar-brand">
+      <img src="https://res.cloudinary.com/dwvt4e9o2/image/upload/v1763476964/Screenshot_73_e5hyu9.png">
+      <span>Swiss Aid Connect<br>Foundation</span>
+    </div>
 
-  <div class="topbar-brand">
-    <img src="https://res.cloudinary.com/dwvt4e9o2/image/upload/v1763476964/Screenshot_73_e5hyu9.png">
-    <span>Swiss Aid Connect<br>Foundation</span>
-  </div>
+    <button class="mobile-menu-btn" id="mobileToggle">≡</button>
+  </header>
 
- 
-</header>
-
-
-  <!-- MOBILE NAV -->
   <div class="mobile-nav" id="mobileMenu">
     <a href="dashboard.html">Dashboard</a>
     <a href="profile.html">My Profile</a>
@@ -386,12 +244,7 @@ body {
     <button onclick="document.getElementById('logoutBtn').click()">Logout</button>
   </div>
 
-</div>
-
-
-  <!-- CONTENT -->
   <main class="content">
-
     <div class="card">
       <h2 id="welcome">Welcome</h2>
       <p class="small" id="memberSummary">Loading profile…</p>
@@ -409,12 +262,9 @@ body {
         <p class="small">Loading joined events…</p>
       </div>
     </div>
-
   </main>
 </div>
 
-
-<!-- FIREBASE -->
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
@@ -430,6 +280,7 @@ const firebaseConfig = {
   appId: "1:598813811284:web:d4a9ebf46da0fb290043c1"
 };
 firebase.initializeApp(firebaseConfig);
+
 const auth = firebase.auth();
 const db = firebase.database();
 
@@ -439,61 +290,45 @@ auth.onAuthStateChanged(async user => {
     return;
   }
 
-document.getElementById("welcome").textContent =
-  `Welcome, ${user.displayName || user.email}`;
+  document.getElementById("welcome").textContent =
+    `Welcome, ${user.displayName || user.email}`;
 
-// Load profile
-const snap = await db.ref("members/" + user.uid).once("value");
-const profile = snap.val() || {};
+  const snap = await db.ref("members/" + user.uid).once("value");
+  const profile = snap.val() || {};
 
-document.getElementById("memberSummary").textContent =
-  `${profile.fullName || '—'} · ${profile.country || '—'} · Joined: ${profile.joinedAt || '—'}`;
+  document.getElementById("memberSummary").textContent =
+    `${profile.fullName || '—'} · ${profile.country || '—'} · Joined: ${profile.joinedAt || '—'}`;
 
-// Load events the user joined
-const userEventsSnap = await db
-  .ref("eventSignups")
-  .once("value");
+  const eventSnap = await db.ref("eventSignups").once("value");
+  const events = eventSnap.val() || {};
+  let joined = [];
 
-const allEvents = userEventsSnap.val() || {};
-let joined = [];
+  Object.keys(events).forEach(id => {
+    if (events[id][user.uid]) {
+      joined.push(events[id][user.uid]);
+    }
+  });
 
-// Loop through eventId → users → userId
-Object.keys(allEvents).forEach(eventId => {
-  const users = allEvents[eventId];
-  if (users[user.uid]) {
-    joined.push(users[user.uid]);
-  }
+  let html = joined.length
+    ? joined.map(e => `
+        <li>
+          <strong>${e.eventTitle}</strong><br>
+          <span class="small">Joined: ${e.joinedAt}</span>
+        </li>
+      `).join("")
+    : "<li>No joined events yet</li>";
+
+  document.getElementById("joinedEvents").innerHTML = `<ul class="small">${html}</ul>`;
+
+  document.getElementById("logoutBtn").onclick = async () => {
+    await auth.signOut();
+    window.location.href = "/#joinPage";
+  };
 });
 
-let html = "";
-
-if (joined.length > 0) {
-  html = joined.map(e => `
-    <li>
-      <strong>${e.eventTitle}</strong><br>
-      <span class="small">Joined: ${e.joinedAt}</span>
-    </li>
-  `).join("");
-} else {
-  html = "<li>No joined events yet</li>";
-}
-
-document.getElementById("joinedEvents").innerHTML =
-  `<ul class="small">${html}</ul>`;
-
-// Logout
-document.getElementById("logoutBtn").addEventListener("click", async () => {
-  await auth.signOut();
-  window.location.href = "/#joinPage";
-});
-});
-
-
-// MOBILE NAV TOGGLE
-document.querySelector(".mobile-menu-btn").addEventListener("click", () => {
+document.getElementById("mobileToggle").onclick = () => {
   document.getElementById("mobileMenu").classList.toggle("show");
-});
-  
+};
 </script>
 
 </body>
