@@ -107,39 +107,48 @@ button.saveBtn {
   border-radius: 8px;
   cursor: pointer;
 }
+.mobile-menu-btn {
+  display: none; /* hidden on PC */
+}
+
+
+
+  
+
 
 /* ================= MOBILE NAV (max 880px) ================= */
 @media (max-width: 880px) {
 
-  /* Hide nav links + logout */
+  /* Hide desktop nav links */
   .nav-links {
-    display: none;
+    display: none !important;
   }
 
-  /* Show hamburger (3 big dashes) */
+  /* Show mobile button (text only, blue color) */
   .mobile-menu-btn {
-    display: block;
-    font-size: 38px;
+    display: block !important;
+    font-size: 32px;
     font-weight: 700;
-    color: #fff;
-    background: none;
-    border: none;
+    color: var(--brand); /* blue text */
+    background: none !important;
+    border: none !important;
     cursor: pointer;
   }
 
-  /* Slide-down mobile menu */
+  /* MOBILE DROPDOWN MENU */
   .mobile-nav {
     display: none;
     flex-direction: column;
-    background: var(--brand);
+    background: #ffffff;      /* white background */
     padding: 15px 24px;
+    border-bottom: 1px solid #d3dce6;
   }
 
   .mobile-nav a,
   .mobile-nav button {
-    color: #fff;
+    color: var(--brand);      /* blue text */
     text-decoration: none;
-    padding: 10px 0;
+    padding: 12px 0;
     font-size: 17px;
     text-align: left;
     background: none;
@@ -171,7 +180,8 @@ button.saveBtn {
   </div>
 
   <!-- MOBILE BUTTON -->
-  <button class="mobile-menu-btn" id="menuToggle" style="display:none;">≡</button>
+<button class="mobile-menu-btn" id="menuToggle">≡</button>
+
 </header>
 
 <!-- MOBILE DROPDOWN MENU -->
