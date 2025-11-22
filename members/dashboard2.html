@@ -143,63 +143,62 @@ body {
   color: var(--brand);
 }
 
-/* MOBILE ============================== */
+
+/* =============================== */
+/*      MOBILE (≤880px)            */
+/* =============================== */
 @media (max-width: 880px) {
 
-  body {
-    display: block !important;
-  }
+  /* Hide sidebar */
+  .sidebar { display: none !important; }
 
-  .sidebar {
-    display: none !important;
-  }
-
-  /* Topbar mobile */
+  /* TOPBAR */
   .topbar {
-    justify-content: space-between;
+    display: flex;
+    justify-content: space-between;   /* Logo left, menu right */
+    align-items: center;
     padding: 16px 20px;
+    background: #fff;
+    border-bottom: 1px solid #dbe1e8;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
   }
 
-  /* Show brand on mobile */
+  /* BRAND (logo + title) */
   .topbar-brand {
     display: flex !important;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
   }
 
   .topbar-brand img {
-    width: 42px;
+    width: 65px;      /* Increased size */
   }
 
   .topbar-brand span {
     font-size: 18px;
     font-weight: 700;
     color: var(--brand);
-    line-height: 1.2;
   }
 
-  /* Hide account + logout */
-  .topbar a,
-  .topbar button:not(.mobile-menu-btn) {
-    display: none !important;
-  }
-
+  /* HAMBURGER ON RIGHT */
   .mobile-menu-btn {
     display: block !important;
-    font-size: 42px;
+    font-size: 44px;
     font-weight: 800;
     color: var(--brand);
     background: none;
     border: none;
     cursor: pointer;
-    margin-top: -4px;
+    margin-left: auto;        /* forces it to the far right */
   }
 
-  /* Mobile menu */
+  /* MOBILE NAV */
   .mobile-nav {
     display: none;
     flex-direction: column;
-    background: #fff;
+    background: white;
     border-bottom: 1px solid #dbe1e8;
     padding: 18px 22px;
   }
@@ -213,22 +212,20 @@ body {
     font-size: 18px;
     font-weight: 600;
     padding: 12px 0;
-    text-align: left;
-    color: var(--brand);
     background: none;
     border: none;
-    text-decoration: none;
+    text-align: left;
+    color: var(--brand);      /* BLUE TEXT */
     width: 100%;
+    text-decoration: none;
   }
 
-  /* Content */
-  .content {
-    padding: 20px 18px;
+  /* Hide account + logout on mobile */
+  .topbar a,
+  .topbar button:not(.mobile-menu-btn) {
+    display: none !important;
   }
 
-  .card {
-    padding: 18px;
-  }
 }
 
 
@@ -278,16 +275,15 @@ body {
   <!-- TOPBAR -->
   <header class="topbar">
 
-    <!-- Hamburger -->
-    <button class="mobile-menu-btn" id="mobileToggle">≡</button>
+  <div class="topbar-brand">
+    <img src="https://res.cloudinary.com/dwvt4e9o2/image/upload/v1763476964/Screenshot_73_e5hyu9.png">
+    <span>Swiss Aid Connect<br>Foundation</span>
+  </div>
 
-    <!-- Mobile brand -->
-    <div class="topbar-brand">
-      <img src="https://res.cloudinary.com/dwvt4e9o2/image/upload/v1763476964/Screenshot_73_e5hyu9.png">
-      <span>Swiss Aid Connect<br>Foundation</span>
-    </div>
+  <button class="mobile-menu-btn" id="mobileToggle">≡</button>
 
-  </header>
+</header>
+
 
   <!-- MOBILE MENU -->
   <div class="mobile-nav" id="mobileMenu">
