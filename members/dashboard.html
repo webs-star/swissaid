@@ -260,7 +260,7 @@ body {
   <a class="nav-link" href="announcements.html">Announcements</a>
   <a class="nav-link" href="https://webs-star.github.io/swissaid/">Website Home</a>
  <a class="nav-link" href="https://webs-star.github.io/swissaid/members/Admin">ADMIN ONLY</a>
-  <button id="logoutBtn">Logout</button>
+
 </aside>
 
 <div class="main">
@@ -280,7 +280,7 @@ body {
     <a href="events.html">Events</a>
     <a href="announcements.html">Announcements</a>
     <a href="https://webs-star.github.io/swissaid/">Website Home</a>
-    <button onclick="document.getElementById('logoutBtn').click()">Logout</button>
+    
   </div>
 
   <main class="content">
@@ -359,11 +359,7 @@ auth.onAuthStateChanged(async user => {
 
   document.getElementById("joinedEvents").innerHTML = `<ul class="small">${html}</ul>`;
 
-  document.getElementById("logoutBtn").onclick = async () => {
-    await auth.signOut();
-    window.location.href = "/#joinPage";
-  };
-});
+
 
 document.getElementById("mobileToggle").onclick = () => {
   document.getElementById("mobileMenu").classList.toggle("show");
