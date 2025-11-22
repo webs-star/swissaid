@@ -1297,7 +1297,7 @@ footer.site-footer{
    <a href="#">A.I</a>
   
  <a href="#" data-key="join-nav">Portal</a>
- <button id="globalLogoutBtn" style="display:none;" class="logout-global">Logout</button>
+ 
 
    <a href="#" id="langToggle" data-lang="en">EN</a> 
 </div>
@@ -1928,7 +1928,7 @@ document.getElementById('btnMenu').addEventListener('click', () => {
 
              <a href="#" data-key="about-us-nav">About Us</a>
            <a href="#" data-key="focus-nav">Our Focus Areas</a>
-            <button id="globalLogoutBtn" style="display:none;" class="logout-global">Logout</button>
+          
 
            
         `;
@@ -2632,24 +2632,6 @@ onAuthStateChanged(auth, (user) => {
 
 
 
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    document.getElementById("logoutBtn").style.display = "block";        // login page
-    document.getElementById("globalLogoutBtn").style.display = "block";  // global button
-  } else {
-    document.getElementById("logoutBtn").style.display = "none";
-    document.getElementById("globalLogoutBtn").style.display = "none";
-  }
-});
-
-document.getElementById("globalLogoutBtn").addEventListener("click", async () => {
-  try {
-    await auth.signOut();
-    alert("Logged out!");
-  } catch (err) {
-    alert(err.message);
-  }
-});
 
 
   
