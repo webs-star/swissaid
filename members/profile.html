@@ -107,24 +107,81 @@ button.saveBtn {
   border-radius: 8px;
   cursor: pointer;
 }
+
+
+  /* ================= MOBILE NAV (max 880px) ================= */
+@media (max-width: 880px) {
+
+  /* Hide nav links + logout */
+  .nav-links {
+    display: none;
+  }
+
+  /* Show hamburger (3 big dashes) */
+  .mobile-menu-btn {
+    display: block;
+    font-size: 38px;
+    font-weight: 700;
+    color: #fff;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  /* Slide-down mobile menu */
+  .mobile-nav {
+    display: none;
+    flex-direction: column;
+    background: var(--brand);
+    padding: 15px 24px;
+  }
+
+  .mobile-nav a,
+  .mobile-nav button {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 0;
+    font-size: 17px;
+    text-align: left;
+    background: none;
+    border: none;
+  }
+
+  .mobile-nav.show {
+    display: flex;
+  }
+}
+
 </style>
 </head>
 
 <body>
-
-<!-- HEADER -->
 <header class="header">
   <div class="header-left">
-    <img src="https://res.cloudinary.com/dwvt4e9o2/image/upload/v1763476964/Screenshot_73_e5hyu9.png" alt="Swiss Aid Logo">
+    <img src="https://res.cloudinary.com/dwvt4e9o2/image/upload/v1763476964/Screenshot_73_e5hyu9.png">
     <div style="color:#fff; font-size:18px; font-weight:700;">Swiss Aid Connect Foundation</div>
   </div>
 
+  <!-- DESKTOP NAV -->
   <div class="nav-links">
     <a href="dashboard.html">Dashboard</a>
     <a href="events.html">Events</a>
     <a href="announcements.html">Announcements</a>
     <button id="logoutBtn">Logout</button>
   </div>
+
+  <!-- MOBILE BUTTON -->
+  <button class="mobile-menu-btn" id="menuToggle" style="display:none;">≡</button>
+</header>
+
+<!-- MOBILE DROPDOWN MENU -->
+<div class="mobile-nav" id="mobileNav">
+  <a href="dashboard.html">Dashboard</a>
+  <a href="events.html">Events</a>
+  <a href="announcements.html">Announcements</a>
+  <button id="logoutBtnMobile">Logout</button>
+</div>
+
 </header>
 
 <!-- MAIN -->
@@ -206,6 +263,13 @@ document.getElementById("logoutBtn").addEventListener("click", async () => {
   await auth.signOut();
   window.location.href = "/#joinPage";
 });
+
+
+
+document.getElementById("menuToggle").addEventListener("click", () => {
+  document.getElementById("mobileNav").classList.toggle("show");
+});
+  
 </script>
 
 </body>
