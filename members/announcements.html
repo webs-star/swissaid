@@ -24,7 +24,7 @@ body {
   color: var(--text);
 }
 
-/* ===== HEADER (same as dashboard and profile) ===== */
+/* HEADER */
 .header {
   background: var(--brand);
   padding: 12px 24px;
@@ -44,7 +44,7 @@ body {
   height: 44px;
 }
 
-.header .nav-links a {
+.nav-links a {
   color: #fff;
   margin-right: 16px;
   text-decoration: none;
@@ -61,7 +61,12 @@ body {
   font-weight: 600;
 }
 
-/* ===== CONTENT ===== */
+/* MOBILE NAV BUTTON (hidden on desktop) */
+.mobile-menu-btn {
+  display: none;
+}
+
+/* CONTENT */
 .container {
   max-width: 900px;
   margin: 32px auto;
@@ -85,30 +90,87 @@ body {
   font-size: 14px;
   color: var(--muted);
 }
+
+/* ================= MOBILE NAV ================= */
+@media (max-width: 880px) {
+
+  .header { height: auto !important; }
+
+  .nav-links { display: none !important; }
+
+  .mobile-menu-btn {
+    display: block !important;
+    font-size: 40px;
+    line-height: 1;
+    margin-top: -4px;
+    color: #ffffff;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .mobile-nav {
+    display: none;
+    flex-direction: column;
+    background: var(--brand);
+    padding: 15px 24px;
+  }
+
+  .mobile-nav a,
+  .mobile-nav button {
+    color: #fff;
+    padding: 10px 0;
+    font-size: 17px;
+    text-decoration: none;
+    text-align: left;
+    background: none;
+    border: none;
+  }
+
+  .mobile-nav.show {
+    display: flex !important;
+  }
+}
+
+/* DESKTOP */
+@media (min-width: 881px) {
+  .mobile-menu-btn { display: none !important; }
+  .mobile-nav { display: none !important; }
+  .nav-links { display: flex !important; }
+}
 </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
 <header class="header">
   <div class="header-left">
     <img src="https://res.cloudinary.com/dwvt4e9o2/image/upload/v1763476964/Screenshot_73_e5hyu9.png" alt="Swiss Aid Logo">
     <div style="color:#fff; font-size:18px; font-weight:700;">Swiss Aid Connect Foundation</div>
   </div>
 
+  <!-- Desktop -->
   <div class="nav-links">
     <a href="dashboard.html">Dashboard</a>
     <a href="events.html">Events</a>
     <a href="profile.html">My Profile</a>
     <button id="logoutBtn">Logout</button>
   </div>
+
+  <!-- Mobile -->
+  <button class="mobile-menu-btn" id="menuToggle">≡</button>
 </header>
 
-<!-- MAIN -->
+<!-- Mobile dropdown -->
+<div class="mobile-nav" id="mobileNav">
+  <a href="dashboard.html">Dashboard</a>
+  <a href="events.html">Events</a>
+  <a href="profile.html">My Profile</a>
+  <button id="logoutBtnMobile">Logout</button>
+</div>
+
 <main class="container">
   <h2 style="color:var(--brand); margin-bottom:18px;">Announcements</h2>
-
   <div id="annList">
     <p class="small">Loading announcements…</p>
   </div>
@@ -130,48 +192,56 @@ const firebaseConfig = {
   appId: "1:598813811284:web:d4a9ebf46da0fb290043c1"
 };
 firebase.initializeApp(firebaseConfig);
+
 const auth = firebase.auth();
 const db = firebase.database();
 
-/* ===== AUTH GUARD ===== */
+/* AUTH */
 auth.onAuthStateChanged(user => {
-  if (!user) window.location.href = '/#joinPage';
+  if (!user) window.location.href = "/#joinPage";
   else loadAnnouncements();
 });
 
-/* ===== LOAD ANNOUNCEMENTS ===== */
+/* LOAD ANNOUNCEMENTS */
 async function loadAnnouncements() {
-  const snap = await db.ref('announcements').orderByChild('createdAt').once('value');
+  const snap = await db.ref("announcements").orderByChild("createdAt").once("value");
   const anns = snap.val() || {};
-  const container = document.getElementById('annList');
+  const container = document.getElementById("annList");
 
   if (!Object.keys(anns).length) {
-    container.innerHTML =
-      '<div class="card"><p class="small">No announcements yet.</p></div>';
+    container.innerHTML = '<div class="card"><p class="small">No announcements yet.</p></div>';
     return;
   }
 
-  container.innerHTML = Object.keys(anns)
-    .reverse()
-    .map(id => {
-      const a = anns[id];
-      return `
-        <div class="card">
-          <h3>${a.title}</h3>
-          <p class="small">${a.createdAt}</p>
-          <p>${a.body}</p>
-        </div>
-      `;
-    }).join('');
+  container.innerHTML = Object.keys(anns).reverse().map(id => {
+    const a = anns[id];
+    return `
+      <div class="card">
+        <h3>${a.title}</h3>
+        <p class="small">${a.createdAt}</p>
+        <p>${a.body}</p>
+      </div>
+    `;
+  }).join("");
 }
 
-/* ===== LOGOUT ===== */
-document.getElementById('logoutBtn').addEventListener('click', async () => {
+/* LOGOUT */
+document.getElementById("logoutBtn").addEventListener("click", async () => {
   await auth.signOut();
   window.location.href = "/#joinPage";
+});
+document.getElementById("logoutBtnMobile").addEventListener("click", async () => {
+  await auth.signOut();
+  window.location.href = "/#joinPage";
+});
+
+/* MOBILE MENU */
+document.getElementById("menuToggle").addEventListener("click", () => {
+  document.getElementById("mobileNav").classList.toggle("show");
 });
 </script>
 
 </body>
 </html>
+
 
