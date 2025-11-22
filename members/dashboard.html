@@ -143,76 +143,94 @@ body {
 
 
 
-/* ================= MOBILE NAV (max 880px) ================= */
+/* =============================== */
+/*      FULL MOBILE CSS (≤880px)   */
+/* =============================== */
 @media (max-width: 880px) {
 
-  /* Hide sidebar entirely */
+  /* ------------------------------ */
+  /* HIDE SIDEBAR COMPLETELY        */
+  /* ------------------------------ */
   .sidebar {
     display: none !important;
   }
 
-  /* Top bar layout */
+  /* ------------------------------ */
+  /* TOPBAR ADJUSTMENTS             */
+  /* ------------------------------ */
   .topbar {
-    justify-content: space-between;
+    justify-content: space-between;   /* space for ≡ on left, empty area right */
+    padding: 16px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
   }
 
-
-  @media (max-width: 880px) {
-  .mobile-menu-btn {
-    display: block !important;
-  }
-  .mobile-nav {
-    display: none; /* toggled by JS */
-  }
-}
-
-
-  /* Hide My Account + Logout on phone BUT DO NOT hide hamburger */
+  /* Hide all desktop topbar items except hamburger */
   .topbar a,
   .topbar button:not(.mobile-menu-btn) {
     display: none !important;
   }
 
-  /* SHOW hamburger button */
+  /* ------------------------------ */
+  /* HAMBURGER (≡) BUTTON           */
+  /* ------------------------------ */
   .mobile-menu-btn {
     display: block !important;
-    font-size: 40px;
+    font-size: 42px;
     font-weight: 800;
+    color: var(--brand);    /* blue text */
     background: none;
     border: none;
-    color: var(--brand); /* blue text */
     cursor: pointer;
-    margin-top: -4px;
+    margin-top: -6px;       /* lifts it slightly upward */
   }
 
-  /* Mobile dropdown */
+  /* ------------------------------ */
+  /* MOBILE NAVIGATION DROPDOWN     */
+  /* ------------------------------ */
   .mobile-nav {
-    display: none;
+    display: none;          /* toggle via JS */
     flex-direction: column;
-    background: #fff;
-    padding: 18px 22px;
+    background: #ffffff;
     border-bottom: 1px solid #dbe1e8;
-  }
-
-  .mobile-nav a,
-  .mobile-nav button {
-    font-size: 18px;
-    padding: 12px 0;
-    background: none;
-    border: none;
-    color: var(--brand);
-    text-align: left;
-    font-weight: 600;
-    text-decoration: none;
+    padding: 18px 22px;
   }
 
   .mobile-nav.show {
     display: flex;
   }
+
+  .mobile-nav a,
+  .mobile-nav button {
+    font-size: 18px;
+    font-weight: 600;
+    padding: 12px 0;
+    text-align: left;
+    background: none;
+    border: none;
+    color: var(--brand);   /* blue text */
+    text-decoration: none;
+  }
+
+  /* ------------------------------ */
+  /* CONTENT SPACING FOR PHONE      */
+  /* ------------------------------ */
+  .content {
+    padding: 20px 18px;
+  }
+
+  .card {
+    padding: 18px;
+  }
+
+  .actions a {
+    padding: 9px 12px;
+    font-size: 15px;
+  }
 }
 
-
-/* Default: hidden on PC */
+/* Ensure PC stays clean */
 .mobile-menu-btn {
   display: none;
 }
