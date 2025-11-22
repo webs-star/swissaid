@@ -156,6 +156,17 @@ body {
     justify-content: space-between;
   }
 
+
+  @media (max-width: 880px) {
+  .mobile-menu-btn {
+    display: block !important;
+  }
+  .mobile-nav {
+    display: none; /* toggled by JS */
+  }
+}
+
+
   /* Hide My Account + Logout on phone BUT DO NOT hide hamburger */
   .topbar a,
   .topbar button:not(.mobile-menu-btn) {
@@ -200,8 +211,11 @@ body {
   }
 }
 
-/* Hide mobile elements on PC */
-.mobile-menu-btn,
+
+/* Default: hidden on PC */
+.mobile-menu-btn {
+  display: none;
+}
 .mobile-nav {
   display: none;
 }
