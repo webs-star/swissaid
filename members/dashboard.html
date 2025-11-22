@@ -243,6 +243,20 @@ body {
   }
 }
 
+
+.mobile-nav button {
+    background: none !important;
+    border: none !important;
+    color: var(--brand) !important;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 12px 0;
+    text-align: left;
+    width: 100%;
+    cursor: pointer;
+}
+
+  
 </style>
 
 
@@ -260,6 +274,7 @@ body {
   <a class="nav-link" href="announcements.html">Announcements</a>
   <a class="nav-link" href="https://webs-star.github.io/swissaid/">Website Home</a>
  <a class="nav-link" href="https://webs-star.github.io/swissaid/members/Admin">ADMIN ONLY</a>
+<button id="logoutBtnDesktop">Logout</button>
 
 </aside>
 
@@ -280,7 +295,8 @@ body {
     <a href="events.html">Events</a>
     <a href="announcements.html">Announcements</a>
     <a href="https://webs-star.github.io/swissaid/">Website Home</a>
-    
+    <button id="logoutBtnMobile">Logout</button>
+
   </div>
 
   <main class="content">
@@ -358,6 +374,7 @@ auth.onAuthStateChanged(async user => {
     : "<li>No joined events yet</li>";
 
   document.getElementById("joinedEvents").innerHTML = `<ul class="small">${html}</ul>`;
+window.location.href = "https://webs-star.github.io/swissaid/#joinPage";
 
 
   };
@@ -366,6 +383,27 @@ auth.onAuthStateChanged(async user => {
 document.getElementById("mobileToggle").onclick = () => {
   document.getElementById("mobileMenu").classList.toggle("show");
 };
+
+
+
+
+
+
+// LOGOUT (Desktop & Mobile)
+function doLogout() {
+  auth.signOut()
+    .then(() => {
+      window.location.href = "/";   // Go back to website home
+    })
+    .catch(err => alert(err.message));
+}
+
+document.getElementById("logoutBtnDesktop")?.addEventListener("click", doLogout);
+document.getElementById("logoutBtnMobile")?.addEventListener("click", doLogout);
+
+
+
+  
 </script>
 
 </body>
