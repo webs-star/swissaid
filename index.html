@@ -2615,6 +2615,15 @@ document.getElementById("logoutBtn").addEventListener("click", async () => {
 });
 
 
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    // user logged in
+    document.getElementById("logoutBtn").style.display = "block";
+  } else {
+    // user logged out
+    document.getElementById("logoutBtn").style.display = "none";
+  }
+});
 
 
 </script>
