@@ -152,7 +152,10 @@ body {
   <a class="nav-link" href="profile.html">My Profile</a>
   <a class="nav-link" href="events.html">Events</a>
   <a class="nav-link" href="announcements.html">Announcements</a>
-  <a class="nav-link" href="/">Website Home</a>
+  <a class="nav-link" href="https://webs-star.github.io/swissaid/">Website Home</a>
+
+
+
 </aside>
 
 <!-- MAIN AREA -->
@@ -214,24 +217,16 @@ auth.onAuthStateChanged(async user => {
     return;
   }
 
-  document.getElementById("welcome").textContent =
-    Welcome, ${user.displayName || user.email};
+document.getElementById("welcome").textContent =
+  `Welcome, ${user.displayName || user.email}`;
 
-
-
+// Load profile
 const snap = await db.ref("members/" + user.uid).once("value");
-  const profile = snap.val() || {};
+const profile = snap.val() || {};
 
-  document.getElementById("memberSummary").textContent =
-    ${profile.fullName || '—'} · ${profile.country || '—'} · Joined: ${profile.joinedAt || '—'};
+document.getElementById("memberSummary").textContent =
+  `${profile.fullName || '—'} · ${profile.country || '—'} · Joined: ${profile.joinedAt || '—'}`;
 
-
-
-
-
-
-
-  
 // Load events the user joined
 const userEventsSnap = await db
   .ref("eventSignups")
@@ -251,27 +246,25 @@ Object.keys(allEvents).forEach(eventId => {
 let html = "";
 
 if (joined.length > 0) {
-  html = joined.map(e => 
+  html = joined.map(e => `
     <li>
       <strong>${e.eventTitle}</strong><br>
       <span class="small">Joined: ${e.joinedAt}</span>
     </li>
-  ).join("");
+  `).join("");
 } else {
   html = "<li>No joined events yet</li>";
 }
 
 document.getElementById("joinedEvents").innerHTML =
-  <ul class="small">${html}</ul>;
+  `<ul class="small">${html}</ul>`;
 
-
-
-
+// Logout
 document.getElementById("logoutBtn").addEventListener("click", async () => {
   await auth.signOut();
   window.location.href = "/#joinPage";
 });
- }); 
+});
 </script>
 
 </body>
