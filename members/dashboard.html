@@ -252,6 +252,35 @@ body {
 }
 
 
+
+
+/* Keep logo + title visible on mobile */
+@media (max-width: 880px) {
+
+  .topbar-brand {
+    display: flex !important;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .topbar-brand img {
+    width: 42px;
+  }
+
+  .topbar-brand span {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--brand);
+  }
+
+  /* Hide only account + logout */
+  .topbar a,
+  .topbar button:not(.mobile-menu-btn) {
+    display: none !important;
+  }
+}
+
+  
 </style>
 </head>
 <body>
@@ -273,12 +302,18 @@ body {
 <!-- MAIN WRAPPER -->
 <div class="main">
 
-  <!-- TOP BAR -->
-  <header class="topbar">
-    <button class="mobile-menu-btn" id="mobileToggle">≡</button>
-    <a href="profile.html">My Account</a>
-    <button id="logoutBtn">Logout</button>
-  </header>
+ <header class="topbar">
+  <button class="mobile-menu-btn" id="mobileToggle">≡</button>
+
+  <div class="topbar-brand">
+    <img src="https://res.cloudinary.com/dwvt4e9o2/image/upload/v1763476964/Screenshot_73_e5hyu9.png">
+    <span>Swiss Aid Connect</span>
+  </div>
+
+  <a href="profile.html">My Account</a>
+  <button id="logoutBtn">Logout</button>
+</header>
+
 
   <!-- MOBILE NAV -->
   <div class="mobile-nav" id="mobileMenu">
