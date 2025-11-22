@@ -280,6 +280,67 @@ body {
   }
 }
 
+
+
+
+
+
+
+/* ========================================= */
+/* DESKTOP — hide logo/title in topbar       */
+/* ========================================= */
+.topbar-brand {
+  display: none; /* desktop should NOT show topbar logo/title */
+}
+
+
+/* ========================================= */
+/* MOBILE (≤880px) — show logo + title       */
+/* ========================================= */
+@media (max-width: 880px) {
+
+  /* Sidebar hidden on phone */
+  .sidebar {
+    display: none !important;
+  }
+
+  /* Topbar layout */
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+  }
+
+  /* Show brand on phone */
+  .topbar-brand {
+    display: flex !important;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .topbar-brand img {
+    width: 42px;
+  }
+
+  .topbar-brand span {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--brand);
+  }
+
+  /* Hide "My Account" + "Logout" on phone */
+  .topbar a,
+  .topbar button:not(.mobile-menu-btn) {
+    display: none !important;
+  }
+
+  /* Hamburger visible */
+  .mobile-menu-btn {
+    display: block !important;
+  }
+}
+
   
 </style>
 </head>
