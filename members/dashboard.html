@@ -143,7 +143,6 @@ body {
 
 
 
-
 /* ================= MOBILE NAV (max 880px) ================= */
 @media (max-width: 880px) {
 
@@ -152,31 +151,30 @@ body {
     display: none !important;
   }
 
-  /* Top bar adjustments */
+  /* Top bar layout */
   .topbar {
     justify-content: space-between;
   }
 
-  /* Hide My Account + Logout on phone */
+  /* Hide My Account + Logout on phone BUT DO NOT hide hamburger */
   .topbar a,
-  .topbar button {
+  .topbar button:not(.mobile-menu-btn) {
     display: none !important;
   }
 
   /* SHOW hamburger button */
   .mobile-menu-btn {
-    display: block;
+    display: block !important;
     font-size: 40px;
     font-weight: 800;
-    line-height: 1;
     background: none;
     border: none;
-    color: var(--brand); /* BLUE TEXT */
+    color: var(--brand); /* blue text */
     cursor: pointer;
-    margin-top: -4px; /* push slightly upward */
+    margin-top: -4px;
   }
 
-  /* Mobile dropdown container */
+  /* Mobile dropdown */
   .mobile-nav {
     display: none;
     flex-direction: column;
@@ -202,11 +200,12 @@ body {
   }
 }
 
-/* Hide mobile controls on PC */
+/* Hide mobile elements on PC */
 .mobile-menu-btn,
 .mobile-nav {
   display: none;
 }
+
 
   
 </style>
