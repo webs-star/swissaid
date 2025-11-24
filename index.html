@@ -991,9 +991,6 @@ footer.site-footer{
 
 
 
-
-
-
 /* ===========================
    GRID LAYOUT
 =========================== */
@@ -1022,11 +1019,11 @@ footer.site-footer{
   transform: translateY(-6px);
   box-shadow: 0 12px 35px rgba(0,0,0,0.15);
 }
-
-/* Card Top (gradient bar like Lions) */
+/* CARD TOP */
 .focus-card-top {
-  padding: 40px 20px 60px;
+  padding: 45px 20px 85px;  /* Increased bottom padding so ribbon never overlaps text */
   position: relative;
+  text-align: center;
 }
 
 .focus-icon {
@@ -1034,16 +1031,16 @@ footer.site-footer{
   color: white;
   margin-bottom: 10px;
 }
-
-/* “Learn more” ribbon */
+/* Ribbon (title inside ribbon) */
 .focus-ribbon {
   position: absolute;
-  bottom: -18px;
+  bottom: -22px;            /* Move slightly lower so it doesn't touch paragraph */
   left: 0;
-  padding: 10px 20px;
+  padding: 10px 25px;
   font-weight: 700;
+  background: #fdd835;
   color: #000;
-  background: #fdd835; /* yellow ribbon */
+  font-size: 15px;
   clip-path: polygon(0 0, 85% 0, 100% 100%, 0 100%);
 }
 
@@ -1053,11 +1050,11 @@ footer.site-footer{
   font-weight: 700;
   margin: 25px 20px 10px;
 }
-
+/* Paragraph fix (push text down from ribbon) */
 .focus-card p {
+  margin: 40px 20px 0;   /* Increased top margin so no text is cut */
   font-size: 16px;
-  color: #555;
-  margin: 0 20px;
+  color: #444;
   line-height: 1.6;
 }
 
@@ -1134,9 +1131,22 @@ footer.site-footer{
     position: relative;
     padding-top: calc(var(--header-height, 170px) + 20px);
 }
+/* Learn more button */
+.focus-btn {
+  display: inline-block;
+  margin: 20px 20px 0;
+  padding: 10px 18px;
+  background: #0C2856;
+  color: #fff;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: .2s;
+}
 
-
-
+.focus-btn:hover {
+  background: #134d9c;
+}
 
 
 
@@ -1707,10 +1717,9 @@ footer.site-footer{
         <div class="focus-icon"><i class="fas fa-graduation-cap"></i></div>
         <span class="focus-ribbon">Education</span>
       </div>
-      <h3>Education</h3>
       <p>We advance inclusive, equitable, and high-quality education for children, youth, and underserved communities. Our initiatives strengthen schools, provide essential learning resources, support teachers, and create opportunities that empower learners to unlock their full potential.</p>
 
-
+      <a href="#educationPage" class="focus-btn">Learn More</a>
     </div>
 
     <div class="focus-card fade-up">
@@ -1718,8 +1727,9 @@ footer.site-footer{
         <div class="focus-icon"><i class="fas fa-tree"></i></div>
         <span class="focus-ribbon">Environment</span>
       </div>
-      <h3>Environment</h3>
       <p>We promote environmental conservation and climate resilience through community-driven initiatives. From tree-planting and clean-ups to awareness programs and sustainable practices, we work to protect ecosystems, restore natural resources, and secure a healthier planet for generations to come.</p>
+
+      <a href="#environmentPage" class="focus-btn">Learn More</a>
     </div>
 
     <div class="focus-card fade-up">
@@ -1727,8 +1737,9 @@ footer.site-footer{
         <div class="focus-icon"><i class="fas fa-stethoscope"></i></div>
         <span class="focus-ribbon">Health</span>
       </div>
-      <h3>Health</h3>
       <p>We improve access to essential healthcare by supporting medical outreach, health education, and critical interventions for vulnerable populations. Our programs focus on disease prevention, maternal and child health, mental wellness, and community health strengthening.</p>
+
+      <a href="#healthPage" class="focus-btn">Learn More</a>
     </div>
 
     <div class="focus-card fade-up">
@@ -1736,8 +1747,9 @@ footer.site-footer{
         <div class="focus-icon"><i class="fas fa-hands-helping"></i></div>
         <span class="focus-ribbon">Humanitarian Aid</span>
       </div>
-      <h3>Humanitarian Aid</h3>
       <p>We deliver rapid, compassionate assistance to individuals and families affected by crises, disasters, and hardship. Our humanitarian efforts provide lifesaving relief—including food, clean water, shelter, hygiene supplies, and psychosocial support—helping communities rebuild with dignity and hope.</p>
+
+      <a href="#humanitarianPage" class="focus-btn">Learn More</a>
     </div>
 
     <div class="focus-card fade-up">
@@ -1745,8 +1757,9 @@ footer.site-footer{
         <div class="focus-icon"><i class="fas fa-people-group"></i></div>
         <span class="focus-ribbon">Youth Empowerment</span>
       </div>
-      <h3>Youth Empowerment</h3>
       <p>We equip young people with the skills, mentorship, and opportunities they need to lead and thrive. Through leadership training, entrepreneurship programs, life-skills development, and community involvement, we nurture confident, responsible, and empowered youth ready to shape a better tomorrow.</p>
+
+      <a href="#youthPage" class="focus-btn">Learn More</a>
     </div>
 
   </div>
@@ -1760,10 +1773,6 @@ footer.site-footer{
 
 </div>
 </section>
-
-
-
-
 
 
 <!-- JOIN / LOGIN PAGE (REPLACE your old joinPage block with this) -->
