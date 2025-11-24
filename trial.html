@@ -1922,8 +1922,7 @@ document.getElementById('btnMenu').addEventListener('click', () => {
         const languageText = currentLang.toUpperCase();
 
         inner.innerHTML = `
-            <a href="#">A.I</a>
-           
+            
             <a href="#" id="mobileLangToggle">${languageText}</a>
 
              <a href="#" data-key="about-us-nav">About Us</a>
@@ -1968,287 +1967,538 @@ document.getElementById('btnMenu').addEventListener('click', () => {
 
 // START OF LANGUAGE SCRIPT
 
+
+
 const translations = {
     // English (Default)
     'en': {
+        // HEADER/NAV
+        'join-nav': 'Portal',
         'org-line1': 'Swiss Aid Connect',
         'org-line2': 'Foundation',
         'join-btn': 'Join',
         'donate-btn': 'Donate',
         'about-us-nav': 'About Us',
-        'our-impact-nav': 'Our Impact',
+        'focus-nav': 'Our Focus Areas',
         'get-involved-nav': 'Get Involved',
-        'resource-center-nav': 'Member Resource Center ↗',
-        'hero-heading': 'We are serving a world in need.',
-        'hero-sub': 'One act of kindness at a time.',
+
+        // HERO SECTION
+        'hero-heading': 'Empowering Communities. Transforming Lives.',
+        'hero-sub': 'Creating lasting impact through education, health, environment, humanitarian support, and youth development.',
         'programs-cta': 'Our Programs',
         'volunteer-cta': 'Volunteer',
+        
+        // IMPACT SECTION
         'impact-title': 'Our Global Impact',
         'impact-countries': 'Countries Reached',
         'impact-lives': 'Lives Touched',
         'impact-projects': 'Projects Completed',
         'impact-volunteers': 'Volunteers Engaged',
-        'about-title': 'Making Change Happen',
-        'about-subtitle': 'Connecting communities, empowering lives, inspiring hope.',
+        
+        // SERVE SECTION
+        'serve-title': 'Creating Lasting Change',
+        'serve-p1': 'Our work is grounded in five core pillars — Education, Environment, Health, Humanitarian Assistance, and Youth Development — ensuring that every community we serve receives holistic and sustainable support.',
+        'serve-p2': 'Through educational programs, we open doors to knowledge and lifelong opportunity, while our health initiatives improve access to essential care for vulnerable groups.',
+        'serve-p3': 'We promote environmental stewardship by supporting clean, safe, and sustainable practices that protect future generations.',
+        'serve-p4': 'Our humanitarian programs provide relief, dignity, and hope to individuals facing crisis — including children, persons with disabilities, families living with HIV/AIDS, and those affected by poverty or addiction.',
+        'serve-p5': 'By empowering youth with skills, mentorship, and opportunity, we help build communities that are resilient, inclusive, and ready for the future.',
         'learn-more-btn': 'Learn More',
-        'serve-title': 'Making a Difference',
-        'serve-p1': 'We bring hope and support to communities worldwide, delivering education, health, and sustainable projects that uplift lives.',
-        'serve-p2': 'Our programs reach remote areas, ensuring no one is left behind.',
-        'serve-p3': 'With dedicated volunteers and partners, we create lasting impact across generations.',
-        'serve-p4': 'Join us in building brighter futures through hands-on community initiatives.',
-        'serve-p5': 'Every effort counts, and together we transform lives for the better.',
+
+        // JOIN US SECTION
         'join-us-heading': 'Join us.',
-        'social-heading': 'Stay connected with our mission.',
-        'social-sub': 'Follow us on social media and see how Swiss Aid Connect Foundation is creating lasting change in communities across the world.',
+
+        // STAY CONNECTED SECTION
+        'social-heading': 'Stay Connected With Our Mission',
+        'social-sub': 'Join our online community and follow our journey as we advance education, healthcare, environmental protection, youth empowerment, and humanitarian support across communities. Stay informed, get inspired, and see the real impact of our work through regular updates on <a href="#" style="color:#2C70E4;text-decoration:none;font-weight:600;">social media.</a>',
+        'org-line1-2': 'Swiss Aid Connect<br>Foundation',
+
+        // ABOUT US PAGE (Headings & Body)
+        'about-main-title': 'About Us',
+        'about-who': 'Who We Are',
+        'about-who-body': 'Swiss Aid Connect Foundation is a dedicated non-profit organization committed to transforming lives through compassion, service, and sustainable community development. Guided by our five core pillars—Education, Environment, Health, Humanitarian Support, and Youth Empowerment—we strive to uplift vulnerable populations and build stronger, more resilient communities.',
+        'about-mission': 'Our Mission',
+        'about-mission-body': 'Our mission is to deliver impactful, sustainable solutions that restore dignity, expand opportunity, and strengthen community resilience. We focus on bridging gaps in education, improving access to essential healthcare, promoting environmental protection, empowering young people to lead, and providing rapid humanitarian assistance to families in crisis.',
+        'about-vision': 'Our Vision',
+        'about-vision-body': 'We envision a world where every individual—regardless of background or circumstance—has the opportunity to learn, thrive, and live with dignity. Through inclusive development, long-term partnerships, environmental stewardship, and youth-focused empowerment, we aim to inspire generations of leaders who will build a brighter and more equitable future.',
+        'about-what': 'What We Do',
+        'about-what-body': 'Our work is centered on programs that create meaningful and lasting impact. We promote learning through educational resources, mentorship, and digital literacy. We support environmental restoration, climate awareness, and conservation action. Our healthcare initiatives provide medical outreach, screenings, and essential support to vulnerable families. In times of crisis, our humanitarian team delivers emergency food, shelter, and care. We also empower young people through leadership training, community engagement, and opportunities that shape their future.',
+        
+        // FOCUS PAGE (Hero and Body)
+        'focus-main-title': 'Our Focus Areas',
+        'focus-sub': 'Driving long-term impact through education, healthcare, environmental stewardship, humanitarian response, and youth development.',
+        'focus-education': 'Education',
+        'focus-education-body': 'We advance inclusive, equitable, and high-quality education for children, youth, and underserved communities. Our initiatives strengthen schools, provide essential learning resources, support teachers, and create opportunities that empower learners to unlock their full potential.',
+        'focus-environment': 'Environment',
+        'focus-environment-body': 'We promote environmental conservation and climate resilience through community-driven initiatives. From tree-planting and clean-ups to awareness programs and sustainable practices, we work to protect ecosystems, restore natural resources, and secure a healthier planet for generations to come.',
+        'focus-health': 'Health',
+        'focus-health-body': 'We improve access to essential healthcare by supporting medical outreach, health education, and critical interventions for vulnerable populations. Our programs focus on disease prevention, maternal and child health, mental wellness, and community health strengthening.',
+        'focus-humanitarian': 'Humanitarian Aid',
+        'focus-humanitarian-body': 'We deliver rapid, compassionate assistance to individuals and families affected by crises, disasters, and hardship. Our humanitarian efforts provide lifesaving relief—including food, clean water, shelter, hygiene supplies, and psychosocial support—helping communities rebuild with dignity and hope.',
+        'focus-youth': 'Youth Empowerment',
+        'focus-youth-body': 'We equip young people with the skills, mentorship, and opportunities they need to lead and thrive. Through leadership training, entrepreneurship programs, life-skills development, and community involvement, we nurture confident, responsible, and empowered youth ready to shape a better tomorrow.',
+
+        // JOIN/LOGIN PAGE
+        'join-title': 'Join Us / Login Portal',
+        'join-sub': 'Create an account or sign in',
+        'join-logout': 'Logout',
+        'join-email-login': 'Email Login',
+        'join-email-input': 'Email',
+        'join-password-input': 'Password',
+        'join-login-btn': 'Login',
+        'join-signup-btn': 'Create Account',
+        'join-social-or': 'Or continue with',
+        'join-google-btn': 'Continue with Google',
+        'join-home-btn': 'Return to site',
+
+        // FOOTER
         'news-footer-title': 'NEWS',
-        'news-press': 'Press Center',
-        'news-blog': 'Foundation Blog',
-        'news-reports': 'Annual Reports',
+        'news-updates': 'Updates',
+        'news-announcements': 'Announcements',
         'media-footer-title': 'MEDIA',
-        'media-video': 'Video Library',
-        'media-logos': 'Logos & Branding',
-        'media-guidelines': 'Media Guidelines',
+        'media-gallery': 'Gallery',
+        'media-downloads': 'Downloads',
         'connect-footer-title': 'CONNECT',
-        'connect-careers': 'Careers',
-        'connect-support': 'Contact Support',
-        'connect-partnerships': 'Partnerships',
+        'connect-contact': 'Contact Us',
+        'connect-involved': 'Get Involved',
         'connect-privacy': 'Privacy Policy',
+        'org-line1-2-address': 'Swiss Aid Connect Foundation<br>45 Example Avenue<br>Zurich, Switzerland 8001<br>+41 44 555 88 99',
         'interest-footer-title': 'ALSO OF INTEREST',
-        'interest-program': 'Find a Local Program',
-        'interest-donation': 'Make a Donation',
-        'interest-results': 'Impact Results',
-        'disclaimer-text': 'All donations accepted on this website support Swiss Aid Connect Foundation, an independent nonprofit humanitarian organization. The foundation operates programs in health, education, food security, and social support. Details are provided for informational purposes only and may be updated at any time.',
-        'footer-copyright': 'Swiss Aid Connect Foundation • All rights reserved.'
+        'interest-work': 'Our Work',
+        'interest-donate': 'Donate',
+        'interest-volunteer': 'Volunteer',
+        'disclaimer-text': 'Swiss Aid Connect Foundation is a nonprofit organization committed to supporting communities through education, health, youth programs, and humanitarian assistance. Information on this website may be updated as our work expands.',
+        'footer-copyright': 'Swiss Aid Connect Foundation • All rights reserved.',
+        'footer-copyright-full': '© {{year}} Swiss Aid Connect Foundation • All rights reserved.'
     },
     // French
     'fr': {
+        // HEADER/NAV
+        'join-nav': 'Portail',
         'org-line1': 'Swiss Aid Connect',
         'org-line2': 'Fondation',
         'join-btn': 'Adhérer',
         'donate-btn': 'Faire un Don',
         'about-us-nav': 'À Propos',
-        'our-impact-nav': 'Notre Impact',
+        'focus-nav': 'Nos Domaines d’Action',
         'get-involved-nav': 'S\'Impliquer',
-        'resource-center-nav': 'Centre de Ressources Membres ↗',
-        'hero-heading': 'Nous servons un monde dans le besoin.',
-        'hero-sub': 'Un acte de gentillesse à la fois.',
+
+        // HERO SECTION
+        'hero-heading': 'Redonner le Pouvoir aux Communautés. Transformer les Vies.',
+        'hero-sub': 'Créer un impact durable à travers l\'éducation, la santé, l\'environnement, l\'aide humanitaire et le développement de la jeunesse.',
         'programs-cta': 'Nos Programmes',
         'volunteer-cta': 'Bénévole',
-        'impact-title': 'Notre Impact Global',
+
+        // IMPACT SECTION
+        'impact-title': 'Notre Impact Mondial',
         'impact-countries': 'Pays Atteints',
         'impact-lives': 'Vies Touchées',
         'impact-projects': 'Projets Réalisés',
         'impact-volunteers': 'Bénévoles Engagés',
-        'about-title': 'Agir pour le Changement',
-        'about-subtitle': 'Connecter les communautés, autonomiser les vies, inspirer l\'espoir.',
+
+        // SERVE SECTION
+        'serve-title': 'Créer un Changement Durable',
+        'serve-p1': 'Notre travail repose sur cinq piliers fondamentaux : Éducation, Environnement, Santé, Assistance Humanitaire et Développement de la Jeunesse, assurant un soutien holistique et durable à chaque communauté que nous servons.',
+        'serve-p2': 'Grâce à des programmes éducatifs, nous ouvrons les portes du savoir et des opportunités durables, tandis que nos initiatives de santé améliorent l\'accès aux soins essentiels pour les groupes vulnérables.',
+        'serve-p3': 'Nous promouvons la gestion de l\'environnement en soutenant des pratiques propres, sûres et durables qui protègent les générations futures.',
+        'serve-p4': 'Nos programmes humanitaires apportent secours, dignité et espoir aux personnes confrontées à la crise, y compris les enfants, les personnes handicapées, les familles vivant avec le VIH/SIDA et celles touchées par la pauvreté ou la dépendance.',
+        'serve-p5': 'En dotant les jeunes de compétences, de mentorat et d\'opportunités, nous aidons à bâtir des communautés résilientes, inclusives et prêtes pour l\'avenir.',
         'learn-more-btn': 'En Savoir Plus',
-        'serve-title': 'Faire la Différence',
-        'serve-p1': 'Nous apportons espoir et soutien aux communautés du monde entier, en offrant éducation, santé et projets durables qui améliorent les vies.',
-        'serve-p2': 'Nos programmes atteignent les zones reculées, veillant à ce que personne ne soit laissé pour compte.',
-        'serve-p3': 'Avec des bénévoles et des partenaires dédiés, nous créons un impact durable à travers les générations.',
-        'serve-p4': 'Rejoignez-nous pour construire des avenirs plus radieux grâce à des initiatives communautaires pratiques.',
-        'serve-p5': 'Chaque effort compte, et ensemble nous transformons des vies pour le meilleur.',
-        'join-us-heading': 'Adhérez.',
-        'social-heading': 'Restez connecté à notre mission.',
-        'social-sub': 'Suivez-nous sur les réseaux sociaux et voyez comment Swiss Aid Connect Foundation crée un changement durable dans les communautés à travers le monde.',
-        'news-footer-title': 'NOUVELLES',
-        'news-press': 'Centre de Presse',
-        'news-blog': 'Blog de la Fondation',
-        'news-reports': 'Rapports Annuels',
+        
+        // JOIN US SECTION
+        'join-us-heading': 'Rejoignez-nous.',
+
+        // STAY CONNECTED SECTION
+        'social-heading': 'Restez Connecté à Notre Mission',
+        'social-sub': 'Rejoignez notre communauté en ligne et suivez notre parcours alors que nous faisons progresser l\'éducation, les soins de santé, la protection de l\'environnement, l\'autonomisation des jeunes et l\'aide humanitaire à travers les communautés. Restez informé, soyez inspiré et voyez l\'impact réel de notre travail grâce à des mises à jour régulières sur les <a href="#" style="color:#2C70E4;text-decoration:none;font-weight:600;">médias sociaux.</a>',
+        'org-line1-2': 'Swiss Aid Connect<br>Fondation',
+
+        // ABOUT US PAGE (Headings & Body)
+        'about-main-title': 'À Propos de Nous',
+        'about-who': 'Qui Nous Sommes',
+        'about-who-body': 'La Fondation Swiss Aid Connect est une organisation à but non lucratif dédiée à la transformation des vies par la compassion, le service et le développement communautaire durable. Guidés par nos cinq piliers fondamentaux – Éducation, Environnement, Santé, Aide Humanitaire et Autonomisation des Jeunes – nous nous efforçons de soutenir les populations vulnérables et de bâtir des communautés plus fortes et plus résilientes.',
+        'about-mission': 'Notre Mission',
+        'about-mission-body': 'Notre mission est de fournir des solutions percutantes et durables qui rétablissent la dignité, élargissent les opportunités et renforcent la résilience communautaire. Nous nous concentrons sur le comblement des lacunes en matière d\'éducation, l\'amélioration de l\'accès aux soins de santé essentiels, la promotion de la protection de l\'environnement, l\'autonomisation des jeunes pour qu\'ils dirigent, et la fourniture d\'une assistance humanitaire rapide aux familles en crise.',
+        'about-vision': 'Notre Vision',
+        'about-vision-body': 'Nous envisageons un monde où chaque individu – quelle que soit son origine ou sa situation – a la possibilité d\'apprendre, de s\'épanouir et de vivre dans la dignité. Grâce à un développement inclusif, des partenariats à long terme, la gestion de l\'environnement et l\'autonomisation axée sur les jeunes, nous visons à inspirer des générations de leaders qui bâtiront un avenir plus radieux et plus équitable.',
+        'about-what': 'Ce que Nous Faisons',
+        'about-what-body': 'Notre travail est centré sur des programmes qui créent un impact significatif et durable. Nous encourageons l\'apprentissage par des ressources éducatives, le mentorat et la littératie numérique. Nous soutenons la restauration de l\'environnement, la sensibilisation au climat et les actions de conservation. Nos initiatives de soins de santé offrent une assistance médicale, des dépistages et un soutien essentiel aux familles vulnérables. En temps de crise, notre équipe humanitaire fournit de la nourriture d\'urgence, un abri et des soins. Nous autonomisons également les jeunes par la formation au leadership, l\'engagement communautaire et des opportunités qui façonnent leur avenir.',
+        
+        // FOCUS PAGE (Hero and Body)
+        'focus-main-title': 'Nos Domaines d\'Action',
+        'focus-sub': 'Générer un impact à long terme par l\'éducation, les soins de santé, la gestion de l\'environnement, la réponse humanitaire et le développement des jeunes.',
+        'focus-education': 'Éducation',
+        'focus-education-body': 'Nous promouvons une éducation inclusive, équitable et de haute qualité pour les enfants, les jeunes et les communautés mal desservies. Nos initiatives renforcent les écoles, fournissent des ressources d\'apprentissage essentielles, soutiennent les enseignants et créent des opportunités qui permettent aux apprenants de réaliser leur plein potentiel.',
+        'focus-environment': 'Environnement',
+        'focus-environment-body': 'Nous favorisons la conservation de l\'environnement et la résilience climatique par des initiatives communautaires. De la plantation d\'arbres au nettoyage, en passant par les programmes de sensibilisation et les pratiques durables, nous œuvrons pour protéger les écosystèmes, restaurer les ressources naturelles et assurer une planète plus saine pour les générations à venir.',
+        'focus-health': 'Santé',
+        'focus-health-body': 'Nous améliorons l\'accès aux soins de santé essentiels en soutenant l\'assistance médicale, l\'éducation sanitaire et les interventions critiques pour les populations vulnérables. Nos programmes se concentrent sur la prévention des maladies, la santé maternelle et infantile, le bien-être mental et le renforcement de la santé communautaire.',
+        'focus-humanitarian': 'Aide Humanitaire',
+        'focus-humanitarian-body': 'Nous fournissons une assistance rapide et compatissante aux individus et aux familles touchés par des crises, des catastrophes et des difficultés. Nos efforts humanitaires apportent un secours vital — y compris de la nourriture, de l\'eau potable, un abri, des fournitures d\'hygiène et un soutien psychosocial — aidant les communautés à se reconstruire avec dignité et espoir.',
+        'focus-youth': 'Autonomisation des Jeunes',
+        'focus-youth-body': 'Nous dotons les jeunes des compétences, du mentorat et des opportunités dont ils ont besoin pour diriger et s\'épanouir. Par la formation au leadership, les programmes d\'entrepreneuriat, le développement des compétences de vie et l\'engagement communautaire, nous nourrissons des jeunes confiants, responsables et autonomes, prêts à façonner un avenir meilleur.',
+
+        // JOIN/LOGIN PAGE
+        'join-title': 'Adhérer / Portail de Connexion',
+        'join-sub': 'Créer un compte ou se connecter',
+        'join-logout': 'Déconnexion',
+        'join-email-login': 'Connexion par Email',
+        'join-email-input': 'Email',
+        'join-password-input': 'Mot de passe',
+        'join-login-btn': 'Se Connecter',
+        'join-signup-btn': 'Créer un Compte',
+        'join-social-or': 'Ou continuer avec',
+        'join-google-btn': 'Continuer avec Google',
+        'join-home-btn': 'Retour au site',
+
+        // FOOTER
+        'news-footer-title': 'ACTUALITÉS',
+        'news-updates': 'Mises à jour',
+        'news-announcements': 'Annonces',
         'media-footer-title': 'MÉDIAS',
-        'media-video': 'Vidéothèque',
-        'media-logos': 'Logos et Image de Marque',
-        'media-guidelines': 'Directives Média',
-        'connect-footer-title': 'CONTACT',
-        'connect-careers': 'Carrières',
-        'connect-support': 'Contacter le Support',
-        'connect-partnerships': 'Partenariats',
+        'media-gallery': 'Galerie',
+        'media-downloads': 'Téléchargements',
+        'connect-footer-title': 'CONNECTER',
+        'connect-contact': 'Nous Contacter',
+        'connect-involved': 'S\'Impliquer',
         'connect-privacy': 'Politique de Confidentialité',
+        'org-line1-2-address': 'Fondation Swiss Aid Connect<br>45 Example Avenue<br>Zurich, Suisse 8001<br>+41 44 555 88 99',
         'interest-footer-title': 'ÉGALEMENT D\'INTÉRÊT',
-        'interest-program': 'Trouver un Programme Local',
-        'interest-donation': 'Faire un Don',
-        'interest-results': 'Résultats d\'Impact',
-        'disclaimer-text': 'Tous les dons acceptés sur ce site Web soutiennent Swiss Aid Connect Foundation, une organisation humanitaire indépendante à but non lucratif. La fondation gère des programmes dans les domaines de la santé, de l\'éducation, de la sécurité alimentaire et du soutien social. Les détails sont fournis à titre informatif uniquement et peuvent être mis à jour à tout moment.',
-        'footer-copyright': 'Fondation Swiss Aid Connect • Tous droits réservés.'
+        'interest-work': 'Notre Travail',
+        'interest-donate': 'Faire un Don',
+        'interest-volunteer': 'Devenir Bénévole',
+        'disclaimer-text': 'La Fondation Swiss Aid Connect est une organisation à but non lucratif engagée à soutenir les communautés par l\'éducation, la santé, les programmes pour les jeunes et l\'assistance humanitaire. Les informations sur ce site Web peuvent être mises à jour à mesure que notre travail se développe.',
+        'footer-copyright': 'Fondation Swiss Aid Connect • Tous droits réservés.',
+        'footer-copyright-full': '© {{year}} Fondation Swiss Aid Connect • Tous droits réservés.'
     },
     // German
     'de': {
+        // HEADER/NAV
+        'join-nav': 'Portal',
         'org-line1': 'Swiss Aid Connect',
         'org-line2': 'Stiftung',
         'join-btn': 'Beitreten',
         'donate-btn': 'Spenden',
-        'about-us-nav': 'Über uns',
-        'our-impact-nav': 'Unser Einfluss',
+        'about-us-nav': 'Über Uns',
+        'focus-nav': 'Unsere Schwerpunkte',
         'get-involved-nav': 'Mitmachen',
-        'resource-center-nav': 'Mitglieder-Ressourcenzentrum ↗',
-        'hero-heading': 'Wir dienen einer bedürftigen Welt.',
-        'hero-sub': 'Eine freundliche Tat nach der anderen.',
+
+        // HERO SECTION
+        'hero-heading': 'Gemeinschaften Stärken. Leben Verändern.',
+        'hero-sub': 'Schaffen Sie dauerhafte Wirkung durch Bildung, Gesundheit, Umwelt, humanitäre Unterstützung und Jugendförderung.',
         'programs-cta': 'Unsere Programme',
         'volunteer-cta': 'Freiwillige',
+
+        // IMPACT SECTION
         'impact-title': 'Unser Globaler Einfluss',
-        'impact-countries': 'Länder Erreicht',
-        'impact-lives': 'Leben Berührt',
-        'impact-projects': 'Projekte Abgeschlossen',
-        'impact-volunteers': 'Freiwillige Engagiert',
-        'about-title': 'Wandel Schaffen',
-        'about-subtitle': 'Gemeinschaften verbinden, Leben stärken, Hoffnung inspirieren.',
+        'impact-countries': 'Erreichte Länder',
+        'impact-lives': 'Berührte Leben',
+        'impact-projects': 'Abgeschlossene Projekte',
+        'impact-volunteers': 'Engagierte Freiwillige',
+
+        // SERVE SECTION
+        'serve-title': 'Nachhaltige Veränderung Schaffen',
+        'serve-p1': 'Unsere Arbeit basiert auf fünf Kernpfeilern – Bildung, Umwelt, Gesundheit, Humanitäre Hilfe und Jugendentwicklung – um sicherzustellen, dass jede von uns betreute Gemeinschaft ganzheitliche und nachhaltige Unterstützung erhält.',
+        'serve-p2': 'Durch Bildungsprogramme eröffnen wir den Zugang zu Wissen und lebenslangen Chancen, während unsere Gesundheitsinitiativen den Zugang zu essentieller Versorgung für gefährdete Gruppen verbessern.',
+        'serve-p3': 'Wir fördern den Umweltschutz durch die Unterstützung sauberer, sicherer und nachhaltiger Praktiken, die zukünftige Generationen schützen.',
+        'serve-p4': 'Unsere humanitären Programme bieten Hilfe, Würde und Hoffnung für Menschen in Krisensituationen – einschließlich Kinder, Menschen mit Behinderungen, Familien mit HIV/AIDS sowie Betroffene von Armut oder Sucht.',
+        'serve-p5': 'Durch die Stärkung junger Menschen mit Fähigkeiten, Mentoring und Chancen helfen wir beim Aufbau widerstandsfähiger, integrativer und zukunftsorientierter Gemeinschaften.',
         'learn-more-btn': 'Mehr Erfahren',
-        'serve-title': 'Einen Unterschied Machen',
-        'serve-p1': 'Wir bringen Hoffnung und Unterstützung zu Gemeinschaften weltweit, indem wir Bildung, Gesundheit und nachhaltige Projekte liefern, die das Leben verbessern.',
-        'serve-p2': 'Unsere Programme erreichen abgelegene Gebiete und stellen sicher, dass niemand zurückgelassen wird.',
-        'serve-p3': 'Mit engagierten Freiwilligen und Partnern schaffen wir eine dauerhafte Wirkung über Generationen hinweg.',
-        'serve-p4': 'Bauen Sie mit uns hellere Zukünfte durch hands-on Gemeinschaftsinitiativen auf.',
-        'serve-p5': 'Jeder Beitrag zählt, und gemeinsam verändern wir Leben zum Besseren.',
+        
+        // JOIN US SECTION
         'join-us-heading': 'Machen Sie mit.',
-        'social-heading': 'Bleiben Sie mit unserer Mission verbunden.',
-        'social-sub': 'Folgen Sie uns in den sozialen Medien und sehen Sie, wie die Swiss Aid Connect Foundation nachhaltige Veränderungen in Gemeinschaften auf der ganzen Welt schafft.',
-        'news-footer-title': 'NACHRICHTEN',
-        'news-press': 'Pressezentrum',
-        'news-blog': 'Stiftungsblog',
-        'news-reports': 'Jahresberichte',
+
+        // STAY CONNECTED SECTION
+        'social-heading': 'Bleiben Sie mit Unserer Mission Verbunden',
+        'social-sub': 'Treten Sie unserer Online-Community bei und verfolgen Sie unseren Weg, während wir Bildung, Gesundheitswesen, Umweltschutz, Jugendförderung und humanitäre Unterstützung in Gemeinden vorantreiben. Bleiben Sie informiert, lassen Sie sich inspirieren und sehen Sie die tatsächliche Wirkung unserer Arbeit durch regelmäßige Updates in den <a href="#" style="color:#2C70E4;text-decoration:none;font-weight:600;">sozialen Medien.</a>',
+        'org-line1-2': 'Swiss Aid Connect<br>Stiftung',
+
+        // ABOUT US PAGE (Headings & Body)
+        'about-main-title': 'Über Uns',
+        'about-who': 'Wer Wir Sind',
+        'about-who-body': 'Die Swiss Aid Connect Stiftung ist eine engagierte gemeinnützige Organisation, die sich der Veränderung von Leben durch Mitgefühl, Dienst und nachhaltige Gemeindeentwicklung verschrieben hat. Geleitet von unseren fünf Kernpfeilern – Bildung, Umwelt, Gesundheit, Humanitäre Unterstützung und Jugendförderung – streben wir danach, gefährdete Bevölkerungsgruppen zu fördern und stärkere, widerstandsfähigere Gemeinschaften aufzubauen.',
+        'about-mission': 'Unsere Mission',
+        'about-mission-body': 'Unsere Mission ist es, wirkungsvolle, nachhaltige Lösungen zu liefern, die Würde wiederherstellen, Chancen erweitern und die Widerstandsfähigkeit der Gemeinschaft stärken. Wir konzentrieren uns darauf, Lücken in der Bildung zu schließen, den Zugang zu grundlegender Gesundheitsversorgung zu verbessern, den Umweltschutz zu fördern, junge Menschen zur Führung zu befähigen und Familien in Krisensituationen schnelle humanitäre Hilfe zu leisten.',
+        'about-vision': 'Unsere Vision',
+        'about-vision-body': 'Wir stellen uns eine Welt vor, in der jeder Einzelne – unabhängig von Herkunft oder Umständen – die Möglichkeit hat, zu lernen, sich zu entfalten und in Würde zu leben. Durch inklusive Entwicklung, langfristige Partnerschaften, Umweltschutz und jugendfokussierte Förderung wollen wir Generationen von Führungskräften inspirieren, die eine hellere und gerechtere Zukunft aufbauen werden.',
+        'about-what': 'Was Wir Tun',
+        'about-what-body': 'Unsere Arbeit konzentriert sich auf Programme, die eine bedeutungsvolle und dauerhafte Wirkung erzielen. Wir fördern das Lernen durch Bildungsressourcen, Mentoring und digitale Kompetenz. Wir unterstützen die Wiederherstellung der Umwelt, das Klimabewusstsein und Maßnahmen zum Schutz. Unsere Gesundheitsinitiativen bieten medizinische Hilfe, Vorsorgeuntersuchungen und wesentliche Unterstützung für gefährdete Familien. In Krisenzeiten liefert unser humanitäres Team Notnahrung, Unterkunft und Pflege. Wir stärken junge Menschen auch durch Führungstraining, Gemeinschaftsengagement und Chancen, die ihre Zukunft gestalten.',
+        
+        // FOCUS PAGE (Hero and Body)
+        'focus-main-title': 'Unsere Schwerpunkte',
+        'focus-sub': 'Langfristige Wirkung durch Bildung, Gesundheitswesen, Umweltschutz, humanitäre Hilfe und Jugendentwicklung erzielen.',
+        'focus-education': 'Bildung',
+        'focus-education-body': 'Wir fördern inklusive, gerechte und qualitativ hochwertige Bildung für Kinder, Jugendliche und unterversorgte Gemeinschaften. Unsere Initiativen stärken Schulen, stellen essentielle Lernressourcen bereit, unterstützen Lehrkräfte und schaffen Möglichkeiten, die Lernende befähigen, ihr volles Potenzial zu entfalten.',
+        'focus-environment': 'Umwelt',
+        'focus-environment-body': 'Wir fördern den Umweltschutz und die Klimaresilienz durch gemeinschaftsgetriebene Initiativen. Von Baumpflanzungen und Aufräumaktionen bis hin zu Aufklärungsprogrammen und nachhaltigen Praktiken arbeiten wir daran, Ökosysteme zu schützen, natürliche Ressourcen wiederherzustellen und einen gesünderen Planeten für zukünftige Generationen zu sichern.',
+        'focus-health': 'Gesundheit',
+        'focus-health-body': 'Wir verbessern den Zugang zu grundlegender Gesundheitsversorgung, indem wir medizinische Hilfe, Gesundheitserziehung und kritische Interventionen für gefährdete Bevölkerungsgruppen unterstützen. Unsere Programme konzentrieren sich auf Krankheitsprävention, Mütter- und Kindergesundheit, psychisches Wohlbefinden und die Stärkung der Gemeinschaftsgesundheit.',
+        'focus-humanitarian': 'Humanitäre Hilfe',
+        'focus-humanitarian-body': 'Wir leisten schnelle, mitfühlende Hilfe für Einzelpersonen und Familien, die von Krisen, Katastrophen und Not betroffen sind. Unsere humanitären Bemühungen bieten lebensrettende Unterstützung – einschließlich Nahrung, sauberem Wasser, Unterkunft, Hygieneartikeln und psychosozialer Betreuung – und helfen Gemeinschaften, mit Würde und Hoffnung wieder aufzubauen.',
+        'focus-youth': 'Jugendförderung',
+        'focus-youth-body': 'Wir statten junge Menschen mit den Fähigkeiten, dem Mentoring und den Möglichkeiten aus, die sie zum Führen und Gedeihen benötigen. Durch Führungstraining, Unternehmertumsprogramme, Entwicklung von Lebenskompetenzen und Gemeinschaftsbeteiligung fördern wir selbstbewusste, verantwortungsbewusste und gestärkte junge Menschen, die bereit sind, eine bessere Zukunft zu gestalten.',
+
+        // JOIN/LOGIN PAGE
+        'join-title': 'Beitreten / Login-Portal',
+        'join-sub': 'Ein Konto erstellen oder anmelden',
+        'join-logout': 'Abmelden',
+        'join-email-login': 'E-Mail-Login',
+        'join-email-input': 'E-Mail',
+        'join-password-input': 'Passwort',
+        'join-login-btn': 'Login',
+        'join-signup-btn': 'Konto Erstellen',
+        'join-social-or': 'Oder fortfahren mit',
+        'join-google-btn': 'Mit Google fortfahren',
+        'join-home-btn': 'Zurück zur Seite',
+
+        // FOOTER
+        'news-footer-title': 'NEUIGKEITEN',
+        'news-updates': 'Aktuelles',
+        'news-announcements': 'Mitteilungen',
         'media-footer-title': 'MEDIEN',
-        'media-video': 'Videobibliothek',
-        'media-logos': 'Logos & Branding',
-        'media-guidelines': 'Medienrichtlinien',
-        'connect-footer-title': 'KONTAKT',
-        'connect-careers': 'Karriere',
-        'connect-support': 'Kontaktieren Sie den Support',
-        'connect-partnerships': 'Partnerschaften',
+        'media-gallery': 'Galerie',
+        'media-downloads': 'Downloads',
+        'connect-footer-title': 'VERBINDEN',
+        'connect-contact': 'Kontaktieren Sie uns',
+        'connect-involved': 'Mitmachen',
         'connect-privacy': 'Datenschutzrichtlinie',
+        'org-line1-2-address': 'Swiss Aid Connect Stiftung<br>45 Example Avenue<br>Zürich, Schweiz 8001<br>+41 44 555 88 99',
         'interest-footer-title': 'AUCH INTERESSANT',
-        'interest-program': 'Finden Sie ein lokales Programm',
-        'interest-donation': 'Machen Sie eine Spende',
-        'interest-results': 'Wirkungsergebnisse',
-        'disclaimer-text': 'Alle auf dieser Website akzeptierten Spenden unterstützen die Swiss Aid Connect Foundation, eine unabhängige gemeinnützige humanitäre Organisation. Die Stiftung betreibt Programme in den Bereichen Gesundheit, Bildung, Ernährungssicherheit und soziale Unterstützung. Die Details dienen nur zu Informationszwecken und können jederzeit aktualisiert werden.',
-        'footer-copyright': 'Swiss Aid Connect Stiftung • Alle Rechte vorbehalten.'
+        'interest-work': 'Unsere Arbeit',
+        'interest-donate': 'Spenden',
+        'interest-volunteer': 'Freiwillige',
+        'disclaimer-text': 'Die Swiss Aid Connect Stiftung ist eine gemeinnützige Organisation, die sich der Unterstützung von Gemeinschaften durch Bildung, Gesundheit, Jugendprogramme und humanitäre Hilfe verschrieben hat. Die Informationen auf dieser Website können bei Erweiterung unserer Arbeit aktualisiert werden.',
+        'footer-copyright': 'Swiss Aid Connect Stiftung • Alle Rechte vorbehalten.',
+        'footer-copyright-full': '© {{year}} Swiss Aid Connect Stiftung • Alle Rechte vorbehalten.'
     },
     // Spanish (Castilian)
     'es': {
+        // HEADER/NAV
+        'join-nav': 'Portal',
         'org-line1': 'Swiss Aid Connect',
         'org-line2': 'Fundación',
         'join-btn': 'Únete',
         'donate-btn': 'Dona',
         'about-us-nav': 'Sobre Nosotros',
-        'our-impact-nav': 'Nuestro Impacto',
+        'focus-nav': 'Nuestras Áreas de Enfoque',
         'get-involved-nav': 'Participa',
-        'resource-center-nav': 'Centro de Recursos para Miembros ↗',
-        'hero-heading': 'Estamos sirviendo a un mundo en necesidad.',
-        'hero-sub': 'Un acto de bondad a la vez.',
+
+        // HERO SECTION
+        'hero-heading': 'Empoderando Comunidades. Transformando Vidas.',
+        'hero-sub': 'Creando un impacto duradero a través de la educación, la salud, el medio ambiente, el apoyo humanitario y el desarrollo juvenil.',
         'programs-cta': 'Nuestros Programas',
         'volunteer-cta': 'Voluntario',
+
+        // IMPACT SECTION
         'impact-title': 'Nuestro Impacto Global',
         'impact-countries': 'Países Alcanzados',
-        'impact-lives': 'Vidas Tocadas',
+        'impact-lives': 'Vidas Impactadas',
         'impact-projects': 'Proyectos Completados',
-        'impact-volunteers': 'Voluntarios Involucrados',
-        'about-title': 'Haciendo que el Cambio Suceda',
-        'about-subtitle': 'Conectando comunidades, empoderando vidas, inspirando esperanza.',
+        'impact-volunteers': 'Voluntarios Comprometidos',
+
+        // SERVE SECTION
+        'serve-title': 'Creando un Cambio Duradero',
+        'serve-p1': 'Nuestro trabajo se basa en cinco pilares centrales — Educación, Medio Ambiente, Salud, Asistencia Humanitaria y Empoderamiento Juvenil — asegurando que cada comunidad a la que servimos reciba apoyo integral y sostenible.',
+        'serve-p2': 'A través de programas educativos, abrimos puertas al conocimiento y a oportunidades de por vida, mientras que nuestras iniciativas de salud mejoran el acceso a la atención esencial para grupos vulnerables.',
+        'serve-p3': 'Fomentamos la administración ambiental mediante el apoyo a prácticas limpias, seguras y sostenibles que protegen a las generaciones futuras.',
+        'serve-p4': 'Nuestros programas humanitarios brindan alivio, dignidad y esperanza a las personas que enfrentan crisis, incluidos niños, personas con discapacidad, familias que viven con VIH/SIDA y aquellos afectados por la pobreza o la adicción.',
+        'serve-p5': 'Al empoderar a los jóvenes con habilidades, mentoría y oportunidades, ayudamos a construir comunidades resilientes, inclusivas y listas para el futuro.',
         'learn-more-btn': 'Saber Más',
-        'serve-title': 'Marcando la Diferencia',
-        'serve-p1': 'Brindamos esperanza y apoyo a comunidades de todo el mundo, ofreciendo educación, salud y proyectos sostenibles que elevan vidas.',
-        'serve-p2': 'Nuestros programas llegan a áreas remotas, asegurando que nadie se quede atrás.',
-        'serve-p3': 'Con voluntarios y socios dedicados, creamos un impacto duradero a través de generaciones.',
-        'serve-p4': 'Únete a nosotros para construir futuros más brillantes a través de iniciativas comunitarias prácticas.',
-        'serve-p5': 'Cada esfuerzo cuenta, y juntos transformamos vidas para mejor.',
-        'join-us-heading': 'Únete.',
-        'social-heading': 'Mantente conectado con nuestra misión.',
-        'social-sub': 'Síguenos en las redes sociales y mira cómo Swiss Aid Connect Foundation está creando un cambio duradero en comunidades de todo el mundo.',
+        
+        // JOIN US SECTION
+        'join-us-heading': 'Únete a nosotros.',
+
+        // STAY CONNECTED SECTION
+        'social-heading': 'Mantente Conectado con Nuestra Misión',
+        'social-sub': 'Únete a nuestra comunidad en línea y sigue nuestro viaje mientras avanzamos en la educación, la atención médica, la protección del medio ambiente, el empoderamiento juvenil y el apoyo humanitario en todas las comunidades. Mantente informado, inspírate y mira el impacto real de nuestro trabajo a través de actualizaciones periódicas en las <a href="#" style="color:#2C70E4;text-decoration:none;font-weight:600;">redes sociales.</a>',
+        'org-line1-2': 'Swiss Aid Connect<br>Fundación',
+
+        // ABOUT US PAGE (Headings & Body)
+        'about-main-title': 'Sobre Nosotros',
+        'about-who': 'Quiénes Somos',
+        'about-who-body': 'La Fundación Swiss Aid Connect es una organización dedicada sin fines de lucro, comprometida a transformar vidas a través de la compasión, el servicio y el desarrollo comunitario sostenible. Guiados por nuestros cinco pilares fundamentales — Educación, Medio Ambiente, Salud, Apoyo Humanitario y Empoderamiento Juvenil — nos esforzamos por elevar a las poblaciones vulnerables y construir comunidades más fuertes y resilientes.',
+        'about-mission': 'Nuestra Misión',
+        'about-mission-body': 'Nuestra misión es ofrecer soluciones impactantes y sostenibles que restauran la dignidad, amplían las oportunidades y fortalecen la resiliencia comunitaria. Nos enfocamos en cerrar las brechas en la educación, mejorar el acceso a la atención médica esencial, promover la protección del medio ambiente, empoderar a los jóvenes para que lideren y proporcionar asistencia humanitaria rápida a las familias en crisis.',
+        'about-vision': 'Nuestra Visión',
+        'about-vision-body': 'Visualizamos un mundo donde cada individuo, independientemente de su origen o circunstancia, tenga la oportunidad de aprender, prosperar y vivir con dignidad. A través del desarrollo inclusivo, las asociaciones a largo plazo, la administración ambiental y el empoderamiento centrado en la juventud, aspiramos a inspirar a generaciones de líderes que construirán un futuro más brillante y equitativo.',
+        'about-what': 'Qué Hacemos',
+        'about-what-body': 'Nuestro trabajo se centra en programas que crean un impacto significativo y duradero. Fomentamos el aprendizaje a través de recursos educativos, mentoría y alfabetización digital. Apoyamos la restauración ambiental, la conciencia climática y las acciones de conservación. Nuestras iniciativas de atención médica proporcionan alcance médico, exámenes y apoyo esencial a familias vulnerables. En tiempos de crisis, nuestro equipo humanitario entrega alimentos de emergencia, refugio y atención. También empoderamos a los jóvenes a través de la formación en liderazgo, la participación comunitaria y oportunidades que moldean su futuro.',
+        
+        // FOCUS PAGE (Hero and Body)
+        'focus-main-title': 'Nuestras Áreas de Enfoque',
+        'focus-sub': 'Impulsando un impacto a largo plazo a través de la educación, la atención médica, la administración ambiental, la respuesta humanitaria y el desarrollo juvenil.',
+        'focus-education': 'Educación',
+        'focus-education-body': 'Promovemos una educación inclusiva, equitativa y de alta calidad para niños, jóvenes y comunidades desatendidas. Nuestras iniciativas fortalecen las escuelas, proporcionan recursos de aprendizaje esenciales, apoyan a los maestros y crean oportunidades que empoderan a los estudiantes para que desarrollen todo su potencial.',
+        'focus-environment': 'Medio Ambiente',
+        'focus-environment-body': 'Promovemos la conservación del medio ambiente y la resiliencia climática a través de iniciativas impulsadas por la comunidad. Desde la plantación de árboles y limpiezas hasta programas de concientización y prácticas sostenibles, trabajamos para proteger los ecosistemas, restaurar los recursos naturales y asegurar un planeta más saludable para las generaciones venideras.',
+        'focus-health': 'Salud',
+        'focus-health-body': 'Mejoramos el acceso a la atención médica esencial apoyando el alcance médico, los exámenes de detección y las intervenciones críticas para las poblaciones vulnerables. Nuestros programas se centran en la prevención de enfermedades, la salud maternoinfantil, el bienestar mental y el fortalecimiento de la salud comunitaria.',
+        'focus-humanitarian': 'Ayuda Humanitaria',
+        'focus-humanitarian-body': 'Brindamos asistencia rápida y compasiva a personas y familias afectadas por crisis, desastres y dificultades. Nuestros esfuerzos humanitarios proporcionan alivio que salva vidas — incluyendo alimentos, agua potable, refugio, suministros de higiene y apoyo psicosocial — ayudando a las comunidades a reconstruirse con dignidad y esperanza.',
+        'focus-youth': 'Empoderamiento Juvenil',
+        'focus-youth-body': 'Equipamos a los jóvenes con las habilidades, la mentoría y las oportunidades que necesitan para liderar y prosperar. A través de la capacitación en liderazgo, los programas de emprendimiento, el desarrollo de habilidades para la vida y la participación comunitaria, nutrimos a jóvenes seguros, responsables y empoderados, listos para forjar un mañana mejor.',
+
+        // JOIN/LOGIN PAGE
+        'join-title': 'Únete / Portal de Inicio de Sesión',
+        'join-sub': 'Crea una cuenta o inicia sesión',
+        'join-logout': 'Cerrar Sesión',
+        'join-email-login': 'Acceso por Correo Electrónico',
+        'join-email-input': 'Correo Electrónico',
+        'join-password-input': 'Contraseña',
+        'join-login-btn': 'Iniciar Sesión',
+        'join-signup-btn': 'Crear Cuenta',
+        'join-social-or': 'O continuar con',
+        'join-google-btn': 'Continuar con Google',
+        'join-home-btn': 'Volver al sitio',
+
+        // FOOTER
         'news-footer-title': 'NOTICIAS',
-        'news-press': 'Centro de Prensa',
-        'news-blog': 'Blog de la Fundación',
-        'news-reports': 'Informes Anuales',
+        'news-updates': 'Actualizaciones',
+        'news-announcements': 'Anuncios',
         'media-footer-title': 'MEDIOS',
-        'media-video': 'Videoteca',
-        'media-logos': 'Logotipos y Marca',
-        'media-guidelines': 'Directrices para Medios',
+        'media-gallery': 'Galería',
+        'media-downloads': 'Descargas',
         'connect-footer-title': 'CONECTAR',
-        'connect-careers': 'Carreras',
-        'connect-support': 'Contactar Soporte',
-        'connect-partnerships': 'Asociaciones',
+        'connect-contact': 'Contáctanos',
+        'connect-involved': 'Participa',
         'connect-privacy': 'Política de Privacidad',
+        'org-line1-2-address': 'Swiss Aid Connect Fundación<br>45 Example Avenue<br>Zúrich, Suiza 8001<br>+41 44 555 88 99',
         'interest-footer-title': 'TAMBIÉN DE INTERÉS',
-        'interest-program': 'Encuentra un Programa Local',
-        'interest-donation': 'Haz una Donación',
-        'interest-results': 'Resultados de Impacto',
-        'disclaimer-text': 'Todas las donaciones aceptadas en este sitio web apoyan a Swiss Aid Connect Foundation, una organización humanitaria sin fines de lucro independiente. La fundación opera programas de salud, educación, seguridad alimentaria y apoyo social. Los detalles se proporcionan solo con fines informativos y pueden actualizarse en cualquier momento.',
-        'footer-copyright': 'Swiss Aid Connect Foundation • Todos los derechos reservados.'
+        'interest-work': 'Nuestro Trabajo',
+        'interest-donate': 'Dona',
+        'interest-volunteer': 'Voluntario',
+        'disclaimer-text': 'Swiss Aid Connect Foundation es una organización sin fines de lucro comprometida a apoyar a las comunidades a través de la educación, la salud, los programas para jóvenes y la asistencia humanitaria. La información en este sitio web puede actualizarse a medida que nuestro trabajo se expande.',
+        'footer-copyright': 'Swiss Aid Connect Foundation • Todos los derechos reservados.',
+        'footer-copyright-full': '© {{year}} Swiss Aid Connect Foundation • Todos los derechos reservados.'
     },
     // Swahili (Kiswahili)
     'sw': {
+        // HEADER/NAV
+        'join-nav': 'Mfumo',
         'org-line1': 'Swiss Aid Connect',
         'org-line2': 'Foundation (Msingi)',
         'join-btn': 'Jiunge',
         'donate-btn': 'Toa Mchango',
         'about-us-nav': 'Kuhusu Sisi',
-        'our-impact-nav': 'Athari Yetu',
+        'focus-nav': 'Maeneo Yetu ya Kuzingatia',
         'get-involved-nav': 'Shiriki',
-        'resource-center-nav': 'Kituo cha Rasilimali Wanachama ↗',
-        'hero-heading': 'Tunahudumia ulimwengu wenye uhitaji.',
-        'hero-sub': 'Kitendo kimoja cha ukarimu kwa wakati mmoja.',
+
+        // HERO SECTION
+        'hero-heading': 'Kuwawezesha Jamii. Kubadili Maisha.',
+        'hero-sub': 'Kuunda athari ya kudumu kupitia elimu, afya, mazingira, msaada wa kibinadamu, na maendeleo ya vijana.',
         'programs-cta': 'Programu Zetu',
-        'volunteer-cta': 'Jitolee',
-        'impact-title': 'Athari Yetu Duniani',
+        'volunteer-cta': 'Mjitoleaji',
+
+        // IMPACT SECTION
+        'impact-title': 'Athari Yetu ya Ulimwenguni',
         'impact-countries': 'Nchi Zilizofikiwa',
         'impact-lives': 'Maisha Yaliyoguswa',
         'impact-projects': 'Miradi Iliyokamilika',
-        'impact-volunteers': 'Wajitoleaji Walioshirikishwa',
-        'about-title': 'Kuleta Mabadiliko',
-        'about-subtitle': 'Kuunganisha jamii, kuwezesha maisha, kuhamasisha matumaini.',
+        'impact-volunteers': 'Wajitoleaji Walioshiriki',
+
+        // SERVE SECTION
+        'serve-title': 'Kuunda Mabadiliko ya Kudumu',
+        'serve-p1': 'Kazi yetu inategemea nguzo tano kuu — Elimu, Mazingira, Afya, Msaada wa Kibinadamu, na Uwezeshaji wa Vijana — tukihakikisha kila jamii tunayohudumia inapokea msaada kamili na endelevu.',
+        'serve-p2': 'Kupitia programu za elimu, tunafungua milango ya maarifa na fursa za maisha yote, huku mipango yetu ya afya ikiboresha upatikanaji wa huduma muhimu kwa makundi hatarishi.',
+        'serve-p3': 'Tunakuza uwakili wa mazingira kwa kusaidia mazoea safi, salama na endelevu yanayolinda vizazi vijavyo.',
+        'serve-p4': 'Programu zetu za kibinadamu hutoa msaada, heshima, na matumaini kwa watu wanaokabiliwa na mgogoro — ikiwa ni pamoja na watoto, watu wenye ulemavu, familia zinazoishi na VVU/UKIMWI, na wale walioathiriwa na umaskini au uraibu.',
+        'serve-p5': 'Kwa kuwawezesha vijana na ujuzi, ushauri, na fursa, tunasaidia kujenga jamii ambazo ni imara, zinazojumuisha, na tayari kwa ajili ya baadaye.',
         'learn-more-btn': 'Jifunze Zaidi',
-        'serve-title': 'Kuleta Tofauti',
-        'serve-p1': 'Tunaleta matumaini na msaada kwa jamii ulimwenguni kote, tukitoa elimu, afya, na miradi endelevu inayoinua maisha.',
-        'serve-p2': 'Programu zetu hufika maeneo ya mbali, tukihakikisha hakuna anayeachwa nyuma.',
-        'serve-p3': 'Pamoja na wajitoleaji na washirika waliojitolea, tunaleta athari ya kudumu kwa vizazi vyote.',
-        'serve-p4': 'Ungana nasi katika kujenga mustakabali mzuri kupitia mipango ya jamii inayotekelezwa kwa vitendo.',
-        'serve-p5': 'Kila juhudi huhesabika, na kwa pamoja tunabadilisha maisha kuwa bora.',
+        
+        // JOIN US SECTION
         'join-us-heading': 'Jiunge nasi.',
-        'social-heading': 'Ungana na dhamira yetu.',
-        'social-sub': 'Tufuate kwenye mitandao ya kijamii uone jinsi Swiss Aid Connect Foundation inavyoleta mabadiliko ya kudumu katika jamii ulimwenguni kote.',
+
+        // STAY CONNECTED SECTION
+        'social-heading': 'Endelea Kuunganishwa na Dhamira Yetu',
+        'social-sub': 'Jiunge na jumuiya yetu ya mtandaoni na ufuate safari yetu tunapoendeleza elimu, huduma za afya, ulinzi wa mazingira, uwezeshaji wa vijana, na msaada wa kibinadamu katika jamii. Endelea kufahamishwa, pata msukumo, na uone athari halisi ya kazi yetu kupitia sasisho za mara kwa mara kwenye <a href="#" style="color:#2C70E4;text-decoration:none;font-weight:600;">mitandao ya kijamii.</a>',
+        'org-line1-2': 'Swiss Aid Connect<br>Foundation (Msingi)',
+
+        // ABOUT US PAGE (Headings & Body)
+        'about-main-title': 'Kuhusu Sisi',
+        'about-who': 'Sisi ni Nani',
+        'about-who-body': 'Swiss Aid Connect Foundation ni shirika lisilo la faida lililojitolea kubadilisha maisha kupitia huruma, huduma, na maendeleo endelevu ya jamii. Tukiongozwa na nguzo zetu tano kuu — Elimu, Mazingira, Afya, Msaada wa Kibinadamu, na Uwezeshaji wa Vijana — tunajitahidi kuinua watu walio katika mazingira magumu na kujenga jamii imara na zenye uwezo zaidi.',
+        'about-mission': 'Dhamira Yetu',
+        'about-mission-body': 'Dhamira yetu ni kutoa suluhisho zenye athari na endelevu ambazo zinarudisha heshima, kupanua fursa, na kuimarisha uwezo wa jamii. Tunazingatia kuziba mapengo katika elimu, kuboresha upatikanaji wa huduma muhimu za afya, kukuza ulinzi wa mazingira, kuwawezesha vijana kuongoza, na kutoa msaada wa haraka wa kibinadamu kwa familia zilizo katika shida.',
+        'about-vision': 'Maono Yetu',
+        'about-vision-body': 'Tunaona ulimwengu ambapo kila mtu — bila kujali asili au hali — ana fursa ya kujifunza, kustawi, na kuishi kwa heshima. Kupitia maendeleo jumuishi, ushirikiano wa muda mrefu, uwakili wa mazingira, na uwezeshaji unaozingatia vijana, tunalenga kuhamasisha vizazi vya viongozi ambao watajenga mustakabali mzuri na wenye usawa zaidi.',
+        'about-what': 'Tunachofanya',
+        'about-what-body': 'Kazi yetu inalenga kwenye programu zinazounda athari ya maana na ya kudumu. Tunakuza ujifunzaji kupitia rasilimali za elimu, ushauri, na ujuzi wa kidijitali. Tunasaidia urejeshwaji wa mazingira, uhamasishaji wa hali ya hewa, na hatua za uhifadhi. Mipango yetu ya afya hutoa huduma za matibabu, uchunguzi, na msaada muhimu kwa familia zilizo katika mazingira magumu. Katika nyakati za shida, timu yetu ya kibinadamu hutoa chakula cha dharura, makazi, na huduma. Pia tunawawezesha vijana kupitia mafunzo ya uongozi, ushiriki wa jamii, na fursa zinazounda mustakabali wao.',
+        
+        // FOCUS PAGE (Hero and Body)
+        'focus-main-title': 'Maeneo Yetu ya Kuzingatia',
+        'focus-sub': 'Kuleta athari ya muda mrefu kupitia elimu, huduma za afya, uwakili wa mazingira, mwitikio wa kibinadamu, na maendeleo ya vijana.',
+        'focus-education': 'Elimu',
+        'focus-education-body': 'Tunaendeleza elimu jumuishi, ya usawa, na ya hali ya juu kwa watoto, vijana, na jamii zisizohudumiwa. Mipango yetu inaimarisha shule, inatoa rasilimali muhimu za kujifunzia, inawasaidia walimu, na inaunda fursa zinazowawezesha wanafunzi kufikia uwezo wao kamili.',
+        'focus-environment': 'Mazingira',
+        'focus-environment-body': 'Tunakuza uhifadhi wa mazingira na uwezo wa kukabiliana na hali ya hewa kupitia mipango inayoongozwa na jamii. Kuanzia upandaji miti na usafishaji hadi programu za uhamasishaji na mazoea endelevu, tunafanya kazi kulinda mifumo ya ikolojia, kurejesha rasilimali asili, na kuhakikisha sayari yenye afya kwa vizazi vijavyo.',
+        'focus-health': 'Afya',
+        'focus-health-body': 'Tunaboresha upatikanaji wa huduma muhimu za afya kwa kusaidia huduma za matibabu, elimu ya afya, na hatua muhimu kwa watu walio katika mazingira magumu. Programu zetu zinalenga kuzuia magonjwa, afya ya mama na mtoto, ustawi wa akili, na uimarishaji wa afya ya jamii.',
+        'focus-humanitarian': 'Msaada wa Kibinadamu',
+        'focus-humanitarian-body': 'Tunatoa msaada wa haraka na wa huruma kwa watu binafsi na familia zilizoathiriwa na shida, majanga, na ugumu. Juhudi zetu za kibinadamu hutoa msaada wa kuokoa maisha — pamoja na chakula, maji safi, makazi, vifaa vya usafi, na msaada wa kisaikolojia — kusaidia jamii kujijenga upya kwa heshima na matumaini.',
+        'focus-youth': 'Uwezeshaji wa Vijana',
+        'focus-youth-body': 'Tunawapa vijana ujuzi, ushauri, na fursa wanazohitaji ili kuongoza na kustawi. Kupitia mafunzo ya uongozi, programu za ujasiriamali, ukuzaji wa ujuzi wa maisha, na ushiriki wa jamii, tunalea vijana wenye ujasiri, kuwajibika, na kuwezeshwa tayari kuunda kesho bora.',
+
+        // JOIN/LOGIN PAGE
+        'join-title': 'Jiunge / Mfumo wa Kuingia',
+        'join-sub': 'Fungua akaunti au ingia',
+        'join-logout': 'Toka',
+        'join-email-login': 'Kuingia kwa Barua Pepe',
+        'join-email-input': 'Barua Pepe',
+        'join-password-input': 'Neno la Siri',
+        'join-login-btn': 'Ingia',
+        'join-signup-btn': 'Fungua Akaunti',
+        'join-social-or': 'Au endelea na',
+        'join-google-btn': 'Endelea na Google',
+        'join-home-btn': 'Rudi kwenye tovuti',
+
+        // FOOTER
         'news-footer-title': 'HABARI',
-        'news-press': 'Kituo cha Waandishi',
-        'news-blog': 'Blogu ya Msingi',
-        'news-reports': 'Ripoti za Mwaka',
+        'news-updates': 'Sasisho',
+        'news-announcements': 'Matangazo',
         'media-footer-title': 'VYOMBO VYA HABARI',
-        'media-video': 'Maktaba ya Video',
-        'media-logos': 'Nembo na Chapa',
-        'media-guidelines': 'Miongozo ya Vyombo vya Habari',
-        'connect-footer-title': 'UNGANA',
-        'connect-careers': 'Nafasi za Kazi',
-        'connect-support': 'Wasiliana na Usaidizi',
-        'connect-partnerships': 'Ushirikiano',
+        'media-gallery': 'Matunzio',
+        'media-downloads': 'Vipakuliwa',
+        'connect-footer-title': 'UNGANISHA',
+        'connect-contact': 'Wasiliana Nasi',
+        'connect-involved': 'Shiriki',
         'connect-privacy': 'Sera ya Faragha',
-        'interest-footer-title': 'YA KUVUTIA PIA',
-        'interest-program': 'Tafuta Programu ya Mitaa',
-        'interest-donation': 'Toa Mchango',
-        'interest-results': 'Matokeo ya Athari',
-        'disclaimer-text': 'Michango yote inayopokelewa kwenye tovuti hii inaunga mkono Swiss Aid Connect Foundation, shirika huru la kibinadamu lisilo la faida. Msingi hutoa programu za afya, elimu, usalama wa chakula, na msaada wa kijamii. Maelezo hutolewa kwa madhumuni ya habari tu na yanaweza kusasishwa wakati wowote.',
-        'footer-copyright': 'Swiss Aid Connect Foundation • Haki zote zimehifadhiwa.'
+        'org-line1-2-address': 'Swiss Aid Connect Foundation<br>45 Example Avenue<br>Zurich, Switzerland 8001<br>+41 44 555 88 99',
+        'interest-footer-title': 'PIA KWA MASLAHI YAKO',
+        'interest-work': 'Kazi Yetu',
+        'interest-donate': 'Toa Mchango',
+        'interest-volunteer': 'Mjitoleaji',
+        'disclaimer-text': 'Swiss Aid Connect Foundation ni shirika lisilo la faida lililojitolea kusaidia jamii kupitia elimu, afya, mipango ya vijana, na msaada wa kibinadamu. Taarifa kwenye tovuti hii inaweza kusasishwa kadri kazi yetu inavyopanuka.',
+        'footer-copyright': 'Swiss Aid Connect Foundation • Haki zote zimehifadhiwa.',
+        'footer-copyright-full': '© {{year}} Swiss Aid Connect Foundation • Haki zote zimehifadhiwa.'
     }
 };
 
+
+
 // Map of HTML elements to their corresponding translation keys
-// ... (TEXT MAPPINGS remain the same) ...
 const textMappings = [
+    // Top Nav
+    { selector: '.top-nav a:nth-child(2)', key: 'join-nav' }, // Portal
+    // Header/Brand
     { selector: '.brand h1 span:first-child', key: 'org-line1' },
     { selector: '.brand h1 span:last-child', key: 'org-line2' },
     { selector: '.btn-join', key: 'join-btn' },
     { selector: '.btn-donate', key: 'donate-btn' },
+    // Side Nav
     { selector: '.side-nav a:nth-child(1)', key: 'about-us-nav' },
-    { selector: '.side-nav a:nth-child(2)', key: 'our-impact-nav' },
+    { selector: '.side-nav a:nth-child(2)', key: 'focus-nav' },
     { selector: '.side-nav a:nth-child(3)', key: 'get-involved-nav' },
-    { selector: '.side-nav a:nth-child(4)', key: 'resource-center-nav' },
+    // HERO SECTION
     { selector: '#hero-heading', key: 'hero-heading' },
     { selector: '.hero-sub', key: 'hero-sub' },
     { selector: '.hero-ctas .cta-primary', key: 'programs-cta' },
     { selector: '.hero-ctas .cta-outline', key: 'volunteer-cta' },
+    // IMPACT SECTION
     { selector: '#impact-heading', key: 'impact-title' },
     { selector: '.impact-grid .impact-card:nth-child(1) p', key: 'impact-countries' },
     { selector: '.impact-grid .impact-card:nth-child(2) p', key: 'impact-lives' },
     { selector: '.impact-grid .impact-card:nth-child(3) p', key: 'impact-projects' },
     { selector: '.impact-grid .impact-card:nth-child(4) p', key: 'impact-volunteers' },
-    { selector: '#about-heading', key: 'about-title' },
-    { selector: '.about-subtitle', key: 'about-subtitle' },
-    { selector: '.about-section .btn-learn', key: 'learn-more-btn' },
+    // SERVE SECTION
     { selector: '#serve-heading', key: 'serve-title' },
     { selector: '.serve-paragraph .line1', key: 'serve-p1' },
     { selector: '.serve-paragraph .line2', key: 'serve-p2' },
@@ -2256,50 +2506,91 @@ const textMappings = [
     { selector: '.serve-paragraph .line4', key: 'serve-p4' },
     { selector: '.serve-paragraph .line5', key: 'serve-p5' },
     { selector: '.serve-btn', key: 'learn-more-btn' },
-    { selector: 'section:nth-child(7) > div > h2', key: 'join-us-heading' }, // Join us. section
+    // JOIN US SECTION
+    { selector: 'section:nth-child(7) > div > h2', key: 'join-us-heading' },
     { selector: '.join-btn-green', key: 'learn-more-btn' },
     { selector: '.join-btn-blue', key: 'learn-more-btn' },
-    { selector: 'section:nth-child(8) > div > h2', key: 'social-heading' }, // Stay connected section
-    { selector: 'section:nth-child(8) > div > p:nth-of-type(1)', key: 'social-sub', innerHTML: true }, // Subtitle must handle the <a> tag
-    // Social icons
-    { selector: 'section:nth-child(8) .social-p:nth-child(1)', key: 'org-line1' },
-    { selector: 'section:nth-child(8) .social-p:nth-child(2)', key: 'org-line2' },
-    { selector: 'section:nth-child(8) > div > div > div:nth-child(1) p', key: 'org-line1-2' },
-    { selector: 'section:nth-child(8) > div > div > div:nth-child(2) p', key: 'org-line1-2' },
-    { selector: 'section:nth-child(8) > div > div > div:nth-child(3) p', key: 'org-line1-2' },
-    { selector: 'section:nth-child(8) > div > div > div:nth-child(4) p', key: 'org-line1-2' },
-    { selector: 'section:nth-child(8) > div > div > div:nth-child(5) p', key: 'org-line1-2' },
+    // STAY CONNECTED SECTION
+    { selector: 'section:nth-child(8) > div > h2', key: 'social-heading' },
+    { selector: 'section:nth-child(8) > div > p:nth-of-type(1)', key: 'social-sub', innerHTML: true },
+    { selector: 'section:nth-child(8) > div > div > div:nth-child(1) p', key: 'org-line1-2', innerHTML: true },
+    { selector: 'section:nth-child(8) > div > div > div:nth-child(2) p', key: 'org-line1-2', innerHTML: true },
+    { selector: 'section:nth-child(8) > div > div > div:nth-child(3) p', key: 'org-line1-2', innerHTML: true },
+    { selector: 'section:nth-child(8) > div > div > div:nth-child(4) p', key: 'org-line1-2', innerHTML: true },
+    { selector: 'section:nth-child(8) > div > div > div:nth-child(5) p', key: 'org-line1-2', innerHTML: true },
 
-    // Footer
+    // ABOUT US PAGE (Headings & Body)
+    { selector: '#aboutPage .about-main-title', key: 'about-main-title' },
+    { selector: '#aboutPage .about-block:nth-child(2) h3', key: 'about-who' },
+    { selector: '#aboutPage .about-block:nth-child(2) p', key: 'about-who-body' },
+    { selector: '#aboutPage .about-block:nth-child(3) h3', key: 'about-mission' },
+    { selector: '#aboutPage .about-block:nth-child(3) p', key: 'about-mission-body' },
+    { selector: '#aboutPage .about-block:nth-child(4) h3', key: 'about-vision' },
+    { selector: '#aboutPage .about-block:nth-child(4) p', key: 'about-vision-body' },
+    { selector: '#aboutPage .about-block:nth-child(5) h3', key: 'about-what' },
+    { selector: '#aboutPage .about-block:nth-child(5) p', key: 'about-what-body' },
+    { selector: '#aboutPage .floatHomeBtn', key: 'join-home-btn', attribute: 'aria-label' },
+
+    // FOCUS PAGE (Hero and Body)
+    { selector: '#focusPage .focus-hero h2', key: 'focus-main-title' },
+    { selector: '#focusPage .focus-hero p', key: 'focus-sub' },
+    { selector: '#focusPage .focus-card:nth-child(1) .focus-ribbon', key: 'focus-education' },
+    { selector: '#focusPage .focus-card:nth-child(1) h3', key: 'focus-education' },
+    { selector: '#focusPage .focus-card:nth-child(1) p', key: 'focus-education-body' },
+    { selector: '#focusPage .focus-card:nth-child(2) .focus-ribbon', key: 'focus-environment' },
+    { selector: '#focusPage .focus-card:nth-child(2) h3', key: 'focus-environment' },
+    { selector: '#focusPage .focus-card:nth-child(2) p', key: 'focus-environment-body' },
+    { selector: '#focusPage .focus-card:nth-child(3) .focus-ribbon', key: 'focus-health' },
+    { selector: '#focusPage .focus-card:nth-child(3) h3', key: 'focus-health' },
+    { selector: '#focusPage .focus-card:nth-child(3) p', key: 'focus-health-body' },
+    { selector: '#focusPage .focus-card:nth-child(4) .focus-ribbon', key: 'focus-humanitarian' },
+    { selector: '#focusPage .focus-card:nth-child(4) h3', key: 'focus-humanitarian' },
+    { selector: '#focusPage .focus-card:nth-child(4) p', key: 'focus-humanitarian-body' },
+    { selector: '#focusPage .focus-card:nth-child(5) .focus-ribbon', key: 'focus-youth' },
+    { selector: '#focusPage .focus-card:nth-child(5) h3', key: 'focus-youth' },
+    { selector: '#focusPage .focus-card:nth-child(5) p', key: 'focus-youth-body' },
+    { selector: '#focusPage .floatHomeBtn', key: 'join-home-btn', attribute: 'aria-label' },
+
+    // JOIN/LOGIN PAGE
+    { selector: '#joinPage .join-title', key: 'join-title' },
+    { selector: '#joinPage .join-sub', key: 'join-sub' },
+    { selector: '#joinPage #logoutBtn', key: 'join-logout' },
+    { selector: '#joinPage .join-card:nth-child(4) h3', key: 'join-email-login' },
+    { selector: '#joinPage #emailInput', key: 'join-email-input', attribute: 'placeholder' },
+    { selector: '#joinPage #passwordInput', key: 'join-password-input', attribute: 'placeholder' },
+    { selector: '#joinPage #emailLoginBtn', key: 'join-login-btn' },
+    { selector: '#joinPage #emailSignupBtn', key: 'join-signup-btn' },
+    { selector: '#joinPage .join-card:nth-child(5) h3', key: 'join-social-or' },
+    { selector: '#joinPage #googleBtn', key: 'join-google-btn' },
+    { selector: '#joinPage .floating-home-btn', key: 'join-home-btn', attribute: 'aria-label' },
+
+    // FOOTER
     { selector: 'footer h4:nth-child(1)', key: 'news-footer-title' },
-    { selector: 'footer p a:nth-child(1)', key: 'news-press' },
-    { selector: 'footer p a:nth-child(2)', key: 'news-blog' },
-    { selector: 'footer p a:nth-child(3)', key: 'news-reports' },
+    { selector: 'footer p a:nth-child(1)', key: 'news-updates' },
+    { selector: 'footer p a:nth-child(2)', key: 'news-announcements' },
+    
     { selector: 'footer h4:nth-child(4)', key: 'media-footer-title' },
-    { selector: 'footer p a:nth-child(4)', key: 'media-video' },
-    { selector: 'footer p a:nth-child(5)', key: 'media-logos' },
-    { selector: 'footer p a:nth-child(6)', key: 'media-guidelines' },
+    { selector: 'footer p a:nth-child(3)', key: 'media-gallery' },
+    { selector: 'footer p a:nth-child(4)', key: 'media-downloads' },
+    
     { selector: 'footer h4:nth-child(7)', key: 'connect-footer-title' },
-    { selector: 'footer p a:nth-child(7)', key: 'connect-careers' },
-    { selector: 'footer p a:nth-child(8)', key: 'connect-support' },
-    { selector: 'footer p a:nth-child(9)', key: 'connect-partnerships' },
-    { selector: 'footer p a:nth-child(10)', key: 'connect-privacy' },
-    { selector: 'footer .social-p-address', key: 'org-line1-2-address' },
-    { selector: 'footer > div > div > div:nth-child(2) p', key: 'org-line1-2-address' },
-    { selector: 'footer > div > div:nth-child(2) > p', key: 'org-line1-2-address' }, // The address block text
+    { selector: 'footer p a:nth-child(5)', key: 'connect-contact' },
+    { selector: 'footer p a:nth-child(6)', key: 'connect-involved' },
+    { selector: 'footer p a:nth-child(7)', key: 'connect-privacy' },
+    
+    { selector: 'footer > div > div > div:nth-child(2) > p', key: 'org-line1-2-address', innerHTML: true },
 
-    { selector: 'footer div:nth-child(3) span', key: 'interest-footer-title' },
-    { selector: 'footer div:nth-child(3) a:nth-child(1)', key: 'interest-program' },
-    { selector: 'footer div:nth-child(3) a:nth-child(2)', key: 'interest-donation' },
-    { selector: 'footer div:nth-child(3) a:nth-child(3)', key: 'interest-results' },
+    { selector: 'footer > div > div:nth-child(2) > div > span', key: 'interest-footer-title' },
+    { selector: 'footer > div > div:nth-child(2) > div > a:nth-child(2)', key: 'interest-work' },
+    { selector: 'footer > div > div:nth-child(2) > div > a:nth-child(3)', key: 'interest-donate' },
+    { selector: 'footer > div > div:nth-child(2) > div > a:nth-child(4)', key: 'interest-volunteer' },
+
     { selector: 'footer > div > p:nth-child(6)', key: 'disclaimer-text' },
-    { selector: '.site-footer', key: 'footer-copyright-full' } // The final footer
+    { selector: 'footer > span:last-child', key: 'footer-copyright-full' }
 ];
 
-/**
- * Switches the language of the page content.
- * @param {string} langCode - The target language code ('en', 'fr', 'de', 'es', 'sw').
- */
+
+
 function switchLanguage(langCode) {
     const languageData = translations[langCode];
     if (!languageData) return;
@@ -2314,35 +2605,35 @@ function switchLanguage(langCode) {
     textMappings.forEach(mapping => {
         document.querySelectorAll(mapping.selector).forEach(element => {
             const translation = languageData[mapping.key];
-            if (translation) {
-                // Special handling for the social media subtitle to preserve the inner <a> tag
-                if (mapping.key === 'social-sub') {
-                    const socialMediaLink = element.querySelector('a');
-                    const [part1, part2] = translation.split('social media');
-                    // Rebuild HTML with preserved link
-                    element.innerHTML = `${part1} <a href="#" style="color:#2C70E4;text-decoration:none;font-weight:600;">social media</a> ${part2}`;
-                } else if (mapping.key === 'org-line1-2-address') {
-                    // Special handling for the address block to preserve <br> and address lines
-                    // Note: This relies on the translation being structured to split on "Foundation" (or similar marker)
-                    const [line1, line2] = translation.split('Foundation');
-                    const currentAddress = element.innerHTML.split('<br>');
-                    element.innerHTML = `${line1} Foundation<br>${currentAddress[1]}<br>${currentAddress[2]}<br>${currentAddress[3]}`;
-                } else if (mapping.key === 'org-line1-2') {
-                    // Special handling for social icon names
-                    element.innerHTML = `${languageData['org-line1']}<br>${languageData['org-line2']}`;
-                } else if (mapping.key === 'footer-copyright-full') {
-                    // Special handling for the site footer to retain the dynamic year
-                    const year = document.getElementById('year').textContent;
-                    element.textContent = `© ${year} ${languageData['footer-copyright']}`;
-                }
-                else {
+            if (!translation) return; // Skip if no translation is found
+
+            // --- Simplified and Corrected Translation Logic ---
+            
+            // Handle translations that contain HTML (like the social-sub, org-line1-2, and address)
+            if (mapping.key === 'social-sub' || mapping.key === 'org-line1-2-address' || mapping.key === 'org-line1-2') {
+                element.innerHTML = translation;
+            } 
+            // Handle the footer copyright with the dynamic year
+            else if (mapping.key === 'footer-copyright-full') {
+                const year = new Date().getFullYear(); // Use current year, assuming 'year' element might not exist
+                // The translation key is likely defined as: '© {{year}} Swiss Aid Connect Foundation • All rights reserved.'
+                // A better approach is to use string replace for dynamic content:
+                element.textContent = translation.replace('{{year}}', year);
+            }
+            // Handle all standard text content
+            else {
+                // Check for attribute mapping first
+                if (mapping.attribute) {
+                    element.setAttribute(mapping.attribute, translation);
+                } else {
                     element.textContent = translation;
                 }
             }
+            // --- End of Corrected Logic ---
         });
     });
 
-    // 2. Update dynamic mobile menu content if it's already generated
+    // 2. Update dynamic mobile menu content (Your original logic here seems fine)
     const inner = document.getElementById('mobileMenuInner');
     if (inner && inner.innerHTML.trim() !== "") {
         const mobileLinks = inner.querySelectorAll('a');
@@ -2360,7 +2651,11 @@ function switchLanguage(langCode) {
             }
         });
     }
-} // End of switchLanguage function
+} 
+// End of switchLanguage function
+
+
+
 // Language Cycling Logic (EN -> FR -> DE -> ES -> SW -> EN)
 const langToggle = document.getElementById('langToggle');
 if (langToggle) {
@@ -2636,7 +2931,6 @@ onAuthStateChanged(auth, (user) => {
 
   
 </script>
-
 
 
 
