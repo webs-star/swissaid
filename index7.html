@@ -2480,7 +2480,7 @@ const translations = {
 };
 
 
-```javascript
+
 // Map of HTML elements to their corresponding translation keys
 const textMappings = [
     // Top Nav
@@ -2612,35 +2612,35 @@ function switchLanguage(langCode) {
     textMappings.forEach(mapping => {
         document.querySelectorAll(mapping.selector).forEach(element => {
             const translation = languageData[mapping.key];
-            if (translation) {
-                // Special handling for the social media subtitle to preserve the inner <a> tag
-                if (mapping.key === 'social-sub') {
-                    const socialMediaLink = element.querySelector('a');
-                    const [part1, part2] = translation.split('social media');
-                    // Rebuild HTML with preserved link
-                    element.innerHTML = `${part1} <a href="#" style="color:#2C70E4;text-decoration:none;font-weight:600;">social media</a> ${part2}`;
-                } else if (mapping.key === 'org-line1-2-address') {
-                    // Special handling for the address block to preserve <br> and address lines
-                    // Note: This relies on the translation being structured to split on "Foundation" (or similar marker)
-                    const [line1, line2] = translation.split('Foundation');
-                    const currentAddress = element.innerHTML.split('<br>');
-                    element.innerHTML = `${line1} Foundation<br>${currentAddress[1]}<br>${currentAddress[2]}<br>${currentAddress[3]}`;
-                } else if (mapping.key === 'org-line1-2') {
-                    // Special handling for social icon names
-                    element.innerHTML = `${languageData['org-line1']}<br>${languageData['org-line2']}`;
-                } else if (mapping.key === 'footer-copyright-full') {
-                    // Special handling for the site footer to retain the dynamic year
-                    const year = document.getElementById('year').textContent;
-                    element.textContent = `© ${year} ${languageData['footer-copyright']}`;
-                }
-                else {
+            if (!translation) return; // Skip if no translation is found
+
+            // --- Simplified and Corrected Translation Logic ---
+            
+            // Handle translations that contain HTML (like the social-sub, org-line1-2, and address)
+            if (mapping.key === 'social-sub' || mapping.key === 'org-line1-2-address' || mapping.key === 'org-line1-2') {
+                element.innerHTML = translation;
+            } 
+            // Handle the footer copyright with the dynamic year
+            else if (mapping.key === 'footer-copyright-full') {
+                const year = new Date().getFullYear(); // Use current year, assuming 'year' element might not exist
+                // The translation key is likely defined as: '© {{year}} Swiss Aid Connect Foundation • All rights reserved.'
+                // A better approach is to use string replace for dynamic content:
+                element.textContent = translation.replace('{{year}}', year);
+            }
+            // Handle all standard text content
+            else {
+                // Check for attribute mapping first
+                if (mapping.attribute) {
+                    element.setAttribute(mapping.attribute, translation);
+                } else {
                     element.textContent = translation;
                 }
             }
+            // --- End of Corrected Logic ---
         });
     });
 
-    // 2. Update dynamic mobile menu content if it's already generated
+    // 2. Update dynamic mobile menu content (Your original logic here seems fine)
     const inner = document.getElementById('mobileMenuInner');
     if (inner && inner.innerHTML.trim() !== "") {
         const mobileLinks = inner.querySelectorAll('a');
@@ -2658,7 +2658,11 @@ function switchLanguage(langCode) {
             }
         });
     }
-} // End of switchLanguage function
+} 
+// End of switchLanguage function
+
+
+
 // Language Cycling Logic (EN -> FR -> DE -> ES -> SW -> EN)
 const langToggle = document.getElementById('langToggle');
 if (langToggle) {
