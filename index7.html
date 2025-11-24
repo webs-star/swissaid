@@ -1294,7 +1294,7 @@ footer.site-footer{
 <body>
 <!-- Top Utility Nav -->
 <div class="top-nav">
-   <a href="#">A.I</a>
+  
   
  <a href="#" data-key="join-nav">Portal</a>
  
@@ -1374,7 +1374,7 @@ footer.site-footer{
 
         <div class="hero-ctas" role="group" aria-label="Primary calls to action">
           <a class="cta cta-primary" href="#" data-key="focus-nav">Our Programs</a>
-          <a class="cta cta-outline" href="#">Volunteer</a>
+          <a href="#" class="cta cta-outline" data-key="join-nav">Volunteer</a>
         </div>
       </div>
     </div>
@@ -1483,7 +1483,7 @@ footer.site-footer{
           clip-path:polygon(0 0,100% 0,88% 100%,0% 100%);
           background:#04C26A;
           transition:0.3s;
-        ">Learn more</a>
+          " data-key="join-nav">Learn more</a>
       </div>
 
       <!-- Card 2 -->
@@ -1500,7 +1500,7 @@ footer.site-footer{
           clip-path:polygon(0 0,100% 0,88% 100%,0% 100%);
           background:#2C70E4;
           transition:0.3s;
-        ">Learn more</a>
+      " data-key="focus-nav">Learn more</a>
       </div>
 
     </div>
@@ -1886,14 +1886,25 @@ footer.site-footer{
 
     </div>
 
+
+
     <!-- Also of Interest -->
     <div style="margin-top:40px;font-size:15px;">
       <span style="color:#F5C22D;font-weight:700;letter-spacing:1px;">ALSO OF INTEREST</span>
-      &nbsp;&nbsp; <a class="ft" href="#">Our Work</a> &nbsp;&bull;&nbsp;
-      <a class="ft" href="#">Donate</a> &nbsp;&bull;&nbsp;
-      <a class="ft" href="#">Volunteer</a>
+      &nbsp;&nbsp; <a class="ft" href="#" data-key="focus-nav">Our Work</a> &nbsp;&bull;&nbsp;
+<a class="ft" href="#" data-key="focus-nav">Our Work</a>
+
+
+
+      <a class="ft" href="#">Donate</a>&nbsp;&bull;&nbsp;
+     <a href="#" class="ft" data-key="join-nav">Volunteer</a>
+      
     </div>
 
+
+
+    
+<a class="cta cta-primary" href="#" data-key="focus-nav">Our Programs</a>
     <!-- Separator Line -->
     <div style="border-bottom:1px solid rgba(255,255,255,0.3);margin:35px 0;"></div>
 
@@ -1928,8 +1939,7 @@ document.getElementById('btnMenu').addEventListener('click', () => {
         const languageText = currentLang.toUpperCase();
 
         inner.innerHTML = `
-            <a href="#">A.I</a>
-           
+            
             <a href="#" id="mobileLangToggle">${languageText}</a>
 
              <a href="#" data-key="about-us-nav">About Us</a>
