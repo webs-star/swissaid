@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Environment & Climate Action | NGO</title>
+
+<style>
+:root{
+    --blue:#0b61b6;
+    --yellow:#f5c400;
+    --purple:#7a2fa6;
+    --green:#2a9d8f;
+    --orange:#f4a261;
+    --text:#333;
+    --max-width:1200px;
+}
+body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#fafafa;
+    color:var(--text);
+    line-height:1.6;
+}
+
+/* Header */
+header{
+    background:var(--green);
+    color:#fff;
+    padding:20px;
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    align-items:center;
+}
+.logo{ height:70px; }
+.page-title{ margin:0; font-size:32px; text-align:center; }
+.empty{ height:70px; }
+
+/* Sections */
+.section{
+    max-width:var(--max-width);
+    margin:60px auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:40px;
+    padding:60px 20px;
+    position:relative;
+    border-radius:20px;
+    overflow:hidden;
+    min-height:350px;
+    background-repeat:no-repeat;
+    background-size:cover;
+    background-blend-mode:overlay;
+}
+.section:nth-child(even){ flex-direction:row-reverse; }
+.text{ width:50%; }
+.text h2{ margin-top:0; font-size:28px; color:#fff; }
+
+/* Image shapes */
+.shape-round{ width:50%; border-radius:50%; }
+.shape-rounded{ width:50%; border-radius:20px; }
+.shape-diagonal{ width:50%; clip-path:polygon(0 0, 100% 10%, 100% 100%, 0 90%); border-radius:10px; }
+.shape-hexagon{ width:50%; clip-path:polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%); }
+.shape-leaf{ width:50%; clip-path:ellipse(50% 40% at 50% 50%); }
+
+.center-section{ text-align:center; flex-direction:column; color:#fff; }
+
+/* Footer */
+footer{ background:#222; color:#eee; padding:30px; text-align:center; margin-top:60px; }
+
+/* Responsive */
+@media(max-width:900px){
+    .section{ flex-direction:column !important; text-align:center; }
+    .section img, .text{ width:100%; }
+}
+
+/* BACKGROUNDS FOR ENVIRONMENT PAGE */
+.section:nth-of-type(1){ background:linear-gradient(135deg,#2a9d8f,#21867a); color:#fff; }
+.section:nth-of-type(2){ background:linear-gradient(135deg,#0b61b6,#1a75d1); color:#fff; }
+.section:nth-of-type(3){ background:linear-gradient(135deg,#f4a261,#e07b39); color:#333; }
+.section:nth-of-type(4){ background:linear-gradient(135deg,#7a2fa6,#5e2080); color:#fff; }
+.section:nth-of-type(5){ background:linear-gradient(135deg,#f5c400,#d4a500); color:#333; }
+
+.section > *{ position:relative; z-index:2; }
+</style>
+</head>
+
+<body>
+
+<header>
+    <img src="https://cdn.pixabay.com/photo/2025/10/15/04/31/mahonia-9895458_640.jpg" class="logo">
+    <h1 class="page-title">Environmental Stewardship</h1>
+    <div class="empty"></div>
+</header>
+
+<!-- 1. Environment Overview - Circular Image -->
+<section class="section">
+    <div class="text">
+        <h2>Protecting Our Planet for Future Generations</h2>
+        <p>We empower communities to conserve natural resources, fight climate change, and adopt sustainable lifestyles. Our programs ensure cleaner environments, greener spaces, and resilient ecosystems.</p>
+    </div>
+    <img src="https://cdn.pixabay.com/photo/2025/10/15/04/31/mahonia-9895458_640.jpg" class="shape-round">
+</section>
+
+<!-- 2. Conservation Programs -->
+<section class="section">
+    <div class="text">
+        <h2>Community Conservation Initiatives</h2>
+        <p>We support tree planting, clean-up drives, ecosystem restoration, and awareness campaigns that build environmental responsibility and protect biodiversity.</p>
+    </div>
+    <img src="https://cdn.pixabay.com/photo/2015/11/23/03/36/medical-emergency-1057706_1280.jpg" class="shape-rounded">
+</section>
+
+<!-- 3. Climate Action Programs -->
+<section class="section">
+    <img src="https://cdn.pixabay.com/photo/2016/11/14/03/16/book-1822474_640.jpg" class="shape-diagonal">
+    <div class="text">
+        <h2>Climate Change Adaptation & Resilience</h2>
+        <p>We equip communities with knowledge and tools to withstand droughts, floods, and environmental hazards through early warning systems and climate-smart practices.</p>
+    </div>
+</section>
+
+<!-- 4. Sustainable Practices -->
+<section class="section">
+    <img src="https://cdn.pixabay.com/photo/2020/03/03/04/52/pill-4897529_640.jpg" class="shape-hexagon">
+    <div class="text">
+        <h2>Promoting Sustainable Living</h2>
+        <p>We promote waste reduction, recycling, renewable energy use, and eco-friendly habits to protect the environment while improving livelihoods.</p>
+    </div>
+</section>
+
+<!-- 5. Youth in Green Innovation -->
+<section class="section">
+    <div class="text">
+        <h2>Youth-Led Environmental Innovation</h2>
+        <p>We empower young innovators to create eco-friendly solutions, lead green projects, and build a sustainable future through mentorship and innovation labs.</p>
+    </div>
+    <img src="https://cdn.pixabay.com/photo/2013/12/06/10/21/disability-224130_640.jpg" class="shape-leaf">
+</section>
+
+<footer>
+    © <script>document.write(new Date().getFullYear());</script> Environmental Stewardship — All Rights Reserved.
+</footer>
+
+</body>
+</html>
