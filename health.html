@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Health & Wellness | NGO</title>
+
+<style>
+:root{
+    --blue:#0b61b6;
+    --yellow:#f5c400;
+    --purple:#7a2fa6;
+    --green:#2a9d8f;
+    --orange:#f4a261;
+    --text:#333;
+    --max-width:1200px;
+}
+body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#fafafa;
+    color:var(--text);
+    line-height:1.6;
+}
+
+/* Header */
+header{
+    background:#e63946;
+    color:#fff;
+    padding:20px;
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    align-items:center;
+}
+.logo{ height:70px; }
+.page-title{ margin:0; font-size:32px; text-align:center; }
+.empty{ height:70px; }
+
+/* Sections */
+.section{
+    max-width:var(--max-width);
+    margin:60px auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:40px;
+    padding:60px 20px;
+    position:relative;
+    border-radius:20px;
+    overflow:hidden;
+    min-height:350px;
+    background-repeat:no-repeat;
+    background-size:cover;
+    background-blend-mode:overlay;
+}
+.section:nth-child(even){ flex-direction:row-reverse; }
+.text{ width:50%; }
+.text h2{ margin-top:0; font-size:28px; color:#fff; }
+
+/* Image shapes */
+.shape-round{ width:50%; border-radius:50%; }
+.shape-rounded{ width:50%; border-radius:20px; }
+.shape-diagonal{ width:50%; clip-path:polygon(0 0, 100% 10%, 100% 100%, 0 90%); border-radius:10px; }
+.shape-hexagon{ width:50%; clip-path:polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%); }
+.shape-leaf{ width:50%; clip-path:ellipse(50% 40% at 50% 50%); }
+
+.center-section{ text-align:center; flex-direction:column; color:#fff; }
+
+/* Footer */
+footer{ background:#222; color:#eee; padding:30px; text-align:center; margin-top:60px; }
+
+/* Responsive */
+@media(max-width:900px){
+    .section{ flex-direction:column !important; text-align:center; }
+    .section img, .text{ width:100%; }
+}
+
+/* BACKGROUNDS FOR HEALTH PAGE */
+.section:nth-of-type(1){ background:linear-gradient(135deg,#e63946,#d62828); color:#fff; }
+.section:nth-of-type(2){ background:linear-gradient(135deg,#f77f00,#fcbf49); color:#333; }
+.section:nth-of-type(3){ background:linear-gradient(135deg,#2a9d8f,#21867a); color:#fff; }
+.section:nth-of-type(4){ background:linear-gradient(135deg,#0b61b6,#1a75d1); color:#fff; }
+.section:nth-of-type(5){ background:linear-gradient(135deg,#7a2fa6,#5e2080); color:#fff; }
+
+.section > *{ position:relative; z-index:2; }
+</style>
+</head>
+
+<body>
+
+<header>
+    <img src="https://cdn.pixabay.com/photo/2025/10/15/04/31/mahonia-9895458_640.jpg" class="logo">
+    <h1 class="page-title">Health & Wellness</h1>
+    <div class="empty"></div>
+</header>
+
+<!-- 1. Health Overview - Circular Image -->
+<section class="section">
+    <div class="text">
+        <h2>Promoting Healthy Communities</h2>
+        <p>Our health programs improve access to essential medical services, health education, and critical interventions for vulnerable populations. We focus on disease prevention, maternal and child health, and mental wellness.</p>
+    </div>
+    <img src="https://cdn.pixabay.com/photo/2025/10/15/04/31/mahonia-9895458_640.jpg" class="shape-round">
+</section>
+
+<!-- 2. Medical Outreach -->
+<section class="section">
+    <div class="text">
+        <h2>Medical Outreach Programs</h2>
+        <p>We organize mobile clinics, vaccination drives, and health awareness campaigns to reach underserved communities. Our efforts provide lifesaving care and health education to those in need.</p>
+    </div>
+    <img src="https://cdn.pixabay.com/photo/2015/11/23/03/36/medical-emergency-1057706_1280.jpg" class="shape-rounded">
+</section>
+
+<!-- 3. Maternal & Child Health -->
+<section class="section">
+    <img src="https://cdn.pixabay.com/photo/2016/11/14/03/16/book-1822474_640.jpg" class="shape-diagonal">
+    <div class="text">
+        <h2>Maternal and Child Health</h2>
+        <p>We provide specialized programs for maternal care, early childhood development, nutrition, and immunization. These interventions ensure healthier mothers and children in communities we serve.</p>
+    </div>
+</section>
+
+<!-- 4. Mental Wellness & Education -->
+<section class="section">
+    <img src="https://cdn.pixabay.com/photo/2020/03/03/04/52/pill-4897529_640.jpg" class="shape-hexagon">
+    <div class="text">
+        <h2>Mental Health & Wellness</h2>
+        <p>Our initiatives promote mental wellness through awareness, counseling, community support, and training programs. We aim to reduce stigma and support holistic health in society.</p>
+    </div>
+</section>
+
+<!-- 5. Youth Health Engagement -->
+<section class="section">
+    <div class="text">
+        <h2>Engaging Youth in Health</h2>
+        <p>We educate young people on healthy lifestyles, disease prevention, and community health leadership. Youth-led health campaigns empower the next generation to champion wellness in their communities.</p>
+    </div>
+    <img src="https://cdn.pixabay.com/photo/2013/12/06/10/21/disability-224130_640.jpg" class="shape-leaf">
+</section>
+
+<footer>
+    © <script>document.write(new Date().getFullYear());</script> Health & Wellness — All Rights Reserved.
+</footer>
+
+</body>
+</html>
