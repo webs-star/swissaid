@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Youth Empowerment | NGO</title>
+
+<style>
+:root{
+    --blue:#0b61b6;
+    --yellow:#f5c400;
+    --purple:#7a2fa6;
+    --green:#2a9d8f;
+    --orange:#f4a261;
+    --text:#333;
+    --max-width:1200px;
+}
+body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:#fafafa;
+    color:var(--text);
+    line-height:1.6;
+}
+
+/* Header */
+header{
+    background:#7a2fa6;
+    color:#fff;
+    padding:20px;
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    align-items:center;
+}
+.logo{ height:70px; }
+.page-title{ margin:0; font-size:32px; text-align:center; }
+.empty{ height:70px; }
+
+/* Sections */
+.section{
+    max-width:var(--max-width);
+    margin:60px auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:40px;
+    padding:60px 20px;
+    position:relative;
+    border-radius:20px;
+    overflow:hidden;
+    min-height:350px;
+    background-repeat:no-repeat;
+    background-size:cover;
+    background-blend-mode:overlay;
+}
+.section:nth-child(even){ flex-direction:row-reverse; }
+.text{ width:50%; }
+.text h2{ margin-top:0; font-size:28px; color:#fff; }
+
+/* Image shapes */
+.shape-round{ width:50%; border-radius:50%; }
+.shape-rounded{ width:50%; border-radius:20px; }
+.shape-diagonal{ width:50%; clip-path:polygon(0 0, 100% 10%, 100% 100%, 0 90%); border-radius:10px; }
+.shape-hexagon{ width:50%; clip-path:polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%); }
+.shape-leaf{ width:50%; clip-path:ellipse(50% 40% at 50% 50%); }
+
+.center-section{ text-align:center; flex-direction:column; color:#fff; }
+
+/* Footer */
+footer{ background:#222; color:#eee; padding:30px; text-align:center; margin-top:60px; }
+
+/* Responsive */
+@media(max-width:900px){
+    .section{ flex-direction:column !important; text-align:center; }
+    .section img, .text{ width:100%; }
+}
+
+/* BACKGROUNDS FOR YOUTH EMPOWERMENT PAGE */
+.section:nth-of-type(1){ background:linear-gradient(135deg,#7a2fa6,#5e2080); color:#fff; }
+.section:nth-of-type(2){ background:linear-gradient(135deg,#2a9d8f,#21867a); color:#fff; }
+.section:nth-of-type(3){ background:linear-gradient(135deg,#f5c400,#d4a500); color:#333; }
+.section:nth-of-type(4){ background:linear-gradient(135deg,#0b61b6,#1a75d1); color:#fff; }
+.section:nth-of-type(5){ background:linear-gradient(135deg,#f4a261,#e07b39); color:#333; }
+
+.section > *{ position:relative; z-index:2; }
+</style>
+</head>
+
+<body>
+
+<header>
+    <img src="https://cdn.pixabay.com/photo/2025/10/15/04/31/mahonia-9895458_640.jpg" class="logo">
+    <h1 class="page-title">Youth Empowerment</h1>
+    <div class="empty"></div>
+</header>
+
+<!-- 1. Youth Leadership -->
+<section class="section">
+    <div class="text">
+        <h2>Leadership Development</h2>
+        <p>We nurture leadership skills in youth through training, mentorship, and opportunities to lead projects. Our programs empower young people to take initiative and become change agents in their communities.</p>
+    </div>
+    <img src="https://cdn.pixabay.com/photo/2025/10/15/04/31/mahonia-9895458_640.jpg" class="shape-round">
+</section>
+
+<!-- 2. Life Skills Training -->
+<section class="section">
+    <div class="text">
+        <h2>Life Skills & Confidence</h2>
+        <p>Our programs focus on building communication, problem-solving, critical thinking, and decision-making skills. Youth gain confidence and resilience to navigate challenges in personal and professional life.</p>
+    </div>
+    <img src="https://cdn.pixabay.com/photo/2015/11/23/03/36/medical-emergency-1057706_1280.jpg" class="shape-rounded">
+</section>
+
+<!-- 3. Entrepreneurship & Startups -->
+<section class="section center-section">
+    <img src="https://cdn.pixabay.com/photo/2016/11/14/03/16/book-1822474_640.jpg" class="shape-diagonal">
+    <div class="text">
+        <h2>Entrepreneurship Programs</h2>
+        <p>Youth receive hands-on guidance to create businesses, develop financial literacy, and implement innovative ideas. Incubation support and mentorship help launch successful startups.</p>
+    </div>
+</section>
+
+<!-- 4. Community Engagement -->
+<section class="section">
+    <img src="https://cdn.pixabay.com/photo/2020/03/03/04/52/pill-4897529_640.jpg" class="shape-hexagon">
+    <div class="text">
+        <h2>Community Projects</h2>
+        <p>We encourage young people to engage in social initiatives that address local challenges. Projects in health, environment, and education foster civic responsibility and social impact.</p>
+    </div>
+</section>
+
+<!-- 5. Digital Skills & Mentorship -->
+<section class="section center-section">
+    <div class="text">
+        <h2>Digital Skills & Mentorship</h2>
+        <p>Youth gain exposure to coding, data, digital marketing, and online collaboration tools. Mentorship from professionals guides them to use technology to enhance learning, employability, and entrepreneurship.</p>
+    </div>
+    <img src="https://cdn.pixabay.com/photo/2013/12/06/10/21/disability-224130_640.jpg" class="shape-leaf">
+</section>
+
+<footer>
+    © <script>document.write(new Date().getFullYear());</script> Youth Empowerment — All Rights Reserved.
+</footer>
+
+</body>
+</html>
