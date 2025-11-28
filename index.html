@@ -1315,13 +1315,57 @@ footer.site-footer{
   height: 88px;
 }
 
+
+
+
+
+
+
+  
+.lang-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.lang-menu {
+    position: absolute;
+    display: none;
+    background: white;
+    border: 1px solid #ccc;
+    padding: 6px 0;
+    border-radius: 6px;
+    min-width: 120px;
+    z-index: 99;
+}
+
+.lang-menu a {
+    display: block;
+    padding: 8px 12px;
+    text-decoration: none;
+    color: #333;
+}
+
+.lang-menu a:hover {
+    background: #f2f2f2;
+}
 </style>
 </head>
 <body>
 <!-- Top Utility Nav -->
 <div class="top-nav">
   
-   <a href="#" id="langToggle" data-lang="en">EN</a> 
+  
+  <div class="lang-dropdown">
+    <a href="#" id="langToggle" data-lang="en">EN ▾</a>
+
+    <div class="lang-menu" id="langMenu">
+        <a href="#" data-lang-select="en">English</a>
+        <a href="#" data-lang-select="fr">French</a>
+        <a href="#" data-lang-select="de">German</a>
+        <a href="#" data-lang-select="es">Spanish</a>
+        <a href="#" data-lang-select="sw">Swahili</a>
+    </div>
+</div>
  <a href="#" data-key="join-nav">Portal</a>
  
 
@@ -1946,68 +1990,119 @@ footer.site-footer{
 
 
 <script>
-// Mobile Menu button handler
+// ---------------- MOBILE MENU HANDLER ----------------
 const btnMenu = document.getElementById('btnMenu');
 const mobileMenu = document.getElementById('mobileMenu');
 const mobileMenuInner = document.getElementById('mobileMenuInner');
 
 btnMenu.addEventListener('click', () => {
-    // Toggle menu visibility
+    // Toggle mobile visibility
     mobileMenu.classList.toggle('open');
 
-    // Only generate menu content once
+    // Generate content once
     if (mobileMenuInner.innerHTML.trim() === "") {
+
         const currentLang = document.getElementById('langToggle').getAttribute('data-lang') || 'en';
         const languageText = currentLang.toUpperCase();
 
+        // MOBILE CONTENT
         mobileMenuInner.innerHTML = `
-            <a href="#" id="mobileLangToggle">${languageText}</a>
+            <div class="mobile-lang-dropdown">
+                <a href="#" id="mobileLangToggle">${languageText} ▾</a>
+                <div class="mobile-lang-menu">
+                    <a href="#" data-mobile-lang="en">English</a>
+                    <a href="#" data-mobile-lang="fr">Français</a>
+                    <a href="#" data-mobile-lang="de">Deutsch</a>
+                    <a href="#" data-mobile-lang="es">Español</a>
+                    <a href="#" data-mobile-lang="sw">Kiswahili</a>
+                </div>
+            </div>
+
             <a href="#" data-key="about-us-nav">About Us</a>
             <a href="#" data-key="focus-nav">Our Focus Areas</a>
         `;
 
-        // Close mobile menu when any link is clicked
-        const links = mobileMenuInner.querySelectorAll('a');
+        // Close menu when any link is clicked
+        const links = mobileMenuInner.querySelectorAll('a:not(#mobileLangToggle)');
         links.forEach(link => {
             link.addEventListener('click', () => {
                 mobileMenu.classList.remove('open');
             });
         });
-        // Add event listener to the newly created mobile language link
-        const mobileLangToggle = document.getElementById('mobileLangToggle');
-        
-        // This is the listener that cycles the languages (EN -> FR -> DE -> ES -> SW -> EN)
-        mobileLangToggle.addEventListener('click', (e) => {
-            e.preventDefault();
-            
-            // Get the current language from the desktop toggle's attribute
-            const currentLang = document.getElementById('langToggle').getAttribute('data-lang');
-            let nextLang;
 
-            switch (currentLang) {
-                case 'en': nextLang = 'fr'; break;
-                case 'fr': nextLang = 'de'; break;
-                case 'de': nextLang = 'es'; break;
-                case 'es': nextLang = 'sw'; break;
-                case 'sw': nextLang = 'en'; break;
-                default: nextLang = 'en';
-            }
-            
-            // 1. Call the main switch function to change all text on the page
-            switchLanguage(nextLang); 
-            localStorage.setItem('userLang', nextLang);
-            
-            // 2. The switchLanguage function (Block #1) will handle updating the text content
+        // ---------- MOBILE DROPDOWN ----------
+        const mobileLangToggle = document.getElementById("mobileLangToggle");
+        const mobileLangMenu = mobileMenuInner.querySelector(".mobile-lang-menu");
+
+        // Toggle mobile dropdown
+        mobileLangToggle.addEventListener("click", (e) => {
+            e.preventDefault();
+            mobileLangMenu.style.display =
+                mobileLangMenu.style.display === "block" ? "none" : "block";
         });
 
-        // Apply current translation to the new mobile links
-        // This ensures the menu links are translated immediately upon first open
+        // Select language in mobile dropdown
+        mobileMenuInner.querySelectorAll("[data-mobile-lang]").forEach(option => {
+            option.addEventListener("click", (e) => {
+                e.preventDefault();
+
+                const selectedLang = option.getAttribute("data-mobile-lang");
+
+                // Update desktop toggle
+                const desktopToggle = document.getElementById("langToggle");
+                desktopToggle.innerHTML = selectedLang.toUpperCase() + " ▾";
+                desktopToggle.setAttribute("data-lang", selectedLang);
+
+                // Update mobile toggle
+                mobileLangToggle.innerHTML = selectedLang.toUpperCase() + " ▾";
+
+                // Save & switch
+                localStorage.setItem("userLang", selectedLang);
+                switchLanguage(selectedLang);
+
+                // Close mobile dropdown
+                mobileLangMenu.style.display = "none";
+            });
+        });
+
+        // Apply translation immediately
         switchLanguage(currentLang);
     }
 });
 
-// START OF LANGUAGE SCRIPT
 
+
+// ---------------- DESKTOP LANGUAGE DROPDOWN ----------------
+
+// Toggle dropdown visibility
+document.getElementById("langToggle").addEventListener("click", (e) => {
+    e.preventDefault();
+    document.getElementById("langMenu").style.display =
+        document.getElementById("langMenu").style.display === "block"
+            ? "none"
+            : "block";
+});
+
+// Selecting desktop language
+document.querySelectorAll("[data-lang-select]").forEach(option => {
+    option.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        const selectedLang = option.getAttribute("data-lang-select");
+
+        // Update desktop
+        const desktopToggle = document.getElementById("langToggle");
+        desktopToggle.innerHTML = selectedLang.toUpperCase() + " ▾";
+        desktopToggle.setAttribute("data-lang", selectedLang);
+
+        // Save & switch
+        localStorage.setItem("userLang", selectedLang);
+        switchLanguage(selectedLang);
+
+        // Close dropdown
+        document.getElementById("langMenu").style.display = "none";
+    });
+});
 
 
 const translations = {
