@@ -1901,46 +1901,36 @@ footer.site-footer{
 
 
 
-<footer class="site-footer" style="background:#0C2856;color:#fff;font-family:Arial, sans-serif;padding:60px 0 40px;">
-  <div style="max-width:1300px;margin:auto;padding:0 30px;">
+
+
+<footer class="site-footer" style="background:#0C2856;color:#fff;font-family:Arial, sans-serif;padding:40px 0;">
+  <div style="max-width:1100px;margin:auto;padding:0 20px;">
 
     <!-- Top Grid -->
-    <div style="display:grid;grid-template-columns:2fr 1fr;gap:30px;">
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:30px;">
 
-      <!-- Left columns -->
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:30px;">
-
-        <!-- NEWS -->
+      <!-- Left Links -->
+      <div style="display:flex;gap:50px;flex-wrap:wrap;">
         <div>
-          <h4 style="font-size:15px;font-weight:700;color:#F5C22D;letter-spacing:1px;margin-bottom:15px;">NEWS</h4>
+          <h4 style="font-size:15px;font-weight:700;color:#F5C22D;letter-spacing:1px;margin-bottom:10px;">NEWS</h4>
           <p><a class="ft" href="#">Updates</a></p>
           <p><a class="ft" href="#">Announcements</a></p>
         </div>
 
-        <!-- MEDIA -->
         <div>
-          <h4 style="font-size:15px;font-weight:700;color:#F5C22D;letter-spacing:1px;margin-bottom:15px;">MEDIA</h4>
-          <p><a class="ft" href="#">Gallery</a></p>
-          <p><a class="ft" href="#">Downloads</a></p>
-        </div>
-
-        <!-- CONNECT -->
-        <div>
-          <h4 style="font-size:15px;font-weight:700;color:#F5C22D;letter-spacing:1px;margin-bottom:15px;">CONNECT</h4>
+          <h4 style="font-size:15px;font-weight:700;color:#F5C22D;letter-spacing:1px;margin-bottom:10px;">CONNECT</h4>
           <p><a class="ft" href="#">Contact Us</a></p>
           <p><a class="ft" href="#">Get Involved</a></p>
           <p><a class="ft" href="#">Privacy Policy</a></p>
         </div>
-
       </div>
 
-      <!-- Right Side: Social + Address -->
+      <!-- Right: Social + Office -->
       <div style="text-align:left;">
         <div style="font-size:22px;display:flex;gap:15px;margin-bottom:15px;">
           <a class="ft" href="#">📘</a>
           <a class="ft" href="#">📷</a>
           <a class="ft" href="#">💼</a>
-          <a class="ft" href="#">✖</a>
           <a class="ft" href="#">▶</a>
           <a class="ft" href="#">📱</a>
         </div>
@@ -1950,42 +1940,40 @@ footer.site-footer{
         <p style="margin:0;line-height:1.6;">
           Swiss Aid Connect Foundation<br>
           45 Example Avenue<br>
-          Zurich, Switzerland 8001<br>
-          +41 44 555 88 99
+          Nairobi, Kenya<br>
+          +254 712 345 678
         </p>
       </div>
 
     </div>
 
-
-
     <!-- Also of Interest -->
-    <div style="margin-top:40px;font-size:15px;">
+    <div style="margin-top:30px;font-size:15px;">
       <span style="color:#F5C22D;font-weight:700;letter-spacing:1px;">ALSO OF INTEREST</span>
-      &nbsp;&nbsp; <a class="ft" href="#" data-key="focus-nav">Our Work</a> &nbsp;&bull;&nbsp;
-      <a class="ft" href="#">Donate</a>&nbsp;&bull;&nbsp;
-     <a href="#" class="ft" data-key="join-nav">Volunteer</a>
-      
+      &nbsp;&nbsp;
+      <a class="ft" href="#">Our Work</a> &nbsp;&bull;&nbsp;
+      <a class="ft" href="#">Donate</a> &nbsp;&bull;&nbsp;
+      <a class="ft" href="#">Volunteer</a>
     </div>
 
-
-
-  
     <!-- Separator Line -->
-    <div style="border-bottom:1px solid rgba(255,255,255,0.3);margin:35px 0;"></div>
+    <div style="border-bottom:1px solid rgba(255,255,255,0.3);margin:25px 0;"></div>
 
-    <!-- Disclaimers -->
+    <!-- Disclaimer -->
     <p style="font-size:13px;line-height:1.7;max-width:900px;">
-      Swiss Aid Connect Foundation is a nonprofit organization committed to supporting communities through education, health, youth programs, and humanitarian assistance. Information on this website may be updated as our work expands.
+      Swiss Aid Connect Foundation is a nonprofit organization supporting communities through education, health, youth programs, and humanitarian assistance. Website content may be updated as our work expands.
     </p>
 
   </div>
 
-  © <span id="year"></span> Swiss Aid Connect Foundation • All rights reserved.
+  <div style="text-align:center;margin-top:20px;">
+    © <span id="year"></span> Swiss Aid Connect Foundation • All rights reserved.
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </footer>
-
-
-
 
 
 
