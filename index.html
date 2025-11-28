@@ -2731,100 +2731,71 @@ function switchLanguage(langCode) {
     const languageData = translations[langCode];
     if (!languageData) return;
 
+    // Update desktop language toggle
     const langToggle = document.getElementById('langToggle');
     if (langToggle) {
-        langToggle.textContent = langCode.toUpperCase();
+        langToggle.textContent = langCode.toUpperCase() + " ▾";
         langToggle.setAttribute('data-lang', langCode);
     }
 
-    // 1. Translate elements based on the hardcoded textMappings array
+    // 1. Translate elements using textMappings
     textMappings.forEach(mapping => {
         document.querySelectorAll(mapping.selector).forEach(element => {
             const translation = languageData[mapping.key];
-            if (!translation) return; // Skip if no translation is found
+            if (!translation) return;
 
-            // --- Simplified and Corrected Translation Logic ---
-            
-            // Handle translations that contain HTML (like the social-sub, org-line1-2, and address)
-            if (mapping.key === 'social-sub' || mapping.key === 'org-line1-2-address' || mapping.key === 'org-line1-2') {
+            // Handle translations with HTML
+            if (
+                mapping.key === 'social-sub' ||
+                mapping.key === 'org-line1-2-address' ||
+                mapping.key === 'org-line1-2'
+            ) {
                 element.innerHTML = translation;
-            } 
-            // Handle the footer copyright with the dynamic year
+            }
+
+            // Footer copyright with dynamic year
             else if (mapping.key === 'footer-copyright-full') {
-                const year = new Date().getFullYear(); // Use current year, assuming 'year' element might not exist
-                // The translation key is likely defined as: '© {{year}} Swiss Aid Connect Foundation • All rights reserved.'
-                // A better approach is to use string replace for dynamic content:
+                const year = new Date().getFullYear();
                 element.textContent = translation.replace('{{year}}', year);
             }
-            // Handle all standard text content
-           else {
-    // Skip Google button so the logo image is not removed
-    if (element.id === 'googleBtn') return;
 
-    if (mapping.attribute) {
-        element.setAttribute(mapping.attribute, translation);
-    } else {
-        element.textContent = translation;
-    }
-}
+            // Normal translations
+            else {
+                // Keep Google button image safe
+                if (element.id === 'googleBtn') return;
 
+                if (mapping.attribute) {
+                    element.setAttribute(mapping.attribute, translation);
+                } else {
+                    element.textContent = translation;
+                }
+            }
         });
     });
 
-    // 2. Update dynamic mobile menu content (Your original logic here seems fine)
+    // 2. Update MOBILE menu translations
     const inner = document.getElementById('mobileMenuInner');
     if (inner && inner.innerHTML.trim() !== "") {
         const mobileLinks = inner.querySelectorAll('a');
+
         mobileLinks.forEach(link => {
             const dataKey = link.getAttribute('data-key');
-            
+
             if (link.id === 'mobileLangToggle') {
-                // Update the language toggle text
-                link.textContent = langCode.toUpperCase();
-            } else if (dataKey && languageData[dataKey]) {
-                // Translate the navigation links using their data-key
+                link.textContent = langCode.toUpperCase() + " ▾";
+            }
+            else if (dataKey && languageData[dataKey]) {
                 link.textContent = languageData[dataKey];
-            } else if (link.textContent === 'A.I' || link.textContent === 'Portal') {
-                // Keep static links as is
+            }
+            else if (link.textContent === 'A.I' || link.textContent === 'Portal') {
+                // Leave static items unchanged
             }
         });
     }
 } 
-// End of switchLanguage function
+// END OF switchLanguage FUNCTION
 
 
-
-// Language Cycling Logic (EN -> FR -> DE -> ES -> SW -> EN)
-const langToggle = document.getElementById('langToggle');
-if (langToggle) {
-    langToggle.addEventListener('click', (e) => {
-        e.preventDefault();
-        const currentLang = langToggle.getAttribute('data-lang');
-        let nextLang;
-
-        switch (currentLang) {
-            case 'en':
-                nextLang = 'fr';
-                break;
-            case 'fr':
-                nextLang = 'de';
-                break;
-            case 'de':
-                nextLang = 'es'; // New link
-                break;
-            case 'es':
-                nextLang = 'sw'; // New link
-                break;
-            case 'sw':
-                nextLang = 'en'; // Cycle back to start
-                break;
-            default:
-                nextLang = 'en';
-        }
-        switchLanguage(nextLang);
-        localStorage.setItem('userLang', nextLang);
-    });
-}
 
 
 
