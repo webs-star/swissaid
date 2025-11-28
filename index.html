@@ -2030,16 +2030,23 @@ btnMenu.addEventListener('click', () => {
             });
         });
 
-        // ---------- MOBILE DROPDOWN ----------
-        const mobileLangToggle = document.getElementById("mobileLangToggle");
-        const mobileLangMenu = mobileMenuInner.querySelector(".mobile-lang-menu");
 
-        // Toggle mobile dropdown
-        mobileLangToggle.addEventListener("click", (e) => {
-            e.preventDefault();
-            mobileLangMenu.style.display =
-                mobileLangMenu.style.display === "block" ? "none" : "block";
-        });
+// ---------- MOBILE DROPDOWN ----------
+const mobileLangToggle = document.getElementById("mobileLangToggle");
+const mobileLangMenu = mobileMenuInner.querySelector(".mobile-lang-menu");
+
+// Ensure dropdown is hidden when loaded
+mobileLangMenu.style.display = "none";
+
+// Toggle mobile dropdown
+mobileLangToggle.addEventListener("click", (e) => {
+    e.preventDefault();
+    mobileLangMenu.style.display =
+        mobileLangMenu.style.display === "block" ? "none" : "block";
+});
+
+
+      
 
         // Select language in mobile dropdown
         mobileMenuInner.querySelectorAll("[data-mobile-lang]").forEach(option => {
