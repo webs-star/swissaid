@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hybrid Education Centre | NGO</title>
 <style>
+/* --- SAME CSS AS YOUR ORIGINAL (UNCHANGED) --- */
 :root{
     --blue:#0b61b6;
     --yellow:#f5c400;
@@ -32,7 +33,6 @@ header{
 .logo{ height:70px; }
 .page-title{ margin:0; font-size:32px; text-align:center; }
 .empty{ height:70px; }
-
 .section{
     max-width:var(--max-width);
     margin:60px auto;
@@ -47,36 +47,23 @@ header{
 .section:nth-child(even){ flex-direction:row-reverse; }
 .text{ width:50%; }
 .text h2{ margin-top:0; font-size:28px; }
-
 .shape-round{ width:50%; border-radius:50%; }
 .shape-rounded{ width:50%; border-radius:20px; }
 .shape-diagonal{ width:50%; clip-path:polygon(0 0, 100% 10%, 100% 100%, 0 90%); }
 .shape-hexagon{ width:50%; clip-path:polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%); }
 .shape-leaf{ width:50%; clip-path:ellipse(50% 40% at 50% 50%); }
-
 .center-section{ text-align:center; flex-direction:column; }
-
-footer{
-    background:#222;
-    color:#eee;
-    padding:30px;
-    text-align:center;
-    margin-top:60px;
-}
-
+footer{ background:#222; color:#eee; padding:30px; text-align:center; margin-top:60px; }
 @media(max-width:900px){
     .section{ flex-direction:column !important; text-align:center; }
     .section img, .text{ width:100%; }
 }
-
 .section:nth-of-type(1){ background:linear-gradient(135deg, #0b61b6, #1a75d1); color:#fff; }
 .section:nth-of-type(2){ background:linear-gradient(135deg, #2a9d8f, #21867a); color:#fff; }
 .section:nth-of-type(3){ background:linear-gradient(135deg, #f4a261, #e07b39); }
 .section:nth-of-type(4){ background:linear-gradient(135deg, #7a2fa6, #5e2080); color:#fff; }
 .section:nth-of-type(5){ background:linear-gradient(135deg, #f5c400, #d4a500); }
-
 .section.swiss{ background:linear-gradient(135deg, #004080, #0066cc); color:#fff; }
-
 .floating-home-btn{
   position:fixed;
   bottom:28px;
@@ -98,106 +85,103 @@ footer{
   <div class="empty"></div>
 </header>
 
-<!-- Section 1 -->
+<!-- SECTION 1 -->
 <section class="section">
   <div class="text">
     <h2>Hybrid Education Overview</h2>
-    <p>We provide flexible digital and in-school learning support to children and youth across Nairobi, Murang’a, Kiambu, Nakuru, Machakos, and Mombasa. Our hybrid model combines technology access, community-based tutoring, skills development, and school support.</p>
+    <p>We provide flexible digital and in-school learning support to children and youth across Nairobi, Murang’a, Kiambu, Nakuru, Machakos, and Mombasa.</p>
 
-    <p><strong>Operational status:</strong> The Hybrid Education Centres are fully established and operational. Each centre is equipped with computers, reliable satellite internet (Starlink), trained local facilitators, and structured learning schedules.</p>
+    <p><strong>Current Status:</strong> Our Hybrid Education Centres are already established and operational, offering structured digital learning, local mentorship, and access to international academic content.</p>
 
-    <p>Students access international online courses, live virtual sessions, and hands-on mentorship in a safe community-based environment, ensuring continuity of learning regardless of infrastructure limitations.</p>
+    <p>The centres combine physical classrooms with digital platforms, AI-supported learning, and live virtual sessions from global educators. This model ensures continuity, quality, and affordability for learners who would otherwise be excluded from tertiary education.</p>
+
+    <p><strong>Support Needed:</strong> To fully equip and scale these centres, we seek donor support to strengthen classroom infrastructure, expand internet capacity, and subsidize learning costs for students who cannot fully afford fees.</p>
   </div>
   <img src="https://images.pexels.com/photos/12497062/pexels-photo-12497062.jpeg" class="shape-round">
 </section>
 
-<!-- Section 2 -->
+<!-- SECTION 2 -->
 <section class="section">
   <div class="text">
     <h2>Why Hybrid Learning?</h2>
-    <p>Kenya faces large education gaps: overcrowded classrooms, limited digital access, high cost of online learning, and lack of post-secondary opportunities.</p>
+    <p>Sub-Saharan Africa has a tertiary education enrollment rate of under 10%, compared to over 70% in developed regions. Traditional institutions often fail due to cost, distance, and infrastructure challenges.</p>
 
-    <p>The hybrid education model bridges these gaps by combining:</p>
     <ul>
-      <li>Online and offline digital lessons</li>
-      <li>Community learning hubs with mentorship</li>
-      <li>Live sessions with educators and professionals</li>
-      <li>AI-supported personalized learning paths</li>
+      <li>World-class digital content from international universities</li>
+      <li>Live online sessions with professors and entrepreneurs</li>
+      <li>On-site mentoring and guided study sessions</li>
+      <li>AI-supported personalized learning and assessment</li>
       <li>Lower cost per student through shared infrastructure</li>
     </ul>
 
-    <p>This approach delivers globally competitive education outcomes at a sustainable community level.</p>
+    <p>This hybrid approach makes quality education accessible while remaining financially sustainable with donor and partner support.</p>
   </div>
   <img src="https://res.cloudinary.com/dwvt4e9o2/image/upload/v1766164104/ChatGPT_Image_Dec_19_2025_08_07_57_PM_usfrdk.png" class="shape-rounded">
 </section>
 
-<!-- Section 3 -->
+<!-- SECTION 3 -->
 <section class="section center-section">
   <img src="https://images.pexels.com/photos/5905700/pexels-photo-5905700.jpeg" class="shape-diagonal">
   <div class="text">
     <h2>Counties We Serve</h2>
-    <p>Our Hybrid Education Centres actively operate in:</p>
+    <p>Hybrid Education Centres are operational in:</p>
     <ul>
-      <li><strong>Nairobi:</strong> Digital hubs, youth entrepreneurship, startup incubation.</li>
-      <li><strong>Murang’a:</strong> Rural learning hubs, girls mentorship, environmental education.</li>
-      <li><strong>Kiambu & Thika:</strong> ICT skills, coding, after-school hybrid centres.</li>
-      <li><strong>Nakuru:</strong> STEM mentorship, hybrid labs, teacher capacity-building.</li>
-      <li><strong>Machakos:</strong> Weekend digital learning and distance support.</li>
-      <li><strong>Mombasa:</strong> Vocational skills, blended learning, youth empowerment.</li>
+      <li><strong>Nairobi:</strong> Urban youth, startup incubation, digital entrepreneurship.</li>
+      <li><strong>Murang’a:</strong> Rural learning hubs, girls mentorship.</li>
+      <li><strong>Kiambu & Thika:</strong> ICT skills and coding centres.</li>
+      <li><strong>Nakuru & Machakos:</strong> Weekend hybrid learning hubs.</li>
+      <li><strong>Mombasa:</strong> Vocational skills and blended learning.</li>
     </ul>
-
-    <p>Each centre is implemented in collaboration with local partners, ensuring community ownership and sustainability.</p>
   </div>
 </section>
 
-<!-- Section 4 -->
+<!-- SECTION 4 -->
 <section class="section center-section">
   <img src="https://images.pexels.com/photos/35154092/pexels-photo-35154092.jpeg" class="shape-hexagon">
   <div class="text">
-    <h2>Program Activities</h2>
+    <h2>What Happens Inside Our Centres</h2>
     <ul>
-      <li>Fully equipped computer-based learning stations</li>
-      <li>Live virtual sessions with professors and industry experts</li>
+      <li>30+ computer learning stations per centre</li>
+      <li>Satellite internet (Starlink) with backup power</li>
       <li>Core course: Introduction to Entrepreneurship</li>
       <li>Electives in digital skills, AI, vocational training</li>
-      <li>Startup incubation, mentorship, and pitch development</li>
+      <li>Startup incubation and certification</li>
     </ul>
 
-    <p>Students work on real-world projects, build business models, and receive continuous assessment leading to certification.</p>
+    <p><strong>Donor Opportunity:</strong> Support is needed for computers, screens, routers, software licenses, and internet subscriptions to maintain and expand access.</p>
   </div>
 </section>
 
-<!-- Section 5 -->
+<!-- SECTION 5 -->
 <section class="section center-section">
   <div class="text">
     <h2>Program Impact</h2>
-    <p>Since implementation, the Hybrid Education Centres have achieved measurable results:</p>
     <ul>
-      <li>300+ students trained</li>
+      <li>300+ students trained through operational centres</li>
       <li>Multiple youth-led startups launched</li>
-      <li>Improved digital literacy and employability</li>
+      <li>Improved employability and digital literacy</li>
       <li>Reduced youth migration through local opportunity creation</li>
-      <li>Strengthened NGO and community partnerships</li>
     </ul>
+
+    <p><strong>Student Support Need:</strong> While some learners contribute partial fees (approx. €30/month), many cannot fully afford costs. Donor funding helps bridge this gap, ensuring no capable student is excluded due to financial hardship.</p>
   </div>
   <img src="https://images.pexels.com/photos/11025022/pexels-photo-11025022.jpeg" class="shape-leaf">
 </section>
 
-<!-- Swiss Aid -->
+<!-- SWISS AID -->
 <section class="section swiss center-section">
   <div class="text">
     <h2>Swiss Aid Connect Foundation Partnership</h2>
-    <p>The centres are implemented in partnership with Swiss Aid Connect Foundation using a proven hybrid education model.</p>
-
+    <p>Implemented in partnership with Swiss Aid Connect Foundation, our centres follow a proven hybrid education model integrating:</p>
     <ul>
-      <li>International university courses</li>
+      <li>International university content</li>
       <li>Live sessions with professors and entrepreneurs</li>
       <li>AI-driven learning personalization</li>
-      <li>Starlink internet and optional solar power</li>
+      <li>Reliable infrastructure (Starlink & solar options)</li>
       <li>Recognized certification pathways</li>
     </ul>
 
-    <p>This partnership ensures quality, scalability, and long-term sustainability with gradual transfer to local ownership.</p>
+    <p><strong>Invitation to Partners:</strong> We invite donors, institutions, and corporate partners to support classroom equipment, connectivity, and student scholarships, ensuring long-term sustainability and expanded impact.</p>
   </div>
 </section>
 
