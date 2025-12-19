@@ -21,8 +21,6 @@ body{
     color:var(--text);
     line-height:1.6;
 }
-
-/* Header */
 header{
     background:var(--blue);
     color:#fff;
@@ -35,7 +33,6 @@ header{
 .page-title{ margin:0; font-size:32px; text-align:center; }
 .empty{ height:70px; }
 
-/* Sections */
 .section{
     max-width:var(--max-width);
     margin:60px auto;
@@ -44,178 +41,172 @@ header{
     justify-content:space-between;
     gap:40px;
     padding:60px 20px;
-    position:relative;
     border-radius:20px;
-    overflow:hidden;
     min-height:350px;
-    background-repeat:no-repeat;
-    background-size:cover;
-    background-blend-mode:overlay;
 }
 .section:nth-child(even){ flex-direction:row-reverse; }
 .text{ width:50%; }
 .text h2{ margin-top:0; font-size:28px; }
 
-/* Image shapes */
-.shape-round{ width:50%; border-radius:50%; height:auto; }
+.shape-round{ width:50%; border-radius:50%; }
 .shape-rounded{ width:50%; border-radius:20px; }
-.shape-diagonal{ width:50%; clip-path:polygon(0 0, 100% 10%, 100% 100%, 0 90%); border-radius:10px; }
+.shape-diagonal{ width:50%; clip-path:polygon(0 0, 100% 10%, 100% 100%, 0 90%); }
 .shape-hexagon{ width:50%; clip-path:polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%); }
 .shape-leaf{ width:50%; clip-path:ellipse(50% 40% at 50% 50%); }
+
 .center-section{ text-align:center; flex-direction:column; }
 
-/* Footer */
-footer{ background:#222; color:#eee; padding:30px; text-align:center; margin-top:60px; }
+footer{
+    background:#222;
+    color:#eee;
+    padding:30px;
+    text-align:center;
+    margin-top:60px;
+}
 
-/* Responsive */
 @media(max-width:900px){
     .section{ flex-direction:column !important; text-align:center; }
     .section img, .text{ width:100%; }
 }
 
-/* Colored backgrounds */
 .section:nth-of-type(1){ background:linear-gradient(135deg, #0b61b6, #1a75d1); color:#fff; }
 .section:nth-of-type(2){ background:linear-gradient(135deg, #2a9d8f, #21867a); color:#fff; }
-.section:nth-of-type(3){ background:linear-gradient(135deg, #f4a261, #e07b39); color:#333; }
+.section:nth-of-type(3){ background:linear-gradient(135deg, #f4a261, #e07b39); }
 .section:nth-of-type(4){ background:linear-gradient(135deg, #7a2fa6, #5e2080); color:#fff; }
-.section:nth-of-type(5){ background:linear-gradient(135deg, #f5c400, #d4a500); color:#333; }
-/* Swiss Aid Connect Section */
+.section:nth-of-type(5){ background:linear-gradient(135deg, #f5c400, #d4a500); }
+
 .section.swiss{ background:linear-gradient(135deg, #004080, #0066cc); color:#fff; }
 
-/* Text overlay */
-.section > *{ position:relative; z-index:2; }
-
-/* floating home button */
-.floating-home-btn {
-  position: fixed;
-  bottom: 28px;
-  right: 28px;
-  z-index: 99999;
-  border-radius: 16px;
-  padding: 10px 12px;
-  background: #0C2856;
-  border: none;
-  color: white;
+.floating-home-btn{
+  position:fixed;
+  bottom:28px;
+  right:28px;
+  border-radius:16px;
+  padding:10px 12px;
+  background:#0C2856;
+  border:none;
+  color:white;
 }
 </style>
 </head>
+
 <body>
 
 <header>
-    <div class="logo-box">
-        <img src="https://res.cloudinary.com/dwvt4e9o2/image/upload/v1763476964/Screenshot_73_e5hyu9.png" class="logo">
-    </div>
-    <h1 class="page-title">Hybrid Education Centre for Youth</h1>
-    <div class="empty"></div>
+  <img src="https://res.cloudinary.com/dwvt4e9o2/image/upload/v1763476964/Screenshot_73_e5hyu9.png" class="logo">
+  <h1 class="page-title">Hybrid Education Centre for Youth</h1>
+  <div class="empty"></div>
 </header>
 
-<!-- Section 1: Overview -->
+<!-- Section 1 -->
 <section class="section">
-    <div class="text">
-        <h2>Hybrid Education Overview</h2>
-        <p>We provide flexible digital and in-school learning support to children and youth across Nairobi, Murang’a, Kiambu, Nakuru, Machakos, and Mombasa. Our hybrid model combines technology access, community-based tutoring, skills development, and school support, ensuring that every learner can access quality education.</p>
-        <p>Through online modules, mentorship, practical fieldwork, and structured study sessions, students gain knowledge, confidence, and digital literacy to succeed in the 21st century.</p>
-    </div>
-    <img src="https://images.pexels.com/photos/12497062/pexels-photo-12497062.jpeg" class="shape-round" alt="Hybrid Learning Overview">
+  <div class="text">
+    <h2>Hybrid Education Overview</h2>
+    <p>We provide flexible digital and in-school learning support to children and youth across Nairobi, Murang’a, Kiambu, Nakuru, Machakos, and Mombasa. Our hybrid model combines technology access, community-based tutoring, skills development, and school support.</p>
+
+    <p><strong>Operational status:</strong> The Hybrid Education Centres are fully established and operational. Each centre is equipped with computers, reliable satellite internet (Starlink), trained local facilitators, and structured learning schedules.</p>
+
+    <p>Students access international online courses, live virtual sessions, and hands-on mentorship in a safe community-based environment, ensuring continuity of learning regardless of infrastructure limitations.</p>
+  </div>
+  <img src="https://images.pexels.com/photos/12497062/pexels-photo-12497062.jpeg" class="shape-round">
 </section>
 
-<!-- Section 2: Why Hybrid Learning -->
+<!-- Section 2 -->
 <section class="section">
-    <div class="text">
-        <h2>Why Hybrid Learning?</h2>
-        <p>Kenya faces large education gaps: overcrowded classrooms, limited digital access in rural and peri-urban areas, high cost of online learning, and lack of after-school support. Hybrid education bridges these gaps by combining:</p>
-        <ul>
-            <li>Digital lessons accessible online and offline</li>
-            <li>Community learning hubs and study centers</li>
-            <li>School-based tutoring and mentorship</li>
-            <li>Home-based support through worksheets and mobile tutors</li>
-            <li>Skill development in ICT, entrepreneurship, and STEM</li>
-        </ul>
-    </div>
-    <img src="https://res.cloudinary.com/dwvt4e9o2/image/upload/v1766164104/ChatGPT_Image_Dec_19_2025_08_07_57_PM_usfrdk.png" class="shape-rounded" alt="Why Hybrid Learning">
+  <div class="text">
+    <h2>Why Hybrid Learning?</h2>
+    <p>Kenya faces large education gaps: overcrowded classrooms, limited digital access, high cost of online learning, and lack of post-secondary opportunities.</p>
 
+    <p>The hybrid education model bridges these gaps by combining:</p>
+    <ul>
+      <li>Online and offline digital lessons</li>
+      <li>Community learning hubs with mentorship</li>
+      <li>Live sessions with educators and professionals</li>
+      <li>AI-supported personalized learning paths</li>
+      <li>Lower cost per student through shared infrastructure</li>
+    </ul>
 
-   
+    <p>This approach delivers globally competitive education outcomes at a sustainable community level.</p>
+  </div>
+  <img src="https://res.cloudinary.com/dwvt4e9o2/image/upload/v1766164104/ChatGPT_Image_Dec_19_2025_08_07_57_PM_usfrdk.png" class="shape-rounded">
 </section>
 
-<!-- Section 3: County Focus -->
+<!-- Section 3 -->
 <section class="section center-section">
-    <img src="https://images.pexels.com/photos/5905700/pexels-photo-5905700.jpeg" class="shape-diagonal" alt="Counties">
-    <div class="text">
-        <h2>Counties We Serve</h2>
-        <p>Our programs are active in:</p>
-        <ul>
-            <li><strong>Nairobi:</strong> Urban and informal settlement learners, digital clubs, safe weekend hubs, ICT skills and youth empowerment.</li>
-            <li><strong>Murang’a:</strong> Rural learners, community hybrid hubs, girls' mentorship, school tree planting, environmental education.</li>
-            <li><strong>Kiambu:</strong> High youth population, digital literacy classes, coding, after-school tutoring centers.</li>
-            <li><strong>Nakuru:</strong> Mixture of rural and urban learners, STEM mentorship, hybrid labs, teacher capacity-building.</li>
-            <li><strong>Machakos:</strong> Distance challenges addressed by hybrid model, weekend digital lessons, after-school hubs.</li>
-            <li><strong>Mombasa:</strong> Coastal youth, blended learning, vocational skills, girls empowerment, community study centers.</li>
-        </ul>
-    </div>
+  <img src="https://images.pexels.com/photos/5905700/pexels-photo-5905700.jpeg" class="shape-diagonal">
+  <div class="text">
+    <h2>Counties We Serve</h2>
+    <p>Our Hybrid Education Centres actively operate in:</p>
+    <ul>
+      <li><strong>Nairobi:</strong> Digital hubs, youth entrepreneurship, startup incubation.</li>
+      <li><strong>Murang’a:</strong> Rural learning hubs, girls mentorship, environmental education.</li>
+      <li><strong>Kiambu & Thika:</strong> ICT skills, coding, after-school hybrid centres.</li>
+      <li><strong>Nakuru:</strong> STEM mentorship, hybrid labs, teacher capacity-building.</li>
+      <li><strong>Machakos:</strong> Weekend digital learning and distance support.</li>
+      <li><strong>Mombasa:</strong> Vocational skills, blended learning, youth empowerment.</li>
+    </ul>
+
+    <p>Each centre is implemented in collaboration with local partners, ensuring community ownership and sustainability.</p>
+  </div>
 </section>
 
-<!-- Section 4: Program Activities -->
+<!-- Section 4 -->
 <section class="section center-section">
-    <img src="https://images.pexels.com/photos/35154092/pexels-photo-35154092.jpeg" class="shape-hexagon" alt="Program Activities">
-    <div class="text">
-        <h2>Program Activities</h2>
-        <ul>
-            <li><strong>Digital Learning Access:</strong> Tablets, online/offline lessons, low-data solutions.</li>
-            <li><strong>Community Hybrid Learning Hubs:</strong> Safe spaces with internet, mentors, quiet study zones, girls' STEM clubs.</li>
-            <li><strong>School Visits & Support:</strong> Teacher training, mentorship, digital labs, study materials.</li>
-            <li><strong>Youth Skills Development:</strong> ICT, coding, digital marketing, entrepreneurship, career guidance.</li>
-            <li><strong>Home-Based Support:</strong> Mobile tutors, worksheets, radio/audio lessons, WhatsApp homework help.</li>
-        </ul>
-    </div>
+  <img src="https://images.pexels.com/photos/35154092/pexels-photo-35154092.jpeg" class="shape-hexagon">
+  <div class="text">
+    <h2>Program Activities</h2>
+    <ul>
+      <li>Fully equipped computer-based learning stations</li>
+      <li>Live virtual sessions with professors and industry experts</li>
+      <li>Core course: Introduction to Entrepreneurship</li>
+      <li>Electives in digital skills, AI, vocational training</li>
+      <li>Startup incubation, mentorship, and pitch development</li>
+    </ul>
+
+    <p>Students work on real-world projects, build business models, and receive continuous assessment leading to certification.</p>
+  </div>
 </section>
 
-<!-- Section 5: Impact -->
+<!-- Section 5 -->
 <section class="section center-section">
-    <div class="text">
-        <h2>Program Impact</h2>
-        <p>Across the six counties, our hybrid education program has:</p>
-        <ul>
-            <li>Reached hundreds of learners with digital and physical support</li>
-            <li>Established multiple community learning hubs</li>
-            <li>Trained teachers and youth mentors</li>
-            <li>Provided devices and learning materials to students</li>
-            <li>Empowered girls in STEM and leadership programs</li>
-            <li>Improved exam readiness, digital literacy, and vocational skills</li>
-            <li>Integrated environmental education through school tree planting initiatives</li>
-        </ul>
-    </div>
-    <img src=" https://images.pexels.com/photos/11025022/pexels-photo-11025022.jpeg" class="shape-leaf" alt="Program Impact">
+  <div class="text">
+    <h2>Program Impact</h2>
+    <p>Since implementation, the Hybrid Education Centres have achieved measurable results:</p>
+    <ul>
+      <li>300+ students trained</li>
+      <li>Multiple youth-led startups launched</li>
+      <li>Improved digital literacy and employability</li>
+      <li>Reduced youth migration through local opportunity creation</li>
+      <li>Strengthened NGO and community partnerships</li>
+    </ul>
+  </div>
+  <img src="https://images.pexels.com/photos/11025022/pexels-photo-11025022.jpeg" class="shape-leaf">
 </section>
 
-<!-- Swiss Aid Connect Section -->
+<!-- Swiss Aid -->
 <section class="section swiss center-section">
-    <div class="text">
-        <h2>Swiss Aid Connect Foundation - Hybrid Learning Centers</h2>
-        <p>Our scalable hybrid model integrates top-tier digital education, AI-driven personalization, and local mentorship to bridge gaps effectively. Program highlights include:</p>
-        <ul>
-            <li>Online courses from top universities</li>
-            <li>Live sessions with professors and entrepreneurs</li>
-            <li>Tutor guidance and AI-supported learning</li>
-            <li>Hands-on entrepreneurship and certification</li>
-            <li>Reliable technical infrastructure (Starlink & solar power)</li>
-        </ul>
-        <p>Curriculum: Introduction to Entrepreneurship → Opportunity Discovery → Business Model → Marketing → Pitch Development. Elective modules include Digital Skills, Vocational Training, and Academic Programs.</p>
-        <p>Impact: Centers established in Mombasa, Nairobi, Thika, and Kiambu have trained over 300 students and launched multiple startups, providing youth with skills, entrepreneurship opportunities, and digital literacy.</p>
-    </div>
+  <div class="text">
+    <h2>Swiss Aid Connect Foundation Partnership</h2>
+    <p>The centres are implemented in partnership with Swiss Aid Connect Foundation using a proven hybrid education model.</p>
+
+    <ul>
+      <li>International university courses</li>
+      <li>Live sessions with professors and entrepreneurs</li>
+      <li>AI-driven learning personalization</li>
+      <li>Starlink internet and optional solar power</li>
+      <li>Recognized certification pathways</li>
+    </ul>
+
+    <p>This partnership ensures quality, scalability, and long-term sustainability with gradual transfer to local ownership.</p>
+  </div>
 </section>
 
-<a href="https://webs-star.github.io/swissaid/" target="_blank" aria-label="Home">
-  <button class="floating-home-btn floatHomeBtn" aria-label="Home">
-    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M3 12l9-9 9 9"/>
-      <path d="M9 21V9h6v12"/>
-    </svg>
-  </button>
+<a href="https://webs-star.github.io/swissaid/" target="_blank">
+  <button class="floating-home-btn">🏠</button>
 </a>
 
 <footer>
-    © <script>document.write(new Date().getFullYear());</script> Hybrid Education Centre — All Rights Reserved.
+  © <script>document.write(new Date().getFullYear());</script> Hybrid Education Centre — All Rights Reserved.
 </footer>
 
 </body>
