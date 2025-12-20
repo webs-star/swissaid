@@ -96,22 +96,80 @@ footer{ background:#222; color:#eee; padding:30px; text-align:center; margin-top
   border: none;
   color: white;
 }
+
+/* LANGUAGE DROPDOWN */
+.lang-dropdown{
+  position:relative;
+  justify-self:end;
+  z-index:1000;
+}
+
+#langToggle{
+  background:#ffffff;
+  color:#000;
+  padding:6px 10px;
+  border-radius:8px;
+  text-decoration:none;
+  font-weight:bold;
+  font-size:14px;
+  cursor:pointer;
+  display:inline-block;
+}
+
+.lang-menu{
+  position:absolute;
+  top:110%;
+  right:0;
+  background:#fff;
+  min-width:160px;
+  border-radius:10px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.2);
+  display:none;
+  overflow:hidden;
+}
+
+.lang-menu a{
+  display:block;
+  padding:10px 14px;
+  text-decoration:none;
+  color:#000;
+  font-size:14px;
+}
+
+.lang-menu a:hover{
+  background:#f2f2f2;
+}
+
+.lang-menu.open{
+  display:block;
+}
+
 </style>
 </head>
 
 <body>
 
 <header>
-    <img src="https://cdn.pixabay.com/photo/2025/10/15/04/31/mahonia-9895458_640.jpg" class="logo">
-    <h1 class="page-title">Youth Empowerment</h1>
-    <div class="empty"></div>
+    <img src="https://res.cloudinary.com/dwvt4e9o2/image/upload/v1763476964/Screenshot_73_e5hyu9.png" class="logo">
+    <h1 class="page-title" data-key="page-title">Youth Empowerment</h1>
+    <div class="lang-dropdown">
+      <button id="langToggle" data-lang="en">EN ▾</button>
+      <div class="lang-menu" id="langMenu">
+        <a href="#" data-lang-select="en">English</a>
+        <a href="#" data-lang-select="fr">Français</a>
+        <a href="#" data-lang-select="de">Deutsch</a>
+        <a href="#" data-lang-select="es">Español</a>
+        <a href="#" data-lang-select="it">Italiano</a>
+        <a href="#" data-lang-select="sw">KiSwahili</a>
+      </div>
+    </div>
 </header>
 
 <!-- 1. Overview of Youth Empowerment -->
 <section class="section">
     <div class="text">
-        <h2>Overview of Youth Empowerment</h2>
-        <p>Our programs focus on actionable youth initiatives, mentorship, leadership, life skills, civic engagement, and education. We aim to equip young people in Nairobi, Muranga, Kiambu, Nakuru, Machakos, and Mombasa with the tools to thrive socially, economically, and digitally.</p>
+        <h2 data-key="s1-title">Overview of Youth Empowerment</h2>
+        <p data-key="s1-p1">Our programs focus on actionable youth initiatives, mentorship, leadership, life skills, civic engagement, and education. We aim to equip young people in Nairobi, Muranga, Kiambu, Nakuru, Machakos, and Mombasa with the tools to thrive socially, economically, and digitally.</p>
     </div>
     <img src="https://images.pexels.com/photos/14429344/pexels-photo-14429344.jpeg" class="shape-round">
 </section>
@@ -119,8 +177,8 @@ footer{ background:#222; color:#eee; padding:30px; text-align:center; margin-top
 <!-- 2. Mentorship & Leadership -->
 <section class="section">
     <div class="text">
-        <h2>Mentorship & Leadership Development</h2>
-        <p>Youth mentorship programs provide guidance and leadership training in Nairobi (Kibera youth hubs), Muranga (Kandara community projects), and Kiambu (Thika & Ruiru youth councils). These programs address civic responsibility, drug abuse prevention, and youth-led advocacy initiatives.</p>
+        <h2 data-key="s2-title">Mentorship & Leadership Development</h2>
+        <p data-key="s2-p1">Youth mentorship programs provide guidance and leadership training in Nairobi (Kibera youth hubs), Muranga (Kandara community projects), and Kiambu (Thika & Ruiru youth councils). These programs address civic responsibility, drug abuse prevention, and youth-led advocacy initiatives.</p>
     </div>
     <img src="https://res.cloudinary.com/dwvt4e9o2/image/upload/v1766165018/ChatGPT_Image_Dec_19_2025_08_22_39_PM_xnkubz.png" class="shape-rounded">
 </section>
@@ -129,8 +187,8 @@ footer{ background:#222; color:#eee; padding:30px; text-align:center; margin-top
 <section class="section center-section">
     <img src="https://images.pexels.com/photos/5675818/pexels-photo-5675818.jpeg" class="shape-diagonal">
     <div class="text">
-        <h2>Life Skills & Education</h2>
-        <p>We offer programs on decision-making, problem-solving, civic engagement, STEM initiatives, vocational training, and internships. County-specific programs include Nakuru (Njoro youth sports & arts), Machakos (coding clubs & civic leadership), and Mombasa (Likoni & Kisauni volunteer projects).</p>
+        <h2 data-key="s3-title">Life Skills & Education</h2>
+        <p data-key="s3-p1">We offer programs on decision-making, problem-solving, civic engagement, STEM initiatives, vocational training, and internships. County-specific programs include Nakuru (Njoro youth sports & arts), Machakos (coding clubs & civic leadership), and Mombasa (Likoni & Kisauni volunteer projects).</p>
     </div>
 </section>
 
@@ -138,16 +196,16 @@ footer{ background:#222; color:#eee; padding:30px; text-align:center; margin-top
 <section class="section">
     <img src="https://images.pexels.com/photos/9431450/pexels-photo-9431450.jpeg" class="shape-hexagon">
     <div class="text">
-        <h2>Entrepreneurship & Economic Opportunities</h2>
-        <p>Youth business incubation, microfinance, and entrepreneurship programs are implemented in Kiambu, Mombasa, and Nairobi. These initiatives include mentorship, start-up support, and access to local markets, empowering youth to develop sustainable income streams.</p>
+        <h2 data-key="s4-title">Entrepreneurship & Economic Opportunities</h2>
+        <p data-key="s4-p1">Youth business incubation, microfinance, and entrepreneurship programs are implemented in Kiambu, Mombasa, and Nairobi. These initiatives include mentorship, start-up support, and access to local markets, empowering youth to develop sustainable income streams.</p>
     </div>
 </section>
 
 <!-- 5. Sports, Arts & Civic Engagement -->
 <section class="section center-section">
     <div class="text">
-        <h2>Sports, Arts & Civic Engagement</h2>
-        <p>Youth participate in county-specific sports leagues, music, art, and volunteerism programs. Nairobi and Nakuru host competitive leagues and creative arts events; Machakos and Muranga focus on civic projects and leadership; Mombasa promotes entrepreneurship and community service; Kiambu encourages innovation challenges.</p>
+        <h2 data-key="s5-title">Sports, Arts & Civic Engagement</h2>
+        <p data-key="s5-p1">Youth participate in county-specific sports leagues, music, art, and volunteerism programs. Nairobi and Nakuru host competitive leagues and creative arts events; Machakos and Muranga focus on civic projects and leadership; Mombasa promotes entrepreneurship and community service; Kiambu encourages innovation challenges.</p>
     </div>
     <img src="https://images.pexels.com/photos/9287491/pexels-photo-9287491.jpeg" class="shape-leaf">
 </section>
@@ -155,8 +213,8 @@ footer{ background:#222; color:#eee; padding:30px; text-align:center; margin-top
 <!-- 6. Digital Inclusion & Innovation -->
 <section class="section">
     <div class="text">
-        <h2>Digital Inclusion & Innovation</h2>
-        <p>ICT, coding, robotics, and digital literacy programs are active across all six counties. Youth gain access to technology hubs, mentorship, and online platforms, ensuring inclusion of youth with disabilities while promoting innovation, collaboration, and employability.</p>
+        <h2 data-key="s6-title">Digital Inclusion & Innovation</h2>
+        <p data-key="s6-p1">ICT, coding, robotics, and digital literacy programs are active across all six counties. Youth gain access to technology hubs, mentorship, and online platforms, ensuring inclusion of youth with disabilities while promoting innovation, collaboration, and employability.</p>
     </div>
     <img src="https://images.pexels.com/photos/693859/pexels-photo-693859.jpeg" class="shape-diagonal">
 </section>
@@ -170,9 +228,155 @@ footer{ background:#222; color:#eee; padding:30px; text-align:center; margin-top
   </button>
 </a>
     
-<footer>
+<footer data-key="footer-text">
     © <script>document.write(new Date().getFullYear());</script> Youth Empowerment — All Rights Reserved.
 </footer>
+
+<!-- TRANSLATION SCRIPT -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const translations = {
+    en:{
+      "page-title":"Youth Empowerment",
+      "s1-title":"Overview of Youth Empowerment",
+      "s1-p1":"Our programs focus on actionable youth initiatives, mentorship, leadership, life skills, civic engagement, and education. We aim to equip young people in Nairobi, Muranga, Kiambu, Nakuru, Machakos, and Mombasa with the tools to thrive socially, economically, and digitally.",
+      "s2-title":"Mentorship & Leadership Development",
+      "s2-p1":"Youth mentorship programs provide guidance and leadership training in Nairobi (Kibera youth hubs), Muranga (Kandara community projects), and Kiambu (Thika & Ruiru youth councils). These programs address civic responsibility, drug abuse prevention, and youth-led advocacy initiatives.",
+      "s3-title":"Life Skills & Education",
+      "s3-p1":"We offer programs on decision-making, problem-solving, civic engagement, STEM initiatives, vocational training, and internships. County-specific programs include Nakuru (Njoro youth sports & arts), Machakos (coding clubs & civic leadership), and Mombasa (Likoni & Kisauni volunteer projects).",
+      "s4-title":"Entrepreneurship & Economic Opportunities",
+      "s4-p1":"Youth business incubation, microfinance, and entrepreneurship programs are implemented in Kiambu, Mombasa, and Nairobi. These initiatives include mentorship, start-up support, and access to local markets, empowering youth to develop sustainable income streams.",
+      "s5-title":"Sports, Arts & Civic Engagement",
+      "s5-p1":"Youth participate in county-specific sports leagues, music, art, and volunteerism programs. Nairobi and Nakuru host competitive leagues and creative arts events; Machakos and Muranga focus on civic projects and leadership; Mombasa promotes entrepreneurship and community service; Kiambu encourages innovation challenges.",
+      "s6-title":"Digital Inclusion & Innovation",
+      "s6-p1":"ICT, coding, robotics, and digital literacy programs are active across all six counties. Youth gain access to technology hubs, mentorship, and online platforms, ensuring inclusion of youth with disabilities while promoting innovation, collaboration, and employability.",
+      "footer-text":"© Youth Empowerment — All Rights Reserved."
+    },
+    fr:{
+      "page-title":"Autonomisation des Jeunes",
+      "s1-title":"Aperçu de l'autonomisation des jeunes",
+      "s1-p1":"Nos programmes se concentrent sur des initiatives concrètes pour les jeunes, le mentorat, le leadership, les compétences de vie, l'engagement civique et l'éducation. Nous visons à équiper les jeunes de Nairobi, Muranga, Kiambu, Nakuru, Machakos et Mombasa avec les outils nécessaires pour réussir socialement, économiquement et numériquement.",
+      "s2-title":"Mentorat & Développement du Leadership",
+      "s2-p1":"Les programmes de mentorat pour les jeunes offrent des conseils et une formation au leadership à Nairobi (centres pour jeunes de Kibera), Muranga (projets communautaires de Kandara) et Kiambu (conseils de jeunes de Thika et Ruiru). Ces programmes traitent de la responsabilité civique, de la prévention de la toxicomanie et des initiatives de plaidoyer dirigées par les jeunes.",
+      "s3-title":"Compétences de vie & Éducation",
+      "s3-p1":"Nous proposons des programmes sur la prise de décision, la résolution de problèmes, l'engagement civique, les initiatives STEM, la formation professionnelle et les stages. Les programmes spécifiques aux comtés incluent Nakuru (sports et arts pour les jeunes de Njoro), Machakos (clubs de codage et leadership civique) et Mombasa (projets de volontariat à Likoni et Kisauni).",
+      "s4-title":"Entrepreneuriat & Opportunités Économiques",
+      "s4-p1":"L'incubation d'entreprises pour les jeunes, la microfinance et les programmes d'entrepreneuriat sont mis en œuvre à Kiambu, Mombasa et Nairobi. Ces initiatives comprennent le mentorat, le soutien aux start-ups et l'accès aux marchés locaux, permettant aux jeunes de développer des sources de revenus durables.",
+      "s5-title":"Sports, Arts & Engagement Civique",
+      "s5-p1":"Les jeunes participent à des ligues sportives spécifiques aux comtés, à la musique, à l'art et à des programmes de bénévolat. Nairobi et Nakuru accueillent des ligues compétitives et des événements artistiques créatifs ; Machakos et Muranga se concentrent sur les projets civiques et le leadership ; Mombasa promeut l'entrepreneuriat et le service communautaire ; Kiambu encourage les défis d'innovation.",
+      "s6-title":"Inclusion Numérique & Innovation",
+      "s6-p1":"Les programmes TIC, codage, robotique et alphabétisation numérique sont actifs dans les six comtés. Les jeunes ont accès à des centres technologiques, au mentorat et aux plateformes en ligne, garantissant l'inclusion des jeunes en situation de handicap tout en promouvant l'innovation, la collaboration et l'employabilité.",
+      "footer-text":"© Autonomisation des Jeunes — Tous droits réservés."
+    },
+    de:{
+      "page-title":"Jugendförderung",
+      "s1-title":"Überblick über Jugendförderung",
+      "s1-p1":"Unsere Programme konzentrieren sich auf umsetzbare Jugendinitiativen, Mentoring, Führung, Lebenskompetenzen, bürgerschaftliches Engagement und Bildung. Wir möchten junge Menschen in Nairobi, Muranga, Kiambu, Nakuru, Machakos und Mombasa befähigen, sozial, wirtschaftlich und digital erfolgreich zu sein.",
+      "s2-title":"Mentoring & Führungsentwicklung",
+      "s2-p1":"Jugend-Mentoring-Programme bieten Anleitung und Führungstraining in Nairobi (Kibera-Jugendzentren), Muranga (Kandara-Gemeinschaftsprojekte) und Kiambu (Thika & Ruiru Jugendräte). Diese Programme behandeln bürgerschaftliche Verantwortung, Drogenprävention und von Jugendlichen geleitete Advocacy-Initiativen.",
+      "s3-title":"Lebenskompetenzen & Bildung",
+      "s3-p1":"Wir bieten Programme zu Entscheidungsfindung, Problemlösung, bürgerschaftlichem Engagement, STEM-Initiativen, Berufsbildung und Praktika an. County-spezifische Programme umfassen Nakuru (Njoro Jugendsport & Kunst), Machakos (Coding-Clubs & Civic Leadership) und Mombasa (Likoni & Kisauni Freiwilligenprojekte).",
+      "s4-title":"Unternehmertum & Wirtschaftliche Chancen",
+      "s4-p1":"Jugend-Business-Inkubation, Mikrofinanzierung und Unternehmertumsprogramme werden in Kiambu, Mombasa und Nairobi umgesetzt. Diese Initiativen umfassen Mentoring, Start-up-Unterstützung und Zugang zu lokalen Märkten, wodurch Jugendliche nachhaltige Einkommensquellen entwickeln können.",
+      "s5-title":"Sport, Kunst & Bürgerschaftliches Engagement",
+      "s5-p1":"Jugendliche nehmen an County-spezifischen Sportligen, Musik-, Kunst- und Freiwilligenprogrammen teil. Nairobi und Nakuru veranstalten Wettbewerbs-Ligen und kreative Kunstveranstaltungen; Machakos und Muranga konzentrieren sich auf Bürgerprojekte und Führung; Mombasa fördert Unternehmertum und Gemeindedienst; Kiambu fördert Innovationswettbewerbe.",
+      "s6-title":"Digitale Inklusion & Innovation",
+      "s6-p1":"ICT-, Coding-, Robotik- und digitale Kompetenzprogramme sind in allen sechs Counties aktiv. Jugendliche erhalten Zugang zu Technologiezentren, Mentoring und Online-Plattformen, wobei die Inklusion von Jugendlichen mit Behinderungen gewährleistet wird und Innovation, Zusammenarbeit und Beschäftigungsfähigkeit gefördert werden.",
+      "footer-text":"© Jugendförderung — Alle Rechte vorbehalten."
+    },
+    es:{
+      "page-title":"Empoderamiento Juvenil",
+      "s1-title":"Visión General del Empoderamiento Juvenil",
+      "s1-p1":"Nuestros programas se centran en iniciativas juveniles accionables, mentoría, liderazgo, habilidades para la vida, participación cívica y educación. Nuestro objetivo es equipar a los jóvenes en Nairobi, Muranga, Kiambu, Nakuru, Machakos y Mombasa con las herramientas para prosperar social, económica y digitalmente.",
+      "s2-title":"Mentoría y Desarrollo de Liderazgo",
+      "s2-p1":"Los programas de mentoría juvenil brindan orientación y formación en liderazgo en Nairobi (centros juveniles de Kibera), Muranga (proyectos comunitarios de Kandara) y Kiambu (consejos juveniles de Thika y Ruiru). Estos programas abordan la responsabilidad cívica, la prevención del consumo de drogas y las iniciativas de defensa lideradas por jóvenes.",
+      "s3-title":"Habilidades para la Vida y Educación",
+      "s3-p1":"Ofrecemos programas sobre toma de decisiones, resolución de problemas, participación cívica, iniciativas STEM, formación profesional y pasantías. Los programas específicos de cada condado incluyen Nakuru (deportes y artes juveniles de Njoro), Machakos (clubes de codificación y liderazgo cívico) y Mombasa (proyectos de voluntariado de Likoni y Kisauni).",
+      "s4-title":"Emprendimiento y Oportunidades Económicas",
+      "s4-p1":"La incubación empresarial juvenil, la microfinanciación y los programas de emprendimiento se implementan en Kiambu, Mombasa y Nairobi. Estas iniciativas incluyen mentoría, apoyo a startups y acceso a mercados locales, empoderando a los jóvenes para desarrollar fuentes de ingresos sostenibles.",
+      "s5-title":"Deportes, Artes y Participación Cívica",
+      "s5-p1":"Los jóvenes participan en ligas deportivas específicas del condado, música, arte y programas de voluntariado. Nairobi y Nakuru albergan ligas competitivas y eventos artísticos creativos; Machakos y Muranga se centran en proyectos cívicos y liderazgo; Mombasa promueve el emprendimiento y el servicio comunitario; Kiambu fomenta desafíos de innovación.",
+      "s6-title":"Inclusión Digital e Innovación",
+      "s6-p1":"Los programas de TIC, codificación, robótica y alfabetización digital están activos en los seis condados. Los jóvenes tienen acceso a centros tecnológicos, mentoría y plataformas en línea, garantizando la inclusión de los jóvenes con discapacidades mientras se fomenta la innovación, la colaboración y la empleabilidad.",
+      "footer-text":"© Empoderamiento Juvenil — Todos los derechos reservados."
+    },
+    it:{
+      "page-title":"Empowerment Giovanile",
+      "s1-title":"Panoramica dell'Empowerment Giovanile",
+      "s1-p1":"I nostri programmi si concentrano su iniziative giovanili concrete, mentoring, leadership, competenze di vita, impegno civico ed educazione. Puntiamo a fornire ai giovani di Nairobi, Muranga, Kiambu, Nakuru, Machakos e Mombasa gli strumenti per prosperare socialmente, economicamente e digitalmente.",
+      "s2-title":"Mentoring e Sviluppo della Leadership",
+      "s2-p1":"I programmi di mentoring giovanile offrono guida e formazione alla leadership a Nairobi (hub giovanili di Kibera), Muranga (progetti comunitari di Kandara) e Kiambu (consigli giovanili di Thika e Ruiru). Questi programmi affrontano responsabilità civica, prevenzione della droga e iniziative di advocacy guidate dai giovani.",
+      "s3-title":"Competenze di Vita ed Educazione",
+      "s3-p1":"Offriamo programmi su decision-making, problem-solving, impegno civico, iniziative STEM, formazione professionale e stage. I programmi specifici per contea includono Nakuru (sport e arti giovanili a Njoro), Machakos (club di coding e leadership civica) e Mombasa (progetti di volontariato a Likoni e Kisauni).",
+      "s4-title":"Imprenditorialità e Opportunità Economiche",
+      "s4-p1":"Incubazione aziendale giovanile, microfinanza e programmi di imprenditorialità sono implementati a Kiambu, Mombasa e Nairobi. Queste iniziative comprendono mentoring, supporto alle start-up e accesso ai mercati locali, permettendo ai giovani di sviluppare flussi di reddito sostenibili.",
+      "s5-title":"Sport, Arte e Impegno Civico",
+      "s5-p1":"I giovani partecipano a leghe sportive specifiche per contea, musica, arte e programmi di volontariato. Nairobi e Nakuru ospitano leghe competitive ed eventi artistici creativi; Machakos e Muranga si concentrano su progetti civici e leadership; Mombasa promuove imprenditorialità e servizio comunitario; Kiambu incoraggia sfide di innovazione.",
+      "s6-title":"Inclusione Digitale e Innovazione",
+      "s6-p1":"I programmi ICT, coding, robotica e alfabetizzazione digitale sono attivi in tutti e sei i contee. I giovani hanno accesso a hub tecnologici, mentoring e piattaforme online, garantendo l'inclusione dei giovani con disabilità promuovendo innovazione, collaborazione e occupabilità.",
+      "footer-text":"© Empowerment Giovanile — Tutti i diritti riservati."
+    },
+    sw:{
+      "page-title":"Uwezeshaji Vijana",
+      "s1-title":"Muhtasari wa Uwezeshaji Vijana",
+      "s1-p1":"Programu zetu zinazingatia miradi halisi ya vijana, malezi, uongozi, ujuzi wa maisha, ushiriki wa kijamii na elimu. Tunakusudia kuwapa vijana wa Nairobi, Muranga, Kiambu, Nakuru, Machakos, na Mombasa zana za kufanikisha maisha yao kijamii, kiuchumi na kidijitali.",
+      "s2-title":"Malezi & Maendeleo ya Uongozi",
+      "s2-p1":"Programu za malezi kwa vijana hutoa mwongozo na mafunzo ya uongozi Nairobi (Kibera youth hubs), Muranga (miradi ya jamii ya Kandara), na Kiambu (Thika & Ruiru youth councils). Programu hizi zinashughulikia uwajibikaji wa kijamii, kuzuia matumizi ya madawa ya kulevya, na miradi ya utetezi inayotungwa na vijana.",
+      "s3-title":"Ujuzi wa Maisha & Elimu",
+      "s3-p1":"Tunatoa programu za maamuzi, utatuzi wa matatizo, ushiriki wa kijamii, miradi ya STEM, mafunzo ya ufundi, na mafunzo ya ndani. Miradi maalum ya kaunti ni pamoja na Nakuru (michezo & sanaa ya vijana Njoro), Machakos (clubs za coding & uongozi wa kijamii), na Mombasa (miradi ya kujitolea Likoni & Kisauni).",
+      "s4-title":"Ujasiriamali & Fursa za Kiuchumi",
+      "s4-p1":"Ujasiriamali wa vijana, mikopo midogo na programu za ujasiriamali zinafanywa katika Kaunti za Kiambu, Mombasa na Nairobi. Miradi hii inajumuisha malezi, msaada kwa start-ups, na upatikanaji wa masoko ya ndani, ikiwasaidia vijana kuendeleza mapato endelevu.",
+      "s5-title":"Michezo, Sanaa & Ushiriki wa Kijamii",
+      "s5-p1":"Vijana washiriki katika ligi za michezo maalum za kaunti, muziki, sanaa, na miradi ya kujitolea. Nairobi na Nakuru wanashiriki ligi za mashindano na matukio ya sanaa; Machakos na Muranga wanazingatia miradi ya kijamii na uongozi; Mombasa inakuza ujasiriamali na huduma ya jamii; Kiambu inahamasisha changamoto za ubunifu.",
+      "s6-title":"Ujumuishwaji wa Kidijitali & Ubunifu",
+      "s6-p1":"Programu za ICT, coding, robotics na ujuzi wa kidijitali zinatimizwa katika kaunti zote sita. Vijana wanapata upatikanaji wa hubs za teknolojia, malezi, na mitandao ya mtandaoni, kuhakikisha ujumuishwaji wa vijana wenye ulemavu huku wakikuza ubunifu, ushirikiano na ajira.",
+      "footer-text":"© Uwezeshaji Vijana — Haki zote zimehifadhiwa."
+    }
+  };
+
+  const toggleBtn = document.getElementById("langToggle");
+  const menu = document.getElementById("langMenu");
+
+  function switchLanguage(lang){
+    if(!translations[lang]) return;
+    document.querySelectorAll("[data-key]").forEach(el=>{
+      const key = el.dataset.key;
+      if(translations[lang][key]) el.innerHTML = translations[lang][key];
+    });
+    toggleBtn.textContent = lang.toUpperCase() + " ▾";
+    toggleBtn.setAttribute("data-lang", lang);
+    localStorage.setItem("lang", lang);
+  }
+
+  // Dropdown toggle
+  toggleBtn.addEventListener("click", e => {
+    e.stopPropagation();
+    menu.classList.toggle("open");
+  });
+
+  // Select language
+  menu.querySelectorAll("[data-lang-select]").forEach(item=>{
+    item.addEventListener("click", e=>{
+      e.preventDefault();
+      const lang = item.getAttribute("data-lang-select");
+      switchLanguage(lang);
+      menu.classList.remove("open");
+    });
+  });
+
+  // Close dropdown on outside click
+  document.addEventListener("click", e=>{
+    if(!menu.contains(e.target) && !toggleBtn.contains(e.target)){
+      menu.classList.remove("open");
+    }
+  });
+
+  // Load saved language
+  const savedLang = localStorage.getItem("lang") || "en";
+  switchLanguage(savedLang);
+
+});
+</script>
 
 </body>
 </html>
