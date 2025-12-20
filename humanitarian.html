@@ -97,32 +97,88 @@ footer{ background:#222; color:#eee; padding:30px; text-align:center; margin-top
   border: none;
   color: white;
 }
+
+/* LANGUAGE DROPDOWN */
+.lang-dropdown{
+  position:relative;
+  justify-self:end;
+  z-index:1000;
+}
+
+#langToggle{
+  background:#ffffff;
+  color:#000;
+  padding:6px 10px;
+  border-radius:8px;
+  text-decoration:none;
+  font-weight:bold;
+  font-size:14px;
+  cursor:pointer;
+  display:inline-block;
+}
+
+.lang-menu{
+  position:absolute;
+  top:110%;
+  right:0;
+  background:#fff;
+  min-width:160px;
+  border-radius:10px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.2);
+  display:none;
+  overflow:hidden;
+}
+
+.lang-menu a{
+  display:block;
+  padding:10px 14px;
+  text-decoration:none;
+  color:#000;
+  font-size:14px;
+}
+
+.lang-menu a:hover{
+  background:#f2f2f2;
+}
+
+.lang-menu.open{
+  display:block;
+}
+
 </style>
 </head>
-
 <body>
 
 <header>
     <img src="https://res.cloudinary.com/dwvt4e9o2/image/upload/v1763476964/Screenshot_73_e5hyu9.png" class="logo">
-    <h1 class="page-title">Humanitarian Aid</h1>
-    <div class="empty"></div>
+    <h1 class="page-title" data-key="page-title">Humanitarian Aid</h1>
+    <div class="lang-dropdown">
+        <button id="langToggle" data-lang="en">EN ▾</button>
+        <div class="lang-menu" id="langMenu">
+            <a href="#" data-lang-select="en">English</a>
+            <a href="#" data-lang-select="fr">Français</a>
+            <a href="#" data-lang-select="de">Deutsch</a>
+            <a href="#" data-lang-select="es">Español</a>
+            <a href="#" data-lang-select="it">Italiano</a>
+            <a href="#" data-lang-select="sw">KiSwahili</a>
+        </div>
+    </div>
 </header>
 
-<!-- 1. Humanitarian Aid Overview -->
+<!-- Sections -->
 <section class="section">
     <div class="text">
-        <h2>Rapid Crisis Response</h2>
-        <p>We deliver timely, compassionate assistance to individuals and families affected by disasters, conflicts, and hardship. Our programs provide lifesaving support including food, clean water, shelter, hygiene supplies, and inclusive support for people with disabilities and drug abuse recovery programs.</p>
+        <h2 data-key="s1-title">Rapid Crisis Response</h2>
+        <p data-key="s1-p1">We deliver timely, compassionate assistance to individuals and families affected by disasters, conflicts, and hardship. Our programs provide lifesaving support including food, clean water, shelter, hygiene supplies, and inclusive support for people with disabilities and drug abuse recovery programs.</p>
     </div>
     <img src="https://images.pexels.com/photos/8042458/pexels-photo-8042458.jpeg" class="shape-round">
 </section>
 
-<!-- 2. Food & Nutrition Support -->
 <section class="section">
     <div class="text">
-        <h2>Food & Nutrition Assistance</h2>
-        <p>We distribute food supplies and nutrition support to vulnerable communities. Programs are county-specific for better reach:</p>
-        <ul>
+        <h2 data-key="s2-title">Food & Nutrition Assistance</h2>
+        <p data-key="s2-p1">We distribute food supplies and nutrition support to vulnerable communities. Programs are county-specific for better reach:</p>
+        <ul data-key="s2-ul">
             <li><strong>Nairobi:</strong> Kibera, Mathare</li>
             <li><strong>Muranga:</strong> Kandara, Maragua</li>
             <li><strong>Kiambu:</strong> Thika, Ruiru</li>
@@ -134,13 +190,12 @@ footer{ background:#222; color:#eee; padding:30px; text-align:center; margin-top
     <img src="https://images.pexels.com/photos/6590920/pexels-photo-6590920.jpeg" class="shape-rounded">
 </section>
 
-<!-- 3. Shelter & Safety -->
 <section class="section center-section">
     <img src="https://images.pexels.com/photos/9993426/pexels-photo-9993426.jpeg" class="shape-diagonal">
     <div class="text">
-        <h2>Safe Shelter & Housing</h2>
-        <p>Temporary shelters, tents, and reinforced housing are provided to protect families. Programs also cater to disability-inclusive shelters and safe spaces for youth recovering from drug abuse.</p>
-        <ul>
+        <h2 data-key="s3-title">Safe Shelter & Housing</h2>
+        <p data-key="s3-p1">Temporary shelters, tents, and reinforced housing are provided to protect families. Programs also cater to disability-inclusive shelters and safe spaces for youth recovering from drug abuse.</p>
+        <ul data-key="s3-ul">
             <li><strong>Nairobi:</strong> Informal settlements</li>
             <li><strong>Muranga & Kiambu:</strong> Community shelters</li>
             <li><strong>Nakuru:</strong> Displaced families support</li>
@@ -150,13 +205,12 @@ footer{ background:#222; color:#eee; padding:30px; text-align:center; margin-top
     </div>
 </section>
 
-<!-- 4. Water & Sanitation -->
 <section class="section">
     <img src="https://images.pexels.com/photos/3030316/pexels-photo-3030316.jpeg" class="shape-hexagon">
     <div class="text">
-        <h2>Clean Water & Hygiene</h2>
-        <p>We ensure access to safe water and hygiene facilities, with special attention to accessibility for persons with disabilities.</p>
-        <ul>
+        <h2 data-key="s4-title">Clean Water & Hygiene</h2>
+        <p data-key="s4-p1">We ensure access to safe water and hygiene facilities, with special attention to accessibility for persons with disabilities.</p>
+        <ul data-key="s4-ul">
             <li><strong>Nairobi:</strong> Kibera, Mathare</li>
             <li><strong>Muranga:</strong> Maragua, Kandara</li>
             <li><strong>Kiambu:</strong> Ruiru, Thika</li>
@@ -167,12 +221,11 @@ footer{ background:#222; color:#eee; padding:30px; text-align:center; margin-top
     </div>
 </section>
 
-<!-- 5. Drug Abuse Prevention & Rehabilitation -->
 <section class="section center-section">
     <div class="text">
-        <h2>Drug Abuse Prevention & Rehabilitation</h2>
-        <p>We provide awareness campaigns, counseling, and rehabilitation for youth. Programs are tailored per county:</p>
-        <ul>
+        <h2 data-key="s5-title">Drug Abuse Prevention & Rehabilitation</h2>
+        <p data-key="s5-p1">We provide awareness campaigns, counseling, and rehabilitation for youth. Programs are tailored per county:</p>
+        <ul data-key="s5-ul">
             <li><strong>Nairobi:</strong> Mathare Youth Rehabilitation Center</li>
             <li><strong>Muranga:</strong> Kandara & Maragua youth rehab</li>
             <li><strong>Kiambu:</strong> Thika youth rehab</li>
@@ -181,16 +234,15 @@ footer{ background:#222; color:#eee; padding:30px; text-align:center; margin-top
             <li><strong>Mombasa:</strong> Likoni youth programs</li>
         </ul>
     </div>
-    <img src="https://cdn.pixabay.com/photo/2020/03/03/04/52/pill-4897529_640.jpg  " class="shape-leaf">
+    <img src="https://cdn.pixabay.com/photo/2020/03/03/04/52/pill-4897529_640.jpg" class="shape-leaf">
 </section>
 
-<!-- 6. Disability Inclusion & Youth Engagement -->
 <section class="section">
     <img src="https://cdn.pixabay.com/photo/2013/12/06/10/21/disability-224130_640.jpg" class="shape-rounded">
     <div class="text">
-        <h2>Disability Support & Youth Engagement</h2>
-        <p>We provide assistive devices, training, inclusive education, and mentorship for youth-led community projects. Programs aim to build resilience and promote leadership among young people while supporting persons with disabilities.</p>
-        <ul>
+        <h2 data-key="s6-title">Disability Support & Youth Engagement</h2>
+        <p data-key="s6-p1">We provide assistive devices, training, inclusive education, and mentorship for youth-led community projects. Programs aim to build resilience and promote leadership among young people while supporting persons with disabilities.</p>
+        <ul data-key="s6-ul">
             <li><strong>Nairobi:</strong> Nairobi Rehabilitation Center for Disabilities</li>
             <li><strong>Muranga & Kiambu:</strong> Community support programs</li>
             <li><strong>Nakuru:</strong> Nakuru County disability initiatives</li>
@@ -209,9 +261,188 @@ footer{ background:#222; color:#eee; padding:30px; text-align:center; margin-top
   </button>
 </a>
 
-<footer>
+<footer data-key="footer-text">
     © <script>document.write(new Date().getFullYear());</script> Humanitarian Aid — All Rights Reserved.
 </footer>
 
+<!-- TRANSLATION SCRIPT -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+const translations = {
+  en: {
+    "page-title": "Humanitarian Aid",
+    "s1-title": "Rapid Crisis Response",
+    "s1-p1": "We deliver timely, compassionate assistance to individuals and families affected by disasters, conflicts, and hardship. Our programs provide lifesaving support including food, clean water, shelter, hygiene supplies, and inclusive support for people with disabilities and drug abuse recovery programs.",
+    "s2-title": "Food & Nutrition Assistance",
+    "s2-p1": "We distribute food supplies and nutrition support to vulnerable communities. Programs are county-specific for better reach:",
+    "s2-ul": "<li><strong>Nairobi:</strong> Kibera, Mathare</li><li><strong>Muranga:</strong> Kandara, Maragua</li><li><strong>Kiambu:</strong> Thika, Ruiru</li><li><strong>Nakuru:</strong> Njoro, Naivasha</li><li><strong>Machakos:</strong> Machakos town, Mwala</li><li><strong>Mombasa:</strong> Likoni, Kisauni</li>",
+    "s3-title": "Safe Shelter & Housing",
+    "s3-p1": "Temporary shelters, tents, and reinforced housing are provided to protect families. Programs also cater to disability-inclusive shelters and safe spaces for youth recovering from drug abuse.",
+    "s3-ul": "<li><strong>Nairobi:</strong> Informal settlements</li><li><strong>Muranga & Kiambu:</strong> Community shelters</li><li><strong>Nakuru:</strong> Displaced families support</li><li><strong>Machakos:</strong> Rural communities</li><li><strong>Mombasa:</strong> Coastal informal settlements</li>",
+    "s4-title": "Clean Water & Hygiene",
+    "s4-p1": "We ensure access to safe water and hygiene facilities, with special attention to accessibility for persons with disabilities.",
+    "s4-ul": "<li><strong>Nairobi:</strong> Kibera, Mathare</li><li><strong>Muranga:</strong> Maragua, Kandara</li><li><strong>Kiambu:</strong> Ruiru, Thika</li><li><strong>Nakuru:</strong> Naivasha, Njoro</li><li><strong>Machakos:</strong> Machakos town, Mwala</li><li><strong>Mombasa:</strong> Likoni, Kisauni</li>",
+    "s5-title": "Drug Abuse Prevention & Rehabilitation",
+    "s5-p1": "We provide awareness campaigns, counseling, and rehabilitation for youth. Programs are tailored per county:",
+    "s5-ul": "<li><strong>Nairobi:</strong> Mathare Youth Rehabilitation Center</li><li><strong>Muranga:</strong> Kandara & Maragua youth rehab</li><li><strong>Kiambu:</strong> Thika youth rehab</li><li><strong>Nakuru:</strong> Nakuru town youth centers</li><li><strong>Machakos:</strong> Machakos town youth rehab</li><li><strong>Mombasa:</strong> Likoni youth programs</li>",
+    "s6-title": "Disability Support & Youth Engagement",
+    "s6-p1": "We provide assistive devices, training, inclusive education, and mentorship for youth-led community projects. Programs aim to build resilience and promote leadership among young people while supporting persons with disabilities.",
+    "s6-ul": "<li><strong>Nairobi:</strong> Nairobi Rehabilitation Center for Disabilities</li><li><strong>Muranga & Kiambu:</strong> Community support programs</li><li><strong>Nakuru:</strong> Nakuru County disability initiatives</li><li><strong>Machakos:</strong> Inclusive education programs</li><li><strong>Mombasa:</strong> Likoni & Kisauni support centers</li>",
+    "footer-text": "© Humanitarian Aid — All Rights Reserved."
+  },
+
+  fr: {
+    "page-title": "Aide Humanitaire",
+    "s1-title": "Réponse Rapide en Cas de Crise",
+    "s1-p1": "Nous fournissons une assistance rapide et compatissante aux personnes et familles touchées par des catastrophes, des conflits et des difficultés. Nos programmes offrent un soutien vital, y compris la nourriture, l'eau potable, l'hébergement, les fournitures d'hygiène et un soutien inclusif pour les personnes handicapées et les programmes de rétablissement de la toxicomanie.",
+    "s2-title": "Assistance Alimentaire et Nutritionnelle",
+    "s2-p1": "Nous distribuons des denrées alimentaires et un soutien nutritionnel aux communautés vulnérables. Les programmes sont spécifiques à chaque comté pour une meilleure couverture :",
+    "s2-ul": "<li><strong>Nairobi :</strong> Kibera, Mathare</li><li><strong>Muranga :</strong> Kandara, Maragua</li><li><strong>Kiambu :</strong> Thika, Ruiru</li><li><strong>Nakuru :</strong> Njoro, Naivasha</li><li><strong>Machakos :</strong> Machakos ville, Mwala</li><li><strong>Mombasa :</strong> Likoni, Kisauni</li>",
+    "s3-title": "Abri et Logement Sûrs",
+    "s3-p1": "Des abris temporaires, des tentes et des logements renforcés sont fournis pour protéger les familles. Les programmes incluent également des abris accessibles aux personnes handicapées et des espaces sûrs pour les jeunes en rétablissement de la toxicomanie.",
+    "s3-ul": "<li><strong>Nairobi :</strong> Quartiers informels</li><li><strong>Muranga & Kiambu :</strong> Abri communautaire</li><li><strong>Nakuru :</strong> Soutien aux familles déplacées</li><li><strong>Machakos :</strong> Communautés rurales</li><li><strong>Mombasa :</strong> Quartiers informels côtiers</li>",
+    "s4-title": "Eau Propre et Hygiène",
+    "s4-p1": "Nous garantissons l'accès à de l'eau potable et à des installations d'hygiène, avec une attention particulière à l'accessibilité pour les personnes handicapées.",
+    "s4-ul": "<li><strong>Nairobi :</strong> Kibera, Mathare</li><li><strong>Muranga :</strong> Maragua, Kandara</li><li><strong>Kiambu :</strong> Ruiru, Thika</li><li><strong>Nakuru :</strong> Naivasha, Njoro</li><li><strong>Machakos :</strong> Machakos ville, Mwala</li><li><strong>Mombasa :</strong> Likoni, Kisauni</li>",
+    "s5-title": "Prévention et Réhabilitation de la Toxicomanie",
+    "s5-p1": "Nous proposons des campagnes de sensibilisation, des conseils et des programmes de réhabilitation pour les jeunes. Les programmes sont adaptés par comté :",
+    "s5-ul": "<li><strong>Nairobi :</strong> Centre de réhabilitation des jeunes de Mathare</li><li><strong>Muranga :</strong> Réhabilitation des jeunes de Kandara & Maragua</li><li><strong>Kiambu :</strong> Réhabilitation des jeunes de Thika</li><li><strong>Nakuru :</strong> Centres pour jeunes de la ville de Nakuru</li><li><strong>Machakos :</strong> Réhabilitation des jeunes de Machakos</li><li><strong>Mombasa :</strong> Programmes pour jeunes de Likoni</li>",
+    "s6-title": "Soutien aux Personnes Handicapées et Engagement des Jeunes",
+    "s6-p1": "Nous fournissons des dispositifs d'assistance, une formation, une éducation inclusive et un mentorat pour les projets communautaires dirigés par des jeunes. Les programmes visent à renforcer la résilience et promouvoir le leadership tout en soutenant les personnes handicapées.",
+    "s6-ul": "<li><strong>Nairobi :</strong> Centre de réhabilitation pour personnes handicapées de Nairobi</li><li><strong>Muranga & Kiambu :</strong> Programmes de soutien communautaire</li><li><strong>Nakuru :</strong> Initiatives pour personnes handicapées du comté de Nakuru</li><li><strong>Machakos :</strong> Programmes d'éducation inclusive</li><li><strong>Mombasa :</strong> Centres de soutien de Likoni & Kisauni</li>",
+    "footer-text": "© Aide Humanitaire — Tous droits réservés."
+  },
+
+  de: {
+    "page-title": "Humanitäre Hilfe",
+    "s1-title": "Schnelle Krisenhilfe",
+    "s1-p1": "Wir leisten zeitnahe, mitfühlende Hilfe für Einzelpersonen und Familien, die von Katastrophen, Konflikten und Not betroffen sind. Unsere Programme bieten lebensrettende Unterstützung, einschließlich Nahrung, sauberem Wasser, Unterkunft, Hygienematerialien und inklusiver Unterstützung für Menschen mit Behinderungen sowie Drogenrehabilitationsprogramme.",
+    "s2-title": "Ernährungs- und Nahrungsmittelhilfe",
+    "s2-p1": "Wir verteilen Nahrungsmittel und Ernährungsunterstützung an gefährdete Gemeinschaften. Programme sind auf die einzelnen Landkreise zugeschnitten, um eine bessere Reichweite zu gewährleisten:",
+    "s2-ul": "<li><strong>Nairobi:</strong> Kibera, Mathare</li><li><strong>Muranga:</strong> Kandara, Maragua</li><li><strong>Kiambu:</strong> Thika, Ruiru</li><li><strong>Nakuru:</strong> Njoro, Naivasha</li><li><strong>Machakos:</strong> Machakos Stadt, Mwala</li><li><strong>Mombasa:</strong> Likoni, Kisauni</li>",
+    "s3-title": "Sicherer Schutz & Unterkunft",
+    "s3-p1": "Temporäre Unterkünfte, Zelte und verstärkte Häuser werden bereitgestellt, um Familien zu schützen. Programme bieten auch barrierefreie Unterkünfte und sichere Räume für Jugendliche in Drogenrehabilitation.",
+    "s3-ul": "<li><strong>Nairobi:</strong> Informelle Siedlungen</li><li><strong>Muranga & Kiambu:</strong> Gemeinschaftsunterkünfte</li><li><strong>Nakuru:</strong> Unterstützung für vertriebene Familien</li><li><strong>Machakos:</strong> Ländliche Gemeinden</li><li><strong>Mombasa:</strong> Küsteninformelle Siedlungen</li>",
+    "s4-title": "Sauberes Wasser & Hygiene",
+    "s4-p1": "Wir sorgen für den Zugang zu sicherem Wasser und sanitären Einrichtungen, mit besonderem Augenmerk auf die Zugänglichkeit für Menschen mit Behinderungen.",
+    "s4-ul": "<li><strong>Nairobi:</strong> Kibera, Mathare</li><li><strong>Muranga:</strong> Maragua, Kandara</li><li><strong>Kiambu:</strong> Ruiru, Thika</li><li><strong>Nakuru:</strong> Naivasha, Njoro</li><li><strong>Machakos:</strong> Machakos Stadt, Mwala</li><li><strong>Mombasa:</strong> Likoni, Kisauni</li>",
+    "s5-title": "Drogenprävention & Rehabilitation",
+    "s5-p1": "Wir bieten Aufklärungskampagnen, Beratung und Rehabilitation für Jugendliche. Programme werden je nach Landkreis angepasst:",
+    "s5-ul": "<li><strong>Nairobi:</strong> Mathare Jugendrehabilitationszentrum</li><li><strong>Muranga:</strong> Kandara & Maragua Jugendrehab</li><li><strong>Kiambu:</strong> Thika Jugendrehab</li><li><strong>Nakuru:</strong> Jugendzentren der Stadt Nakuru</li><li><strong>Machakos:</strong> Machakos Stadt Jugendrehab</li><li><strong>Mombasa:</strong> Likoni Jugendprogramme</li>",
+    "s6-title": "Unterstützung für Menschen mit Behinderungen & Jugendbeteiligung",
+    "s6-p1": "Wir bieten Hilfsmittel, Schulungen, inklusive Bildung und Mentoring für jugendgeführte Gemeinschaftsprojekte. Programme sollen Resilienz aufbauen und Führung fördern und gleichzeitig Menschen mit Behinderungen unterstützen.",
+    "s6-ul": "<li><strong>Nairobi:</strong> Nairobi Rehabilitationszentrum für Behinderte</li><li><strong>Muranga & Kiambu:</strong> Gemeinschaftsunterstützungsprogramme</li><li><strong>Nakuru:</strong> Behinderteninitiativen des Landkreises Nakuru</li><li><strong>Machakos:</strong> Inklusive Bildungsprogramme</li><li><strong>Mombasa:</strong> Unterstützungszentren von Likoni & Kisauni</li>",
+    "footer-text": "© Humanitäre Hilfe — Alle Rechte vorbehalten."
+  },
+
+  es: {
+    "page-title": "Ayuda Humanitaria",
+    "s1-title": "Respuesta Rápida ante Crisis",
+    "s1-p1": "Ofrecemos asistencia oportuna y compasiva a individuos y familias afectadas por desastres, conflictos y dificultades. Nuestros programas proporcionan apoyo vital, incluyendo alimentos, agua potable, refugio, suministros de higiene y apoyo inclusivo para personas con discapacidades y programas de recuperación de drogas.",
+    "s2-title": "Asistencia Alimentaria y Nutricional",
+    "s2-p1": "Distribuimos alimentos y apoyo nutricional a comunidades vulnerables. Los programas son específicos por condado para una mejor cobertura:",
+    "s2-ul": "<li><strong>Nairobi:</strong> Kibera, Mathare</li><li><strong>Muranga:</strong> Kandara, Maragua</li><li><strong>Kiambu:</strong> Thika, Ruiru</li><li><strong>Nakuru:</strong> Njoro, Naivasha</li><li><strong>Machakos:</strong> Ciudad de Machakos, Mwala</li><li><strong>Mombasa:</strong> Likoni, Kisauni</li>",
+    "s3-title": "Refugio y Vivienda Segura",
+    "s3-p1": "Se proporcionan refugios temporales, tiendas y viviendas reforzadas para proteger a las familias. Los programas también incluyen refugios inclusivos para personas con discapacidad y espacios seguros para jóvenes en recuperación de drogas.",
+    "s3-ul": "<li><strong>Nairobi:</strong> Asentamientos informales</li><li><strong>Muranga & Kiambu:</strong> Refugios comunitarios</li><li><strong>Nakuru:</strong> Apoyo a familias desplazadas</li><li><strong>Machakos:</strong> Comunidades rurales</li><li><strong>Mombasa:</strong> Asentamientos informales costeros</li>",
+    "s4-title": "Agua Limpia e Higiene",
+    "s4-p1": "Garantizamos el acceso a agua segura e instalaciones de higiene, con especial atención a la accesibilidad para personas con discapacidades.",
+    "s4-ul": "<li><strong>Nairobi:</strong> Kibera, Mathare</li><li><strong>Muranga:</strong> Maragua, Kandara</li><li><strong>Kiambu:</strong> Ruiru, Thika</li><li><strong>Nakuru:</strong> Naivasha, Njoro</li><li><strong>Machakos:</strong> Ciudad de Machakos, Mwala</li><li><strong>Mombasa:</strong> Likoni, Kisauni</li>",
+    "s5-title": "Prevención y Rehabilitación de Drogas",
+    "s5-p1": "Ofrecemos campañas de concienciación, asesoramiento y rehabilitación para jóvenes. Los programas se adaptan por condado:",
+    "s5-ul": "<li><strong>Nairobi:</strong> Centro de Rehabilitación Juvenil de Mathare</li><li><strong>Muranga:</strong> Rehabilitación juvenil de Kandara & Maragua</li><li><strong>Kiambu:</strong> Rehabilitación juvenil de Thika</li><li><strong>Nakuru:</strong> Centros juveniles de la ciudad de Nakuru</li><li><strong>Machakos:</strong> Rehabilitación juvenil de Machakos</li><li><strong>Mombasa:</strong> Programas juveniles de Likoni</li>",
+    "s6-title": "Apoyo a Personas con Discapacidades & Participación Juvenil",
+    "s6-p1": "Proporcionamos dispositivos de asistencia, capacitación, educación inclusiva y mentoría para proyectos comunitarios dirigidos por jóvenes. Los programas buscan fortalecer la resiliencia y promover el liderazgo mientras apoyan a personas con discapacidades.",
+    "s6-ul": "<li><strong>Nairobi:</strong> Centro de Rehabilitación para Discapacitados de Nairobi</li><li><strong>Muranga & Kiambu:</strong> Programas de apoyo comunitario</li><li><strong>Nakuru:</strong> Iniciativas para discapacitados del condado de Nakuru</li><li><strong>Machakos:</strong> Programas de educación inclusiva</li><li><strong>Mombasa:</strong> Centros de apoyo de Likoni & Kisauni</li>",
+    "footer-text": "© Ayuda Humanitaria — Todos los derechos reservados."
+  },
+
+  it: {
+    "page-title": "Aiuto Umanitario",
+    "s1-title": "Risposta Rapida alle Crisi",
+    "s1-p1": "Forniamo assistenza tempestiva e compassionevole a individui e famiglie colpite da disastri, conflitti e difficoltà. I nostri programmi offrono supporto vitale, inclusi cibo, acqua potabile, alloggi, forniture igieniche e supporto inclusivo per persone con disabilità e programmi di recupero da abuso di sostanze.",
+    "s2-title": "Assistenza Alimentare e Nutrizionale",
+    "s2-p1": "Distribuiamo forniture alimentari e supporto nutrizionale alle comunità vulnerabili. I programmi sono specifici per contea per una maggiore copertura:",
+    "s2-ul": "<li><strong>Nairobi:</strong> Kibera, Mathare</li><li><strong>Muranga:</strong> Kandara, Maragua</li><li><strong>Kiambu:</strong> Thika, Ruiru</li><li><strong>Nakuru:</strong> Njoro, Naivasha</li><li><strong>Machakos:</strong> Città di Machakos, Mwala</li><li><strong>Mombasa:</strong> Likoni, Kisauni</li>",
+    "s3-title": "Alloggi Sicuri",
+    "s3-p1": "Vengono forniti rifugi temporanei, tende e abitazioni rinforzate per proteggere le famiglie. I programmi includono anche rifugi accessibili per persone con disabilità e spazi sicuri per i giovani in recupero da droghe.",
+    "s3-ul": "<li><strong>Nairobi:</strong> Insediamenti informali</li><li><strong>Muranga & Kiambu:</strong> Rifugi comunitari</li><li><strong>Nakuru:</strong> Supporto alle famiglie sfollate</li><li><strong>Machakos:</strong> Comunità rurali</li><li><strong>Mombasa:</strong> Insediamenti informali costieri</li>",
+    "s4-title": "Acqua Pulita e Igiene",
+    "s4-p1": "Garantiamo l'accesso ad acqua sicura e strutture igieniche, con particolare attenzione all'accessibilità per le persone con disabilità.",
+    "s4-ul": "<li><strong>Nairobi:</strong> Kibera, Mathare</li><li><strong>Muranga:</strong> Maragua, Kandara</li><li><strong>Kiambu:</strong> Ruiru, Thika</li><li><strong>Nakuru:</strong> Naivasha, Njoro</li><li><strong>Machakos:</strong> Città di Machakos, Mwala</li><li><strong>Mombasa:</strong> Likoni, Kisauni</li>",
+    "s5-title": "Prevenzione e Riabilitazione da Droghe",
+    "s5-p1": "Offriamo campagne di sensibilizzazione, consulenza e riabilitazione per i giovani. I programmi sono personalizzati per contea:",
+    "s5-ul": "<li><strong>Nairobi:</strong> Centro di Riabilitazione Giovanile di Mathare</li><li><strong>Muranga:</strong> Riabilitazione giovanile di Kandara & Maragua</li><li><strong>Kiambu:</strong> Riabilitazione giovanile di Thika</li><li><strong>Nakuru:</strong> Centri giovanili della città di Nakuru</li><li><strong>Machakos:</strong> Riabilitazione giovanile di Machakos</li><li><strong>Mombasa:</strong> Programmi giovanili di Likoni</li>",
+    "s6-title": "Supporto per Disabili e Coinvolgimento Giovanile",
+   "s6-p1": "Forniamo dispositivi assistivi, formazione, istruzione inclusiva e mentorship per progetti comunitari guidati dai giovani. I programmi mirano a costruire resilienza e promuovere la leadership tra i giovani, supportando al contempo le persone con disabilità.",
+    "s6-ul": "<li><strong>Nairobi:</strong> Centro di Riabilitazione per Disabili di Nairobi</li><li><strong>Muranga & Kiambu:</strong> Programmi di supporto comunitario</li><li><strong>Nakuru:</strong> Iniziative per disabili della contea di Nakuru</li><li><strong>Machakos:</strong> Programmi di istruzione inclusiva</li><li><strong>Mombasa:</strong> Centri di supporto di Likoni & Kisauni</li>",
+    "footer-text": "© Aiuto Umanitario — Tutti i diritti riservati."
+  },
+sw: {
+    "page-title": "Msaada wa Kibinadamu",
+    "s1-title": "Jibu la Haraka kwa Mgogoro",
+    "s1-p1": "Tunatoa msaada wa haraka na wenye huruma kwa watu na familia zilizokumbwa na majanga, migogoro, na shida. Programu zetu zinatoa msaada muhimu ikiwemo chakula, maji safi, makazi, vifaa vya usafi, na msaada wa ujumuishaji kwa watu wenye ulemavu pamoja na programu za urejeleo wa utumiaji wa dawa za kulevya.",
+    "s2-title": "Msaada wa Chakula na Lishe",
+    "s2-p1": "Tunagawa chakula na msaada wa lishe kwa jamii zilizo hatarini. Programu zinazingatia kila kaunti kwa upatikanaji bora:",
+    "s2-ul": "<li><strong>Nairobi:</strong> Kibera, Mathare</li><li><strong>Muranga:</strong> Kandara, Maragua</li><li><strong>Kiambu:</strong> Thika, Ruiru</li><li><strong>Nakuru:</strong> Njoro, Naivasha</li><li><strong>Machakos:</strong> Jiji la Machakos, Mwala</li><li><strong>Mombasa:</strong> Likoni, Kisauni</li>",
+    "s3-title": "Makazi Salama",
+    "s3-p1": "Tunatoa makazi ya muda, tenti, na nyumba imara ili kulinda familia. Programu pia zinahusisha makazi yanayofaa kwa watu wenye ulemavu na maeneo salama kwa vijana wanaopona kutokana na dawa za kulevya.",
+    "s3-ul": "<li><strong>Nairobi:</strong> Mitaa isiyo rasmi</li><li><strong>Muranga & Kiambu:</strong> Makazi ya jamii</li><li><strong>Nakuru:</strong> Msaada kwa familia zilizo hamishwa</li><li><strong>Machakos:</strong> Jamii za vijijini</li><li><strong>Mombasa:</strong> Mitaa ya pwani isiyo rasmi</li>",
+    "s4-title": "Maji Safi na Usafi",
+    "s4-p1": "Tunahakikisha upatikanaji wa maji safi na miundombinu ya usafi, tukizingatia upatikanaji kwa watu wenye ulemavu.",
+    "s4-ul": "<li><strong>Nairobi:</strong> Kibera, Mathare</li><li><strong>Muranga:</strong> Maragua, Kandara</li><li><strong>Kiambu:</strong> Ruiru, Thika</li><li><strong>Nakuru:</strong> Naivasha, Njoro</li><li><strong>Machakos:</strong> Jiji la Machakos, Mwala</li><li><strong>Mombasa:</strong> Likoni, Kisauni</li>",
+    "s5-title": "Kuzuia na Urejeleo wa Matumizi ya Dawa za Kulevya",
+    "s5-p1": "Tunatoa kampeni za uhamasishaji, ushauri, na urejeleo kwa vijana. Programu zinabinafsishwa kwa kila kaunti:",
+    "s5-ul": "<li><strong>Nairobi:</strong> Kituo cha Urejeleo wa Vijana Mathare</li><li><strong>Muranga:</strong> Urejeleo wa Vijana Kandara & Maragua</li><li><strong>Kiambu:</strong> Urejeleo wa Vijana Thika</li><li><strong>Nakuru:</strong> Vituo vya vijana vya Jiji la Nakuru</li><li><strong>Machakos:</strong> Urejeleo wa Vijana Jiji la Machakos</li><li><strong>Mombasa:</strong> Programu za vijana Likoni</li>",
+    "s6-title": "Msaada kwa Watu Wenye Ulemavu na Ushiriki wa Vijana",
+    "s6-p1": "Tunatoa vifaa vya msaada, mafunzo, elimu jumuishi, na ushauri kwa miradi ya jamii inayoendeshwa na vijana. Programu zinakusudia kujenga ustahimilivu na kukuza uongozi miongoni mwa vijana huku zikisaidia watu wenye ulemavu.",
+    "s6-ul": "<li><strong>Nairobi:</strong> Kituo cha Rehabilitasi kwa Watu Wenye Ulemavu Nairobi</li><li><strong>Muranga & Kiambu:</strong> Programu za msaada wa jamii</li><li><strong>Nakuru:</strong> Miradi ya ulemavu ya Kaunti ya Nakuru</li><li><strong>Machakos:</strong> Programu za elimu jumuishi</li><li><strong>Mombasa:</strong> Vituo vya msaada Likoni & Kisauni</li>",
+    "footer-text": "© Msaada wa Kibinadamu — Haki Zote Zimehifadhiwa."
+  }
+};
+
+
+const toggleBtn = document.getElementById("langToggle");
+const menu = document.getElementById("langMenu");
+
+if (!toggleBtn || !menu) return;
+
+function switchLanguage(lang){
+    if(!translations[lang]) return;
+    document.querySelectorAll("[data-key]").forEach(el=>{
+        const key = el.dataset.key;
+        if(translations[lang][key]) el.innerHTML = translations[lang][key];
+    });
+    toggleBtn.textContent = lang.toUpperCase() + " ▾";
+    toggleBtn.setAttribute("data-lang", lang);
+    localStorage.setItem("lang", lang);
+}
+
+toggleBtn.addEventListener("click", e=>{
+    e.stopPropagation();
+    menu.classList.toggle("open");
+});
+
+menu.querySelectorAll("[data-lang-select]").forEach(item=>{
+    item.addEventListener("click", e=>{
+        e.preventDefault();
+        const lang = item.getAttribute("data-lang-select");
+        switchLanguage(lang);
+        menu.classList.remove("open");
+    });
+});
+
+document.addEventListener("click", e=>{
+    if(!menu.contains(e.target) && !toggleBtn.contains(e.target)){
+        menu.classList.remove("open");
+    }
+});
+
+const savedLang = localStorage.getItem("lang") || "en";
+switchLanguage(savedLang);
+
+});
+</script>
 </body>
 </html>
