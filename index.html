@@ -3109,7 +3109,7 @@ document.getElementById("googleBtn").addEventListener("click", async () => {
     await auth.signInWithPopup(googleProvider);
 
     // REDIRECT TO MEMBERS DASHBOARD
-    window.location.href = "/swissaid/members/dashboard.html";
+    window.location.href = "/members/dashboard.html";
 
   } catch (err) {
     alert(err.message);
