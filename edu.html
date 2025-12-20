@@ -27,12 +27,13 @@ header{
     color:#fff;
     padding:20px;
     display:grid;
-    grid-template-columns:1fr auto 1fr;
+    grid-template-columns:1fr auto 1fr auto; /* extended safely */
     align-items:center;
 }
 .logo{ height:70px; }
 .page-title{ margin:0; font-size:32px; text-align:center; }
 .empty{ height:70px; }
+
 .section{
     max-width:var(--max-width);
     margin:60px auto;
@@ -54,16 +55,19 @@ header{
 .shape-leaf{ width:50%; clip-path:ellipse(50% 40% at 50% 50%); }
 .center-section{ text-align:center; flex-direction:column; }
 footer{ background:#222; color:#eee; padding:30px; text-align:center; margin-top:60px; }
+
 @media(max-width:900px){
     .section{ flex-direction:column !important; text-align:center; }
     .section img, .text{ width:100%; }
 }
+
 .section:nth-of-type(1){ background:linear-gradient(135deg, #0b61b6, #1a75d1); color:#fff; }
 .section:nth-of-type(2){ background:linear-gradient(135deg, #2a9d8f, #21867a); color:#fff; }
 .section:nth-of-type(3){ background:linear-gradient(135deg, #f4a261, #e07b39); }
 .section:nth-of-type(4){ background:linear-gradient(135deg, #7a2fa6, #5e2080); color:#fff; }
 .section:nth-of-type(5){ background:linear-gradient(135deg, #f5c400, #d4a500); }
 .section.swiss{ background:linear-gradient(135deg, #004080, #0066cc); color:#fff; }
+
 .floating-home-btn{
   position:fixed;
   bottom:28px;
@@ -74,28 +78,98 @@ footer{ background:#222; color:#eee; padding:30px; text-align:center; margin-top
   border:none;
   color:white;
 }
+
+/* ================================================= */
+/* ========== LANGUAGE DROPDOWN (ADDED) ============= */
+/* ================================================= */
+
+.lang-dropdown{
+  position:relative;
+  justify-self:end;
+  z-index:1000;
+}
+
+#langToggle{
+  background:#ffffff;
+  color:#000;
+  padding:6px 10px;
+  border-radius:8px;
+  text-decoration:none;
+  font-weight:bold;
+  font-size:14px;
+  cursor:pointer;
+  display:inline-block;
+}
+
+.lang-menu{
+  position:absolute;
+  top:110%;
+  right:0;
+  background:#fff;
+  min-width:160px;
+  border-radius:10px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.2);
+  display:none;
+  overflow:hidden;
+}
+
+.lang-menu a{
+  display:block;
+  padding:10px 14px;
+  text-decoration:none;
+  color:#000;
+  font-size:14px;
+}
+
+.lang-menu a:hover{
+  background:#f2f2f2;
+}
+
+.lang-menu.open{
+  display:block;
+}
 </style>
+
 </head>
-
 <body>
-
 <header>
   <img src="https://res.cloudinary.com/dwvt4e9o2/image/upload/v1763476964/Screenshot_73_e5hyu9.png" class="logo">
-  <h1 class="page-title">Hybrid Education Centre for Youth</h1>
-  <div class="empty"></div>
+  <h1 class="page-title" data-key="page-title">Hybrid Education Centre for Youth</h1>
+
+  <div class="lang-dropdown">
+    <button id="langToggle" data-lang="en">EN ▾</button>
+    <div class="lang-menu" id="langMenu">
+      <a href="#" data-lang-select="en">English</a>
+      <a href="#" data-lang-select="fr">Français</a>
+      <a href="#" data-lang-select="de">Deutsch</a>
+      <a href="#" data-lang-select="es">Español</a>
+      <a href="#" data-lang-select="it">Italiano</a>
+      <a href="#" data-lang-select="sw">KiSwahili</a>
+    </div>
+  </div>
 </header>
+
 
 <!-- SECTION 1 -->
 <section class="section">
   <div class="text">
-    <h2>Hybrid Education Overview</h2>
-    <p>We provide flexible digital and in-school learning support to children and youth across Nairobi, Murang’a, Kiambu, Nakuru, Machakos, and Mombasa.</p>
+    <h2 data-key="s1-title">Hybrid Education Overview</h2>
 
-    <p><strong>Current Status:</strong> Our Hybrid Education Centres are already established and operational, offering structured digital learning, local mentorship, and access to international academic content.</p>
+    <p data-key="s1-p1">
+      We provide flexible digital and in-school learning support to children and youth across Nairobi, Murang’a, Kiambu, Nakuru, Machakos, and Mombasa.
+    </p>
 
-    <p>The centres combine physical classrooms with digital platforms, AI-supported learning, and live virtual sessions from global educators. This model ensures continuity, quality, and affordability for learners who would otherwise be excluded from tertiary education.</p>
+    <p data-key="s1-p2">
+      <strong>Current Status:</strong> Our Hybrid Education Centres are already established and operational, offering structured digital learning, local mentorship, and access to international academic content.
+    </p>
 
-    <p><strong>Support Needed:</strong> To fully equip and scale these centres, we seek donor support to strengthen classroom infrastructure, expand internet capacity, and subsidize learning costs for students who cannot fully afford fees.</p>
+    <p data-key="s1-p3">
+      The centres combine physical classrooms with digital platforms, AI-supported learning, and live virtual sessions from global educators. This model ensures continuity, quality, and affordability for learners who would otherwise be excluded from tertiary education.
+    </p>
+
+    <p data-key="s1-p4">
+      <strong>Support Needed:</strong> To fully equip and scale these centres, we seek donor support to strengthen classroom infrastructure, expand internet capacity, and subsidize learning costs for students who cannot fully afford fees.
+    </p>
   </div>
   <img src="https://images.pexels.com/photos/12497062/pexels-photo-12497062.jpeg" class="shape-round">
 </section>
@@ -103,18 +177,23 @@ footer{ background:#222; color:#eee; padding:30px; text-align:center; margin-top
 <!-- SECTION 2 -->
 <section class="section">
   <div class="text">
-    <h2>Why Hybrid Learning?</h2>
-    <p>Sub-Saharan Africa has a tertiary education enrollment rate of under 10%, compared to over 70% in developed regions. Traditional institutions often fail due to cost, distance, and infrastructure challenges.</p>
+    <h2 data-key="s2-title">Why Hybrid Learning?</h2>
+
+    <p data-key="s2-p1">
+      Sub-Saharan Africa has a tertiary education enrollment rate of under 10%, compared to over 70% in developed regions. Traditional institutions often fail due to cost, distance, and infrastructure challenges.
+    </p>
 
     <ul>
-      <li>World-class digital content from international universities</li>
-      <li>Live online sessions with professors and entrepreneurs</li>
-      <li>On-site mentoring and guided study sessions</li>
-      <li>AI-supported personalized learning and assessment</li>
-      <li>Lower cost per student through shared infrastructure</li>
+      <li data-key="s2-li1">World-class digital content from international universities</li>
+      <li data-key="s2-li2">Live online sessions with professors and entrepreneurs</li>
+      <li data-key="s2-li3">On-site mentoring and guided study sessions</li>
+      <li data-key="s2-li4">AI-supported personalized learning and assessment</li>
+      <li data-key="s2-li5">Lower cost per student through shared infrastructure</li>
     </ul>
 
-    <p>This hybrid approach makes quality education accessible while remaining financially sustainable with donor and partner support.</p>
+    <p data-key="s2-p2">
+      This hybrid approach makes quality education accessible while remaining financially sustainable with donor and partner support.
+    </p>
   </div>
   <img src="https://res.cloudinary.com/dwvt4e9o2/image/upload/v1766164104/ChatGPT_Image_Dec_19_2025_08_07_57_PM_usfrdk.png" class="shape-rounded">
 </section>
@@ -123,14 +202,16 @@ footer{ background:#222; color:#eee; padding:30px; text-align:center; margin-top
 <section class="section center-section">
   <img src="https://images.pexels.com/photos/5905700/pexels-photo-5905700.jpeg" class="shape-diagonal">
   <div class="text">
-    <h2>Counties We Serve</h2>
-    <p>Hybrid Education Centres are operational in:</p>
+    <h2 data-key="s3-title">Counties We Serve</h2>
+
+    <p data-key="s3-p1">Hybrid Education Centres are operational in:</p>
+
     <ul>
-      <li><strong>Nairobi:</strong> Urban youth, startup incubation, digital entrepreneurship.</li>
-      <li><strong>Murang’a:</strong> Rural learning hubs, girls mentorship.</li>
-      <li><strong>Kiambu & Thika:</strong> ICT skills and coding centres.</li>
-      <li><strong>Nakuru & Machakos:</strong> Weekend hybrid learning hubs.</li>
-      <li><strong>Mombasa:</strong> Vocational skills and blended learning.</li>
+      <li data-key="s3-li1"><strong>Nairobi:</strong> Urban youth, startup incubation, digital entrepreneurship.</li>
+      <li data-key="s3-li2"><strong>Murang’a:</strong> Rural learning hubs, girls mentorship.</li>
+      <li data-key="s3-li3"><strong>Kiambu & Thika:</strong> ICT skills and coding centres.</li>
+      <li data-key="s3-li4"><strong>Nakuru & Machakos:</strong> Weekend hybrid learning hubs.</li>
+      <li data-key="s3-li5"><strong>Mombasa:</strong> Vocational skills and blended learning.</li>
     </ul>
   </div>
 </section>
@@ -139,31 +220,37 @@ footer{ background:#222; color:#eee; padding:30px; text-align:center; margin-top
 <section class="section center-section">
   <img src="https://images.pexels.com/photos/35154092/pexels-photo-35154092.jpeg" class="shape-hexagon">
   <div class="text">
-    <h2>What Happens Inside Our Centres</h2>
+    <h2 data-key="s4-title">What Happens Inside Our Centres</h2>
+
     <ul>
-      <li>30+ computer learning stations per centre</li>
-      <li>Satellite internet (Starlink) with backup power</li>
-      <li>Core course: Introduction to Entrepreneurship</li>
-      <li>Electives in digital skills, AI, vocational training</li>
-      <li>Startup incubation and certification</li>
+      <li data-key="s4-li1">30+ computer learning stations per centre</li>
+      <li data-key="s4-li2">Satellite internet (Starlink) with backup power</li>
+      <li data-key="s4-li3">Core course: Introduction to Entrepreneurship</li>
+      <li data-key="s4-li4">Electives in digital skills, AI, vocational training</li>
+      <li data-key="s4-li5">Startup incubation and certification</li>
     </ul>
 
-    <p><strong>Donor Opportunity:</strong> Support is needed for computers, screens, routers, software licenses, and internet subscriptions to maintain and expand access.</p>
+    <p data-key="s4-p1">
+      <strong>Donor Opportunity:</strong> Support is needed for computers, screens, routers, software licenses, and internet subscriptions to maintain and expand access.
+    </p>
   </div>
 </section>
 
 <!-- SECTION 5 -->
 <section class="section center-section">
   <div class="text">
-    <h2>Program Impact</h2>
+    <h2 data-key="s5-title">Program Impact</h2>
+
     <ul>
-      <li>300+ students trained through operational centres</li>
-      <li>Multiple youth-led startups launched</li>
-      <li>Improved employability and digital literacy</li>
-      <li>Reduced youth migration through local opportunity creation</li>
+      <li data-key="s5-li1">300+ students trained through operational centres</li>
+      <li data-key="s5-li2">Multiple youth-led startups launched</li>
+      <li data-key="s5-li3">Improved employability and digital literacy</li>
+      <li data-key="s5-li4">Reduced youth migration through local opportunity creation</li>
     </ul>
 
-    <p><strong>Student Support Need:</strong> While some learners contribute partial fees (approx. €30/month), many cannot fully afford costs. Donor funding helps bridge this gap, ensuring no capable student is excluded due to financial hardship.</p>
+    <p data-key="s5-p1">
+      <strong>Student Support Need:</strong> While some learners contribute partial fees (approx. €30/month), many cannot fully afford costs. Donor funding helps bridge this gap, ensuring no capable student is excluded due to financial hardship.
+    </p>
   </div>
   <img src="https://images.pexels.com/photos/11025022/pexels-photo-11025022.jpeg" class="shape-leaf">
 </section>
@@ -171,17 +258,23 @@ footer{ background:#222; color:#eee; padding:30px; text-align:center; margin-top
 <!-- SWISS AID -->
 <section class="section swiss center-section">
   <div class="text">
-    <h2>Swiss Aid Connect Foundation Partnership</h2>
-    <p>Implemented in partnership with Swiss Aid Connect Foundation, our centres follow a proven hybrid education model integrating:</p>
+    <h2 data-key="s6-title">Swiss Aid Connect Foundation Partnership</h2>
+
+    <p data-key="s6-p1">
+      Implemented in partnership with Swiss Aid Connect Foundation, our centres follow a proven hybrid education model integrating:
+    </p>
+
     <ul>
-      <li>International university content</li>
-      <li>Live sessions with professors and entrepreneurs</li>
-      <li>AI-driven learning personalization</li>
-      <li>Reliable infrastructure (Starlink & solar options)</li>
-      <li>Recognized certification pathways</li>
+      <li data-key="s6-li1">International university content</li>
+      <li data-key="s6-li2">Live sessions with professors and entrepreneurs</li>
+      <li data-key="s6-li3">AI-driven learning personalization</li>
+      <li data-key="s6-li4">Reliable infrastructure (Starlink & solar options)</li>
+      <li data-key="s6-li5">Recognized certification pathways</li>
     </ul>
 
-    <p><strong>Invitation to Partners:</strong> We invite donors, institutions, and corporate partners to support classroom equipment, connectivity, and student scholarships, ensuring long-term sustainability and expanded impact.</p>
+    <p data-key="s6-p2">
+      <strong>Invitation to Partners:</strong> We invite donors, institutions, and corporate partners to support classroom equipment, connectivity, and student scholarships, ensuring long-term sustainability and expanded impact.
+    </p>
   </div>
 </section>
 
@@ -189,9 +282,392 @@ footer{ background:#222; color:#eee; padding:30px; text-align:center; margin-top
   <button class="floating-home-btn">🏠</button>
 </a>
 
-<footer>
+<footer data-key="footer-text">
   © <script>document.write(new Date().getFullYear());</script> Hybrid Education Centre — All Rights Reserved.
 </footer>
 
+<!-- TRANSLATION ENGINE (EMPTY, SAFE, READY) -->
+<script>
+/* ---------- TRANSLATIONS OBJECT ---------- */
+const translations = {
+  /* ===================== ENGLISH ===================== */
+  en: {
+    "page-title": "Hybrid Education Centre for Youth",
+
+    "s1-title": "Hybrid Education Overview",
+    "s1-p1": "We provide flexible digital and in-school learning support to children and youth across Nairobi, Murang’a, Kiambu, Nakuru, Machakos, and Mombasa.",
+    "s1-p2": "<strong>Current Status:</strong> Our Hybrid Education Centres are already established and operational, offering structured digital learning, local mentorship, and access to international academic content.",
+    "s1-p3": "The centres combine physical classrooms with digital platforms, AI-supported learning, and live virtual sessions from global educators. This model ensures continuity, quality, and affordability for learners who would otherwise be excluded from tertiary education.",
+    "s1-p4": "<strong>Support Needed:</strong> To fully equip and scale these centres, we seek donor support to strengthen classroom infrastructure, expand internet capacity, and subsidize learning costs for students who cannot fully afford fees.",
+
+    "s2-title": "Why Hybrid Learning?",
+    "s2-p1": "Sub-Saharan Africa has a tertiary education enrollment rate of under 10%, compared to over 70% in developed regions. Traditional institutions often fail due to cost, distance, and infrastructure challenges.",
+    "s2-li1": "World-class digital content from international universities",
+    "s2-li2": "Live online sessions with professors and entrepreneurs",
+    "s2-li3": "On-site mentoring and guided study sessions",
+    "s2-li4": "AI-supported personalized learning and assessment",
+    "s2-li5": "Lower cost per student through shared infrastructure",
+    "s2-p2": "This hybrid approach makes quality education accessible while remaining financially sustainable with donor and partner support.",
+
+    "s3-title": "Counties We Serve",
+    "s3-p1": "Hybrid Education Centres are operational in:",
+    "s3-li1": "<strong>Nairobi:</strong> Urban youth, startup incubation, digital entrepreneurship.",
+    "s3-li2": "<strong>Murang’a:</strong> Rural learning hubs, girls mentorship.",
+    "s3-li3": "<strong>Kiambu & Thika:</strong> ICT skills and coding centres.",
+    "s3-li4": "<strong>Nakuru & Machakos:</strong> Weekend hybrid learning hubs.",
+    "s3-li5": "<strong>Mombasa:</strong> Vocational skills and blended learning.",
+
+    "s4-title": "What Happens Inside Our Centres",
+    "s4-li1": "30+ computer learning stations per centre",
+    "s4-li2": "Satellite internet (Starlink) with backup power",
+    "s4-li3": "Core course: Introduction to Entrepreneurship",
+    "s4-li4": "Electives in digital skills, AI, vocational training",
+    "s4-li5": "Startup incubation and certification",
+    "s4-p1": "<strong>Donor Opportunity:</strong> Support is needed for computers, screens, routers, software licenses, and internet subscriptions to maintain and expand access.",
+
+    "s5-title": "Program Impact",
+    "s5-li1": "300+ students trained through operational centres",
+    "s5-li2": "Multiple youth-led startups launched",
+    "s5-li3": "Improved employability and digital literacy",
+    "s5-li4": "Reduced youth migration through local opportunity creation",
+    "s5-p1": "<strong>Student Support Need:</strong> While some learners contribute partial fees (approx. €30/month), many cannot fully afford costs. Donor funding helps bridge this gap, ensuring no capable student is excluded due to financial hardship.",
+
+    "s6-title": "Swiss Aid Connect Foundation Partnership",
+    "s6-p1": "Implemented in partnership with Swiss Aid Connect Foundation, our centres follow a proven hybrid education model integrating:",
+    "s6-li1": "International university content",
+    "s6-li2": "Live sessions with professors and entrepreneurs",
+    "s6-li3": "AI-driven learning personalization",
+    "s6-li4": "Reliable infrastructure (Starlink & solar options)",
+    "s6-li5": "Recognized certification pathways",
+    "s6-p2": "<strong>Invitation to Partners:</strong> We invite donors, institutions, and corporate partners to support classroom equipment, connectivity, and student scholarships, ensuring long-term sustainability and expanded impact.",
+
+    "footer-text": "© Hybrid Education Centre — All Rights Reserved."
+  },
+
+  /* ===================== FRENCH ===================== */
+  fr: {
+    "page-title": "Centre d’éducation hybride pour la jeunesse",
+
+    "s1-title": "Aperçu de l’éducation hybride",
+    "s1-p1": "Nous fournissons un soutien flexible pour l’apprentissage numérique et en présentiel aux enfants et aux jeunes à Nairobi, Murang’a, Kiambu, Nakuru, Machakos et Mombasa.",
+    "s1-p2": "<strong>État actuel :</strong> Nos centres d’éducation hybride sont déjà établis et opérationnels, offrant un apprentissage numérique structuré, un mentorat local et l’accès à des contenus académiques internationaux.",
+    "s1-p3": "Les centres combinent des salles de classe physiques avec des plateformes numériques, un apprentissage assisté par IA et des sessions virtuelles en direct avec des éducateurs internationaux. Ce modèle assure continuité, qualité et accessibilité pour les apprenants qui seraient autrement exclus de l’enseignement supérieur.",
+    "s1-p4": "<strong>Soutien nécessaire :</strong> Pour équiper et développer pleinement ces centres, nous sollicitons le soutien des donateurs pour renforcer l’infrastructure des salles de classe, augmenter la capacité Internet et subventionner les frais pour les étudiants qui ne peuvent pas payer intégralement.",
+
+    "s2-title": "Pourquoi l’apprentissage hybride ?",
+    "s2-p1": "L’Afrique subsaharienne a un taux d’inscription à l’enseignement supérieur inférieur à 10 %, contre plus de 70 % dans les régions développées. Les institutions traditionnelles échouent souvent en raison du coût, de la distance et des infrastructures.",
+    "s2-li1": "Contenu numérique de classe mondiale provenant d’universités internationales",
+    "s2-li2": "Sessions en ligne en direct avec des professeurs et des entrepreneurs",
+    "s2-li3": "Mentorat sur place et sessions d’études guidées",
+    "s2-li4": "Apprentissage personnalisé assisté par IA et évaluation",
+    "s2-li5": "Coût par étudiant réduit grâce au partage des infrastructures",
+    "s2-p2": "Cette approche hybride rend l’éducation de qualité accessible tout en restant financièrement durable avec le soutien des donateurs et partenaires.",
+
+    "s3-title": "Comtés desservis",
+    "s3-p1": "Les centres d’éducation hybride sont opérationnels dans :",
+    "s3-li1": "<strong>Nairobi :</strong> Jeunes urbains, incubation de startups, entrepreneuriat numérique.",
+    "s3-li2": "<strong>Murang’a :</strong> Centres d’apprentissage ruraux, mentorat pour filles.",
+    "s3-li3": "<strong>Kiambu & Thika :</strong> Compétences TIC et centres de codage.",
+    "s3-li4": "<strong>Nakuru & Machakos :</strong> Centres d’apprentissage hybride du week-end.",
+    "s3-li5": "<strong>Mombasa :</strong> Compétences professionnelles et apprentissage mixte.",
+
+    "s4-title": "Ce qui se passe dans nos centres",
+    "s4-li1": "Plus de 30 stations d’apprentissage informatique par centre",
+    "s4-li2": "Internet par satellite (Starlink) avec alimentation de secours",
+    "s4-li3": "Cours principal : Introduction à l’entrepreneuriat",
+    "s4-li4": "Cours optionnels en compétences numériques, IA et formation professionnelle",
+    "s4-li5": "Incubation de startups et certification",
+    "s4-p1": "<strong>Opportunité pour les donateurs :</strong> Un soutien est nécessaire pour les ordinateurs, écrans, routeurs, licences logicielles et abonnements Internet afin de maintenir et d’élargir l’accès.",
+
+    "s5-title": "Impact du programme",
+    "s5-li1": "Plus de 300 étudiants formés dans les centres opérationnels",
+    "s5-li2": "Multiples startups dirigées par des jeunes lancées",
+    "s5-li3": "Employabilité et alphabétisation numérique améliorées",
+    "s5-li4": "Réduction de la migration des jeunes grâce à la création d’opportunités locales",
+    "s5-p1": "<strong>Besoins de soutien aux étudiants :</strong> Bien que certains apprenants contribuent à des frais partiels (env. 30 €/mois), beaucoup ne peuvent pas se permettre les coûts. Le financement des donateurs aide à combler cette lacune, garantissant qu’aucun étudiant capable ne soit exclu en raison de difficultés financières.",
+
+    "s6-title": "Partenariat avec la Swiss Aid Connect Foundation",
+    "s6-p1": "Mis en œuvre en partenariat avec Swiss Aid Connect Foundation, nos centres suivent un modèle d’éducation hybride éprouvé intégrant :",
+    "s6-li1": "Contenu universitaire international",
+    "s6-li2": "Sessions en direct avec des professeurs et des entrepreneurs",
+    "s6-li3": "Personnalisation de l’apprentissage pilotée par IA",
+    "s6-li4": "Infrastructure fiable (Starlink et options solaires)",
+    "s6-li5": "Parcours de certification reconnus",
+    "s6-p2": "<strong>Invitation aux partenaires :</strong> Nous invitons les donateurs, institutions et partenaires corporatifs à soutenir l’équipement des salles de classe, la connectivité et les bourses étudiantes, garantissant la durabilité à long terme et un impact élargi.",
+
+    "footer-text": "© Centre d’éducation hybride — Tous droits réservés."
+  },
+  
+  
+  /* ===================== GERMAN ===================== */
+de: {
+  "page-title": "Hybrid-Bildungszentrum für Jugendliche",
+
+  "s1-title": "Überblick über Hybrid-Bildung",
+  "s1-p1": "Wir bieten flexible digitale und schulische Lernunterstützung für Kinder und Jugendliche in Nairobi, Murang’a, Kiambu, Nakuru, Machakos und Mombasa.",
+  "s1-p2": "<strong>Aktueller Status:</strong> Unsere Hybrid-Bildungszentren sind bereits etabliert und in Betrieb, bieten strukturiertes digitales Lernen, lokale Mentoring-Angebote und Zugang zu internationalem akademischem Inhalt.",
+  "s1-p3": "Die Zentren kombinieren physische Klassenzimmer mit digitalen Plattformen, KI-gestütztem Lernen und Live-Videositzungen mit globalen Lehrenden. Dieses Modell gewährleistet Kontinuität, Qualität und Erschwinglichkeit für Lernende, die sonst vom tertiären Bildungsbereich ausgeschlossen wären.",
+  "s1-p4": "<strong>Benötigte Unterstützung:</strong> Um diese Zentren vollständig auszustatten und zu erweitern, suchen wir Spenderunterstützung zur Verbesserung der Klassenzimmerinfrastruktur, Erweiterung der Internetkapazität und Subventionierung der Lernkosten für Schüler, die die Gebühren nicht vollständig bezahlen können.",
+
+  "s2-title": "Warum Hybrid-Lernen?",
+  "s2-p1": "In Subsahara-Afrika liegt die Einschreibungsquote in tertiären Bildungseinrichtungen unter 10 %, im Vergleich zu über 70 % in entwickelten Regionen. Traditionelle Institutionen scheitern oft aufgrund von Kosten, Entfernung und Infrastrukturproblemen.",
+  "s2-li1": "Digitaler Inhalt von Weltklasse-Universitäten",
+  "s2-li2": "Live-Online-Sitzungen mit Professoren und Unternehmern",
+  "s2-li3": "Mentoring vor Ort und geführte Lernsitzungen",
+  "s2-li4": "KI-gestütztes personalisiertes Lernen und Bewertung",
+  "s2-li5": "Niedrigere Kosten pro Schüler durch geteilte Infrastruktur",
+  "s2-p2": "Dieser hybride Ansatz macht hochwertige Bildung zugänglich und bleibt finanziell nachhaltig mit Unterstützung von Spendern und Partnern.",
+
+  "s3-title": "Von uns bediente Bezirke",
+  "s3-p1": "Hybrid-Bildungszentren sind in Betrieb in:",
+  "s3-li1": "<strong>Nairobi:</strong> Urbane Jugend, Startup-Inkubation, digitales Unternehmertum.",
+  "s3-li2": "<strong>Murang’a:</strong> Ländliche Lernzentren, Mentoring für Mädchen.",
+  "s3-li3": "<strong>Kiambu & Thika:</strong> ICT-Fähigkeiten und Coding-Zentren.",
+  "s3-li4": "<strong>Nakuru & Machakos:</strong> Wochenend-Hybrid-Lernzentren.",
+  "s3-li5": "<strong>Mombasa:</strong> Berufliche Fähigkeiten und Blended Learning.",
+
+  "s4-title": "Was in unseren Zentren passiert",
+  "s4-li1": "30+ Computer-Lernstationen pro Zentrum",
+  "s4-li2": "Satelliteninternet (Starlink) mit Backup-Stromversorgung",
+  "s4-li3": "Kernkurs: Einführung in Unternehmertum",
+  "s4-li4": "Wahlfächer in digitalen Fähigkeiten, KI, beruflicher Ausbildung",
+  "s4-li5": "Startup-Inkubation und Zertifizierung",
+  "s4-p1": "<strong>Spendergelegenheit:</strong> Unterstützung wird für Computer, Bildschirme, Router, Softwarelizenzen und Internetabonnements benötigt, um den Zugang aufrechtzuerhalten und zu erweitern.",
+
+  "s5-title": "Programmwirkung",
+  "s5-li1": "Über 300 Schüler in den Betriebszentren geschult",
+  "s5-li2": "Mehrere von Jugendlichen geführte Startups gestartet",
+  "s5-li3": "Verbesserte Beschäftigungsfähigkeit und digitale Kompetenz",
+  "s5-li4": "Reduzierte Jugendmigration durch lokale Chancen",
+  "s5-p1": "<strong>Unterstützungsbedarf für Schüler:</strong> Während einige Lernende Teilgebühren (ca. 30 €/Monat) zahlen, können viele die Kosten nicht vollständig tragen. Spenderfinanzierung hilft, diese Lücke zu schließen, sodass kein fähiger Schüler aufgrund finanzieller Schwierigkeiten ausgeschlossen wird.",
+
+  "s6-title": "Partnerschaft mit Swiss Aid Connect Foundation",
+  "s6-p1": "In Partnerschaft mit der Swiss Aid Connect Foundation umgesetzt, folgen unsere Zentren einem bewährten hybriden Bildungsmodell, das integriert:",
+  "s6-li1": "Inhalte internationaler Universitäten",
+  "s6-li2": "Live-Sitzungen mit Professoren und Unternehmern",
+  "s6-li3": "KI-gesteuerte Personalisierung des Lernens",
+  "s6-li4": "Zuverlässige Infrastruktur (Starlink & Solarlösungen)",
+  "s6-li5": "Anerkannte Zertifizierungspfade",
+  "s6-p2": "<strong>Einladung an Partner:</strong> Wir laden Spender, Institutionen und Unternehmenspartner ein, Klassenzimmerausrüstung, Konnektivität und Stipendien zu unterstützen, um langfristige Nachhaltigkeit und erweiterten Einfluss zu gewährleisten.",
+
+  "footer-text": "© Hybrid-Bildungszentrum — Alle Rechte vorbehalten."
+},
+
+/* ===================== SPANISH ===================== */
+es: {
+  "page-title": "Centro de Educación Híbrida para Jóvenes",
+
+  "s1-title": "Resumen de la Educación Híbrida",
+  "s1-p1": "Brindamos apoyo flexible para el aprendizaje digital y presencial a niños y jóvenes en Nairobi, Murang’a, Kiambu, Nakuru, Machakos y Mombasa.",
+  "s1-p2": "<strong>Estado Actual:</strong> Nuestros Centros de Educación Híbrida ya están establecidos y operativos, ofreciendo aprendizaje digital estructurado, mentoría local y acceso a contenido académico internacional.",
+  "s1-p3": "Los centros combinan aulas físicas con plataformas digitales, aprendizaje apoyado por IA y sesiones virtuales en vivo de educadores globales. Este modelo asegura continuidad, calidad y asequibilidad para los estudiantes que de otro modo serían excluidos de la educación terciaria.",
+  "s1-p4": "<strong>Apoyo Necesario:</strong> Para equipar y escalar completamente estos centros, buscamos apoyo de donantes para fortalecer la infraestructura del aula, ampliar la capacidad de Internet y subsidiar los costos de aprendizaje para los estudiantes que no pueden pagar la totalidad de las tarifas.",
+
+  "s2-title": "¿Por qué el Aprendizaje Híbrido?",
+  "s2-p1": "África Subsahariana tiene una tasa de inscripción en educación terciaria inferior al 10 %, en comparación con más del 70 % en regiones desarrolladas. Las instituciones tradicionales a menudo fallan debido al costo, la distancia y los problemas de infraestructura.",
+  "s2-li1": "Contenido digital de clase mundial de universidades internacionales",
+  "s2-li2": "Sesiones en línea en vivo con profesores y emprendedores",
+  "s2-li3": "Mentoría en sitio y sesiones de estudio guiadas",
+  "s2-li4": "Aprendizaje personalizado asistido por IA y evaluación",
+  "s2-li5": "Menor costo por estudiante mediante infraestructura compartida",
+  "s2-p2": "Este enfoque híbrido hace que la educación de calidad sea accesible mientras se mantiene financieramente sostenible con el apoyo de donantes y socios.",
+
+  "s3-title": "Condados a los que Servimos",
+  "s3-p1": "Los Centros de Educación Híbrida están operativos en:",
+  "s3-li1": "<strong>Nairobi:</strong> Juventud urbana, incubación de startups, emprendimiento digital.",
+  "s3-li2": "<strong>Murang’a:</strong> Centros de aprendizaje rural, mentoría para niñas.",
+  "s3-li3": "<strong>Kiambu & Thika:</strong> Centros de habilidades TIC y codificación.",
+  "s3-li4": "<strong>Nakuru & Machakos:</strong> Centros híbridos de aprendizaje de fin de semana.",
+  "s3-li5": "<strong>Mombasa:</strong> Habilidades vocacionales y aprendizaje combinado.",
+
+  "s4-title": "Qué Ocurre Dentro de Nuestros Centros",
+  "s4-li1": "Más de 30 estaciones de aprendizaje informático por centro",
+  "s4-li2": "Internet satelital (Starlink) con energía de respaldo",
+  "s4-li3": "Curso central: Introducción al Emprendimiento",
+  "s4-li4": "Optativas en habilidades digitales, IA y formación vocacional",
+  "s4-li5": "Incubación de startups y certificación",
+  "s4-p1": "<strong>Oportunidad para Donantes:</strong> Se necesita apoyo para computadoras, pantallas, routers, licencias de software y suscripciones de Internet para mantener y ampliar el acceso.",
+
+  "s5-title": "Impacto del Programa",
+  "s5-li1": "Más de 300 estudiantes capacitados a través de centros operativos",
+  "s5-li2": "Múltiples startups lideradas por jóvenes lanzadas",
+  "s5-li3": "Mejorada empleabilidad y alfabetización digital",
+  "s5-li4": "Reducción de la migración juvenil mediante creación de oportunidades locales",
+  "s5-p1": "<strong>Necesidad de Apoyo Estudiantil:</strong> Aunque algunos estudiantes contribuyen con tarifas parciales (aprox. 30 €/mes), muchos no pueden cubrir los costos completos. La financiación de donantes ayuda a cerrar esta brecha, asegurando que ningún estudiante capaz sea excluido por dificultades económicas.",
+
+  "s6-title": "Asociación con Swiss Aid Connect Foundation",
+  "s6-p1": "Implementado en asociación con Swiss Aid Connect Foundation, nuestros centros siguen un modelo de educación híbrida probado que integra:",
+  "s6-li1": "Contenido universitario internacional",
+  "s6-li2": "Sesiones en vivo con profesores y emprendedores",
+  "s6-li3": "Personalización del aprendizaje impulsada por IA",
+  "s6-li4": "Infraestructura confiable (Starlink y opciones solares)",
+  "s6-li5": "Rutas de certificación reconocidas",
+  "s6-p2": "<strong>Invitación a Socios:</strong> Invitamos a donantes, instituciones y socios corporativos a apoyar el equipamiento del aula, la conectividad y las becas estudiantiles, asegurando sostenibilidad a largo plazo y un impacto ampliado.",
+
+  "footer-text": "© Centro de Educación Híbrida — Todos los derechos reservados."
+},
+
+/* ===================== ITALIAN ===================== */
+it: {
+  "page-title": "Centro di Istruzione Ibrida per Giovani",
+
+  "s1-title": "Panoramica sull'Istruzione Ibrida",
+  "s1-p1": "Forniamo supporto flessibile all'apprendimento digitale e in presenza per bambini e giovani a Nairobi, Murang’a, Kiambu, Nakuru, Machakos e Mombasa.",
+  "s1-p2": "<strong>Stato Attuale:</strong> I nostri Centri di Istruzione Ibrida sono già operativi, offrendo apprendimento digitale strutturato, tutoraggio locale e accesso a contenuti accademici internazionali.",
+  "s1-p3": "I centri combinano aule fisiche con piattaforme digitali, apprendimento supportato da AI e sessioni virtuali dal vivo da educatori globali. Questo modello garantisce continuità, qualità e accessibilità economica per gli studenti che altrimenti sarebbero esclusi dall'istruzione terziaria.",
+  "s1-p4": "<strong>Supporto Necessario:</strong> Per attrezzare e scalare completamente questi centri, cerchiamo supporto da donatori per rafforzare l'infrastruttura delle aule, aumentare la capacità di Internet e sovvenzionare i costi per studenti che non possono permettersi le tasse complete.",
+
+  "s2-title": "Perché l'Apprendimento Ibrido?",
+  "s2-p1": "L'Africa subsahariana ha un tasso di iscrizione all'istruzione terziaria inferiore al 10%, rispetto a oltre il 70% nelle regioni sviluppate. Le istituzioni tradizionali spesso falliscono a causa dei costi, della distanza e delle sfide infrastrutturali.",
+  "s2-li1": "Contenuti digitali di livello mondiale da università internazionali",
+  "s2-li2": "Sessioni online in diretta con professori e imprenditori",
+  "s2-li3": "Mentoring in loco e sessioni di studio guidate",
+  "s2-li4": "Apprendimento personalizzato supportato da AI e valutazione",
+  "s2-li5": "Costi inferiori per studente tramite infrastrutture condivise",
+  "s2-p2": "Questo approccio ibrido rende l'istruzione di qualità accessibile mantenendo la sostenibilità finanziaria con il supporto di donatori e partner.",
+
+  "s3-title": "Contee in cui Operiamo",
+  "s3-p1": "I Centri di Istruzione Ibrida sono operativi in:",
+  "s3-li1": "<strong>Nairobi:</strong> Giovani urbani, incubazione di startup, imprenditorialità digitale.",
+  "s3-li2": "<strong>Murang’a:</strong> Hub di apprendimento rurale, tutoraggio per ragazze.",
+  "s3-li3": "<strong>Kiambu & Thika:</strong> Centri di competenze ICT e coding.",
+  "s3-li4": "<strong>Nakuru & Machakos:</strong> Centri di apprendimento ibrido del fine settimana.",
+  "s3-li5": "<strong>Mombasa:</strong> Competenze professionali e apprendimento misto.",
+
+  "s4-title": "Cosa Succede Nei Nostri Centri",
+  "s4-li1": "Oltre 30 postazioni informatiche per centro",
+  "s4-li2": "Internet satellitare (Starlink) con alimentazione di backup",
+  "s4-li3": "Corso principale: Introduzione all'Imprenditorialità",
+  "s4-li4": "Opzionali in competenze digitali, AI e formazione professionale",
+  "s4-li5": "Incubazione di startup e certificazione",
+  "s4-p1": "<strong>Opportunità per i Donatori:</strong> Il supporto è necessario per computer, schermi, router, licenze software e abbonamenti Internet per mantenere ed espandere l'accesso.",
+
+  "s5-title": "Impatto del Programma",
+  "s5-li1": "Oltre 300 studenti formati tramite centri operativi",
+  "s5-li2": "Multiple startup guidate da giovani lanciate",
+  "s5-li3": "Migliorata occupabilità e alfabetizzazione digitale",
+  "s5-li4": "Ridotta migrazione giovanile attraverso la creazione di opportunità locali",
+  "s5-p1": "<strong>Bisogno di Supporto per Studenti:</strong> Sebbene alcuni studenti contribuiscano con tasse parziali (circa €30/mese), molti non possono permettersi i costi totali. I finanziamenti dei donatori aiutano a colmare questa lacuna, garantendo che nessuno studente capace sia escluso a causa di difficoltà finanziarie.",
+
+  "s6-title": "Partnership con Swiss Aid Connect Foundation",
+  "s6-p1": "Implementato in partnership con Swiss Aid Connect Foundation, i nostri centri seguono un modello di istruzione ibrida collaudato che integra:",
+  "s6-li1": "Contenuti universitari internazionali",
+  "s6-li2": "Sessioni dal vivo con professori e imprenditori",
+  "s6-li3": "Personalizzazione dell'apprendimento guidata da AI",
+  "s6-li4": "Infrastruttura affidabile (Starlink & opzioni solari)",
+  "s6-li5": "Percorsi di certificazione riconosciuti",
+  "s6-p2": "<strong>Invito ai Partner:</strong> Invitiamo donatori, istituzioni e partner aziendali a supportare l'equipaggiamento delle aule, la connettività e le borse di studio, garantendo sostenibilità a lungo termine e impatto ampliato.",
+
+  "footer-text": "© Centro di Istruzione Ibrida — Tutti i diritti riservati."
+},
+
+/* ===================== KISWAHILI ===================== */
+sw: {
+  "page-title": "Kituo cha Elimu ya Mchanganyiko kwa Vijana",
+
+  "s1-title": "Muhtasari wa Elimu ya Mchanganyiko",
+  "s1-p1": "Tunatoa msaada wa kujifunzia kidijitali na shuleni kwa watoto na vijana katika Nairobi, Murang’a, Kiambu, Nakuru, Machakos na Mombasa.",
+  "s1-p2": "<strong>Hali ya Sasa:</strong> Vituo vyetu vya Elimu ya Mchanganyiko vimeshajengwa na vinafanya kazi, vinatoa elimu ya kidijitali iliyo na mpangilio, uongozi wa karibu, na ufikaji wa maudhui ya kielimu ya kimataifa.",
+  "s1-p3": "Vituo vinachanganya madarasa ya kawaida na majukwaa ya kidijitali, kujifunzia kwa msaada wa AI, na vipindi vya moja kwa moja kutoka kwa walimu wa kimataifa. Mfano huu unahakikisha kuendelea, ubora, na gharama nafuu kwa wanafunzi ambao vinginevyo wangekuwa nje ya elimu ya juu.",
+  "s1-p4": "<strong>Msaada Unaohitajika:</strong> Ili kuandaa kikamilifu na kupanua vituo hivi, tunatafuta msaada kutoka kwa wafadhili kuimarisha miundombinu ya madarasa, kuongeza uwezo wa intaneti, na kusaidia gharama za wanafunzi ambao hawawezi kulipia kikamilifu.",
+
+  "s2-title": "Kwa Nini Kujifunza kwa Mchanganyiko?",
+  "s2-p1": "Afrika Kusubsahara ina kiwango cha usajili cha elimu ya juu chini ya 10%, ikilinganishwa na zaidi ya 70% katika maeneo yaliyoendelea. Taasisi za jadi mara nyingi zinashindwa kutokana na gharama, umbali, na changamoto za miundombinu.",
+  "s2-li1": "Maudhui ya kidijitali ya kiwango cha dunia kutoka vyuo vikuu vya kimataifa",
+  "s2-li2": "Vipindi vya mtandaoni vya moja kwa moja na maprofesa na wajasiriamali",
+  "s2-li3": "Uongozi wa karibu na vipindi vya kusomea vilivyoongozwa",
+  "s2-li4": "Kujifunza kwa mtu binafsi kwa msaada wa AI na tathmini",
+  "s2-li5": "Gharama ya chini kwa mwanafunzi kupitia miundombinu ya pamoja",
+  "s2-p2": "Njia hii ya mchanganyiko inafanya elimu ya ubora kupatikana huku ikiendelea kuwa ya kifedha kwa msaada wa wafadhili na washirika.",
+
+  "s3-title": "Kaunti Tunazohudumia",
+  "s3-p1": "Vituo vya Elimu ya Mchanganyiko vinafanya kazi katika:",
+  "s3-li1": "<strong>Nairobi:</strong> Vijana wa mijini, kuanzisha startups, ujasiriamali wa kidijitali.",
+  "s3-li2": "<strong>Murang’a:</strong> Vituo vya kujifunzia vijijini, uongozi wa wasichana.",
+  "s3-li3": "<strong>Kiambu & Thika:</strong> Ujuzi wa ICT na vituo vya coding.",
+  "s3-li4": "<strong>Nakuru & Machakos:</strong> Vituo vya kujifunzia vya wikendi vya mchanganyiko.",
+  "s3-li5": "<strong>Mombasa:</strong> Ujuzi wa kazi na ujifunzaji mchanganyiko.",
+
+  "s4-title": "Kinachotokea Ndani ya Vituo Vyetu",
+  "s4-li1": "Vituo 30+ vya kompyuta kwa kila kituo",
+  "s4-li2": "Intaneti ya satellite (Starlink) yenye umeme wa dharura",
+  "s4-li3": "Kozi kuu: Utangulizi wa Ujasiriamali",
+  "s4-li4": "Kozi za hiari katika ujuzi wa kidijitali, AI, na mafunzo ya kazi",
+  "s4-li5": "Kuanzisha startups na uthibitisho",
+  "s4-p1": "<strong>Mfano kwa Wafadhili:</strong> Msaada unahitajika kwa kompyuta, skrini, router, leseni za programu, na usajili wa intaneti ili kudumisha na kupanua upatikanaji.",
+
+  "s5-title": "Athari za Programu",
+  "s5-li1": "Wanafunzi 300+ wamefundishwa kupitia vituo vya uendeshaji",
+  "s5-li2": "Startups nyingi zinazoendeshwa na vijana zimeanzishwa",
+  "s5-li3": "Uwezo wa ajira na uelewa wa kidijitali umeboreshwa",
+  "s5-li4": "Kupungua kwa uhamiaji wa vijana kupitia kuunda fursa za ndani",
+  "s5-p1": "<strong>Mahitaji ya Msaada kwa Wanafunzi:</strong> Ingawa baadhi ya wanafunzi hushiriki ada sehemu (takriban €30/mwezi), wengi hawawezi kulipa gharama kamili. Fedha za wafadhili husaidia kufunika pengo hili, kuhakikisha hakuna mwanafunzi mwenye uwezo anayekatishwa kutokana na shida za kifedha.",
+
+  "s6-title": "Ushirikiano na Swiss Aid Connect Foundation",
+  "s6-p1": "Kutekelezwa kwa ushirikiano na Swiss Aid Connect Foundation, vituo vyetu vinafuata mfano wa elimu ya mchanganyiko uliothibitishwa unaojumuisha:",
+  "s6-li1": "Maudhui ya vyuo vikuu vya kimataifa",
+  "s6-li2": "Vipindi vya moja kwa moja na maprofesa na wajasiriamali",
+  "s6-li3": "Uboreshaji wa kujifunza kwa mtu binafsi unaotolewa na AI",
+  "s6-li4": "Miundombinu ya kuaminika (Starlink na chaguo la jua)",
+  "s6-li5": "Njia za uthibitisho zinazotambulika",
+  "s6-p2": "<strong>Mwaliko kwa Washirika:</strong> Tunawaalika wafadhili, taasisi, na washirika wa kampuni kusaidia vifaa vya madarasa, muunganisho wa intaneti, na ufadhili wa wanafunzi, kuhakikisha uendelevu wa muda mrefu na athari kubwa zaidi.",
+
+  "footer-text": "© Kituo cha Elimu ya Mchanganyiko — Haki Zote Zimehifadhiwa."
+}
+
+
+};
+
+function switchLanguage(lang){
+  if(!translations[lang]) return;
+
+  document.querySelectorAll("[data-key]").forEach(el=>{
+    const key = el.dataset.key;
+    if(translations[lang][key]) el.innerHTML = translations[lang][key];
+  });
+
+  localStorage.setItem("lang", lang);
+
+  const toggle = document.getElementById("langToggle");
+  if(toggle){
+    toggle.textContent = lang.toUpperCase() + " ▾";
+    toggle.setAttribute("data-lang", lang);
+  }
+}
+
+/* ---------- DROPDOWN TOGGLE ---------- */
+const toggleBtn = document.getElementById("langToggle");
+const menu = document.getElementById("langMenu");
+
+toggleBtn.addEventListener("click", e => {
+  e.stopPropagation(); // prevent document click
+  menu.classList.toggle("open");
+});
+
+/* ---------- LANGUAGE SELECTION ---------- */
+document.querySelectorAll("[data-lang-select]").forEach(item=>{
+  item.addEventListener("click", e=>{
+    e.preventDefault();
+    const lang = item.getAttribute("data-lang-select");
+    switchLanguage(lang);
+    menu.classList.remove("open");
+  });
+});
+
+/* ---------- CLOSE DROPDOWN ON OUTSIDE CLICK ---------- */
+document.addEventListener("click", e => {
+  if (!menu.contains(e.target) && !toggleBtn.contains(e.target)) {
+    menu.classList.remove("open");
+  }
+});
+
+/* ---------- LOAD SAVED LANGUAGE ---------- */
+document.addEventListener("DOMContentLoaded", ()=>{
+  const saved = localStorage.getItem("lang") || "en";
+  switchLanguage(saved);
+});
+
+
+</script>
 </body>
 </html>
