@@ -34,7 +34,6 @@ header{
 }
 .logo{ height:70px; }
 .page-title{ margin:0; font-size:32px; text-align:center; }
-.empty{ height:70px; }
 
 /* Sections */
 .section{
@@ -96,6 +95,44 @@ footer{ background:#222; color:#eee; padding:30px; text-align:center; margin-top
   border: none;
   color: white;
 }
+
+/* ========== LANGUAGE DROPDOWN ========== */
+.lang-dropdown{
+  position:relative;
+  justify-self:end;
+  z-index:1000;
+}
+#langToggle{
+  background:#ffffff;
+  color:#000;
+  padding:6px 10px;
+  border-radius:8px;
+  text-decoration:none;
+  font-weight:bold;
+  font-size:14px;
+  cursor:pointer;
+  display:inline-block;
+}
+.lang-menu{
+  position:absolute;
+  top:110%;
+  right:0;
+  background:#fff;
+  min-width:160px;
+  border-radius:10px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.2);
+  display:none;
+  overflow:hidden;
+}
+.lang-menu a{
+  display:block;
+  padding:10px 14px;
+  text-decoration:none;
+  color:#000;
+  font-size:14px;
+}
+.lang-menu a:hover{ background:#f2f2f2; }
+.lang-menu.open{ display:block; }
 </style>
 </head>
 
@@ -103,15 +140,26 @@ footer{ background:#222; color:#eee; padding:30px; text-align:center; margin-top
 
 <header>
     <img src="https://res.cloudinary.com/dwvt4e9o2/image/upload/v1763476964/Screenshot_73_e5hyu9.png" class="logo">
-    <h1 class="page-title">Health & Wellness</h1>
-    <div class="empty"></div>
+    <h1 class="page-title" data-key="page-title">Health & Wellness</h1>
+    
+    <div class="lang-dropdown">
+      <button id="langToggle" data-lang="en">EN ▾</button>
+      <div class="lang-menu" id="langMenu">
+        <a href="#" data-lang-select="en">English</a>
+        <a href="#" data-lang-select="fr">Français</a>
+        <a href="#" data-lang-select="de">Deutsch</a>
+        <a href="#" data-lang-select="es">Español</a>
+        <a href="#" data-lang-select="it">Italiano</a>
+        <a href="#" data-lang-select="sw">KiSwahili</a>
+      </div>
+    </div>
 </header>
 
 <!-- 1. Health Overview - Circular Image -->
 <section class="section">
     <div class="text">
-        <h2>Promoting Healthy Communities</h2>
-        <p>Our health programs improve access to essential medical services, health education, and critical interventions for vulnerable populations. We focus on disease prevention, maternal and child health, mental wellness, and community outreach.</p>
+        <h2 data-key="s1-title">Promoting Healthy Communities</h2>
+        <p data-key="s1-p1">Our health programs improve access to essential medical services, health education, and critical interventions for vulnerable populations. We focus on disease prevention, maternal and child health, mental wellness, and community outreach.</p>
     </div>
     <img src="https://images.pexels.com/photos/33127835/pexels-photo-33127835.jpeg" class="shape-round">
 </section>
@@ -119,10 +167,10 @@ footer{ background:#222; color:#eee; padding:30px; text-align:center; margin-top
 <!-- 2. Medical Outreach -->
 <section class="section">
     <div class="text">
-        <h2>Medical Outreach Programs</h2>
-        <p>We organize mobile clinics, vaccination drives, and health awareness campaigns to reach underserved communities. Our efforts provide lifesaving care and health education to those in need.</p>
-        <p><strong>Field Visits by County:</strong></p>
-        <ul>
+        <h2 data-key="s2-title">Medical Outreach Programs</h2>
+        <p data-key="s2-p1">We organize mobile clinics, vaccination drives, and health awareness campaigns to reach underserved communities. Our efforts provide lifesaving care and health education to those in need.</p>
+        <p data-key="s2-p2"><strong>Field Visits by County:</strong></p>
+        <ul data-key="s2-p3">
             <li><strong>Nairobi:</strong> Kenyatta National Hospital, Mbagathi Hospital, Kariobangi Health Centre, Nairobi Women’s Hospital.</li>
             <li><strong>Murang’a:</strong> Murang’a Level 5 Hospital, Makuyu Health Centre, Kangari Health Centre.</li>
             <li><strong>Kiambu:</strong> Kiambu County Referral Hospital, Limuru Health Centre, Thika Level 5 Hospital.</li>
@@ -138,8 +186,8 @@ footer{ background:#222; color:#eee; padding:30px; text-align:center; margin-top
 <section class="section">
     <img src="https://images.pexels.com/photos/11612437/pexels-photo-11612437.jpeg" class="shape-diagonal">
     <div class="text">
-        <h2>Maternal and Child Health</h2>
-        <p>We provide specialized programs for maternal care, early childhood development, nutrition, and immunization. Through partnerships with local hospitals and health centers, we ensure healthier mothers and children in Nairobi, Murang’a, Kiambu, Nakuru, Machakos, and Mombasa.</p>
+        <h2 data-key="s3-title">Maternal and Child Health</h2>
+        <p data-key="s3-p1">We provide specialized programs for maternal care, early childhood development, nutrition, and immunization. Through partnerships with local hospitals and health centers, we ensure healthier mothers and children in Nairobi, Murang’a, Kiambu, Nakuru, Machakos, and Mombasa.</p>
     </div>
 </section>
 
@@ -147,16 +195,16 @@ footer{ background:#222; color:#eee; padding:30px; text-align:center; margin-top
 <section class="section">
     <img src="https://images.pexels.com/photos/33132346/pexels-photo-33132346.jpeg" class="shape-hexagon">
     <div class="text">
-        <h2>Mental Health & Wellness</h2>
-        <p>Our initiatives promote mental wellness through awareness, counseling, community support, and training programs. We collaborate with health facilities across all counties to reduce stigma and support holistic health in society.</p>
+        <h2 data-key="s4-title">Mental Health & Wellness</h2>
+        <p data-key="s4-p1">Our initiatives promote mental wellness through awareness, counseling, community support, and training programs. We collaborate with health facilities across all counties to reduce stigma and support holistic health in society.</p>
     </div>
 </section>
 
 <!-- 5. Youth Health Engagement -->
 <section class="section">
     <div class="text">
-        <h2>Engaging Youth in Health</h2>
-        <p>We educate young people on healthy lifestyles, disease prevention, and community health leadership. Youth-led health campaigns empower the next generation to champion wellness through school visits, mentorship, and hands-on volunteering in hospitals and community clinics.</p>
+        <h2 data-key="s5-title">Engaging Youth in Health</h2>
+        <p data-key="s5-p1">We educate young people on healthy lifestyles, disease prevention, and community health leadership. Youth-led health campaigns empower the next generation to champion wellness through school visits, mentorship, and hands-on volunteering in hospitals and community clinics.</p>
     </div>
     <img src="https://cdn.pixabay.com/photo/2013/12/06/10/21/disability-224130_640.jpg" class="shape-leaf">
 </section>
@@ -170,9 +218,162 @@ footer{ background:#222; color:#eee; padding:30px; text-align:center; margin-top
   </button>
 </a>
 
-<footer>
+<footer data-key="footer-text">
     © <script>document.write(new Date().getFullYear());</script> Health & Wellness — All Rights Reserved.
 </footer>
 
+<!-- TRANSLATION SCRIPT -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+const translations = {
+  en:{
+    "page-title":"Health & Wellness",
+    "s1-title":"Promoting Healthy Communities",
+    "s1-p1":"Our health programs improve access to essential medical services, health education, and critical interventions for vulnerable populations. We focus on disease prevention, maternal and child health, mental wellness, and community outreach.",
+    "s2-title":"Medical Outreach Programs",
+    "s2-p1":"We organize mobile clinics, vaccination drives, and health awareness campaigns to reach underserved communities. Our efforts provide lifesaving care and health education to those in need.",
+    "s2-p2":"<strong>Field Visits by County:</strong>",
+    "s2-p3":"<li><strong>Nairobi:</strong> Kenyatta National Hospital, Mbagathi Hospital, Kariobangi Health Centre, Nairobi Women’s Hospital.</li><li><strong>Murang’a:</strong> Murang’a Level 5 Hospital, Makuyu Health Centre, Kangari Health Centre.</li><li><strong>Kiambu:</strong> Kiambu County Referral Hospital, Limuru Health Centre, Thika Level 5 Hospital.</li><li><strong>Nakuru:</strong> Nakuru Level 5 Hospital, Kapkures Health Centre, Naivasha Sub-County Hospital.</li><li><strong>Machakos:</strong> Machakos Level 5 Hospital, Matuu Sub-County Hospital, Kangundo Health Centre.</li><li><strong>Mombasa:</strong> Mombasa County Referral Hospital, Port Reitz District Hospital, Likoni Sub-County Hospital.</li>",
+    "s3-title":"Maternal and Child Health",
+    "s3-p1":"We provide specialized programs for maternal care, early childhood development, nutrition, and immunization. Through partnerships with local hospitals and health centers, we ensure healthier mothers and children in Nairobi, Murang’a, Kiambu, Nakuru, Machakos, and Mombasa.",
+    "s4-title":"Mental Health & Wellness",
+    "s4-p1":"Our initiatives promote mental wellness through awareness, counseling, community support, and training programs. We collaborate with health facilities across all counties to reduce stigma and support holistic health in society.",
+    "s5-title":"Engaging Youth in Health",
+    "s5-p1":"We educate young people on healthy lifestyles, disease prevention, and community health leadership. Youth-led health campaigns empower the next generation to champion wellness through school visits, mentorship, and hands-on volunteering in hospitals and community clinics.",
+    "footer-text":"© Health & Wellness — All Rights Reserved."
+  },
+  fr:{
+    "page-title":"Santé & Bien-être",
+    "s1-title":"Promotion de communautés saines",
+    "s1-p1":"Nos programmes de santé améliorent l'accès aux services médicaux essentiels, à l'éducation sanitaire et aux interventions critiques pour les populations vulnérables. Nous nous concentrons sur la prévention des maladies, la santé maternelle et infantile, le bien-être mental et la sensibilisation communautaire.",
+    "s2-title":"Programmes de sensibilisation médicale",
+    "s2-p1":"Nous organisons des cliniques mobiles, des campagnes de vaccination et des campagnes de sensibilisation pour atteindre les communautés mal desservies. Nos efforts fournissent des soins vitaux et une éducation sanitaire à ceux qui en ont besoin.",
+    "s2-p2":"<strong>Visites sur le terrain par comté :</strong>",
+    "s2-p3":"<li><strong>Nairobi :</strong> Hôpital national Kenyatta, Hôpital Mbagathi, Centre de santé Kariobangi, Hôpital pour femmes de Nairobi.</li><li><strong>Murang’a :</strong> Hôpital de niveau 5 de Murang’a, Centre de santé de Makuyu, Centre de santé de Kangari.</li><li><strong>Kiambu :</strong> Hôpital de référence du comté de Kiambu, Centre de santé de Limuru, Hôpital de niveau 5 de Thika.</li><li><strong>Nakuru :</strong> Hôpital de niveau 5 de Nakuru, Centre de santé de Kapkures, Hôpital de sous-comté de Naivasha.</li><li><strong>Machakos :</strong> Hôpital de niveau 5 de Machakos, Hôpital de sous-comté de Matuu, Centre de santé de Kangundo.</li><li><strong>Mombasa :</strong> Hôpital de référence du comté de Mombasa, Hôpital de district de Port Reitz, Hôpital de sous-comté de Likoni.</li>",
+    "s3-title":"Santé maternelle et infantile",
+    "s3-p1":"Nous proposons des programmes spécialisés pour les soins maternels, le développement de la petite enfance, la nutrition et la vaccination. Grâce à des partenariats avec des hôpitaux locaux et des centres de santé, nous assurons des mères et des enfants en meilleure santé à Nairobi, Murang’a, Kiambu, Nakuru, Machakos et Mombasa.",
+    "s4-title":"Santé mentale & bien-être",
+    "s4-p1":"Nos initiatives favorisent le bien-être mental par la sensibilisation, le conseil, le soutien communautaire et les programmes de formation. Nous collaborons avec des établissements de santé dans tous les comtés pour réduire la stigmatisation et soutenir la santé holistique dans la société.",
+    "s5-title":"Engager les jeunes en matière de santé",
+    "s5-p1":"Nous éduquons les jeunes sur des modes de vie sains, la prévention des maladies et le leadership en santé communautaire. Les campagnes de santé dirigées par les jeunes permettent à la prochaine génération de défendre le bien-être grâce aux visites scolaires, au mentorat et au bénévolat pratique dans les hôpitaux et les cliniques communautaires.",
+    "footer-text":"© Santé & Bien-être — Tous droits réservés."
+  },
+  /* ===================== GERMAN ===================== */
+de: {
+  "page-title": "Gesundheit & Wohlbefinden",
+  "s1-title": "Förderung gesunder Gemeinschaften",
+  "s1-p1": "Unsere Gesundheitsprogramme verbessern den Zugang zu wichtigen medizinischen Leistungen, Gesundheitsbildung und kritischen Interventionen für gefährdete Bevölkerungsgruppen. Wir konzentrieren uns auf Krankheitsprävention, Mutter-Kind-Gesundheit, geistiges Wohlbefinden und Gemeindearbeit.",
+  "s2-title": "Medizinische Outreach‑Programme",
+  "s2-p1": "Wir organisieren mobile Kliniken, Impfkampagnen und Gesundheitsaufklärungskampagnen, um unterversorgte Gemeinschaften zu erreichen. Unsere Bemühungen bieten lebensrettende Versorgung und Gesundheitsbildung für Bedürftige.",
+  "s2-p2": "<strong>Feldbesuche nach Landkreis:</strong>",
+  "s2-p3": "<li><strong>Nairobi:</strong> Kenyatta National Hospital, Mbagathi Hospital, Kariobangi Health Centre, Nairobi Women’s Hospital.</li><li><strong>Murang’a:</strong> Murang’a Level 5 Hospital, Makuyu Health Centre, Kangari Health Centre.</li><li><strong>Kiambu:</strong> Kiambu County Referral Hospital, Limuru Health Centre, Thika Level 5 Hospital.</li><li><strong>Nakuru:</strong> Nakuru Level 5 Hospital, Kapkures Health Centre, Naivasha Sub-County Hospital.</li><li><strong>Machakos:</strong> Machakos Level 5 Hospital, Matuu Sub-County Hospital, Kangundo Health Centre.</li><li><strong>Mombasa:</strong> Mombasa County Referral Hospital, Port Reitz District Hospital, Likoni Sub-County Hospital.</li>",
+  "s3-title": "Mütter‑ und Kindergesundheit",
+  "s3-p1": "Wir bieten spezialisierte Programme für mütterliche Versorgung, frühkindliche Entwicklung, Ernährung und Impfungen an. Durch Partnerschaften mit lokalen Krankenhäusern und Gesundheitszentren sorgen wir für gesündere Mütter und Kinder in Nairobi, Murang’a, Kiambu, Nakuru, Machakos und Mombasa.",
+  "s4-title": "Geistige Gesundheit & Wohlbefinden",
+  "s4-p1": "Unsere Initiativen fördern das geistige Wohlbefinden durch Aufklärung, Beratung, Gemeinschaftsunterstützung und Schulungsprogramme. Wir arbeiten mit Gesundheitseinrichtungen in allen Landkreisen zusammen, um Stigmatisierung zu reduzieren und ganzheitliche Gesundheit zu unterstützen.",
+  "s5-title": "Jugendbeteiligung an Gesundheit",
+  "s5-p1": "Wir bilden junge Menschen zu gesunden Lebensstilen, Krankheitsprävention und Gesundheitsführung in Gemeinden aus. Von Jugendlichen geleitete Gesundheitskampagnen befähigen die nächste Generation, durch Schulbesuche, Mentoring und praktische Freiwilligenarbeit in Krankenhäusern und Gemeinschaftskliniken für Wohlbefinden einzutreten.",
+  "footer-text": "© Gesundheit & Wohlbefinden — Alle Rechte vorbehalten."
+},
+
+/* ===================== SPANISH ===================== */
+es: {
+  "page-title": "Salud y Bienestar",
+  "s1-title": "Promoviendo Comunidades Saludables",
+  "s1-p1": "Nuestros programas de salud mejoran el acceso a servicios médicos esenciales, educación sanitaria e intervenciones críticas para poblaciones vulnerables. Nos enfocamos en la prevención de enfermedades, la salud materno‑infantil, el bienestar mental y la divulgación comunitaria.",
+  "s2-title": "Programas de Atención Médica Comunitaria",
+  "s2-p1": "Organizamos clínicas móviles, campañas de vacunación y campañas de concienciación sobre la salud para llegar a comunidades desatendidas. Nuestros esfuerzos brindan atención que salva vidas y educación sanitaria a quienes lo necesitan.",
+  "s2-p2": "<strong>Visitas de campo por condado:</strong>",
+  "s2-p3": "<li><strong>Nairobi:</strong> Kenyatta National Hospital, Mbagathi Hospital, Kariobangi Health Centre, Nairobi Women’s Hospital.</li><li><strong>Murang’a:</strong> Murang’a Level 5 Hospital, Makuyu Health Centre, Kangari Health Centre.</li><li><strong>Kiambu:</strong> Kiambu County Referral Hospital, Limuru Health Centre, Thika Level 5 Hospital.</li><li><strong>Nakuru:</strong> Nakuru Level 5 Hospital, Kapkures Health Centre, Naivasha Sub-County Hospital.</li><li><strong>Machakos:</strong> Machakos Level 5 Hospital, Matuu Sub-County Hospital, Kangundo Health Centre.</li><li><strong>Mombasa:</strong> Mombasa County Referral Hospital, Port Reitz District Hospital, Likoni Sub-County Hospital.</li>",
+  "s3-title": "Salud Materna e Infantil",
+  "s3-p1": "Ofrecemos programas especializados para el cuidado materno, el desarrollo infantil temprano, la nutrición y la inmunización. A través de asociaciones con hospitales locales y centros de salud, garantizamos madres e hijos más saludables en Nairobi, Murang’a, Kiambu, Nakuru, Machakos y Mombasa.",
+  "s4-title": "Salud Mental y Bienestar",
+  "s4-p1": "Nuestras iniciativas promueven el bienestar mental a través de la concienciación, la orientación, el apoyo comunitario y programas de formación. Colaboramos con centros de salud en todos los condados para reducir el estigma y apoyar la salud integral en la sociedad.",
+  "s5-title": "Participación Juvenil en Salud",
+  "s5-p1": "Educamos a los jóvenes sobre estilos de vida saludables, prevención de enfermedades y liderazgo en salud comunitaria. Las campañas de salud dirigidas por jóvenes empoderan a la próxima generación para abogar por el bienestar mediante visitas escolares, mentoría y voluntariado práctico en hospitales y clínicas comunitarias.",
+  "footer-text": "© Salud y Bienestar — Todos los derechos reservados."
+},
+
+/* ===================== ITALIAN ===================== */
+it: {
+  "page-title": "Salute e Benessere",
+  "s1-title": "Promuovere Comunità Sane",
+  "s1-p1": "I nostri programmi sanitari migliorano l'accesso ai servizi medici essenziali, all'educazione sanitaria e agli interventi critici per le popolazioni vulnerabili. Ci concentriamo sulla prevenzione delle malattie, sulla salute materna e infantile, sul benessere mentale e sull'impegno comunitario.",
+  "s2-title": "Programmi di Assistenza Medica",
+  "s2-p1": "Organizziamo cliniche mobili, campagne di vaccinazione e campagne di sensibilizzazione sanitaria per raggiungere le comunità meno servite. I nostri sforzi forniscono cure salvavita e educazione sanitaria a chi ne ha bisogno.",
+  "s2-p2": "<strong>Visite sul campo per contea:</strong>",
+  "s2-p3": "<li><strong>Nairobi:</strong> Kenyatta National Hospital, Mbagathi Hospital, Kariobangi Health Centre, Nairobi Women’s Hospital.</li><li><strong>Murang’a:</strong> Murang’a Level 5 Hospital, Makuyu Health Centre, Kangari Health Centre.</li><li><strong>Kiambu:</strong> Kiambu County Referral Hospital, Limuru Health Centre, Thika Level 5 Hospital.</li><li><strong>Nakuru:</strong> Nakuru Level 5 Hospital, Kapkures Health Centre, Naivasha Sub-County Hospital.</li><li><strong>Machakos:</strong> Machakos Level 5 Hospital, Matuu Sub-County Hospital, Kangundo Health Centre.</li><li><strong>Mombasa:</strong> Mombasa County Referral Hospital, Port Reitz District Hospital, Likoni Sub-County Hospital.</li>",
+  "s3-title": "Salute Materna e Infantile",
+  "s3-p1": "Forniamo programmi specializzati per l'assistenza materna, lo sviluppo della prima infanzia, la nutrizione e l'immunizzazione. Attraverso partnership con ospedali e centri sanitari locali, garantiamo madri e bambini più sani a Nairobi, Murang’a, Kiambu, Nakuru, Machakos e Mombasa.",
+  "s4-title": "Salute Mentale e Benessere",
+  "s4-p1": "Le nostre iniziative promuovono il benessere mentale attraverso sensibilizzazione, counseling, supporto comunitario e programmi di formazione. Collaboriamo con strutture sanitarie in tutte le contee per ridurre lo stigma e sostenere la salute olistica nella società.",
+  "s5-title": "Coinvolgimento dei Giovani nella Salute",
+  "s5-p1": "Educhiamo i giovani su stili di vita sani, prevenzione delle malattie e leadership nella salute comunitaria. Le campagne sanitarie guidate dai giovani consentono alla prossima generazione di promuovere il benessere attraverso visite scolastiche, mentoring e volontariato pratico in ospedali e cliniche comunitarie.",
+  "footer-text": "© Salute e Benessere — Tutti i diritti riservati."
+},
+
+/* ===================== KISWAHILI ===================== */
+sw: {
+  "page-title": "Afya na Ustawi",
+  "s1-title": "Kukuza Jamii Zenye Afya",
+  "s1-p1": "Programu zetu za afya zinaboresha upatikanaji wa huduma muhimu za matibabu, elimu ya afya, na uingiliaji wa dharura kwa jamii zilizo hatarini. Tunazingatia kinga ya magonjwa, afya ya mama na mtoto, ustawi wa akili, na elimu kwa jamii.",
+  "s2-title": "Programu za Huduma za Matibabu",
+  "s2-p1": "Tunaandaa kliniki za kusafiri, kampeni za chanjo, na kampeni za uhamasishaji wa afya kufikia jamii ambazo hazijafikiwa vizuri. Juhudi zetu hutoa huduma za kuokoa maisha na elimu ya afya kwa wale wanaohitaji.",
+  "s2-p2": "<strong>Ziara za Mashambani kwa Kaunti:</strong>",
+  "s2-p3": "<li><strong>Nairobi:</strong> Kenyatta National Hospital, Mbagathi Hospital, Kariobangi Health Centre, Nairobi Women’s Hospital.</li><li><strong>Murang’a:</strong> Murang’a Level 5 Hospital, Makuyu Health Centre, Kangari Health Centre.</li><li><strong>Kiambu:</strong> Kiambu County Referral Hospital, Limuru Health Centre, Thika Level 5 Hospital.</li><li><strong>Nakuru:</strong> Nakuru Level 5 Hospital, Kapkures Health Centre, Naivasha Sub-County Hospital.</li><li><strong>Machakos:</strong> Machakos Level 5 Hospital, Matuu Sub-County Hospital, Kangundo Health Centre.</li><li><strong>Mombasa:</strong> Mombasa County Referral Hospital, Port Reitz District Hospital, Likoni Sub-County Hospital.</li>",
+  "s3-title": "Afya ya Mama na Mtoto",
+  "s3-p1": "Tunatoa programu maalum za huduma za mama, maendeleo ya utoto mdogo, lishe na chanjo. Kupitia ushirikiano na hospitali na vituo vya afya vya eneo, tunahakikisha mama na watoto wenye afya bora katika Nairobi, Murang’a, Kiambu, Nakuru, Machakos na Mombasa.",
+  "s4-title": "Afya ya Akili na Ustawi",
+  "s4-p1": "Mikakati yetu inakuza ustawi wa akili kupitia uhamasishaji, ushauri, msaada wa jamii na programu za mafunzo. Tunashirikiana na vituo vya afya katika kaunti zote kupunguza ubaguzi na kusaidia afya ya jumla.",
+  "s5-title": "Kushirikisha Vijana Katika Afya",
+  "s5-p1": "Tunawafundisha vijana kuhusu mtindo wa maisha wenye afya, kinga ya magonjwa, na uongozi wa afya kwa jamii. Kampeni za afya zinazoendeshwa na vijana zinawawezesha vizazi vijavyo kutetea ustawi kupitia ziara shuleni, mentoring na kujitolea katika hospitali na zahanati za jamii.",
+  "footer-text": "© Afya na Ustawi — Haki Zote Zimehifadhiwa."
+}
+
+};
+
+const toggleBtn = document.getElementById("langToggle");
+const menu = document.getElementById("langMenu");
+
+function switchLanguage(lang){
+  if(!translations[lang]) return;
+  document.querySelectorAll("[data-key]").forEach(el=>{
+    const key = el.dataset.key;
+    if(translations[lang][key]) el.innerHTML = translations[lang][key];
+  });
+  toggleBtn.textContent = lang.toUpperCase() + " ▾";
+  toggleBtn.setAttribute("data-lang", lang);
+  localStorage.setItem("lang", lang);
+}
+
+// Dropdown toggle
+toggleBtn.addEventListener("click", e=>{
+  e.stopPropagation();
+  menu.classList.toggle("open");
+});
+
+// Select language
+menu.querySelectorAll("[data-lang-select]").forEach(item=>{
+  item.addEventListener("click", e=>{
+    e.preventDefault();
+    const lang = item.getAttribute("data-lang-select");
+    switchLanguage(lang);
+    menu.classList.remove("open");
+  });
+});
+
+// Close dropdown on outside click
+document.addEventListener("click", e=>{
+  if(!menu.contains(e.target) && !toggleBtn.contains(e.target)){
+    menu.classList.remove("open");
+  }
+});
+
+// Load saved language
+const savedLang = localStorage.getItem("lang") || "en";
+switchLanguage(savedLang);
+
+});
+</script>
 </body>
 </html>
