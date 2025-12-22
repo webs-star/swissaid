@@ -15,6 +15,30 @@ label{display:block;margin-top:10px}
 input,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #d1d5db}
 .btn{background:var(--brand);color:#fff;padding:8px 12px;border-radius:8px;border:none;cursor:pointer}
 .small{font-size:13px;color:#475569}
+
+
+  .members-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:16px;
+}
+.member-card{
+  border:1px solid #e5e7eb;
+  border-radius:12px;
+  padding:14px;
+  background:#f9fafb;
+}
+.member-card h4{
+  margin:0;
+  font-size:18px;
+  color:var(--brand);
+}
+.member-meta{
+  margin-top:6px;
+  font-size:14px;
+  color:#475569;
+}
+
 </style>
 </head>
 <body>
@@ -42,6 +66,15 @@ input,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #d1d5d
     <p id="annStatus" class="small"></p>
   </div>
 
+
+<div class="card">
+  <h3>Manage Announcements</h3>
+  <div id="annList" class="small">Loading announcements…</div>
+</div>
+
+
+
+  
   <!-- Event Section -->
   <div class="card">
     <h3>Create Event</h3>
@@ -53,19 +86,19 @@ input,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #d1d5d
     <p id="evStatus" class="small"></p>
   </div>
 
-  <!-- Admin Tools Info -->
-  <div class="card">
-    <h3>Admin Tools</h3>
-    <p class="small">Whitelisted admins are stored in Realtime DB at <code>/admins/{uid}: true</code>.</p>
-  </div>
+ <div class="card">
+  <h3>Manage Events</h3>
+  <div id="eventsList" class="small">Loading events…</div>
+</div>
 
-  <!-- NEW: All Members Section -->
-  <div class="card">
-    <h3>All Joined Members</h3>
-    <ul id="membersList" class="small">
-      <li>Loading members…</li>
-    </ul>
+
+ <div class="card">
+  <h3>All Joined Members</h3>
+  <div id="membersGrid" class="members-grid">
+    <p class="small">Loading members…</p>
   </div>
+</div>
+
 </main>
 
 
@@ -89,59 +122,168 @@ firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.database();
 
-
-
 auth.onAuthStateChanged(async user => {
-  if (!user) return window.location.href='/#joinPage';
+  if (!user) {
+    window.location.href = '/#joinPage';
+    return;
+  }
 
   // check admin
   const aSnap = await db.ref('admins/' + user.uid).once('value');
-  if(!aSnap.exists()){
+  if (!aSnap.exists()) {
     alert('Access denied — admin only');
-    return window.location.href = '/members/dashboard.html';
+    window.location.href = '/members/dashboard.html';
+    return;
   }
 
-  // load all members
-  const membersSnap = await db.ref('members').once('value');
-  const members = membersSnap.val() || {};
+  // ✅ ADMIN: load everything
+  loadMembers();
+  loadAnnouncements();
+  loadEvents();
+});
 
-  const html = Object.keys(members).map(uid => {
+/* ================= MEMBERS ================= */
+async function loadMembers(){
+  const snap = await db.ref('members').once('value');
+  const members = snap.val() || {};
+
+  let html = Object.keys(members).map(uid=>{
     const m = members[uid];
-    return `<li>
-      <strong>${m.fullName || '—'}</strong> · ${m.email || '—'} · ${m.country || '—'} · Joined: ${m.joinedAt || '—'}
-    </li>`;
+    return `
+      <div class="member-card">
+        <h4>${m.fullName || 'No name'}</h4>
+        <div class="member-meta">${m.email || '—'}</div>
+        <div class="member-meta">${m.country || '—'}</div>
+        <div class="member-meta">Joined: ${m.joinedAt || '—'}</div>
+      </div>
+    `;
   }).join('');
 
-  document.getElementById('membersList').innerHTML = html || '<li>No members yet</li>';
-});
+  document.getElementById('membersGrid').innerHTML =
+    html || '<p class="small">No members found</p>';
+}
 
+/* ================= ANNOUNCEMENTS ================= */
+async function loadAnnouncements(){
+  const snap = await db.ref('announcements').once('value');
+  const anns = snap.val() || {};
 
+  let html = Object.keys(anns).map(id=>{
+    const a = anns[id];
+    return `
+      <div class="member-card">
+        <h4>${a.title}</h4>
+        <div class="member-meta">${a.body}</div>
+        <button class="btn" onclick="editAnn('${id}')">Edit</button>
+        <button class="btn" style="background:#dc2626" onclick="deleteAnn('${id}')">Delete</button>
+      </div>
+    `;
+  }).join('');
 
+  document.getElementById('annList').innerHTML =
+    html || '<p>No announcements</p>';
+}
 
+async function deleteAnn(id){
+  if(confirm('Delete this announcement?')){
+    await db.ref('announcements/'+id).remove();
+    loadAnnouncements();
+  }
+}
 
-// post announcement
-document.getElementById('postAnn').addEventListener('click', async ()=>{
-  const title = document.getElementById('annTitle').value.trim();
-  const body = document.getElementById('annBody').value.trim();
-  if(!title || !body) return alert('Both fields required');
-  const id = db.ref('announcements').push().key;
-  await db.ref('announcements/' + id).set({
-    title, body, createdAt: new Date().toISOString()
+function editAnn(id){
+  db.ref('announcements/'+id).once('value').then(s=>{
+    annTitle.value = s.val().title;
+    annBody.value = s.val().body;
+    postAnn.textContent = 'Update Announcement';
+
+    postAnn.onclick = async ()=>{
+      await db.ref('announcements/'+id).update({
+        title: annTitle.value,
+        body: annBody.value
+      });
+      location.reload();
+    };
   });
-  document.getElementById('annStatus').textContent = 'Posted.';
+}
+
+/* ================= EVENTS ================= */
+async function loadEvents(){
+  const snap = await db.ref('events').once('value');
+  const events = snap.val() || {};
+
+  let html = Object.keys(events).map(id=>{
+    const e = events[id];
+    return `
+      <div class="member-card">
+        <h4>${e.title}</h4>
+        <div class="member-meta">${e.date || ''} · ${e.location || ''}</div>
+        <div class="member-meta">${e.description || ''}</div>
+        <button class="btn" onclick="editEvent('${id}')">Edit</button>
+        <button class="btn" style="background:#dc2626" onclick="deleteEvent('${id}')">Delete</button>
+      </div>
+    `;
+  }).join('');
+
+  document.getElementById('eventsList').innerHTML =
+    html || '<p>No events</p>';
+}
+
+async function deleteEvent(id){
+  if(confirm('Delete this event?')){
+    await db.ref('events/'+id).remove();
+    loadEvents();
+  }
+}
+
+function editEvent(id){
+  db.ref('events/'+id).once('value').then(s=>{
+    const e = s.val();
+    evTitle.value = e.title;
+    evDate.value = e.date;
+    evLoc.value = e.location;
+    evDesc.value = e.description;
+
+    createEvent.textContent = 'Update Event';
+    createEvent.onclick = async ()=>{
+      await db.ref('events/'+id).update({
+        title: evTitle.value,
+        date: evDate.value,
+        location: evLoc.value,
+        description: evDesc.value
+      });
+      location.reload();
+    };
+  });
+}
+
+/* ================= CREATE ================= */
+postAnn.addEventListener('click', async ()=>{
+  if(postAnn.textContent !== 'Post Announcement') return;
+  if(!annTitle.value || !annBody.value) return alert('Fill all fields');
+
+  await db.ref('announcements').push({
+    title: annTitle.value,
+    body: annBody.value,
+    createdAt: new Date().toISOString()
+  });
+  loadAnnouncements();
 });
 
-// create event
-document.getElementById('createEvent').addEventListener('click', async ()=>{
-  const title = document.getElementById('evTitle').value.trim();
-  const date = document.getElementById('evDate').value.trim();
-  const loc = document.getElementById('evLoc').value.trim();
-  const desc = document.getElementById('evDesc').value.trim();
-  if(!title) return alert('Title required');
-  const id = db.ref('events').push().key;
-  await db.ref('events/' + id).set({ title, date, location: loc, description: desc, createdAt: new Date().toISOString() });
-  document.getElementById('evStatus').textContent = 'Event created.';
+createEvent.addEventListener('click', async ()=>{
+  if(createEvent.textContent !== 'Create Event') return;
+  if(!evTitle.value) return alert('Title required');
+
+  await db.ref('events').push({
+    title: evTitle.value,
+    date: evDate.value,
+    location: evLoc.value,
+    description: evDesc.value,
+    createdAt: new Date().toISOString()
+  });
+  loadEvents();
 });
+  
 </script>
 </body>
 </html>
