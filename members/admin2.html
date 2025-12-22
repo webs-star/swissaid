@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Members — Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--brand:#0C2856;--accent:#F5C22D}
+body{font-family:Inter,Arial;background:#f8fafc;margin:0;color:#0f1724}
+.header{background:var(--brand);color:#fff;padding:12px 18px}
+.container{max-width:1000px;margin:24px auto;padding:0 18px}
+.card{background:#fff;padding:16px;border-radius:12px;box-shadow:0 8px 20px rgba(2,6,23,0.05);margin-bottom:14px}
+label{display:block;margin-top:10px}
+input,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #d1d5db}
+.btn{background:var(--brand);color:#fff;padding:8px 12px;border-radius:8px;border:none;cursor:pointer}
+.small{font-size:13px;color:#475569}
+</style>
+</head>
+<body>
+<header class="header" style="display:flex;align-items:center;gap:12px;">
+  <img src="https://res.cloudinary.com/dwvt4e9o2/image/upload/v1763476964/Screenshot_73_e5hyu9.png" 
+       alt="Swiss Aid Logo" 
+       style="height:38px; width:auto;">
+
+  <div style="display:flex;flex-direction:column;line-height:1;">
+    <div style="color:#fff; font-size:18px; font-weight:700;">Swiss Aid Connect Foundation</div>
+    <div style="color:#F5C22D; font-size:13px; font-weight:600;">Admin Panel</div>
+  </div>
+</header>
+
+
+
+
+<main class="container">
+  <!-- Announcement Section -->
+  <div class="card">
+    <h3>Create Announcement</h3>
+    <label>Title</label><input id="annTitle" />
+    <label>Body</label><textarea id="annBody" rows="4"></textarea>
+    <button id="postAnn" class="btn">Post Announcement</button>
+    <p id="annStatus" class="small"></p>
+  </div>
+
+  <!-- Event Section -->
+  <div class="card">
+    <h3>Create Event</h3>
+    <label>Title</label><input id="evTitle" />
+    <label>Date</label><input id="evDate" placeholder="2025-12-01" />
+    <label>Location</label><input id="evLoc" />
+    <label>Description</label><textarea id="evDesc" rows="4"></textarea>
+    <button id="createEvent" class="btn">Create Event</button>
+    <p id="evStatus" class="small"></p>
+  </div>
+
+  <!-- Admin Tools Info -->
+  <div class="card">
+    <h3>Admin Tools</h3>
+    <p class="small">Whitelisted admins are stored in Realtime DB at <code>/admins/{uid}: true</code>.</p>
+  </div>
+
+  <!-- NEW: All Members Section -->
+  <div class="card">
+    <h3>All Joined Members</h3>
+    <ul id="membersList" class="small">
+      <li>Loading members…</li>
+    </ul>
+  </div>
+</main>
+
+
+
+
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyAQNayCzqw8NwIRaky4o21TPMXvL1ED5Mc",
+  authDomain: "swissaid-1e9c9.firebaseapp.com",
+  databaseURL: "https://swissaid-1e9c9-default-rtdb.firebaseio.com",
+  projectId: "swissaid-1e9c9",
+  storageBucket: "swissaid-1e9c9.firebasestorage.app",
+  messagingSenderId: "598813811284",
+  appId: "1:598813811284:web:d4a9ebf46da0fb290043c1"
+};
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db = firebase.database();
+
+
+
+auth.onAuthStateChanged(async user => {
+  if (!user) return window.location.href='/#joinPage';
+
+  // check admin
+  const aSnap = await db.ref('admins/' + user.uid).once('value');
+  if(!aSnap.exists()){
+    alert('Access denied — admin only');
+    return window.location.href = '/members/dashboard.html';
+  }
+
+  // load all members
+  const membersSnap = await db.ref('members').once('value');
+  const members = membersSnap.val() || {};
+
+  const html = Object.keys(members).map(uid => {
+    const m = members[uid];
+    return `<li>
+      <strong>${m.fullName || '—'}</strong> · ${m.email || '—'} · ${m.country || '—'} · Joined: ${m.joinedAt || '—'}
+    </li>`;
+  }).join('');
+
+  document.getElementById('membersList').innerHTML = html || '<li>No members yet</li>';
+});
+
+
+
+
+
+// post announcement
+document.getElementById('postAnn').addEventListener('click', async ()=>{
+  const title = document.getElementById('annTitle').value.trim();
+  const body = document.getElementById('annBody').value.trim();
+  if(!title || !body) return alert('Both fields required');
+  const id = db.ref('announcements').push().key;
+  await db.ref('announcements/' + id).set({
+    title, body, createdAt: new Date().toISOString()
+  });
+  document.getElementById('annStatus').textContent = 'Posted.';
+});
+
+// create event
+document.getElementById('createEvent').addEventListener('click', async ()=>{
+  const title = document.getElementById('evTitle').value.trim();
+  const date = document.getElementById('evDate').value.trim();
+  const loc = document.getElementById('evLoc').value.trim();
+  const desc = document.getElementById('evDesc').value.trim();
+  if(!title) return alert('Title required');
+  const id = db.ref('events').push().key;
+  await db.ref('events/' + id).set({ title, date, location: loc, description: desc, createdAt: new Date().toISOString() });
+  document.getElementById('evStatus').textContent = 'Event created.';
+});
+</script>
+</body>
+</html>
