@@ -890,24 +890,6 @@ footer.site-footer{
     align-items: center;
   }
 
-  /* 👇 FIX TEXT ALIGNMENT */
-  .about-block p,
-  .about-block h2,
-  .about-block h3 {
-    max-width: 560px;        /* prevents wide ugly lines */
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    line-height: 1.7;
-  }
-
-  .about-img {
-    width: 240px;
-    height: 240px;
-    margin-bottom: 25px;
-  }
-}
-
 
 
 
@@ -1379,6 +1361,28 @@ footer.site-footer{
 .lang-menu a:hover {
     background: #f2f2f2;
 }
+
+
+
+
+/* ===== GLOBAL MOBILE TEXT ALIGN FIX ===== */
+@media (max-width: 780px) {
+
+  body {
+    text-align: center;
+  }
+
+  p, h1, h2, h3, h4, h5, h6 {
+    max-width: 560px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.7;
+    text-align: center;
+  }
+
+}
+
+  
 </style>
 </head>
 <body>
