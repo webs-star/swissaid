@@ -132,6 +132,16 @@ footer{
 .section:nth-of-type(3){ background:linear-gradient(135deg,#f4a261,#e07b39); }
 .section:nth-of-type(4){ background:linear-gradient(135deg,#7a2fa6,#5e2080); color:#fff; }
 .section:nth-of-type(5){ background:linear-gradient(135deg,#f5c400,#d4a500); }
+/* ================= NEW SECTIONS ================= */
+.section:nth-of-type(6){ 
+  background: linear-gradient(135deg,#0f9d58,#34a853); /* greenish gradient */
+  color: #fff; 
+}
+.section:nth-of-type(7){ 
+  background: linear-gradient(135deg,#fbbc05,#ff6f00); /* yellow-orange gradient */
+  color: #fff; 
+}
+  
 .section.swiss{ background:linear-gradient(135deg,#004080,#0066cc); color:#fff; }
 
 /* ================= FLOAT BUTTON ================= */
@@ -358,47 +368,42 @@ footer{
 </section>
 
 
-
 <!-- SECTION: Digital Inclusion & Innovation -->
-<section class="section center-section">
+<section class="section">
   <img src="https://images.pexels.com/photos/693859/pexels-photo-693859.jpeg" class="shape-diagonal">
   <div class="text">
-    <h2 data-key="s6-title">Digital Inclusion & Innovation</h2>
-
+    <h2 data-key="s7-title">Digital Inclusion & Innovation</h2>
     <ul>
-      <li data-key="s6-li1">ICT, coding, and robotics programs active across all six counties</li>
-      <li data-key="s6-li2">Digital literacy initiatives and technology hubs for youth</li>
-      <li data-key="s6-li3">Mentorship programs and online platforms for skill development</li>
-      <li data-key="s6-li4">Inclusion of youth with disabilities in all programs</li>
-      <li data-key="s6-li5">Promotes innovation, collaboration, and employability</li>
+      <li data-key="s7-li1">ICT, coding, and robotics programs active across all six counties</li>
+      <li data-key="s7-li2">Digital literacy initiatives and technology hubs for youth</li>
+      <li data-key="s7-li3">Mentorship programs and online platforms for skill development</li>
+      <li data-key="s7-li4">Inclusion of youth with disabilities in all programs</li>
+      <li data-key="s7-li5">Promotes innovation, collaboration, and employability</li>
     </ul>
-
-    <p data-key="s6-p1">
+    <p data-key="s7-p1">
       <strong>Impact:</strong> Youth gain equitable access to technology, mentorship, and digital resources, fostering innovation and preparing them for future opportunities.
     </p>
   </div>
 </section>
 
-
 <!-- SECTION: Life Skills & Education -->
-<section class="section center-section">
+<section class="section">
   <img src="https://res.cloudinary.com/dwvt4e9o2/image/upload/v1766230599/ChatGPT_Image_Dec_20_2025_02_31_12_PM_ltuaaf.jpg" class="shape-diagonal">
   <div class="text">
-    <h2 data-key="s3-title">Life Skills & Education</h2>
-
+    <h2 data-key="s8-title">Life Skills & Education</h2>
     <ul>
-      <li data-key="s3-li1">Decision-making, problem-solving, and civic engagement programs</li>
-      <li data-key="s3-li2">STEM initiatives, vocational training, and internships</li>
-      <li data-key="s3-li3">County-specific programs: Nakuru (sports & arts), Machakos (coding & leadership), Mombasa (volunteer projects)</li>
-      <li data-key="s3-li4">Hands-on workshops and mentorship opportunities</li>
-      <li data-key="s3-li5">Certification and skill recognition for participating youth</li>
+      <li data-key="s8-li1">Decision-making, problem-solving, and civic engagement programs</li>
+      <li data-key="s8-li2">STEM initiatives, vocational training, and internships</li>
+      <li data-key="s8-li3">County-specific programs: Nakuru (sports & arts), Machakos (coding & leadership), Mombasa (volunteer projects)</li>
+      <li data-key="s8-li4">Hands-on workshops and mentorship opportunities</li>
+      <li data-key="s8-li5">Certification and skill recognition for participating youth</li>
     </ul>
-
-    <p data-key="s3-p1">
+    <p data-key="s8-p1">
       <strong>Impact:</strong> Prepares youth with practical skills and life competencies, enhancing employability, civic responsibility, and personal development.
     </p>
   </div>
 </section>
+
 
 
 
@@ -467,6 +472,25 @@ const translations = {
     "s6-li5": "Recognized certification pathways",
     "s6-p2": "<strong>Invitation to Partners:</strong> We invite donors, institutions, and corporate partners to support classroom equipment, connectivity, and student scholarships, ensuring long-term sustainability and expanded impact.",
 
+
+ "s7-title": "Digital Inclusion & Innovation",
+  "s7-li1": "ICT, coding, and robotics programs active across all six counties",
+  "s7-li2": "Digital literacy initiatives and technology hubs for youth",
+  "s7-li3": "Mentorship programs and online platforms for skill development",
+  "s7-li4": "Inclusion of youth with disabilities in all programs",
+  "s7-li5": "Promotes innovation, collaboration, and employability",
+  "s7-p1": "<strong>Impact:</strong> Youth gain equitable access to technology, mentorship, and digital resources, fostering innovation and preparing them for future opportunities.",
+
+  "s8-title": "Life Skills & Education",
+  "s8-li1": "Decision-making, problem-solving, and civic engagement programs",
+  "s8-li2": "STEM initiatives, vocational training, and internships",
+  "s8-li3": "County-specific programs: Nakuru (sports & arts), Machakos (coding & leadership), Mombasa (volunteer projects)",
+  "s8-li4": "Hands-on workshops and mentorship opportunities",
+  "s8-li5": "Certification and skill recognition for participating youth",
+  "s8-p1": "<strong>Impact:</strong> Prepares youth with practical skills and life competencies, enhancing employability, civic responsibility, and personal development.",
+
+
+    
     "footer-text": "© Hybrid Education Centre — All Rights Reserved."
   },
 
@@ -520,7 +544,21 @@ const translations = {
     "s6-li4": "Infrastructure fiable (Starlink et options solaires)",
     "s6-li5": "Parcours de certification reconnus",
     "s6-p2": "<strong>Invitation aux partenaires :</strong> Nous invitons les donateurs, institutions et partenaires corporatifs à soutenir l’équipement des salles de classe, la connectivité et les bourses étudiantes, garantissant la durabilité à long terme et un impact élargi.",
+"s7-title": "Inclusion numérique et Innovation",
+  "s7-li1": "Programmes TIC, codage et robotique actifs dans les six comtés",
+  "s7-li2": "Initiatives d'alphabétisation numérique et centres technologiques pour les jeunes",
+  "s7-li3": "Programmes de mentorat et plateformes en ligne pour le développement des compétences",
+  "s7-li4": "Inclusion des jeunes en situation de handicap dans tous les programmes",
+  "s7-li5": "Favorise l'innovation, la collaboration et l'employabilité",
+  "s7-p1": "<strong>Impact :</strong> Les jeunes bénéficient d'un accès équitable à la technologie, au mentorat et aux ressources numériques, favorisant l'innovation et les préparant aux opportunités futures.",
 
+  "s8-title": "Compétences de Vie et Éducation",
+  "s8-li1": "Programmes de prise de décision, résolution de problèmes et engagement civique",
+  "s8-li2": "Initiatives STEM, formation professionnelle et stages",
+  "s8-li3": "Programmes spécifiques aux comtés : Nakuru (sports & arts), Machakos (codage & leadership), Mombasa (projets bénévoles)",
+  "s8-li4": "Ateliers pratiques et opportunités de mentorat",
+  "s8-li5": "Certification et reconnaissance des compétences pour les jeunes participants",
+  "s8-p1": "<strong>Impact :</strong> Prépare les jeunes avec des compétences pratiques et de vie, améliorant leur employabilité, leur responsabilité civique et leur développement personnel.",
     "footer-text": "© Centre d’éducation hybride — Tous droits réservés."
   },
   
@@ -575,7 +613,21 @@ de: {
   "s6-li4": "Zuverlässige Infrastruktur (Starlink & Solarlösungen)",
   "s6-li5": "Anerkannte Zertifizierungspfade",
   "s6-p2": "<strong>Einladung an Partner:</strong> Wir laden Spender, Institutionen und Unternehmenspartner ein, Klassenzimmerausrüstung, Konnektivität und Stipendien zu unterstützen, um langfristige Nachhaltigkeit und erweiterten Einfluss zu gewährleisten.",
+ "s7-title": "Digitale Inklusion & Innovation",
+  "s7-li1": "ICT-, Coding- und Robotikprogramme in allen sechs Bezirken aktiv",
+  "s7-li2": "Digitale Alphabetisierungsinitiativen und Technologiezentren für Jugendliche",
+  "s7-li3": "Mentoring-Programme und Online-Plattformen zur Kompetenzentwicklung",
+  "s7-li4": "Einbeziehung von Jugendlichen mit Behinderungen in alle Programme",
+  "s7-li5": "Fördert Innovation, Zusammenarbeit und Beschäftigungsfähigkeit",
+  "s7-p1": "<strong>Auswirkung:</strong> Jugendliche erhalten gerechten Zugang zu Technologie, Mentoring und digitalen Ressourcen, fördern Innovation und bereiten sie auf zukünftige Chancen vor.",
 
+  "s8-title": "Lebenskompetenzen & Bildung",
+  "s8-li1": "Programme zu Entscheidungsfindung, Problemlösung und bürgerschaftlichem Engagement",
+  "s8-li2": "STEM-Initiativen, berufliche Ausbildung und Praktika",
+  "s8-li3": "Bezirkspezifische Programme: Nakuru (Sport & Kunst), Machakos (Coding & Führung), Mombasa (Freiwilligenprojekte)",
+  "s8-li4": "Praxisworkshops und Mentoring-Möglichkeiten",
+  "s8-li5": "Zertifizierung und Anerkennung von Fähigkeiten für teilnehmende Jugendliche",
+  "s8-p1": "<strong>Auswirkung:</strong> Bereitet Jugendliche mit praktischen Fähigkeiten und Lebenskompetenzen vor, verbessert Beschäftigungsfähigkeit, bürgerschaftliche Verantwortung und persönliche Entwicklung.",
   "footer-text": "© Hybrid-Bildungszentrum — Alle Rechte vorbehalten."
 },
 
@@ -629,7 +681,21 @@ es: {
   "s6-li4": "Infraestructura confiable (Starlink y opciones solares)",
   "s6-li5": "Rutas de certificación reconocidas",
   "s6-p2": "<strong>Invitación a Socios:</strong> Invitamos a donantes, instituciones y socios corporativos a apoyar el equipamiento del aula, la conectividad y las becas estudiantiles, asegurando sostenibilidad a largo plazo y un impacto ampliado.",
+"s7-title": "Inclusión Digital e Innovación",
+  "s7-li1": "Programas de TIC, codificación y robótica activos en los seis condados",
+  "s7-li2": "Iniciativas de alfabetización digital y centros tecnológicos para jóvenes",
+  "s7-li3": "Programas de mentoría y plataformas en línea para desarrollo de habilidades",
+  "s7-li4": "Inclusión de jóvenes con discapacidades en todos los programas",
+  "s7-li5": "Promueve la innovación, la colaboración y la empleabilidad",
+  "s7-p1": "<strong>Impacto:</strong> Los jóvenes obtienen acceso equitativo a tecnología, mentoría y recursos digitales, fomentando la innovación y preparándolos para oportunidades futuras.",
 
+  "s8-title": "Habilidades para la Vida y Educación",
+  "s8-li1": "Programas de toma de decisiones, resolución de problemas y compromiso cívico",
+  "s8-li2": "Iniciativas STEM, formación profesional y pasantías",
+  "s8-li3": "Programas específicos por condado: Nakuru (deportes y arte), Machakos (codificación y liderazgo), Mombasa (proyectos de voluntariado)",
+  "s8-li4": "Talleres prácticos y oportunidades de mentoría",
+  "s8-li5": "Certificación y reconocimiento de habilidades para los jóvenes participantes",
+  "s8-p1": "<strong>Impacto:</strong> Prepara a los jóvenes con habilidades prácticas y competencias para la vida, mejorando la empleabilidad, la responsabilidad cívica y el desarrollo personal.",
   "footer-text": "© Centro de Educación Híbrida — Todos los derechos reservados."
 },
 
@@ -683,6 +749,21 @@ it: {
   "s6-li4": "Infrastruttura affidabile (Starlink & opzioni solari)",
   "s6-li5": "Percorsi di certificazione riconosciuti",
   "s6-p2": "<strong>Invito ai Partner:</strong> Invitiamo donatori, istituzioni e partner aziendali a supportare l'equipaggiamento delle aule, la connettività e le borse di studio, garantendo sostenibilità a lungo termine e impatto ampliato.",
+"s7-title": "Inclusione Digitale e Innovazione",
+  "s7-li1": "Programmi di ICT, coding e robotica attivi in tutti e sei i distretti",
+  "s7-li2": "Iniziative di alfabetizzazione digitale e hub tecnologici per i giovani",
+  "s7-li3": "Programmi di mentoring e piattaforme online per lo sviluppo delle competenze",
+  "s7-li4": "Inclusione dei giovani con disabilità in tutti i programmi",
+  "s7-li5": "Promuove innovazione, collaborazione e occupabilità",
+  "s7-p1": "<strong>Impatto:</strong> I giovani ottengono accesso equo alla tecnologia, mentoring e risorse digitali, favorendo l’innovazione e preparando opportunità future.",
+
+  "s8-title": "Competenze per la Vita e Educazione",
+  "s8-li1": "Programmi di presa di decisioni, problem-solving e impegno civico",
+  "s8-li2": "Iniziative STEM, formazione professionale e stage",
+  "s8-li3": "Programmi specifici per contea: Nakuru (sport e arte), Machakos (coding e leadership), Mombasa (progetti di volontariato)",
+  "s8-li4": "Workshop pratici e opportunità di mentoring",
+  "s8-li5": "Certificazione e riconoscimento delle competenze per i giovani partecipanti",
+  "s8-p1": "<strong>Impatto:</strong> Prepara i giovani con competenze pratiche e abilità di vita, migliorando occupabilità, responsabilità civica e sviluppo personale.",
 
   "footer-text": "© Centro di Istruzione Ibrida — Tutti i diritti riservati."
 },
@@ -738,6 +819,21 @@ sw: {
   "s6-li5": "Njia za uthibitisho zinazotambulika",
   "s6-p2": "<strong>Mwaliko kwa Washirika:</strong> Tunawaalika wafadhili, taasisi, na washirika wa kampuni kusaidia vifaa vya madarasa, muunganisho wa intaneti, na ufadhili wa wanafunzi, kuhakikisha uendelevu wa muda mrefu na athari kubwa zaidi.",
 
+  "s7-title": "Ujumuishaji wa Kidijitali na Ubunifu",
+  "s7-li1": "Programu za ICT, coding, na robotics zinazoendelea katika kaunti zote sita",
+  "s7-li2": "Mazingatio ya uelewa wa kidijitali na vituo vya teknolojia kwa vijana",
+  "s7-li3": "Programu za uongozi wa karibu na majukwaa ya mtandaoni kwa maendeleo ya ujuzi",
+  "s7-li4": "Ujumuishaji wa vijana wenye ulemavu katika programu zote",
+  "s7-li5": "Inakuza ubunifu, ushirikiano, na uwezekano wa ajira",
+  "s7-p1": "<strong>Athari:</strong> Vijana wanapata upatikanaji sawa wa teknolojia, uongozi wa karibu, na rasilimali za kidijitali, kukuza ubunifu na kujiandaa kwa fursa za baadaye.",
+
+  "s8-title": "Ujuzi wa Maisha na Elimu",
+  "s8-li1": "Programu za kufanya maamuzi, kutatua matatizo, na ushiriki wa kiraia",
+  "s8-li2": "Mazingatio ya STEM, mafunzo ya kazi, na mafunzo ya vitendo",
+  "s8-li3": "Programu maalum za kaunti: Nakuru (sports & sanaa), Machakos (coding & uongozi), Mombasa (miradi ya kujitolea)",
+  "s8-li4": "Warsha za vitendo na fursa za uongozi wa karibu",
+  "s8-li5": "Uthibitisho na utambuzi wa ujuzi kwa vijana washiriki",
+  "s8-p1": "<strong>Athari:</strong> Inawaandaa vijana kwa ujuzi wa vitendo na maisha, kuongeza uwezekano wa ajira, uwajibikaji wa kiraia, na maendeleo ya kibinafsi.",
   "footer-text": "© Kituo cha Elimu ya Mchanganyiko — Haki Zote Zimehifadhiwa."
 }
 
