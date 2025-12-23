@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Health & Wellness | NGO</title>
-
 <style>
 :root{
     --blue:#0b61b6;
@@ -15,12 +14,27 @@
     --text:#333;
     --max-width:1200px;
 }
+
 body{
     margin:0;
     font-family:Arial, Helvetica, sans-serif;
     background:#fafafa;
     color:var(--text);
     line-height:1.6;
+}
+
+/* ================================================= */
+/* ===== GLOBAL TEXT ALIGNMENT & BULLET REMOVAL ===== */
+/* ================================================= */
+
+p, h1, h2, h3, h4, h5, h6, li {
+    text-align: left !important;
+}
+
+ul, ol {
+    list-style: none;
+    padding-left: 0;
+    margin-left: 0;
 }
 
 /* Header */
@@ -32,8 +46,9 @@ header{
     grid-template-columns:1fr auto 1fr;
     align-items:center;
 }
+
 .logo{ height:70px; }
-.page-title{ margin:0; font-size:32px; text-align:center; }
+.page-title{ margin:0; font-size:32px; }
 
 /* Sections */
 .section{
@@ -52,9 +67,19 @@ header{
     background-size:cover;
     background-blend-mode:overlay;
 }
-.section:nth-child(even){ flex-direction:row-reverse; }
-.text{ width:50%; }
-.text h2{ margin-top:0; font-size:28px; color:#fff; }
+
+.section:nth-child(even){
+    flex-direction:row-reverse;
+}
+
+.text{
+    width:50%;
+}
+
+.text h2{
+    margin-top:0;
+    font-size:28px;
+}
 
 /* Image shapes */
 .shape-round{ width:50%; border-radius:50%; }
@@ -63,15 +88,46 @@ header{
 .shape-hexagon{ width:50%; clip-path:polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%); }
 .shape-leaf{ width:50%; clip-path:ellipse(50% 40% at 50% 50%); }
 
-.center-section{ text-align:center; flex-direction:column; color:#fff; }
+/* Even visually centered sections keep readable text */
+.center-section{
+    flex-direction:column;
+}
 
 /* Footer */
-footer{ background:#222; color:#eee; padding:30px; text-align:center; margin-top:60px; }
+footer{
+    background:#222;
+    color:#eee;
+    padding:30px;
+    margin-top:60px;
+}
 
-/* Responsive */
+/* ============================ */
+/* ===== MOBILE FIX (SAFE) ==== */
+/* ============================ */
+
 @media(max-width:900px){
-    .section{ flex-direction:column !important; text-align:center; }
-    .section img, .text{ width:100%; }
+
+    .section{
+        flex-direction:column !important;
+        padding:50px 20px;
+    }
+
+    .section img,
+    .text{
+        width:100%;
+    }
+
+    .text{
+        max-width:720px;
+        margin-left:auto;
+        margin-right:auto;
+    }
+
+    .text p,
+    .text h2{
+        text-align:left !important;
+        line-height:1.75;
+    }
 }
 
 /* BACKGROUNDS FOR HEALTH PAGE */
@@ -81,58 +137,70 @@ footer{ background:#222; color:#eee; padding:30px; text-align:center; margin-top
 .section:nth-of-type(4){ background:linear-gradient(135deg,#0b61b6,#1a75d1); color:#fff; }
 .section:nth-of-type(5){ background:linear-gradient(135deg,#7a2fa6,#5e2080); color:#fff; }
 
-.section > *{ position:relative; z-index:2; }
+.section > *{
+    position:relative;
+    z-index:2;
+}
 
 /* floating home button */
-.floating-home-btn {
-  position: fixed;
-  bottom: 28px;
-  right: 28px;
-  z-index: 99999;
-  border-radius: 16px;
-  padding: 10px 12px;
-  background: #0C2856;
-  border: none;
-  color: white;
+.floating-home-btn{
+    position:fixed;
+    bottom:28px;
+    right:28px;
+    z-index:99999;
+    border-radius:16px;
+    padding:10px 12px;
+    background:#0C2856;
+    border:none;
+    color:white;
 }
 
 /* ========== LANGUAGE DROPDOWN ========== */
 .lang-dropdown{
-  position:relative;
-  justify-self:end;
-  z-index:1000;
+    position:relative;
+    justify-self:end;
+    z-index:1000;
 }
+
 #langToggle{
-  background:#ffffff;
-  color:#000;
-  padding:6px 10px;
-  border-radius:8px;
-  text-decoration:none;
-  font-weight:bold;
-  font-size:14px;
-  cursor:pointer;
-  display:inline-block;
+    background:#ffffff;
+    color:#000;
+    padding:6px 10px;
+    border-radius:8px;
+    text-decoration:none;
+    font-weight:bold;
+    font-size:14px;
+    cursor:pointer;
+    display:inline-block;
 }
+
 .lang-menu{
-  position:absolute;
-  top:110%;
-  right:0;
-  background:#fff;
-  min-width:160px;
-  border-radius:10px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.2);
-  display:none;
-  overflow:hidden;
+    position:absolute;
+    top:110%;
+    right:0;
+    background:#fff;
+    min-width:160px;
+    border-radius:10px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+    display:none;
+    overflow:hidden;
 }
+
 .lang-menu a{
-  display:block;
-  padding:10px 14px;
-  text-decoration:none;
-  color:#000;
-  font-size:14px;
+    display:block;
+    padding:10px 14px;
+    text-decoration:none;
+    color:#000;
+    font-size:14px;
 }
-.lang-menu a:hover{ background:#f2f2f2; }
-.lang-menu.open{ display:block; }
+
+.lang-menu a:hover{
+    background:#f2f2f2;
+}
+
+.lang-menu.open{
+    display:block;
+}
 </style>
 </head>
 
