@@ -15,12 +15,24 @@
     --text:#333;
     --max-width:1200px;
 }
+
 body{
     margin:0;
     font-family:Arial, Helvetica, sans-serif;
     background:#fafafa;
     color:var(--text);
     line-height:1.6;
+}
+
+/* ===== GLOBAL TEXT ALIGNMENT & BULLET REMOVAL ===== */
+p, h1, h2, h3, h4, h5, h6, li {
+    text-align: left !important;
+}
+
+ul, ol {
+    list-style: none;
+    padding-left: 0;
+    margin-left: 0;
 }
 
 /* Header */
@@ -32,9 +44,9 @@ header{
     grid-template-columns:1fr auto 1fr;
     align-items:center;
 }
+
 .logo{ height:70px; }
-.page-title{ margin:0; font-size:32px; text-align:center; }
-.empty{ height:70px; }
+.page-title{ margin:0; font-size:32px; }
 
 /* Sections */
 .section{
@@ -53,8 +65,11 @@ header{
     background-size:cover;
     background-blend-mode:overlay;
 }
+
 .section:nth-child(even){ flex-direction:row-reverse; }
+
 .text{ width:50%; }
+
 .text h2{ margin-top:0; font-size:28px; color:#fff; }
 
 /* Image shapes */
@@ -64,15 +79,25 @@ header{
 .shape-hexagon{ width:50%; clip-path:polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%); }
 .shape-leaf{ width:50%; clip-path:ellipse(50% 40% at 50% 50%); }
 
-.center-section{ text-align:center; flex-direction:column; color:#fff; }
+.center-section{ flex-direction:column; }
 
 /* Footer */
-footer{ background:#222; color:#eee; padding:30px; text-align:center; margin-top:60px; }
+footer{ background:#222; color:#eee; padding:30px; margin-top:60px; }
 
 /* Responsive */
 @media(max-width:900px){
-    .section{ flex-direction:column !important; text-align:center; }
+    .section{ flex-direction:column !important; }
     .section img, .text{ width:100%; }
+    .text{
+        max-width:720px;
+        margin-left:auto;
+        margin-right:auto;
+    }
+    .text p,
+    .text h2{
+        text-align:left !important;
+        line-height:1.75;
+    }
 }
 
 /* BACKGROUNDS FOR YOUTH EMPOWERMENT PAGE */
@@ -82,9 +107,10 @@ footer{ background:#222; color:#eee; padding:30px; text-align:center; margin-top
 .section:nth-of-type(4){ background:linear-gradient(135deg,#0b61b6,#1a75d1); color:#fff; }
 .section:nth-of-type(5){ background:linear-gradient(135deg,#f4a261,#e07b39); color:#333; }
 .section:nth-of-type(6){ background:linear-gradient(135deg,#f5c400,#d4a500); color:#333; }
+
 .section > *{ position:relative; z-index:2; }
 
-/* floating home button */
+/* Floating Home Button */
 .floating-home-btn {
   position: fixed;
   bottom: 28px;
@@ -97,7 +123,7 @@ footer{ background:#222; color:#eee; padding:30px; text-align:center; margin-top
   color: white;
 }
 
-/* LANGUAGE DROPDOWN */
+/* Language Dropdown */
 .lang-dropdown{
   position:relative;
   justify-self:end;
