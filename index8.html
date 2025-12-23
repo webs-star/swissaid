@@ -1,0 +1,3131 @@
+
+<!doctype html> 
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Swiss Aid Connect Foundation</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<!-- Firebase 9 Compat Layer (works in normal HTML) -->
+<script src="https://www.gstatic.com/firebasejs/9.6.11/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.11/firebase-auth-compat.js"></script>
+
+<style>
+
+:root{ 
+  --blue:#0b61b6;
+  --yellow:#f5c400;
+  --purple:#7a2fa6;
+  --utility-height:32px;
+  --nav-height:84px;
+  --side-nav-height:48px;
+  --max-width:1180px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{
+  height:100%;
+  font-family: "Segoe UI", Roboto, system-ui, -apple-system, "Helvetica Neue", Arial;
+  color:#222;
+  line-height:1.35;
+}
+
+/* Top utility nav */
+.top-nav {
+  position:fixed;
+  top:0; right:0; left:0;
+  height:var(--utility-height);
+  background:rgba(255,255,255,0.72);
+  backdrop-filter: blur(12px);
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+  padding:0 18px;
+  border-bottom:1px solid rgba(0,0,0,0.06);
+  z-index:100;
+  font-size:14px;
+  gap:16px;
+}
+.top-nav a{
+  text-decoration:none;
+  color:#333;
+  font-weight:600;
+}
+.top-nav a:hover{ text-decoration:underline }
+
+/* Fixed header */
+.site-header{
+  position:fixed;
+  top:var(--utility-height);
+  left:0; right:0;
+  height:var(--nav-height);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:rgba(255,255,255,0.72);
+  backdrop-filter: blur(12px);
+  border-bottom:1px solid rgba(0,0,0,0.06);
+  z-index:95;
+  padding:0 18px;
+}
+
+/* Logo + NGO name */
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  min-width:220px;
+}
+.brand img{ height:76px; width:auto; display:block; }
+
+
+.brand h1 {
+  font-size:30px;
+  letter-spacing:0.2px;
+  color:#222;
+  font-weight:700;
+  white-space: nowrap;   /* <<< KEEP NAME ON ONE LINE */
+}
+
+
+/* Horizontal nav */
+.side-nav-container{
+  position:fixed;
+  top: calc(var(--utility-height) + var(--nav-height));
+  left:0;
+  width:100%;
+  height:var(--side-nav-height);
+  background:rgba(255,255,255,0.72);
+  backdrop-filter: blur(12px);
+  border-top:1px solid rgba(0,0,0,0.06);
+  border-bottom:1px solid rgba(0,0,0,0.06);
+  display:flex;
+  align-items:center;
+  padding:0 18px;
+  z-index:85;
+}
+
+.side-nav{
+  display:flex;
+  gap:16px;
+}
+
+.side-nav a{
+  text-decoration:none;
+  font-weight:600;
+  padding:12px 18px;
+  border-radius:6px;
+  font-size:1.3rem;
+  transition: background 0.3s, color 0.3s;
+}
+
+.side-nav a:nth-of-type(1){ color:#0b61b6; }
+.side-nav a:nth-of-type(2){ color:#7a2fa6; }
+.side-nav a:nth-of-type(3){ color:#f5c400; }
+.side-nav a:nth-of-type(4){ color:#e94e77; }
+
+.side-nav a:hover{
+  background:rgba(0,0,0,0.08);
+  color:#111;
+}
+
+/* Join & Donate buttons */
+.nav-actions{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.btn {
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 18px;
+  border-radius:8px;
+  font-weight:700;
+  text-decoration:none;
+  cursor:pointer;
+  border:none;
+}
+.btn-join{
+  background:var(--blue);
+  color:#fff;
+}
+.btn-donate{
+  background:var(--yellow);
+  color:#111;
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* HERO WRAP */
+.hero-wrap {
+  position:relative;
+  height: calc(100vh - var(--utility-height) - var(--nav-height) - var(--side-nav-height));
+  margin-top: calc(var(--utility-height) + var(--nav-height) + var(--side-nav-height));
+  overflow:hidden;
+}
+
+
+
+.hero-slider {
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  z-index:0;
+}
+
+
+.hero-slide {
+  position:absolute;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  opacity:0;
+  animation:fade 25s infinite;
+}
+
+/* Different animation delays for each slide */
+.slide1 { animation-delay:0s; }
+.slide2 { animation-delay:5s; }
+.slide3 { animation-delay:10s; }
+.slide4 { animation-delay:15s; }
+.slide5 { animation-delay:20s; }
+
+/* Fade-in-out animation */
+@keyframes fade {
+  0% { opacity:0; transform:scale(1.1) rotate(0deg);}
+  10% { opacity:1; transform:scale(1) rotate(0deg);}
+  20% { opacity:1; transform:scale(1) rotate(0deg);}
+  30% { opacity:0; transform:scale(1.05) rotate(2deg);}
+  100% { opacity:0;}
+}
+
+/* Optional: add different effects for each slide */
+.slide1 { animation-name:fade; }
+.slide2 { animation-name:fade-rotate; }
+.slide3 { animation-name:fade-zoom; }
+.slide4 { animation-name:fade-slide; }
+.slide5 { animation-name:fade-flip; }
+
+@keyframes fade-rotate {
+  0%,30%{ opacity:0; transform:rotate(-5deg);}
+  10%,20%{ opacity:1; transform:rotate(0deg);}
+  100%{ opacity:0; transform:rotate(5deg);}
+}
+
+@keyframes fade-zoom {
+  0%,30%{ opacity:0; transform:scale(1.2);}
+  10%,20%{ opacity:1; transform:scale(1);}
+  100%{ opacity:0; transform:scale(1.1);}
+}
+
+@keyframes fade-slide {
+  0%,30%{ opacity:0; transform:translateX(-100px);}
+  10%,20%{ opacity:1; transform:translateX(0);}
+  100%{ opacity:0; transform:translateX(100px);}
+}
+
+@keyframes fade-flip {
+  0%,30%{ opacity:0; transform:rotateY(90deg);}
+  10%,20%{ opacity:1; transform:rotateY(0);}
+  100%{ opacity:0; transform:rotateY(-90deg);}
+}
+
+
+
+
+
+
+
+
+
+.hero-overlay{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.45));
+  z-index:1;
+}
+.hero-inner{
+  position:relative;
+  z-index:2;
+  width:100%;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:28px;
+}
+.hero-content{
+  max-width:1200px;
+  width:100%;
+  color:#fff;
+}
+.hero-huge{
+  font-weight:800;
+  font-size:clamp(34px, 7vw, 64px);
+  line-height:0.98;
+  letter-spacing:-1px;
+  margin-bottom:18px;
+  text-shadow:0 10px 30px rgba(0,0,0,0.45);
+}
+.hero-sub{
+  display:block;
+  font-weight:800;
+  font-size:clamp(20px, 3.5vw, 34px);
+  color:var(--yellow);
+  margin-bottom:22px;
+  text-shadow:0 6px 20px rgba(0,0,0,0.35);
+}
+.hero-ctas{
+  margin-top:8px;
+  display:flex;
+  gap:14px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+.hero-ctas .cta{
+  padding:14px 24px;
+  border-radius:10px;
+  font-weight:700;
+  font-size:16px;
+  text-decoration:none;
+  display:inline-block;
+}
+.cta-primary{ background:var(--blue); color:#fff }
+.cta-outline{ background:rgba(255,255,255,0.12); color:#fff; border:1px solid rgba(255,255,255,0.14) }
+
+footer.site-footer{
+  background:#fafafa;
+  padding:36px 18px;
+  border-top:1px solid rgba(0,0,0,0.05);
+  text-align:center;
+  color:#444;
+  font-size:14px;
+}
+
+
+@media (max-width:520px) {
+  .hero-huge {
+    font-size: 28px;
+  }
+  .hero-sub {
+    font-size: 18px;
+  }
+
+}
+
+.hero-wrap {
+  position:relative;
+  height: calc(100vh - var(--utility-height) - var(--nav-height) - var(--side-nav-height));
+  margin-top: calc(var(--utility-height) + var(--nav-height) + var(--side-nav-height));
+  overflow:hidden;
+  z-index:0;
+}
+
+
+
+.impact-section {
+  padding:80px 18px;
+  background:linear-gradient(180deg, #f0f8ff 0%, #e6f2ff 100%);
+  text-align:center;
+}
+
+.impact-container {
+  max-width:1200px;
+  margin:0 auto;
+}
+
+.impact-title {
+  font-size:clamp(28px,5vw,42px);
+  font-weight:800;
+  color:var(--blue);
+  margin-bottom:40px;
+}
+
+.impact-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:32px;
+  justify-items:center;
+}
+
+.impact-card {
+  padding:28px 20px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  color:#fff;
+  font-weight:600;
+}
+
+/* Different shapes and backgrounds for each card */
+.impact-card:nth-child(1) {
+  background:#0b61b6;
+  border-radius:50% 20% 50% 20%;
+  box-shadow:0 6px 18px rgba(11,97,182,0.3);
+}
+.impact-card:nth-child(2) {
+  background:#f5c400;
+  border-radius:20% 50% 20% 50%;
+  color:#111;
+  box-shadow:0 6px 18px rgba(245,196,0,0.3);
+}
+.impact-card:nth-child(3) {
+  background:#7a2fa6;
+  border-radius:15% 15% 50% 50%;
+  box-shadow:0 6px 18px rgba(122,47,166,0.3);
+}
+.impact-card:nth-child(4) {
+  background:#e94e77;
+  border-radius:40% 10% 40% 10%;
+  box-shadow:0 6px 18px rgba(233,78,119,0.3);
+}
+
+/* Hover effects */
+.impact-card:hover {
+  transform:translateY(-10px) rotate(-2deg);
+  box-shadow:0 12px 24px rgba(0,0,0,0.2);
+}
+
+/* Card content */
+.impact-card h3 {
+  font-size:36px;
+  margin-bottom:12px;
+}
+
+.impact-card p {
+  font-size:18px;
+}
+
+
+.about-section {
+  padding:100px 18px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background: 
+    rgba(255, 255, 255, 0.3), /* subtle white overlay to lighten image */
+    url('https://cdn.pixabay.com/photo/2016/11/29/03/53/technology-1868563_1280.jpg') center/cover no-repeat;
+  color:#111; /* darker text for contrast */
+  position:relative;
+  overflow:hidden;
+  border-radius:30px;
+}
+
+
+
+.about-section::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  background: rgba(0,0,0,0.35); /* dark overlay for text readability */
+  z-index:1;
+}
+
+.about-container {
+  display:flex;
+  max-width:1200px;
+  gap:60px;
+  align-items:center;
+  flex-wrap:wrap;
+  position:relative;
+  z-index:2; /* bring above overlay */
+}
+
+.about-text {
+  flex:1;
+  min-width:300px;
+}
+
+.about-title {
+  font-size:clamp(32px,6vw,48px);
+  font-weight:800;
+  color:#fff;
+  margin-bottom:20px;
+}
+
+.about-subtitle {
+  font-size:20px;
+  margin-bottom:30px;
+  line-height:1.5;
+}
+
+.btn-learn {
+  display:inline-block;
+  padding:14px 28px;
+  background:#f5c400;
+  color:#111;
+  font-weight:700;
+  border-radius:10px;
+  text-decoration:none;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.btn-learn:hover {
+  transform:translateY(-4px);
+  box-shadow:0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* Star-shaped image with smaller points */
+.about-image {
+  flex:1;
+  min-width:300px;
+  clip-path: polygon(
+    50% 0%, 55% 10%, 60% 0%, 65% 10%, 
+    70% 0%, 75% 10%, 80% 0%, 85% 10%, 
+    90% 0%, 95% 10%, 100% 50%, 95% 90%, 
+    90% 100%, 85% 90%, 80% 100%, 75% 90%, 
+    70% 100%, 65% 90%, 60% 100%, 55% 90%, 
+    50% 100%, 45% 90%, 40% 100%, 35% 90%, 
+    30% 100%, 25% 90%, 20% 100%, 15% 90%, 
+    10% 100%, 5% 90%, 0% 50%, 5% 10%, 10% 0%, 
+    15% 10%, 20% 0%, 25% 10%, 30% 0%, 35% 10%, 
+    40% 0%, 45% 10%
+  );
+  overflow:hidden;
+  max-height:600px; /* optional max height */
+}
+
+.about-image img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+
+
+
+
+.serve-section {
+  padding:100px 18px;
+  background:#fefefe;
+  position:relative;
+}
+
+.serve-container {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  max-width:1200px;
+  margin:0 auto;
+  gap:40px;
+  flex-wrap:wrap;
+}
+
+.serve-text {
+  flex:1;
+  min-width:280px;
+}
+
+.serve-title {
+  font-size:clamp(28px,5vw,42px);
+  font-weight:800;
+  color:#0b61b6;
+  margin-bottom:20px;
+}
+
+
+.serve-paragraph {
+  font-size:18px;
+  color:#333;
+  line-height:1.8;
+  text-align:center; /* center text for trapezoid symmetry */
+}
+
+.serve-paragraph .line {
+  display:block;
+  margin:0 auto 12px auto;
+}
+
+/* Smooth 8-shape widths */
+.line1 { max-width:100%; }
+.line2 { max-width:75%; }
+.line3 { max-width:50%; }
+.line4 { max-width:75%; }
+.line5 { max-width:100%; }
+
+
+
+
+.serve-btn {
+  display:inline-block;
+  padding:14px 24px;
+  background:#7a2fa6;
+  color:#fff;
+  font-weight:700;
+  border-radius:12px;
+  text-decoration:none;
+  margin-top:20px;
+}
+
+.serve-image {
+  flex:1;
+  min-width:280px;
+  display:flex;
+  justify-content:center;
+  position:relative;
+}
+
+.serve-image img {
+  width:100%;
+  max-width:500px;
+  height:auto;
+  object-fit:cover;
+  clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%); /* trapezium shape */
+}
+
+
+
+
+.join-btn-green:hover { background:#049C58 !important; }
+.join-btn-blue:hover { background:#1E56B9 !important; }
+
+
+
+.ft { color:#fff;text-decoration:none;font-size:15px; }
+  .ft:hover { text-decoration:underline; }
+
+/* HIDE MOBILE MENU BUTTON ON DESKTOP */
+@media (min-width:881px) {
+  .dot-btn {
+    display: none !important;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+/* ================================
+   MOBILE FIX – FOR SCREENS < 880px
+   ================================ */
+@media (max-width: 880px) {
+
+  /* Hide desktop nav + desktop side menu */
+  .side-nav-container {
+    display: none !important;
+  }
+
+  /* Make header auto-height on phone */
+  .site-header {
+    height: auto;
+    padding: 12px 16px;
+    flex-wrap: wrap;
+    row-gap: 12px;
+  }
+
+  /* Brand row (logo + name + burger) */
+  .brand {
+    width: 100%;
+    justify-content: space-between;
+    min-width: 0;
+  }
+
+  .brand img {
+    height: 58px;       /* reduce logo size on phone */
+  }
+
+  .brand h1 {
+    font-size: 24px;
+    line-height: 1.1;
+  }
+
+  /* Mobile menu (burger button) */
+  .dot-btn {
+    display: block !important;
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    background: #0b61b6;
+    color: #fff;
+    font-size: 26px;
+    border: none;
+    cursor: pointer;
+  }
+
+  .dots {
+    position: relative;
+    top: -2px;
+  }
+
+  /* Move Join + Donate below logo on phone */
+  .nav-actions {
+    width: 100%;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .btn {
+    padding: 8px 14px;
+    font-size: 14px;
+  }
+
+  /* Adjust hero so it doesn't get covered */
+  .hero-wrap {
+    margin-top: calc(var(--utility-height) + 160px) !important;
+    height: calc(100vh - var(--utility-height) - 160px) !important;
+  }
+
+  /* Reduce hero text sizes */
+  .hero-huge {
+    font-size: 26px !important;
+  }
+  .hero-sub {
+    font-size: 16px !important;
+  }
+
+  /* Utility nav stays visible but becomes compact */
+  .top-nav {
+    padding: 0 12px;
+    gap: 10px;
+    font-size: 12px;
+  }
+
+  /* Mobile menu panel layout */
+  .mobile-panel {
+    position: fixed;
+    top: calc(var(--utility-height) + 70px);
+    right: 0;
+    width: 85%;
+    max-width: 320px;
+    background: white;
+    height: calc(100% - var(--utility-height) - 70px);
+    box-shadow: -4px 0 20px rgba(0,0,0,0.15);
+    transform: translateX(100%);
+    transition: transform 0.35s ease;
+    z-index: 200;
+  }
+
+  .mobile-panel.open {
+    transform: translateX(0);
+  }
+
+  .panel-inner a {
+    display: block;
+    padding: 16px 20px;
+    border-bottom: 1px solid #eee;
+    font-size: 18px;
+    text-decoration: none;
+    color: #333;
+  }
+}
+
+
+@media (max-width: 880px) {
+  .top-nav {
+    display: none !important;
+  }
+}
+
+
+@media (max-width: 880px) {
+
+  /* Mobile menu links (inside 3-dashes menu) */
+  .mobile-panel a {
+    display: block;
+    padding: 16px 20px;
+    font-size: 18px;
+
+    background: transparent !important;  /* CLEAR */
+    color: #0b61b6 !important;           /* BLUE TEXT */
+
+    border: none;
+    border-bottom: 1px solid #eee;
+  }
+
+  /* Optional hover */
+  .mobile-panel a:hover {
+    background: rgba(0, 0, 0, 0.05);     /* light tap feedback */
+  }
+}
+
+
+
+.about-fullpage {
+  padding: 0;                     /* full page, no outer margin */
+  background: #ffffff;
+  min-height: 100vh;
+}
+
+.about-wrapper {
+  max-width: none;                /* remove width restriction */
+  margin: 0;
+  padding: 0;
+}
+
+.about-main-title {
+  font-size: 42px;
+  font-weight: 800;
+  color: #0C2856;
+  text-align: center;
+  margin: 0;                      /* remove big top margin */
+  padding: 110px 20px 45px;       /* space inside instead */
+  letter-spacing: -0.5px;
+}
+
+/* ===============================
+   ABOUT — IMAGE BLOCK LAYOUT
+================================*/
+.about-block {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+
+  padding: 80px 40px;             /* inner spacing only */
+  margin: 0;                      /* remove outer margins */
+  width: 100%;                    /* full width */
+  max-width: 100%;                /* force full page */
+
+  border-bottom: 1px solid #e4e7ec;
+  border-radius: 0;               /* no rounded edges (full page) */
+  box-sizing: border-box;
+}
+
+.about-block:last-child {
+  border-bottom: none;
+}
+
+/* Text */
+.about-text h3 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #134d9c;
+  margin-bottom: 12px;
+}
+
+.about-text p {
+  font-size: 17px;
+  line-height: 1.75;
+  color: #444;
+}
+
+/* IMAGE SHAPES */
+.about-img {
+  width: 320px;
+  height: 320px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.about-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.about-img.circle {
+  border-radius: 80%;
+}
+
+.about-img.trapezium {
+  clip-path: polygon(10% 0, 90% 0, 100% 100%, 0 100%);
+}
+
+.about-img.round-diamond {
+  clip-path: polygon(
+    50% 0%, 85% 25%, 100% 50%,
+    85% 75%, 50% 100%, 15% 75%,
+    0% 50%, 15% 25%
+  );
+  border-radius: 20px;
+}
+
+
+
+
+.about-img.blob {
+  border-radius: 37% 63% 66% 34% / 44% 38% 62% 56%;
+}
+
+/* ALTERNATE BLOCKS */
+.about-block.alt-left {
+  flex-direction: row;
+}
+
+.about-block.alt-right {
+  flex-direction: row-reverse;
+}
+
+.about-block.alt-top,
+.about-block.alt-bottom {
+  flex-direction: column;
+  text-align: center;
+}
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 780px) {
+  .about-block {
+    flex-direction: column !important;
+    text-align: center;
+    padding: 60px 25px;           /* mobile-friendly */
+  }
+
+  .about-img {
+    width: 240px;
+    height: 240px;
+  }
+}
+
+/* BACKGROUNDS */
+.bg-blue {
+  background: linear-gradient(135deg, #e7f0ff, #f4f8ff);
+}
+
+.bg-grey {
+  background: #f5f5f5 url('https://www.transparenttextures.com/patterns/cubes.png');
+}
+
+.bg-whitecard {
+  background: #ffffff;
+  box-shadow: 0 4px 25px rgba(0,0,0,0.06);
+  border-radius: 14px;
+}
+
+.bg-beige {
+  background: #faf5ef;
+  border-left: 6px solid #d8c4a8;
+  border-radius: 10px;
+}
+
+
+.about-fullpage {
+  padding-top: 40px;
+}
+
+
+
+
+
+
+
+.floating-home-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 58px;
+  height: 58px;
+
+  background: #134d9c;
+  border-radius: 50%;
+  border: none;
+
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 9999;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.floating-home-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.35);
+}
+
+.floating-home-btn svg {
+  pointer-events: none;
+}
+
+  
+/* Hero Background */
+.focus-hero {
+  width: 100%;
+  padding: 320px 20px;
+  text-align: center;
+  color: #fff;
+  background: 
+    linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), /* lighter overlay */
+    url("https://res.cloudinary.com/dwvt4e9o2/image/upload/v1766232038/ChatGPT_Image_Dec_20_2025_02_59_54_PM_r1cnjh.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 0 0 20px 20px;
+}
+
+.focus-hero h2 {
+  font-size: 2.6rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.focus-hero p {
+  font-size: 1.2rem;
+  max-width: 650px;
+  margin: auto;
+  opacity: 0.9;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+  .focus-hero {
+    padding: 90px 20px;
+  }
+  .focus-hero h2 {
+    font-size: 2rem;
+  }
+  .focus-hero p {
+    font-size: 1rem;
+  }
+}
+
+
+
+
+
+
+
+/* ===========================
+   GRID LAYOUT
+=========================== */
+.focus-grid {
+  max-width: 1250px;
+  margin: 50px auto;
+  padding: 0 20px;
+  display: grid;
+  gap: 35px;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+}
+
+/* ===========================
+   CARD DESIGN
+=========================== */
+.focus-card {
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 6px 25px rgba(0,0,0,0.08);
+  padding-bottom: 25px;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.focus-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+}
+/* CARD TOP */
+.focus-card-top {
+  padding: 45px 20px 85px;  /* Increased bottom padding so ribbon never overlaps text */
+  position: relative;
+  text-align: center;
+}
+
+.focus-icon {
+  font-size: 42px;
+  color: white;
+  margin-bottom: 10px;
+}
+/* Ribbon (title inside ribbon) */
+.focus-ribbon {
+  position: absolute;
+  bottom: -22px;            /* Move slightly lower so it doesn't touch paragraph */
+  left: 0;
+  padding: 10px 25px;
+  font-weight: 700;
+  background: #fdd835;
+  color: #000;
+  font-size: 15px;
+  clip-path: polygon(0 0, 85% 0, 100% 100%, 0 100%);
+}
+
+/* Headings + Text */
+.focus-card h3 {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 25px 20px 10px;
+}
+/* Paragraph fix (push text down from ribbon) */
+.focus-card p {
+  margin: 40px 20px 0;   /* Increased top margin so no text is cut */
+  font-size: 16px;
+  color: #444;
+  line-height: 1.6;
+}
+
+/* ===========================
+   GRADIENT BACKGROUNDS
+=========================== */
+.education-bg {
+  background: linear-gradient(135deg, #ffd75a, #e9a300);
+}
+
+.environment-bg {
+  background: linear-gradient(135deg, #4dcc5b, #009c49);
+}
+
+.health-bg {
+  background: linear-gradient(135deg, #5cb7ff, #0066d6);
+}
+
+.humanitarian-bg {
+  background: linear-gradient(135deg, #d998ff, #7b2ab8);
+}
+
+.youth-bg {
+  background: linear-gradient(135deg, #ff7f60, #cc3300);
+}
+
+/* ===========================
+   ANIMATIONS
+=========================== */
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUp .8s ease forwards;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===========================
+   FLOATING HOME BUTTON
+=========================== */
+.floating-home-btn {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  background: #0C2856;
+  border: none;
+  padding: 14px 16px;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+  cursor: pointer;
+  z-index: 9999;
+  transition: background .2s;
+}
+
+.floating-home-btn:hover {
+  background: #134d9c;
+}
+
+
+
+.focus-icon i {
+  font-size: 46px;
+  padding: 18px;
+  border-radius: 50%;
+  border: 3px solid rgba(255,255,255,0.85);
+}
+
+#focusPage {
+    position: relative;
+    padding-top: calc(var(--header-height, 170px) + 20px);
+}
+/* Learn more button */
+.focus-btn {
+  display: inline-block;
+  margin: 20px 20px 0;
+  padding: 10px 18px;
+  background: #0C2856;
+  color: #fff;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: .2s;
+}
+
+.focus-btn:hover {
+  background: #134d9c;
+}
+
+
+
+
+
+/* ============================================= */
+/* JOIN PAGE — NO HEADER OVERLAP (NO JS VERSION) */
+/* ============================================= */
+
+/* The exact height of your header */
+:root {
+  --header-height: 170px; /* ← change this to match your real header height */
+}
+
+#joinPage {
+  position: relative;
+  display: none;
+
+  /* Push ENTIRE join page BELOW header */
+  margin-top: var(--header-height);
+}
+
+/* container with drawings + overlay */
+.join-bg-box {
+  position: relative;
+  width: 100%;
+  min-height: calc(100vh - var(--header-height));
+  overflow: hidden;
+}
+
+/* background SVG drawings */
+.join-bg-svg {
+  position: absolute;
+  top: 0; 
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150%;
+  height: auto;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* readability overlay */
+.join-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(255,255,255,0.86), rgba(255,255,255,0.92));
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* content wrapper */
+.join-wrapper {
+  position: relative;
+  z-index: 3;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 36px 22px 80px;
+}
+
+/* typography */
+.join-title {
+  font-size: 28px;
+  margin: 6px 0 6px;
+  color: #0c2856;
+  font-weight: 700;
+  text-align: center;
+}
+
+.join-sub {
+  color: #334155;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+/* card styling */
+.join-card {
+  background: rgba(255,255,255,0.95);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(12,40,86,0.08);
+  margin-bottom: 18px;
+  border: 1px solid rgba(12,40,86,0.04);
+}
+
+/* inputs and buttons */
+.join-input {
+  width: 100%;
+  padding: 12px 14px;
+  margin: 10px 0;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+}
+
+.join-btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 8px;
+  border-radius: 10px;
+  background: #0C2856;
+  color: white;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+}
+
+.join-btn.alt {
+  background: #F5C22D;
+  color: #0c2856;
+}
+
+.google-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: center;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  background: white;
+  cursor: pointer;
+}
+
+/* floating home button */
+.floating-home-btn {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 99999;
+  border-radius: 16px;
+  padding: 10px 12px;
+  background: #0C2856;
+  border: none;
+  color: white;
+}
+
+/* responsive adjustments */
+@media (max-width: 720px) {
+  .join-bg-svg {
+    width: 200%;
+  }
+  .join-wrapper {
+    padding: 28px 16px 60px;
+  }
+  .join-title {
+    font-size: 22px;
+  }
+}
+
+
+
+.google-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 10px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.google-btn img.google-icon {
+  width: 88px;
+  height: 88px;
+}
+
+
+
+
+
+
+
+  
+.lang-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.lang-menu {
+    position: absolute;
+    display: none;
+    background: white;
+    border: 1px solid #ccc;
+    padding: 6px 0;
+    border-radius: 6px;
+    min-width: 120px;
+    z-index: 99;
+}
+
+.lang-menu a {
+    display: block;
+    padding: 8px 12px;
+    text-decoration: none;
+    color: #333;
+}
+
+.lang-menu a:hover {
+    background: #f2f2f2;
+}
+
+
+/* ===== GLOBAL MOBILE TEXT FIX ===== */
+@media (max-width: 780px) {
+
+  body {
+    text-align: center;
+  }
+
+  h1, h2, h3, h4, h5, h6,
+  p, span, li, div {
+    max-width: 92%;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    text-align: center !important;
+    line-height: 1.7;
+    word-wrap: break-word;
+  }
+
+  /* Fix flex/grid parents */
+  section, article, main, .container, .card {
+    display: block !important;
+    text-align: center;
+  }
+}
+
+
+</style>
+</head>
+<body>
+<!-- Top Utility Nav -->
+<div class="top-nav">
+ 
+  <div class="lang-dropdown">
+    <a href="#" id="langToggle" data-lang="en">EN ▾</a>
+
+    <div class="lang-menu" id="langMenu">
+        <a href="#" data-lang-select="en">English</a>
+        <a href="#" data-lang-select="fr">Français</a>
+        <a href="#" data-lang-select="de">Deutsch</a>
+      <a href="#" data-lang-select="es">Español</a>
+        <a href="#"  data-lang-select="it">Italiano</a>
+        <a href="#" data-lang-select="sw">KiSwahili</a>
+    </div>
+</div>
+
+ 
+
+  
+</div>
+
+<!-- Main Header -->
+<header>
+  <div class="site-header" role="banner">
+
+    <!-- Row 1: Logo + Two-line NGO Name -->
+ <div class="brand">
+  <img src="https://res.cloudinary.com/dwvt4e9o2/image/upload/v1763476964/Screenshot_73_e5hyu9.png" alt="swisslogo" />
+
+  <h1>
+    Swiss Aid Connect<br>
+    Foundation
+  </h1>
+
+  <!-- MENU BUTTON MOVED HERE -->
+  <button class="dot-btn" id="btnMenu" aria-haspopup="true" aria-controls="mobileMenu" aria-expanded="false">
+    <span class="dots">≡</span>
+  </button>
+</div>
+
+
+    <!-- Row 2: Join + Donate -->
+    <div class="nav-actions">
+      <a class="btn btn-join" href="#" data-key="join-nav">Join</a>
+
+      <a class="btn btn-donate" href="#">Donate</a>
+    </div>
+
+  </div>
+
+  <!-- Desktop Side Navigation -->
+  <div class="side-nav-container">
+    <nav class="side-nav" role="navigation" aria-label="Main navigation">
+       <a href="#" data-key="about-us-nav">About Us</a>
+     <a href="#" data-key="focus-nav">Our Focus Areas</a>
+    
+      
+    </nav>
+  </div>
+
+<!-- Mobile Menu Panel -->
+<div id="mobileMenu" class="mobile-panel" aria-hidden="true" role="menu">
+  <div class="panel-inner" id="mobileMenuInner"></div>
+</div>
+
+  
+</header>
+
+
+<main>
+  <section class="hero-wrap" aria-labelledby="hero-heading">
+    <div class="hero-slider">
+      <img src="https://images.pexels.com/photos/33127835/pexels-photo-33127835.jpeg" class="hero-slide slide1" alt="Slide 1">
+      <img src="https://images.pexels.com/photos/11025022/pexels-photo-11025022.jpeg" class="hero-slide slide3" alt="Slide 2">
+      <img src="https://images.pexels.com/photos/1072824/pexels-photo-1072824.jpeg" class="hero-slide slide4" alt="Slide 3">
+      <img src="https://images.pexels.com/photos/6590920/pexels-photo-6590920.jpeg" class="hero-slide slide5" alt="Slide 4">
+      
+    </div>
+
+    <div class="hero-overlay" aria-hidden="true"></div>
+
+    <div class="hero-inner">
+      <div class="hero-content">
+        <h2 id="hero-heading" class="hero-huge">
+          Empowering Communities. Transforming Lives.
+        </h2>
+
+        <span class="hero-sub">
+          Creating lasting impact through education, health, environment, humanitarian support, and youth development.
+        </span>
+
+        <div class="hero-ctas" role="group" aria-label="Primary calls to action">
+          <a class="cta cta-primary" href="#" data-key="focus-nav">Our Programs</a>
+          <a href="#" class="cta cta-outline" data-key="join-nav">Volunteer</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+
+
+
+
+
+
+<section class="impact-section" aria-labelledby="impact-heading">
+  <div class="impact-container">
+    <h2 id="impact-heading" class="impact-title">Our National Impact</h2>
+    <div class="impact-grid">
+      <div class="impact-card">
+        <h3>47 </h3>
+        <p>Counties Reached</p>
+      </div>
+      <div class="impact-card">
+        <h3>100,000+</h3>
+        <p>Lives Touched</p>
+      </div>
+      <div class="impact-card">
+        <h3>10+</h3>
+        <p>Projects Completed</p>
+      </div>
+      <div class="impact-card">
+        <h3>5000+</h3>
+        <p>Volunteers Engaged</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="serve-section" aria-labelledby="serve-heading">
+  <div class="serve-container">
+    <div class="serve-text">
+      <h2 id="serve-heading" class="serve-title">Creating Lasting Change</h2>
+
+      <p class="serve-paragraph">
+        <span class="line line1">
+          Our work is grounded in five core pillars — Education, Environment, Health,
+          Humanitarian Assistance, and Youth Development — ensuring that every community we serve
+          receives holistic and sustainable support.
+        </span>
+        <span class="line line2">
+          Through educational programs, we open doors to knowledge and lifelong opportunity,
+          while our health initiatives improve access to essential care for vulnerable groups.
+        </span>
+        <span class="line line3">
+          We promote environmental stewardship by supporting clean, safe, and sustainable
+          practices that protect future generations.
+        </span>
+        <span class="line line4">
+          Our humanitarian programs provide relief, dignity, and hope to individuals facing
+          crisis — including children, persons with disabilities, families living with HIV/AIDS,
+          and those affected by poverty or addiction.
+        </span>
+        <span class="line line5">
+          By empowering youth with skills, mentorship, and opportunity, we help build communities
+          that are resilient, inclusive, and ready for the future.
+        </span>
+      </p>
+
+      <a href="#" class="serve-btn" data-key="about-us-nav">Learn More</a>
+    </div>
+
+    <div class="serve-image">
+      <img src="https://images.pexels.com/photos/35250405/pexels-photo-35250405/free-photo-of-children-holding-cups-waiting-in-line-outdoors.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Serving communities">
+    </div>
+  </div>
+</section>
+
+
+
+
+
+<section style="background:#0F2B56;padding:60px 0;color:#fff;font-family:Arial, sans-serif;">
+  <div style="max-width:1200px;margin:auto;padding:0 20px;">
+
+    <!-- Heading -->
+    <h2 style="font-size:40px;margin:0 0 10px;font-weight:700;">Join us.</h2>
+    <div style="width:80px;height:4px;background:#F5C22D;margin-bottom:45px;"></div>
+
+    <!-- Grid container -->
+    <div style="
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
+      gap:30px;
+    ">
+
+      <!-- Card 1 -->
+      <div style="background:#fff;border-radius:6px;overflow:hidden;display:flex;flex-direction:column;">
+        <img src="https://cdn.pixabay.com/photo/2013/12/06/10/21/disability-224130_640.jpg" alt="" style="width:100%;display:block;">
+        <a href="#" class="join-btn-green" style="
+          display:block;
+          padding:20px;
+          text-align:left;
+          color:#fff;
+          font-size:20px;
+          font-weight:600;
+          text-decoration:none;
+          clip-path:polygon(0 0,100% 0,88% 100%,0% 100%);
+          background:#04C26A;
+          transition:0.3s;
+          " data-key="join-nav">Learn more</a>
+      </div>
+
+      <!-- Card 2 -->
+      <div style="background:#fff;border-radius:6px;overflow:hidden;display:flex;flex-direction:column;">
+        <img src="https://cdn.pixabay.com/photo/2018/02/07/18/30/group-3137670_960_720.jpg" alt="" style="width:100%;display:block;">
+        <a href="#" class="join-btn-blue" style="
+          display:block;
+          padding:20px;
+          text-align:left;
+          color:#fff;
+          font-size:20px;
+          font-weight:600;
+          text-decoration:none;
+          clip-path:polygon(0 0,100% 0,88% 100%,0% 100%);
+          background:#2C70E4;
+          transition:0.3s;
+      " data-key="focus-nav">Learn more</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+<section style="padding:60px 0;background:#F8F8F8;font-family:Arial, sans-serif;">
+  <div style="max-width:1200px;margin:auto;padding:0 20px;">
+
+    <!-- Heading -->
+    <h2 style="font-size:36px;margin:0 0 10px;font-weight:700;color:#111;">
+      Stay Connected With Our Mission
+    </h2>
+    <div style="width:70px;height:4px;background:#F5C22D;margin-bottom:25px;"></div>
+
+    <!-- Subtitle -->
+    <p style="font-size:18px;color:#333;max-width:650px;line-height:1.6;">
+      Join our online community and follow our journey as we advance education, healthcare, environmental protection, 
+      youth empowerment, and humanitarian support across communities. Stay informed, get inspired, and see the real impact 
+      of our work through regular updates on
+      <a href="#" style="color:#2C70E4;text-decoration:none;font-weight:600;">social media.</a>
+    </p>
+
+    <!-- Icons Row -->
+    <div style="display:flex;gap:40px;align-items:center;flex-wrap:wrap;margin-top:40px;">
+
+      <!-- Facebook -->
+      <div style="text-align:center;">
+        <a href="https://www.facebook.com/share/1AJnqAQzG4/" target="_blank">
+          <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" width="55">
+        </a>
+        <p style="font-size:13px;color:#333;margin-top:10px;">Swiss Aid Connect<br>Foundation</p>
+      </div>
+
+      <!-- Instagram -->
+      <div style="text-align:center;">
+        <a href="https://www.instagram.com/swissaidconnectfoundation?igsh=bDRqODRmamVvcjBv&utm_source=ig_contact_invite" target="_blank">
+          <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" width="55">
+        </a>
+        <p style="font-size:13px;color:#333;margin-top:10px;">Swiss Aid Connect<br>Foundation</p>
+      </div>
+
+      <!-- X / Twitter -->
+      <div style="text-align:center;">
+        <a href="https://x.com/swissaidconnect" target="_blank">
+          <img src="https://cdn-icons-png.flaticon.com/512/5968/5968958.png" width="55">
+        </a>
+        <p style="font-size:13px;color:#333;margin-top:10px;">Swiss Aid Connect<br>Foundation</p>
+      </div>
+
+      <!-- LinkedIn -->
+      <div style="text-align:center%;">
+        <a href="https://www.linkedin.com/in/swissaid-humanitarian-884025395?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank">
+          <img src="https://cdn-icons-png.flaticon.com/512/3536/3536505.png" width="55">
+        </a>
+        <p style="font-size:13px;color:#333;margin-top:10px;">Swiss Aid Connect<br>Foundation</p>
+      </div>
+
+      <!-- YouTube -->
+      <div style="text-align:center;">
+        <a href="https://www.youtube.com/@swissaidconnectfoundation" target="_blank">
+          <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" width="55">
+        </a>
+        <p style="font-size:13px;color:#333;margin-top:10px;">Swiss Aid Connect<br>Foundation</p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+
+
+
+
+
+
+<section id="aboutPage" class="about-fullpage" style="display:none;">
+  <div class="about-wrapper">
+
+    <h2 class="about-main-title">About Us</h2>
+
+    <!-- ========================= -->
+    <!-- Block 1: Who We Are -->
+    <!-- ========================= -->
+    <div class="about-block alt-left bg-blue">
+      <div class="about-img circle">
+        <img src="https://res.cloudinary.com/dwvt4e9o2/image/upload/v1766162294/ChatGPT_Image_Dec_19_2025_07_11_53_PM_dgiioi.png" alt="">
+      </div>
+      <div class="about-text">
+        <h3>Who We Are</h3>
+        <p>
+          Swiss Aid Connect Foundation is a dedicated non-profit organization committed to transforming
+          lives through compassion, service, and sustainable community development. Guided by our five
+          core pillars—Education, Environment, Health, Humanitarian Support, and Youth Empowerment—we
+          strive to uplift vulnerable populations and build stronger, more resilient communities.
+        </p>
+      </div>
+    </div>
+
+    <!-- ========================= -->
+    <!-- Block 2: Mission -->
+    <!-- ========================= -->
+    <div class="about-block alt-right bg-grey">
+      <div class="about-img trapezium">
+        <img src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=800" alt="">
+      </div>
+      <div class="about-text">
+        <h3>Our Mission</h3>
+        <p>
+          Our mission is to deliver impactful, sustainable solutions that restore dignity, expand opportunity,
+          and strengthen community resilience. We focus on bridging gaps in education, improving access to
+          essential healthcare, promoting environmental protection, empowering young people to lead, and
+          providing rapid humanitarian assistance to families in crisis.
+        </p>
+      </div>
+    </div>
+
+    <!-- ========================= -->
+    <!-- Block 3: Vision -->
+    <!-- ========================= -->
+    <div class="about-block alt-left bg-whitecard">
+      <div class="about-img round-diamond">
+        <img src="https://images.pexels.com/photos/33127835/pexels-photo-33127835.jpeg" alt="">
+      </div>
+      <div class="about-text">
+        <h3>Our Vision</h3>
+        <p>
+          We envision a world where every individual—regardless of background or circumstance—has the
+          opportunity to learn, thrive, and live with dignity. Through inclusive development, long-term
+          partnerships, environmental stewardship, and youth-focused empowerment, we aim to inspire
+          generations of leaders who will build a brighter and more equitable future.
+        </p>
+      </div>
+    </div>
+
+    <!-- ========================= -->
+    <!-- Block 4: What We Do -->
+    <!-- ========================= -->
+    <div class="about-block alt-bottom bg-beige">
+      <div class="about-text">
+        <h3>What We Do</h3>
+        <p>
+          Our work is centered on programs that create meaningful and lasting impact. We promote learning
+          through educational resources, mentorship, and digital literacy. We support environmental
+          restoration, climate awareness, and conservation action. Our healthcare initiatives provide medical
+          outreach, screenings, and essential support to vulnerable families. In times of crisis, our
+          humanitarian team delivers emergency food, shelter, and care. We also empower young people
+          through leadership training, community engagement, and opportunities that shape their future.
+        </p>
+      </div>
+
+      <div class="about-img blob">
+        <img src="https://res.cloudinary.com/dwvt4e9o2/image/upload/v1766162316/ChatGPT_Image_Dec_19_2025_07_30_27_PM_mkcwvo.png" alt="">
+        
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Floating Home Button -->
+  <button class="floating-home-btn floatHomeBtn" aria-label="Home">
+    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 12l9-9 9 9"/>
+      <path d="M9 21V9h6v12"/>
+    </svg>
+  </button>
+</section>
+
+
+
+
+
+<section id="focusPage" class="focus-section" style="display:none;">
+<div class="focus-wrapper">
+
+  <div class="focus-hero">
+   <h2>OUR FOCUS AREAS</h2>
+   
+  </div>
+
+  <div class="focus-grid">
+
+    <div class="focus-card fade-up">
+      <div class="focus-card-top education-bg">
+        <div class="focus-icon"><i class="fas fa-graduation-cap"></i></div>
+        <span class="focus-ribbon">Education</span>
+      </div>
+      <p>We advance inclusive, equitable, and high-quality education for children, youth, and underserved communities. Our initiatives strengthen schools, provide essential learning resources, support teachers, and create opportunities that empower learners to unlock their full potential.</p>
+
+      <a href="https://webs-star.github.io/swissaid/edu" class="focus-btn">Learn More</a>
+    </div>
+
+    <div class="focus-card fade-up">
+      <div class="focus-card-top environment-bg">
+        <div class="focus-icon"><i class="fas fa-tree"></i></div>
+        <span class="focus-ribbon">Environment</span>
+      </div>
+      <p>We promote environmental conservation and climate resilience through community-driven initiatives. From tree-planting and clean-ups to awareness programs and sustainable practices, we work to protect ecosystems, restore natural resources, and secure a healthier planet for generations to come.</p>
+
+      <a href="https://webs-star.github.io/swissaid/env" class="focus-btn">Learn More</a>
+    </div>
+
+    <div class="focus-card fade-up">
+      <div class="focus-card-top health-bg">
+        <div class="focus-icon"><i class="fas fa-stethoscope"></i></div>
+        <span class="focus-ribbon">Health</span>
+      </div>
+      <p>We improve access to essential healthcare by supporting medical outreach, health education, and critical interventions for vulnerable populations. Our programs focus on disease prevention, maternal and child health, mental wellness, and community health strengthening.</p>
+
+      <a href="https://webs-star.github.io/swissaid/health" class="focus-btn">Learn More</a>
+    </div>
+
+    <div class="focus-card fade-up">
+      <div class="focus-card-top humanitarian-bg">
+        <div class="focus-icon"><i class="fas fa-hands-helping"></i></div>
+        <span class="focus-ribbon">Humanitarian Aid</span>
+      </div>
+      <p>We deliver rapid, compassionate assistance to individuals and families affected by crises, disasters, and hardship. Our humanitarian efforts provide lifesaving relief—including food, clean water, shelter, hygiene supplies, and psychosocial support—helping communities rebuild with dignity and hope.</p>
+
+      <a href="https://webs-star.github.io/swissaid/humanitarian" class="focus-btn">Learn More</a>
+    </div>
+
+    <div class="focus-card fade-up">
+      <div class="focus-card-top youth-bg">
+        <div class="focus-icon"><i class="fas fa-people-group"></i></div>
+        <span class="focus-ribbon">Youth Empowerment</span>
+      </div>
+      <p>We equip young people with the skills, mentorship, and opportunities they need to lead and thrive. Through leadership training, entrepreneurship programs, life-skills development, and community involvement, we nurture confident, responsible, and empowered youth ready to shape a better tomorrow.</p>
+
+      <a href="https://webs-star.github.io/swissaid/youth" class="focus-btn">Learn More</a>
+    </div>
+
+  </div>
+
+  <button class="floating-home-btn floatHomeBtn" aria-label="Home">
+    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 12l9-9 9 9"/>
+      <path d="M9 21V9h6v12"/>
+    </svg>
+  </button>
+
+</div>
+</section>
+
+
+<!-- JOIN / LOGIN PAGE (REPLACE your old joinPage block with this) -->
+<section id="joinPage" class="join-section" style="display:none;">
+  <div class="join-bg-box">
+
+    <!-- Big visible SVG illustration (real drawings) -->
+    <svg class="join-bg-svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false" role="img">
+      <!-- Background panel -->
+      <rect x="0" y="0" width="1600" height="900" fill="#f6fbff"/>
+      <!-- Big colored shapes (bold, visible) -->
+      <g transform="translate(0,0)">
+        <path d="M0 0 L1600 0 L1600 280 Q1000 360 600 240 Q300 140 0 240 Z" fill="#0C2856" opacity="0.95"/>
+        <circle cx="350" cy="200" r="150" fill="#F5C22D" opacity="1"/>
+        <path d="M1200 120 C1300 40 1500 80 1580 160 L1580 380 C1450 280 1300 330 1200 420 Z" fill="#1A3D7C" opacity="0.18"/>
+        <path d="M0 620 C450 480 850 760 1600 640 L1600 900 L0 900 Z" fill="#1A3D7C" opacity="0.85"/>
+        <path d="M0 690 C420 820 860 540 1600 760 L1600 900 L0 900 Z" fill="#F5C22D" opacity="0.5"/>
+      </g>
+
+      <!-- DRAWN ICONS — big and clear -->
+      <g transform="translate(120,320) scale(1.05)">
+        <!-- stylized hand/heart icon (big) -->
+        <path d="M220 40 C220 10 190 0 170 20 L150 40 L120 20 C100 0 70 10 70 40 L70 120 C70 150 100 170 130 150 L160 130 L170 140 L200 130 C230 120 240 80 220 40 Z" fill="#ffffff" stroke="#0C2856" stroke-width="6"/>
+        <path d="M175 75 C170 60 150 60 145 75 C140 90 160 105 175 120 C190 105 210 90 205 75 C200 60 185 60 175 75 Z" fill="#F5C22D" stroke="#d9a800" stroke-width="4"/>
+      </g>
+
+      <g transform="translate(1050,280) scale(1.2)">
+        <!-- big user / people icon -->
+        <circle cx="50" cy="50" r="40" fill="#ffffff" stroke="#0C2856" stroke-width="6"/>
+        <path d="M10 120 C10 90 40 70 80 70 C120 70 150 90 150 120 L150 140 L10 140 Z" fill="#ffffff" stroke="#0C2856" stroke-width="6"/>
+      </g>
+
+      <!-- subtle overlay vignette for contrast -->
+      <defs>
+        <linearGradient id="v" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0" stop-color="#ffffff" stop-opacity="0"/>
+          <stop offset="1" stop-color="#000000" stop-opacity="0.02"/>
+        </linearGradient>
+      </defs>
+      <rect x="0" y="0" width="1600" height="900" fill="url(#v)"/>
+    </svg>
+
+    <!-- translucent panel on top of SVG so text is readable -->
+    <div class="join-overlay"></div>
+
+    <!-- actual content card(s) -->
+    <div class="join-wrapper" role="region" aria-labelledby="join-heading">
+      <h2 id="join-heading" class="join-title">Join Us / Login Portal</h2>
+      <p class="join-sub">Create an account or sign in</p>
+      <button id="logoutBtn" style="display:none;" class="join-logout">Logout</button>
+
+      <div class="join-card" aria-live="polite">
+        <h3>Email Login</h3>
+        <input id="emailInput" type="email" placeholder="Email" class="join-input" autocomplete="email" />
+        <input id="passwordInput" type="password" placeholder="Password" class="join-input" autocomplete="current-password" />
+        <button id="emailLoginBtn" class="join-btn">Login</button>
+        <button id="emailSignupBtn" class="join-btn alt">Create Account</button>
+      </div>
+
+      <div class="join-card">
+        <h3>Or continue with</h3>
+        <button id="googleBtn" class="google-btn no-translate" aria-label="Continue with Google">
+  <img class="google-icon" 
+       src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" 
+       alt="Google logo" />
+  <span data-key="continue-google">Continue with Google</span>
+</button>
+      </div>
+
+      <button class="floating-home-btn floatHomeBtn" aria-label="Return to site">
+        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 12l9-9 9 9"/>
+          <path d="M9 21V9h6v12"/>
+        </svg>
+      </button>
+    </div>
+
+  </div>
+</section>
+
+
+
+<footer class="site-footer" style="background:#0C2856;color:#fff;font-family:Arial, sans-serif;padding:40px 0;">
+  <div style="max-width:1100px;margin:auto;padding:0 20px;">
+
+    <p style="margin:0;line-height:1.8;font-size:15px;">
+      <strong>Swiss Aid Connect Foundation</strong><br>
+      Komrades Business Complex<br>
+      P.O. Box 78547-00100, Nairobi<br><br>
+
+      Email: 
+      <a href="mailto:info@swissaidconnectfoundation.com" style="color:#F5C22D;text-decoration:none;">
+        info@swissaidconnectfoundation.com
+      </a><br>
+
+      WhatsApp: 
+      <a href="https://wa.me/41765258145" target="_blank" style="color:#F5C22D;text-decoration:none;">
+        +41 76 525 81 45
+      </a><br>
+
+      Phone: +41 76 525 81 45
+    </p>
+
+    <div style="border-bottom:1px solid rgba(255,255,255,0.3);margin:25px 0;"></div>
+
+    <p style="font-size:13px;line-height:1.7;max-width:900px;">
+      Swiss Aid Connect Foundation is a nonprofit organization supporting communities through education, health, youth programs, and humanitarian assistance.
+    </p>
+
+  </div>
+
+  <div style="text-align:center;margin-top:20px;font-size:13px;">
+    © <span id="year"></span> Swiss Aid Connect Foundation • All rights reserved.
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</footer>
+
+
+
+<script>
+// ---------------- MOBILE MENU HANDLER ----------------
+const btnMenu = document.getElementById('btnMenu');
+const mobileMenu = document.getElementById('mobileMenu');
+const mobileMenuInner = document.getElementById('mobileMenuInner');
+
+btnMenu.addEventListener('click', () => {
+    // Toggle mobile visibility
+    mobileMenu.classList.toggle('open');
+
+    // Generate content once
+    if (mobileMenuInner.innerHTML.trim() === "") {
+
+        const currentLang = document.getElementById('langToggle').getAttribute('data-lang') || 'en';
+        const languageText = currentLang.toUpperCase();
+
+        // MOBILE CONTENT
+        mobileMenuInner.innerHTML = `
+            <div class="mobile-lang-dropdown">
+                <a href="#" id="mobileLangToggle">${languageText} ▾</a>
+                <div class="mobile-lang-menu">
+                    <a href="#" data-mobile-lang="en">English</a>
+                    <a href="#" data-mobile-lang="fr">Français</a>
+                    <a href="#" data-mobile-lang="de">Deutsch</a>
+                    <a href="#" data-mobile-lang="es">Español</a>
+                     <a href="#" data-mobile-lang="it">Italiano</a>
+                    <a href="#" data-mobile-lang="sw">Kiswahili</a>
+                    
+                </div>
+            </div>
+
+            <a href="#" data-key="about-us-nav">About Us</a>
+            <a href="#" data-key="focus-nav">Our Focus Areas</a>
+        `;
+
+        // Close menu when any link is clicked
+        const links = mobileMenuInner.querySelectorAll('a:not(#mobileLangToggle)');
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+            });
+        });
+
+
+// ---------- MOBILE DROPDOWN ----------
+const mobileLangToggle = document.getElementById("mobileLangToggle");
+const mobileLangMenu = mobileMenuInner.querySelector(".mobile-lang-menu");
+
+// Ensure dropdown is hidden when loaded
+mobileLangMenu.style.display = "none";
+
+// Toggle mobile dropdown
+mobileLangToggle.addEventListener("click", (e) => {
+    e.preventDefault();
+    mobileLangMenu.style.display =
+        mobileLangMenu.style.display === "block" ? "none" : "block";
+});
+
+
+      
+
+        // Select language in mobile dropdown
+        mobileMenuInner.querySelectorAll("[data-mobile-lang]").forEach(option => {
+            option.addEventListener("click", (e) => {
+                e.preventDefault();
+
+                const selectedLang = option.getAttribute("data-mobile-lang");
+
+                // Update desktop toggle
+                const desktopToggle = document.getElementById("langToggle");
+                desktopToggle.innerHTML = selectedLang.toUpperCase() + " ▾";
+                desktopToggle.setAttribute("data-lang", selectedLang);
+
+                // Update mobile toggle
+                mobileLangToggle.innerHTML = selectedLang.toUpperCase() + " ▾";
+
+                // Save & switch
+                localStorage.setItem("userLang", selectedLang);
+                switchLanguage(selectedLang);
+
+                // Close mobile dropdown
+                mobileLangMenu.style.display = "none";
+            });
+        });
+
+        // Apply translation immediately
+        switchLanguage(currentLang);
+    }
+});
+
+
+
+// ---------------- DESKTOP LANGUAGE DROPDOWN ----------------
+
+// Toggle dropdown visibility
+document.getElementById("langToggle").addEventListener("click", (e) => {
+    e.preventDefault();
+    document.getElementById("langMenu").style.display =
+        document.getElementById("langMenu").style.display === "block"
+            ? "none"
+            : "block";
+});
+
+// Selecting desktop language
+document.querySelectorAll("[data-lang-select]").forEach(option => {
+    option.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        const selectedLang = option.getAttribute("data-lang-select");
+
+        // Update desktop
+        const desktopToggle = document.getElementById("langToggle");
+        desktopToggle.innerHTML = selectedLang.toUpperCase() + " ▾";
+        desktopToggle.setAttribute("data-lang", selectedLang);
+
+        // Save & switch
+        localStorage.setItem("userLang", selectedLang);
+        switchLanguage(selectedLang);
+
+        // Close dropdown
+        document.getElementById("langMenu").style.display = "none";
+    });
+});
+
+
+const translations = {
+    // English (Default)
+    'en': {
+        // HEADER/NAV
+      
+        'org-line1': 'Swiss Aid Connect',
+        'org-line2': 'Foundation',
+        'join-btn': 'Join',
+        'donate-btn': 'Donate',
+        'about-us-nav': 'About Us',
+        'focus-nav': 'Our Focus Areas',
+        'get-involved-nav': 'Get Involved',
+
+        // HERO SECTION
+        'hero-heading': 'Empowering Communities. Transforming Lives.',
+        'hero-sub': 'Creating lasting impact through education, health, environment, humanitarian support, and youth development.',
+        'programs-cta': 'Our Programs',
+        'volunteer-cta': 'Volunteer',
+        
+        // IMPACT SECTION
+        'impact-title': 'Our Global Impact',
+        'impact-countries': 'Counties Reached',
+        'impact-lives': 'Lives Touched',
+        'impact-projects': 'Projects Completed',
+        'impact-volunteers': 'Volunteers Engaged',
+        
+        // SERVE SECTION
+        'serve-title': 'Creating Lasting Change',
+        'serve-p1': 'Our work is grounded in five core pillars — Education, Environment, Health, Humanitarian Assistance, and Youth Development — ensuring that every community we serve receives holistic and sustainable support.',
+        'serve-p2': 'Through educational programs, we open doors to knowledge and lifelong opportunity, while our health initiatives improve access to essential care for vulnerable groups.',
+        'serve-p3': 'We promote environmental stewardship by supporting clean, safe, and sustainable practices that protect future generations.',
+        'serve-p4': 'Our humanitarian programs provide relief, dignity, and hope to individuals facing crisis — including children, persons with disabilities, families living with HIV/AIDS, and those affected by poverty or addiction.',
+        'serve-p5': 'By empowering youth with skills, mentorship, and opportunity, we help build communities that are resilient, inclusive, and ready for the future.',
+        'learn-more-btn': 'Learn More',
+
+        // JOIN US SECTION
+        'join-us-heading': 'Join us.',
+
+        // STAY CONNECTED SECTION
+        'social-heading': 'Stay Connected With Our Mission',
+        'social-sub': 'Join our online community and follow our journey as we advance education, healthcare, environmental protection, youth empowerment, and humanitarian support across communities. Stay informed, get inspired, and see the real impact of our work through regular updates on <a href="#" style="color:#2C70E4;text-decoration:none;font-weight:600;">social media.</a>',
+        'org-line1-2': 'Swiss Aid Connect<br>Foundation',
+
+        // ABOUT US PAGE (Headings & Body)
+        'about-main-title': 'About Us',
+        'about-who': 'Who We Are',
+        'about-who-body': 'Swiss Aid Connect Foundation is a dedicated non-profit organization committed to transforming lives through compassion, service, and sustainable community development. Guided by our five core pillars—Education, Environment, Health, Humanitarian Support, and Youth Empowerment—we strive to uplift vulnerable populations and build stronger, more resilient communities.',
+        'about-mission': 'Our Mission',
+        'about-mission-body': 'Our mission is to deliver impactful, sustainable solutions that restore dignity, expand opportunity, and strengthen community resilience. We focus on bridging gaps in education, improving access to essential healthcare, promoting environmental protection, empowering young people to lead, and providing rapid humanitarian assistance to families in crisis.',
+        'about-vision': 'Our Vision',
+        'about-vision-body': 'We envision a world where every individual—regardless of background or circumstance—has the opportunity to learn, thrive, and live with dignity. Through inclusive development, long-term partnerships, environmental stewardship, and youth-focused empowerment, we aim to inspire generations of leaders who will build a brighter and more equitable future.',
+        'about-what': 'What We Do',
+        'about-what-body': 'Our work is centered on programs that create meaningful and lasting impact. We promote learning through educational resources, mentorship, and digital literacy. We support environmental restoration, climate awareness, and conservation action. Our healthcare initiatives provide medical outreach, screenings, and essential support to vulnerable families. In times of crisis, our humanitarian team delivers emergency food, shelter, and care. We also empower young people through leadership training, community engagement, and opportunities that shape their future.',
+        
+        // FOCUS PAGE (Hero and Body)
+        'focus-main-title': 'Our Focus Areas',
+        'focus-sub': 'Driving long-term impact through education, healthcare, environmental stewardship, humanitarian response, and youth development.',
+        'focus-education': 'Education',
+        'focus-education-body': 'We advance inclusive, equitable, and high-quality education for children, youth, and underserved communities. Our initiatives strengthen schools, provide essential learning resources, support teachers, and create opportunities that empower learners to unlock their full potential.',
+        'focus-environment': 'Environment',
+        'focus-environment-body': 'We promote environmental conservation and climate resilience through community-driven initiatives. From tree-planting and clean-ups to awareness programs and sustainable practices, we work to protect ecosystems, restore natural resources, and secure a healthier planet for generations to come.',
+        'focus-health': 'Health',
+        'focus-health-body': 'We improve access to essential healthcare by supporting medical outreach, health education, and critical interventions for vulnerable populations. Our programs focus on disease prevention, maternal and child health, mental wellness, and community health strengthening.',
+        'focus-humanitarian': 'Humanitarian Aid',
+        'focus-humanitarian-body': 'We deliver rapid, compassionate assistance to individuals and families affected by crises, disasters, and hardship. Our humanitarian efforts provide lifesaving relief—including food, clean water, shelter, hygiene supplies, and psychosocial support—helping communities rebuild with dignity and hope.',
+        'focus-youth': 'Youth Empowerment',
+        'focus-youth-body': 'We equip young people with the skills, mentorship, and opportunities they need to lead and thrive. Through leadership training, entrepreneurship programs, life-skills development, and community involvement, we nurture confident, responsible, and empowered youth ready to shape a better tomorrow.',
+
+        // JOIN/LOGIN PAGE
+        'join-title': 'Join Us / Login Portal',
+        'join-sub': 'Create an account or sign in',
+        'join-logout': 'Logout',
+        'join-email-login': 'Email Login',
+        'join-email-input': 'Email',
+        'join-password-input': 'Password',
+        'join-login-btn': 'Login',
+        'join-signup-btn': 'Create Account',
+        'join-social-or': 'Or continue with',
+        'join-google-btn': 'Continue with Google',
+        'join-home-btn': 'Return to site',
+
+       // FOOTER
+'footer-title': 'Swiss Aid Connect Foundation',
+
+'footer-address': 'Komrades Business Complex<br>Po. Box 78547-00100<br>Nairobi, Kenya',
+
+'footer-email-label': 'Email:',
+'footer-email': 'info@swissaidconnectfoundation.com',
+
+'footer-whatsapp-label': 'WhatsApp:',
+'footer-whatsapp-number': '+41 76 525 81 45',
+
+'footer-phone-label': 'Phone:',
+'footer-phone-number': '+41 76 525 81 45',
+
+'footer-disclaimer': 'Swiss Aid Connect Foundation supports education and community-focused initiatives. External information and services may be updated from time to time.',
+
+'footer-copyright-full': '© {{year}} Swiss Aid Connect Foundation • All rights reserved.'
+
+    },
+    // French
+    'fr': {
+        // HEADER/NAV
+      
+        'org-line1': 'Swiss Aid Connect',
+        'org-line2': 'Fondation',
+        'join-btn': 'Adhérer',
+        'donate-btn': 'Faire un Don',
+        'about-us-nav': 'À Propos',
+        'focus-nav': 'Nos Domaines d’Action',
+        'get-involved-nav': 'S\'Impliquer',
+
+        // HERO SECTION
+        'hero-heading': 'Redonner le Pouvoir aux Communautés. Transformer les Vies.',
+        'hero-sub': 'Créer un impact durable à travers l\'éducation, la santé, l\'environnement, l\'aide humanitaire et le développement de la jeunesse.',
+        'programs-cta': 'Nos Programmes',
+        'volunteer-cta': 'Bénévole',
+
+        // IMPACT SECTION
+        'impact-title': 'Notre Impact Mondial',
+       'impact-counties': 'Comtés desservis',
+
+        'impact-lives': 'Vies Touchées',
+        'impact-projects': 'Projets Réalisés',
+        'impact-volunteers': 'Bénévoles Engagés',
+
+        // SERVE SECTION
+        'serve-title': 'Créer un Changement Durable',
+        'serve-p1': 'Notre travail repose sur cinq piliers fondamentaux : Éducation, Environnement, Santé, Assistance Humanitaire et Développement de la Jeunesse, assurant un soutien holistique et durable à chaque communauté que nous servons.',
+        'serve-p2': 'Grâce à des programmes éducatifs, nous ouvrons les portes du savoir et des opportunités durables, tandis que nos initiatives de santé améliorent l\'accès aux soins essentiels pour les groupes vulnérables.',
+        'serve-p3': 'Nous promouvons la gestion de l\'environnement en soutenant des pratiques propres, sûres et durables qui protègent les générations futures.',
+        'serve-p4': 'Nos programmes humanitaires apportent secours, dignité et espoir aux personnes confrontées à la crise, y compris les enfants, les personnes handicapées, les familles vivant avec le VIH/SIDA et celles touchées par la pauvreté ou la dépendance.',
+        'serve-p5': 'En dotant les jeunes de compétences, de mentorat et d\'opportunités, nous aidons à bâtir des communautés résilientes, inclusives et prêtes pour l\'avenir.',
+        'learn-more-btn': 'En Savoir Plus',
+        
+        // JOIN US SECTION
+        'join-us-heading': 'Rejoignez-nous.',
+
+        // STAY CONNECTED SECTION
+        'social-heading': 'Restez Connecté à Notre Mission',
+        'social-sub': 'Rejoignez notre communauté en ligne et suivez notre parcours alors que nous faisons progresser l\'éducation, les soins de santé, la protection de l\'environnement, l\'autonomisation des jeunes et l\'aide humanitaire à travers les communautés. Restez informé, soyez inspiré et voyez l\'impact réel de notre travail grâce à des mises à jour régulières sur les <a href="#" style="color:#2C70E4;text-decoration:none;font-weight:600;">médias sociaux.</a>',
+        'org-line1-2': 'Swiss Aid Connect<br>Fondation',
+
+        // ABOUT US PAGE (Headings & Body)
+        'about-main-title': 'À Propos de Nous',
+        'about-who': 'Qui Nous Sommes',
+        'about-who-body': 'La Fondation Swiss Aid Connect est une organisation à but non lucratif dédiée à la transformation des vies par la compassion, le service et le développement communautaire durable. Guidés par nos cinq piliers fondamentaux – Éducation, Environnement, Santé, Aide Humanitaire et Autonomisation des Jeunes – nous nous efforçons de soutenir les populations vulnérables et de bâtir des communautés plus fortes et plus résilientes.',
+        'about-mission': 'Notre Mission',
+        'about-mission-body': 'Notre mission est de fournir des solutions percutantes et durables qui rétablissent la dignité, élargissent les opportunités et renforcent la résilience communautaire. Nous nous concentrons sur le comblement des lacunes en matière d\'éducation, l\'amélioration de l\'accès aux soins de santé essentiels, la promotion de la protection de l\'environnement, l\'autonomisation des jeunes pour qu\'ils dirigent, et la fourniture d\'une assistance humanitaire rapide aux familles en crise.',
+        'about-vision': 'Notre Vision',
+        'about-vision-body': 'Nous envisageons un monde où chaque individu – quelle que soit son origine ou sa situation – a la possibilité d\'apprendre, de s\'épanouir et de vivre dans la dignité. Grâce à un développement inclusif, des partenariats à long terme, la gestion de l\'environnement et l\'autonomisation axée sur les jeunes, nous visons à inspirer des générations de leaders qui bâtiront un avenir plus radieux et plus équitable.',
+        'about-what': 'Ce que Nous Faisons',
+        'about-what-body': 'Notre travail est centré sur des programmes qui créent un impact significatif et durable. Nous encourageons l\'apprentissage par des ressources éducatives, le mentorat et la littératie numérique. Nous soutenons la restauration de l\'environnement, la sensibilisation au climat et les actions de conservation. Nos initiatives de soins de santé offrent une assistance médicale, des dépistages et un soutien essentiel aux familles vulnérables. En temps de crise, notre équipe humanitaire fournit de la nourriture d\'urgence, un abri et des soins. Nous autonomisons également les jeunes par la formation au leadership, l\'engagement communautaire et des opportunités qui façonnent leur avenir.',
+        
+        // FOCUS PAGE (Hero and Body)
+        'focus-main-title': 'Nos Domaines d\'Action',
+        'focus-sub': 'Générer un impact à long terme par l\'éducation, les soins de santé, la gestion de l\'environnement, la réponse humanitaire et le développement des jeunes.',
+        'focus-education': 'Éducation',
+        'focus-education-body': 'Nous promouvons une éducation inclusive, équitable et de haute qualité pour les enfants, les jeunes et les communautés mal desservies. Nos initiatives renforcent les écoles, fournissent des ressources d\'apprentissage essentielles, soutiennent les enseignants et créent des opportunités qui permettent aux apprenants de réaliser leur plein potentiel.',
+        'focus-environment': 'Environnement',
+        'focus-environment-body': 'Nous favorisons la conservation de l\'environnement et la résilience climatique par des initiatives communautaires. De la plantation d\'arbres au nettoyage, en passant par les programmes de sensibilisation et les pratiques durables, nous œuvrons pour protéger les écosystèmes, restaurer les ressources naturelles et assurer une planète plus saine pour les générations à venir.',
+        'focus-health': 'Santé',
+        'focus-health-body': 'Nous améliorons l\'accès aux soins de santé essentiels en soutenant l\'assistance médicale, l\'éducation sanitaire et les interventions critiques pour les populations vulnérables. Nos programmes se concentrent sur la prévention des maladies, la santé maternelle et infantile, le bien-être mental et le renforcement de la santé communautaire.',
+        'focus-humanitarian': 'Aide Humanitaire',
+        'focus-humanitarian-body': 'Nous fournissons une assistance rapide et compatissante aux individus et aux familles touchés par des crises, des catastrophes et des difficultés. Nos efforts humanitaires apportent un secours vital — y compris de la nourriture, de l\'eau potable, un abri, des fournitures d\'hygiène et un soutien psychosocial — aidant les communautés à se reconstruire avec dignité et espoir.',
+        'focus-youth': 'Autonomisation des Jeunes',
+        'focus-youth-body': 'Nous dotons les jeunes des compétences, du mentorat et des opportunités dont ils ont besoin pour diriger et s\'épanouir. Par la formation au leadership, les programmes d\'entrepreneuriat, le développement des compétences de vie et l\'engagement communautaire, nous nourrissons des jeunes confiants, responsables et autonomes, prêts à façonner un avenir meilleur.',
+
+        // JOIN/LOGIN PAGE
+        'join-title': 'Adhérer / Portail de Connexion',
+        'join-sub': 'Créer un compte ou se connecter',
+        'join-logout': 'Déconnexion',
+        'join-email-login': 'Connexion par Email',
+        'join-email-input': 'Email',
+        'join-password-input': 'Mot de passe',
+        'join-login-btn': 'Se Connecter',
+        'join-signup-btn': 'Créer un Compte',
+        'join-social-or': 'Ou continuer avec',
+        'join-google-btn': 'Continuer avec Google',
+        'join-home-btn': 'Retour au site',
+
+       // FOOTER
+'footer-title': 'Fondation Swiss Aid Connect',
+
+'footer-address': 'Komrades Business Complex<br>Boîte Postale 78547-00100<br>Nairobi, Kenya',
+
+'footer-email-label': 'E-mail :',
+'footer-email': 'info@swissaidconnectfoundation.com',
+
+'footer-whatsapp-label': 'WhatsApp :',
+'footer-whatsapp-number': '+41 76 525 81 45',
+
+'footer-phone-label': 'Téléphone :',
+'footer-phone-number': '+41 76 525 81 45',
+
+'footer-disclaimer': 'La Fondation Swiss Aid Connect soutient l’éducation et les initiatives communautaires. Les informations et services externes peuvent être mis à jour périodiquement.',
+
+'footer-copyright-full': '© {{year}} Fondation Swiss Aid Connect • Tous droits réservés.'
+
+    },
+    // German
+    'de': {
+        // HEADER/NAV
+      
+        'org-line1': 'Swiss Aid Connect',
+        'org-line2': 'Stiftung',
+        'join-btn': 'Beitreten',
+        'donate-btn': 'Spenden',
+        'about-us-nav': 'Über Uns',
+        'focus-nav': 'Unsere Schwerpunkte',
+        'get-involved-nav': 'Mitmachen',
+
+        // HERO SECTION
+        'hero-heading': 'Gemeinschaften Stärken. Leben Verändern.',
+        'hero-sub': 'Schaffen Sie dauerhafte Wirkung durch Bildung, Gesundheit, Umwelt, humanitäre Unterstützung und Jugendförderung.',
+        'programs-cta': 'Unsere Programme',
+        'volunteer-cta': 'Freiwillige',
+
+        // IMPACT SECTION
+        'impact-title': 'Unser Globaler Einfluss',
+        'impact-counties': 'Erreichte Bezirke',
+        'impact-lives': 'Berührte Leben',
+        'impact-projects': 'Abgeschlossene Projekte',
+        'impact-volunteers': 'Engagierte Freiwillige',
+
+        // SERVE SECTION
+        'serve-title': 'Nachhaltige Veränderung Schaffen',
+        'serve-p1': 'Unsere Arbeit basiert auf fünf Kernpfeilern – Bildung, Umwelt, Gesundheit, Humanitäre Hilfe und Jugendentwicklung – um sicherzustellen, dass jede von uns betreute Gemeinschaft ganzheitliche und nachhaltige Unterstützung erhält.',
+        'serve-p2': 'Durch Bildungsprogramme eröffnen wir den Zugang zu Wissen und lebenslangen Chancen, während unsere Gesundheitsinitiativen den Zugang zu essentieller Versorgung für gefährdete Gruppen verbessern.',
+        'serve-p3': 'Wir fördern den Umweltschutz durch die Unterstützung sauberer, sicherer und nachhaltiger Praktiken, die zukünftige Generationen schützen.',
+        'serve-p4': 'Unsere humanitären Programme bieten Hilfe, Würde und Hoffnung für Menschen in Krisensituationen – einschließlich Kinder, Menschen mit Behinderungen, Familien mit HIV/AIDS sowie Betroffene von Armut oder Sucht.',
+        'serve-p5': 'Durch die Stärkung junger Menschen mit Fähigkeiten, Mentoring und Chancen helfen wir beim Aufbau widerstandsfähiger, integrativer und zukunftsorientierter Gemeinschaften.',
+        'learn-more-btn': 'Mehr Erfahren',
+        
+        // JOIN US SECTION
+        'join-us-heading': 'Machen Sie mit.',
+
+        // STAY CONNECTED SECTION
+        'social-heading': 'Bleiben Sie mit Unserer Mission Verbunden',
+        'social-sub': 'Treten Sie unserer Online-Community bei und verfolgen Sie unseren Weg, während wir Bildung, Gesundheitswesen, Umweltschutz, Jugendförderung und humanitäre Unterstützung in Gemeinden vorantreiben. Bleiben Sie informiert, lassen Sie sich inspirieren und sehen Sie die tatsächliche Wirkung unserer Arbeit durch regelmäßige Updates in den <a href="#" style="color:#2C70E4;text-decoration:none;font-weight:600;">sozialen Medien.</a>',
+        'org-line1-2': 'Swiss Aid Connect<br>Stiftung',
+
+        // ABOUT US PAGE (Headings & Body)
+        'about-main-title': 'Über Uns',
+        'about-who': 'Wer Wir Sind',
+        'about-who-body': 'Die Swiss Aid Connect Stiftung ist eine engagierte gemeinnützige Organisation, die sich der Veränderung von Leben durch Mitgefühl, Dienst und nachhaltige Gemeindeentwicklung verschrieben hat. Geleitet von unseren fünf Kernpfeilern – Bildung, Umwelt, Gesundheit, Humanitäre Unterstützung und Jugendförderung – streben wir danach, gefährdete Bevölkerungsgruppen zu fördern und stärkere, widerstandsfähigere Gemeinschaften aufzubauen.',
+        'about-mission': 'Unsere Mission',
+        'about-mission-body': 'Unsere Mission ist es, wirkungsvolle, nachhaltige Lösungen zu liefern, die Würde wiederherstellen, Chancen erweitern und die Widerstandsfähigkeit der Gemeinschaft stärken. Wir konzentrieren uns darauf, Lücken in der Bildung zu schließen, den Zugang zu grundlegender Gesundheitsversorgung zu verbessern, den Umweltschutz zu fördern, junge Menschen zur Führung zu befähigen und Familien in Krisensituationen schnelle humanitäre Hilfe zu leisten.',
+        'about-vision': 'Unsere Vision',
+        'about-vision-body': 'Wir stellen uns eine Welt vor, in der jeder Einzelne – unabhängig von Herkunft oder Umständen – die Möglichkeit hat, zu lernen, sich zu entfalten und in Würde zu leben. Durch inklusive Entwicklung, langfristige Partnerschaften, Umweltschutz und jugendfokussierte Förderung wollen wir Generationen von Führungskräften inspirieren, die eine hellere und gerechtere Zukunft aufbauen werden.',
+        'about-what': 'Was Wir Tun',
+        'about-what-body': 'Unsere Arbeit konzentriert sich auf Programme, die eine bedeutungsvolle und dauerhafte Wirkung erzielen. Wir fördern das Lernen durch Bildungsressourcen, Mentoring und digitale Kompetenz. Wir unterstützen die Wiederherstellung der Umwelt, das Klimabewusstsein und Maßnahmen zum Schutz. Unsere Gesundheitsinitiativen bieten medizinische Hilfe, Vorsorgeuntersuchungen und wesentliche Unterstützung für gefährdete Familien. In Krisenzeiten liefert unser humanitäres Team Notnahrung, Unterkunft und Pflege. Wir stärken junge Menschen auch durch Führungstraining, Gemeinschaftsengagement und Chancen, die ihre Zukunft gestalten.',
+        
+        // FOCUS PAGE (Hero and Body)
+        'focus-main-title': 'Unsere Schwerpunkte',
+        'focus-sub': 'Langfristige Wirkung durch Bildung, Gesundheitswesen, Umweltschutz, humanitäre Hilfe und Jugendentwicklung erzielen.',
+        'focus-education': 'Bildung',
+        'focus-education-body': 'Wir fördern inklusive, gerechte und qualitativ hochwertige Bildung für Kinder, Jugendliche und unterversorgte Gemeinschaften. Unsere Initiativen stärken Schulen, stellen essentielle Lernressourcen bereit, unterstützen Lehrkräfte und schaffen Möglichkeiten, die Lernende befähigen, ihr volles Potenzial zu entfalten.',
+        'focus-environment': 'Umwelt',
+        'focus-environment-body': 'Wir fördern den Umweltschutz und die Klimaresilienz durch gemeinschaftsgetriebene Initiativen. Von Baumpflanzungen und Aufräumaktionen bis hin zu Aufklärungsprogrammen und nachhaltigen Praktiken arbeiten wir daran, Ökosysteme zu schützen, natürliche Ressourcen wiederherzustellen und einen gesünderen Planeten für zukünftige Generationen zu sichern.',
+        'focus-health': 'Gesundheit',
+        'focus-health-body': 'Wir verbessern den Zugang zu grundlegender Gesundheitsversorgung, indem wir medizinische Hilfe, Gesundheitserziehung und kritische Interventionen für gefährdete Bevölkerungsgruppen unterstützen. Unsere Programme konzentrieren sich auf Krankheitsprävention, Mütter- und Kindergesundheit, psychisches Wohlbefinden und die Stärkung der Gemeinschaftsgesundheit.',
+        'focus-humanitarian': 'Humanitäre Hilfe',
+        'focus-humanitarian-body': 'Wir leisten schnelle, mitfühlende Hilfe für Einzelpersonen und Familien, die von Krisen, Katastrophen und Not betroffen sind. Unsere humanitären Bemühungen bieten lebensrettende Unterstützung – einschließlich Nahrung, sauberem Wasser, Unterkunft, Hygieneartikeln und psychosozialer Betreuung – und helfen Gemeinschaften, mit Würde und Hoffnung wieder aufzubauen.',
+        'focus-youth': 'Jugendförderung',
+        'focus-youth-body': 'Wir statten junge Menschen mit den Fähigkeiten, dem Mentoring und den Möglichkeiten aus, die sie zum Führen und Gedeihen benötigen. Durch Führungstraining, Unternehmertumsprogramme, Entwicklung von Lebenskompetenzen und Gemeinschaftsbeteiligung fördern wir selbstbewusste, verantwortungsbewusste und gestärkte junge Menschen, die bereit sind, eine bessere Zukunft zu gestalten.',
+
+        // JOIN/LOGIN PAGE
+        'join-title': 'Beitreten / Login-Portal',
+        'join-sub': 'Ein Konto erstellen oder anmelden',
+        'join-logout': 'Abmelden',
+        'join-email-login': 'E-Mail-Login',
+        'join-email-input': 'E-Mail',
+        'join-password-input': 'Passwort',
+        'join-login-btn': 'Login',
+        'join-signup-btn': 'Konto Erstellen',
+        'join-social-or': 'Oder fortfahren mit',
+        'join-google-btn': 'Mit Google fortfahren',
+        'join-home-btn': 'Zurück zur Seite',
+
+        // FOOTER
+'footer-title': 'Swiss Aid Connect Stiftung',
+
+'footer-address': 'Komrades Business Complex<br>Postfach 78547-00100<br>Nairobi, Kenia',
+
+'footer-email-label': 'E-Mail:',
+'footer-email': 'info@swissaidconnectfoundation.com',
+
+'footer-whatsapp-label': 'WhatsApp:',
+'footer-whatsapp-number': '+41 76 525 81 45',
+
+'footer-phone-label': 'Telefon:',
+'footer-phone-number': '+41 76 525 81 45',
+
+'footer-disclaimer': 'Die Swiss Aid Connect Stiftung unterstützt Bildungs- und Gemeinschaftsinitiativen. Externe Informationen und Dienste können regelmäßig aktualisiert werden.',
+
+'footer-copyright-full': '© {{year}} Swiss Aid Connect Stiftung • Alle Rechte vorbehalten.'
+
+    },
+    // Spanish (Castilian)
+    'es': {
+        // HEADER/NAV
+      
+        'org-line1': 'Swiss Aid Connect',
+        'org-line2': 'Fundación',
+        'join-btn': 'Únete',
+        'donate-btn': 'Dona',
+        'about-us-nav': 'Sobre Nosotros',
+        'focus-nav': 'Nuestras Áreas de Enfoque',
+        'get-involved-nav': 'Participa',
+
+        // HERO SECTION
+        'hero-heading': 'Empoderando Comunidades. Transformando Vidas.',
+        'hero-sub': 'Creando un impacto duradero a través de la educación, la salud, el medio ambiente, el apoyo humanitario y el desarrollo juvenil.',
+        'programs-cta': 'Nuestros Programas',
+        'volunteer-cta': 'Voluntario',
+
+        // IMPACT SECTION
+        'impact-title': 'Nuestro Impacto Global',
+        'impact-counties': 'Condados alcanzados',
+        'impact-lives': 'Vidas Impactadas',
+        'impact-projects': 'Proyectos Completados',
+        'impact-volunteers': 'Voluntarios Comprometidos',
+
+        // SERVE SECTION
+        'serve-title': 'Creando un Cambio Duradero',
+        'serve-p1': 'Nuestro trabajo se basa en cinco pilares centrales — Educación, Medio Ambiente, Salud, Asistencia Humanitaria y Empoderamiento Juvenil — asegurando que cada comunidad a la que servimos reciba apoyo integral y sostenible.',
+        'serve-p2': 'A través de programas educativos, abrimos puertas al conocimiento y a oportunidades de por vida, mientras que nuestras iniciativas de salud mejoran el acceso a la atención esencial para grupos vulnerables.',
+        'serve-p3': 'Fomentamos la administración ambiental mediante el apoyo a prácticas limpias, seguras y sostenibles que protegen a las generaciones futuras.',
+        'serve-p4': 'Nuestros programas humanitarios brindan alivio, dignidad y esperanza a las personas que enfrentan crisis, incluidos niños, personas con discapacidad, familias que viven con VIH/SIDA y aquellos afectados por la pobreza o la adicción.',
+        'serve-p5': 'Al empoderar a los jóvenes con habilidades, mentoría y oportunidades, ayudamos a construir comunidades resilientes, inclusivas y listas para el futuro.',
+        'learn-more-btn': 'Saber Más',
+        
+        // JOIN US SECTION
+        'join-us-heading': 'Únete a nosotros.',
+
+        // STAY CONNECTED SECTION
+        'social-heading': 'Mantente Conectado con Nuestra Misión',
+        'social-sub': 'Únete a nuestra comunidad en línea y sigue nuestro viaje mientras avanzamos en la educación, la atención médica, la protección del medio ambiente, el empoderamiento juvenil y el apoyo humanitario en todas las comunidades. Mantente informado, inspírate y mira el impacto real de nuestro trabajo a través de actualizaciones periódicas en las <a href="#" style="color:#2C70E4;text-decoration:none;font-weight:600;">redes sociales.</a>',
+        'org-line1-2': 'Swiss Aid Connect<br>Fundación',
+
+        // ABOUT US PAGE (Headings & Body)
+        'about-main-title': 'Sobre Nosotros',
+        'about-who': 'Quiénes Somos',
+        'about-who-body': 'La Fundación Swiss Aid Connect es una organización dedicada sin fines de lucro, comprometida a transformar vidas a través de la compasión, el servicio y el desarrollo comunitario sostenible. Guiados por nuestros cinco pilares fundamentales — Educación, Medio Ambiente, Salud, Apoyo Humanitario y Empoderamiento Juvenil — nos esforzamos por elevar a las poblaciones vulnerables y construir comunidades más fuertes y resilientes.',
+        'about-mission': 'Nuestra Misión',
+        'about-mission-body': 'Nuestra misión es ofrecer soluciones impactantes y sostenibles que restauran la dignidad, amplían las oportunidades y fortalecen la resiliencia comunitaria. Nos enfocamos en cerrar las brechas en la educación, mejorar el acceso a la atención médica esencial, promover la protección del medio ambiente, empoderar a los jóvenes para que lideren y proporcionar asistencia humanitaria rápida a las familias en crisis.',
+        'about-vision': 'Nuestra Visión',
+        'about-vision-body': 'Visualizamos un mundo donde cada individuo, independientemente de su origen o circunstancia, tenga la oportunidad de aprender, prosperar y vivir con dignidad. A través del desarrollo inclusivo, las asociaciones a largo plazo, la administración ambiental y el empoderamiento centrado en la juventud, aspiramos a inspirar a generaciones de líderes que construirán un futuro más brillante y equitativo.',
+        'about-what': 'Qué Hacemos',
+        'about-what-body': 'Nuestro trabajo se centra en programas que crean un impacto significativo y duradero. Fomentamos el aprendizaje a través de recursos educativos, mentoría y alfabetización digital. Apoyamos la restauración ambiental, la conciencia climática y las acciones de conservación. Nuestras iniciativas de atención médica proporcionan alcance médico, exámenes y apoyo esencial a familias vulnerables. En tiempos de crisis, nuestro equipo humanitario entrega alimentos de emergencia, refugio y atención. También empoderamos a los jóvenes a través de la formación en liderazgo, la participación comunitaria y oportunidades que moldean su futuro.',
+        
+        // FOCUS PAGE (Hero and Body)
+        'focus-main-title': 'Nuestras Áreas de Enfoque',
+        'focus-sub': 'Impulsando un impacto a largo plazo a través de la educación, la atención médica, la administración ambiental, la respuesta humanitaria y el desarrollo juvenil.',
+        'focus-education': 'Educación',
+        'focus-education-body': 'Promovemos una educación inclusiva, equitativa y de alta calidad para niños, jóvenes y comunidades desatendidas. Nuestras iniciativas fortalecen las escuelas, proporcionan recursos de aprendizaje esenciales, apoyan a los maestros y crean oportunidades que empoderan a los estudiantes para que desarrollen todo su potencial.',
+        'focus-environment': 'Medio Ambiente',
+        'focus-environment-body': 'Promovemos la conservación del medio ambiente y la resiliencia climática a través de iniciativas impulsadas por la comunidad. Desde la plantación de árboles y limpiezas hasta programas de concientización y prácticas sostenibles, trabajamos para proteger los ecosistemas, restaurar los recursos naturales y asegurar un planeta más saludable para las generaciones venideras.',
+        'focus-health': 'Salud',
+        'focus-health-body': 'Mejoramos el acceso a la atención médica esencial apoyando el alcance médico, los exámenes de detección y las intervenciones críticas para las poblaciones vulnerables. Nuestros programas se centran en la prevención de enfermedades, la salud maternoinfantil, el bienestar mental y el fortalecimiento de la salud comunitaria.',
+        'focus-humanitarian': 'Ayuda Humanitaria',
+        'focus-humanitarian-body': 'Brindamos asistencia rápida y compasiva a personas y familias afectadas por crisis, desastres y dificultades. Nuestros esfuerzos humanitarios proporcionan alivio que salva vidas — incluyendo alimentos, agua potable, refugio, suministros de higiene y apoyo psicosocial — ayudando a las comunidades a reconstruirse con dignidad y esperanza.',
+        'focus-youth': 'Empoderamiento Juvenil',
+        'focus-youth-body': 'Equipamos a los jóvenes con las habilidades, la mentoría y las oportunidades que necesitan para liderar y prosperar. A través de la capacitación en liderazgo, los programas de emprendimiento, el desarrollo de habilidades para la vida y la participación comunitaria, nutrimos a jóvenes seguros, responsables y empoderados, listos para forjar un mañana mejor.',
+
+        // JOIN/LOGIN PAGE
+        'join-title': 'Únete / Portal de Inicio de Sesión',
+        'join-sub': 'Crea una cuenta o inicia sesión',
+        'join-logout': 'Cerrar Sesión',
+        'join-email-login': 'Acceso por Correo Electrónico',
+        'join-email-input': 'Correo Electrónico',
+        'join-password-input': 'Contraseña',
+        'join-login-btn': 'Iniciar Sesión',
+        'join-signup-btn': 'Crear Cuenta',
+        'join-social-or': 'O continuar con',
+        'join-google-btn': 'Continuar con Google',
+        'join-home-btn': 'Volver al sitio',
+
+       // FOOTER
+'footer-title': 'Fundación Swiss Aid Connect',
+
+'footer-address': 'Komrades Business Complex<br>Apdo. Postal 78547-00100<br>Nairobi, Kenia',
+
+'footer-email-label': 'Correo electrónico:',
+'footer-email': 'info@swissaidconnectfoundation.com',
+
+'footer-whatsapp-label': 'WhatsApp:',
+'footer-whatsapp-number': '+41 76 525 81 45',
+
+'footer-phone-label': 'Teléfono:',
+'footer-phone-number': '+41 76 525 81 45',
+
+'footer-disclaimer': 'La Fundación Swiss Aid Connect apoya iniciativas educativas y comunitarias. La información y los servicios externos pueden actualizarse periódicamente.',
+
+'footer-copyright-full': '© {{year}} Fundación Swiss Aid Connect • Todos los derechos reservados.'
+
+    },
+
+
+// Italian
+    'it': {
+        // HEADER/NAV
+       
+        'org-line1': 'Swiss Aid Connect',
+        'org-line2': 'Fondazione',
+        'join-btn': 'Unisciti',
+        'donate-btn': 'Dona',
+        'about-us-nav': 'Chi Siamo',
+        'focus-nav': 'Le Nostre Aree di Intervento',
+        'get-involved-nav': 'Partecipa',
+
+        // HERO SECTION
+        'hero-heading': 'Dare Potere alle Comunità. Trasformare le Vite.',
+        'hero-sub': 'Creare un impatto duraturo attraverso l\'istruzione, la salute, l\'ambiente, il sostegno umanitario e lo sviluppo giovanile.',
+        'programs-cta': 'I Nostri Programmi',
+        'volunteer-cta': 'Volontariato',
+        
+        // IMPACT SECTION
+        'impact-title': 'Il Nostro Impatto Globale',
+        'impact-counties': 'Contee raggiunte',
+        'impact-lives': 'Vite Toccate',
+        'impact-projects': 'Progetti Completati',
+        'impact-volunteers': 'Volontari Coinvolti',
+        
+        // SERVE SECTION
+        'serve-title': 'Creare un Cambiamento Duraturo',
+        'serve-p1': 'Il nostro lavoro si fonda su cinque pilastri fondamentali — Istruzione, Ambiente, Salute, Assistenza Umanitaria e Sviluppo Giovanile — assicurando che ogni comunità che serviamo riceva un supporto olistico e sostenibile.',
+        'serve-p2': 'Attraverso programmi educativi, apriamo le porte alla conoscenza e alle opportunità per tutta la vita, mentre le nostre iniziative sanitarie migliorano l\'accesso alle cure essenziali per i gruppi vulnerabili.',
+        'serve-p3': 'Promuoviamo la gestione responsabile dell\'ambiente sostenendo pratiche pulite, sicure e sostenibili che proteggono le generazioni future.',
+        'serve-p4': 'I nostri programmi umanitari forniscono soccorso, dignità e speranza agli individui che affrontano crisi — inclusi bambini, persone con disabilità, famiglie che vivono con l\'HIV/AIDS e coloro che sono colpiti dalla povertà o dalla dipendenza.',
+        'serve-p5': 'Dando ai giovani strumenti, mentorship e opportunità, aiutiamo a costruire comunità che siano resilienti, inclusive e pronte per il futuro.',
+        'learn-more-btn': 'Scopri di Più',
+
+        // JOIN US SECTION
+        'join-us-heading': 'Unisciti a noi.',
+
+        // STAY CONNECTED SECTION
+        'social-heading': 'Resta Connesso alla Nostra Missione',
+        'social-sub': 'Unisciti alla nostra comunità online e segui il nostro percorso mentre promuoviamo l\'istruzione, la sanità, la protezione ambientale, l\'empowerment giovanile e il supporto umanitario in tutte le comunità. Rimani informato, lasciati ispirare e guarda l\'impatto reale del nostro lavoro tramite aggiornamenti regolari sui <a href="#" style="color:#2C70E4;text-decoration:none;font-weight:600;">social media.</a>',
+        'org-line1-2': 'Swiss Aid Connect<br>Fondazione',
+
+        // ABOUT US PAGE (Headings & Body)
+        'about-main-title': 'Chi Siamo',
+        'about-who': 'Chi Siamo',
+        'about-who-body': 'Swiss Aid Connect Foundation è un\'organizzazione no-profit dedicata impegnata a trasformare le vite attraverso la compassione, il servizio e lo sviluppo comunitario sostenibile. Guidati dai nostri cinque pilastri fondamentali—Istruzione, Ambiente, Salute, Sostegno Umanitario e Empowerment Giovanile—ci sforziamo di sollevare le popolazioni vulnerabili e costruire comunità più forti e resilienti.',
+        'about-mission': 'La Nostra Missione',
+        'about-mission-body': 'La nostra missione è fornire soluzioni efficaci e sostenibili che ripristinino la dignità, espandano le opportunità e rafforzino la resilienza comunitaria. Ci concentriamo sul colmare le lacune nell\'istruzione, migliorare l\'accesso alle cure sanitarie essenziali, promuovere la protezione ambientale, dare potere ai giovani di guidare e fornire assistenza umanitaria rapida alle famiglie in crisi.',
+        'about-vision': 'La Nostra Visione',
+        'about-vision-body': 'Immaginiamo un mondo in cui ogni individuo—indipendentemente dal background o dalle circostanze—abbia l\'opportunità di imparare, prosperare e vivere con dignità. Attraverso lo sviluppo inclusivo, le partnership a lungo termine, la gestione ambientale e l\'empowerment focalizzato sui giovani, miriamo a ispirare generazioni di leader che costruiranno un futuro più luminoso ed equo.',
+        'about-what': 'Cosa Facciamo',
+        'about-what-body': 'Il nostro lavoro si concentra su programmi che creano un impatto significativo e duraturo. Promuoviamo l\'apprendimento attraverso risorse educative, mentorship e alfabetizzazione digitale. Sosteniamo il ripristino ambientale, la consapevolezza climatica e le azioni di conservazione. Le nostre iniziative sanitarie offrono assistenza medica, screening e supporto essenziale alle famiglie vulnerabili. In tempi di crisi, il nostro team umanitario fornisce cibo di emergenza, alloggio e assistenza. Inoltre, diamo potere ai giovani attraverso la formazione alla leadership, l\'impegno comunitario e le opportunità che modellano il loro futuro.',
+        
+        // FOCUS PAGE (Hero and Body)
+        'focus-main-title': 'Le Nostre Aree di Intervento',
+        'focus-sub': 'Guidare un impatto a lungo termine attraverso l\'istruzione, la sanità, la gestione ambientale, la risposta umanitaria e lo sviluppo giovanile.',
+        'focus-education': 'Istruzione',
+        'focus-education-body': 'Promuoviamo un\'istruzione inclusiva, equa e di alta qualità per bambini, giovani e comunità meno servite. Le nostre iniziative rafforzano le scuole, forniscono risorse essenziali per l\'apprendimento, supportano gli insegnanti e creano opportunità che danno agli studenti la possibilità di sbloccare il loro pieno potenziale.',
+        'focus-environment': 'Ambiente',
+        'focus-environment-body': 'Promuoviamo la conservazione ambientale e la resilienza climatica attraverso iniziative guidate dalla comunità. Dalla piantumazione di alberi e pulizie ai programmi di sensibilizzazione e alle pratiche sostenibili, lavoriamo per proteggere gli ecosistemi, ripristinare le risorse naturali e garantire un pianeta più sano per le generazioni future.',
+        'focus-health': 'Salute',
+        'focus-health-body': 'Miglioriamo l\'accesso alle cure sanitarie essenziali supportando l\'assistenza medica, l\'educazione sanitaria e gli interventi critici per le popolazioni vulnerabili. I nostri programmi si concentrano sulla prevenzione delle malattie, sulla salute materna e infantile, sul benessere mentale e sul rafforzamento della salute comunitaria.',
+        'focus-humanitarian': 'Aiuto Umanitario',
+        'focus-humanitarian-body': 'Forniamo assistenza rapida e compassionevole a individui e famiglie colpiti da crisi, disastri e difficoltà. I nostri sforzi umanitari offrono soccorso salvavita—inclusi cibo, acqua potabile, alloggio, forniture igieniche e supporto psicosociale—aiutando le comunità a ricostruirsi con dignità e speranza.',
+        'focus-youth': 'Empowerment Giovanile',
+        'focus-youth-body': 'Forniamo ai giovani le competenze, la mentorship e le opportunità di cui hanno bisogno per guidare e prosperare. Attraverso la formazione alla leadership, i programmi di imprenditorialità, lo sviluppo di abilità di vita e il coinvolgimento della comunità, coltiviamo giovani fiduciosi, responsabili e potenziati pronti a plasmare un domani migliore.',
+
+        // JOIN/LOGIN PAGE
+        'join-title': 'Unisciti a Noi / Portale di Accesso',
+        'join-sub': 'Crea un account o accedi',
+        'join-logout': 'Esci',
+        'join-email-login': 'Accesso tramite Email',
+        'join-email-input': 'Email',
+        'join-password-input': 'Password',
+        'join-login-btn': 'Accedi',
+        'join-signup-btn': 'Crea Account',
+        'join-social-or': 'Oppure continua con',
+        'join-google-btn': 'Continua con Google',
+        'join-home-btn': 'Ritorna al sito',
+
+       // FOOTER
+'footer-title': 'Fondazione Swiss Aid Connect',
+
+'footer-address': 'Komrades Business Complex<br>Casella Postale 78547-00100<br>Nairobi, Kenya',
+
+'footer-email-label': 'Email:',
+'footer-email': 'info@swissaidconnectfoundation.com',
+
+'footer-whatsapp-label': 'WhatsApp:',
+'footer-whatsapp-number': '+41 76 525 81 45',
+
+'footer-phone-label': 'Telefono:',
+'footer-phone-number': '+41 76 525 81 45',
+
+'footer-disclaimer': 'La Fondazione Swiss Aid Connect sostiene iniziative educative e comunitarie. Le informazioni e i servizi esterni possono essere aggiornati periodicamente.',
+
+'footer-copyright-full': '© {{year}} Fondazione Swiss Aid Connect • Tutti i diritti riservati.'
+
+    },
+
+
+
+
+
+  
+   
+    'sw': {
+        // HEADER/NAV
+       
+        'org-line1': 'Swiss Aid Connect',
+        'org-line2': 'Foundation (Msingi)',
+        'join-btn': 'Jiunge',
+        'donate-btn': 'Toa Mchango',
+        'about-us-nav': 'Kuhusu Sisi',
+        'focus-nav': 'Maeneo Yetu ya Kuzingatia',
+        'get-involved-nav': 'Shiriki',
+
+        // HERO SECTION
+        'hero-heading': 'Kuwawezesha Jamii. Kubadili Maisha.',
+        'hero-sub': 'Kuunda athari ya kudumu kupitia elimu, afya, mazingira, msaada wa kibinadamu, na maendeleo ya vijana.',
+        'programs-cta': 'Programu Zetu',
+        'volunteer-cta': 'Mjitoleaji',
+
+        // IMPACT SECTION
+        'impact-title': 'Athari Yetu ya Ulimwenguni',
+        'impact-counties': 'Kaunti Zilizofikiwa',
+        'impact-lives': 'Maisha Yaliyoguswa',
+        'impact-projects': 'Miradi Iliyokamilika',
+        'impact-volunteers': 'Wajitoleaji Walioshiriki',
+
+        // SERVE SECTION
+        'serve-title': 'Kuunda Mabadiliko ya Kudumu',
+        'serve-p1': 'Kazi yetu inategemea nguzo tano kuu — Elimu, Mazingira, Afya, Msaada wa Kibinadamu, na Uwezeshaji wa Vijana — tukihakikisha kila jamii tunayohudumia inapokea msaada kamili na endelevu.',
+        'serve-p2': 'Kupitia programu za elimu, tunafungua milango ya maarifa na fursa za maisha yote, huku mipango yetu ya afya ikiboresha upatikanaji wa huduma muhimu kwa makundi hatarishi.',
+        'serve-p3': 'Tunakuza uwakili wa mazingira kwa kusaidia mazoea safi, salama na endelevu yanayolinda vizazi vijavyo.',
+        'serve-p4': 'Programu zetu za kibinadamu hutoa msaada, heshima, na matumaini kwa watu wanaokabiliwa na mgogoro — ikiwa ni pamoja na watoto, watu wenye ulemavu, familia zinazoishi na VVU/UKIMWI, na wale walioathiriwa na umaskini au uraibu.',
+        'serve-p5': 'Kwa kuwawezesha vijana na ujuzi, ushauri, na fursa, tunasaidia kujenga jamii ambazo ni imara, zinazojumuisha, na tayari kwa ajili ya baadaye.',
+        'learn-more-btn': 'Jifunze Zaidi',
+        
+        // JOIN US SECTION
+        'join-us-heading': 'Jiunge nasi.',
+
+        // STAY CONNECTED SECTION
+        'social-heading': 'Endelea Kuunganishwa na Dhamira Yetu',
+        'social-sub': 'Jiunge na jumuiya yetu ya mtandaoni na ufuate safari yetu tunapoendeleza elimu, huduma za afya, ulinzi wa mazingira, uwezeshaji wa vijana, na msaada wa kibinadamu katika jamii. Endelea kufahamishwa, pata msukumo, na uone athari halisi ya kazi yetu kupitia sasisho za mara kwa mara kwenye <a href="#" style="color:#2C70E4;text-decoration:none;font-weight:600;">mitandao ya kijamii.</a>',
+        'org-line1-2': 'Swiss Aid Connect<br>Foundation (Msingi)',
+
+        // ABOUT US PAGE (Headings & Body)
+        'about-main-title': 'Kuhusu Sisi',
+        'about-who': 'Sisi ni Nani',
+        'about-who-body': 'Swiss Aid Connect Foundation ni shirika lisilo la faida lililojitolea kubadilisha maisha kupitia huruma, huduma, na maendeleo endelevu ya jamii. Tukiongozwa na nguzo zetu tano kuu — Elimu, Mazingira, Afya, Msaada wa Kibinadamu, na Uwezeshaji wa Vijana — tunajitahidi kuinua watu walio katika mazingira magumu na kujenga jamii imara na zenye uwezo zaidi.',
+        'about-mission': 'Dhamira Yetu',
+        'about-mission-body': 'Dhamira yetu ni kutoa suluhisho zenye athari na endelevu ambazo zinarudisha heshima, kupanua fursa, na kuimarisha uwezo wa jamii. Tunazingatia kuziba mapengo katika elimu, kuboresha upatikanaji wa huduma muhimu za afya, kukuza ulinzi wa mazingira, kuwawezesha vijana kuongoza, na kutoa msaada wa haraka wa kibinadamu kwa familia zilizo katika shida.',
+        'about-vision': 'Maono Yetu',
+        'about-vision-body': 'Tunaona ulimwengu ambapo kila mtu — bila kujali asili au hali — ana fursa ya kujifunza, kustawi, na kuishi kwa heshima. Kupitia maendeleo jumuishi, ushirikiano wa muda mrefu, uwakili wa mazingira, na uwezeshaji unaozingatia vijana, tunalenga kuhamasisha vizazi vya viongozi ambao watajenga mustakabali mzuri na wenye usawa zaidi.',
+        'about-what': 'Tunachofanya',
+        'about-what-body': 'Kazi yetu inalenga kwenye programu zinazounda athari ya maana na ya kudumu. Tunakuza ujifunzaji kupitia rasilimali za elimu, ushauri, na ujuzi wa kidijitali. Tunasaidia urejeshwaji wa mazingira, uhamasishaji wa hali ya hewa, na hatua za uhifadhi. Mipango yetu ya afya hutoa huduma za matibabu, uchunguzi, na msaada muhimu kwa familia zilizo katika mazingira magumu. Katika nyakati za shida, timu yetu ya kibinadamu hutoa chakula cha dharura, makazi, na huduma. Pia tunawawezesha vijana kupitia mafunzo ya uongozi, ushiriki wa jamii, na fursa zinazounda mustakabali wao.',
+        
+        // FOCUS PAGE (Hero and Body)
+        'focus-main-title': 'Maeneo Yetu ya Kuzingatia',
+        'focus-sub': 'Kuleta athari ya muda mrefu kupitia elimu, huduma za afya, uwakili wa mazingira, mwitikio wa kibinadamu, na maendeleo ya vijana.',
+        'focus-education': 'Elimu',
+        'focus-education-body': 'Tunaendeleza elimu jumuishi, ya usawa, na ya hali ya juu kwa watoto, vijana, na jamii zisizohudumiwa. Mipango yetu inaimarisha shule, inatoa rasilimali muhimu za kujifunzia, inawasaidia walimu, na inaunda fursa zinazowawezesha wanafunzi kufikia uwezo wao kamili.',
+        'focus-environment': 'Mazingira',
+        'focus-environment-body': 'Tunakuza uhifadhi wa mazingira na uwezo wa kukabiliana na hali ya hewa kupitia mipango inayoongozwa na jamii. Kuanzia upandaji miti na usafishaji hadi programu za uhamasishaji na mazoea endelevu, tunafanya kazi kulinda mifumo ya ikolojia, kurejesha rasilimali asili, na kuhakikisha sayari yenye afya kwa vizazi vijavyo.',
+        'focus-health': 'Afya',
+        'focus-health-body': 'Tunaboresha upatikanaji wa huduma muhimu za afya kwa kusaidia huduma za matibabu, elimu ya afya, na hatua muhimu kwa watu walio katika mazingira magumu. Programu zetu zinalenga kuzuia magonjwa, afya ya mama na mtoto, ustawi wa akili, na uimarishaji wa afya ya jamii.',
+        'focus-humanitarian': 'Msaada wa Kibinadamu',
+        'focus-humanitarian-body': 'Tunatoa msaada wa haraka na wa huruma kwa watu binafsi na familia zilizoathiriwa na shida, majanga, na ugumu. Juhudi zetu za kibinadamu hutoa msaada wa kuokoa maisha — pamoja na chakula, maji safi, makazi, vifaa vya usafi, na msaada wa kisaikolojia — kusaidia jamii kujijenga upya kwa heshima na matumaini.',
+        'focus-youth': 'Uwezeshaji wa Vijana',
+        'focus-youth-body': 'Tunawapa vijana ujuzi, ushauri, na fursa wanazohitaji ili kuongoza na kustawi. Kupitia mafunzo ya uongozi, programu za ujasiriamali, ukuzaji wa ujuzi wa maisha, na ushiriki wa jamii, tunalea vijana wenye ujasiri, kuwajibika, na kuwezeshwa tayari kuunda kesho bora.',
+
+        // JOIN/LOGIN PAGE
+        'join-title': 'Jiunge / Mfumo wa Kuingia',
+        'join-sub': 'Fungua akaunti au ingia',
+        'join-logout': 'Toka',
+        'join-email-login': 'Kuingia kwa Barua Pepe',
+        'join-email-input': 'Barua Pepe',
+        'join-password-input': 'Neno la Siri',
+        'join-login-btn': 'Ingia',
+        'join-signup-btn': 'Fungua Akaunti',
+        'join-social-or': 'Au endelea na',
+        'join-google-btn': 'Endelea na Google',
+        'join-home-btn': 'Rudi kwenye tovuti',
+
+        // FOOTER
+'footer-title': 'Swiss Aid Connect Foundation',
+
+'footer-address': 'Komrades Business Complex<br>Sanduku la Posta 78547-00100<br>Nairobi, Kenya',
+
+'footer-email-label': 'Barua pepe:',
+'footer-email': 'info@swissaidconnectfoundation.com',
+
+'footer-whatsapp-label': 'WhatsApp:',
+'footer-whatsapp-number': '+41 76 525 81 45',
+
+'footer-phone-label': 'Simu:',
+'footer-phone-number': '+41 76 525 81 45',
+
+'footer-disclaimer': 'Swiss Aid Connect Foundation inaunga mkono miradi ya elimu na jamii. Taarifa na huduma za tovuti za nje zinaweza kusasishwa mara kwa mara.',
+
+'footer-copyright-full': '© {{year}} Swiss Aid Connect Foundation • Haki zote zimehifadhiwa.'
+
+    }
+};
+
+
+
+// Map of HTML elements to their corresponding translation keys
+const textMappings = [
+    // Top Nav
+    { selector: '.top-nav a:nth-child(2)', key: 'join-nav' }, // Portal
+    // Header/Brand
+    { selector: '.brand h1 span:first-child', key: 'org-line1' },
+    { selector: '.brand h1 span:last-child', key: 'org-line2' },
+    { selector: '.btn-join', key: 'join-btn' },
+    { selector: '.btn-donate', key: 'donate-btn' },
+    // Side Nav
+    { selector: '.side-nav a:nth-child(1)', key: 'about-us-nav' },
+    { selector: '.side-nav a:nth-child(2)', key: 'focus-nav' },
+    { selector: '.side-nav a:nth-child(3)', key: 'get-involved-nav' },
+    // HERO SECTION
+    { selector: '#hero-heading', key: 'hero-heading' },
+    { selector: '.hero-sub', key: 'hero-sub' },
+    { selector: '.hero-ctas .cta-primary', key: 'programs-cta' },
+    { selector: '.hero-ctas .cta-outline', key: 'volunteer-cta' },
+    // IMPACT SECTION
+    { selector: '#impact-heading', key: 'impact-title' },
+    { selector: '.impact-grid .impact-card:nth-child(1) p', key: 'impact-countries' },
+    { selector: '.impact-grid .impact-card:nth-child(2) p', key: 'impact-lives' },
+    { selector: '.impact-grid .impact-card:nth-child(3) p', key: 'impact-projects' },
+    { selector: '.impact-grid .impact-card:nth-child(4) p', key: 'impact-volunteers' },
+    // SERVE SECTION
+    { selector: '#serve-heading', key: 'serve-title' },
+    { selector: '.serve-paragraph .line1', key: 'serve-p1' },
+    { selector: '.serve-paragraph .line2', key: 'serve-p2' },
+    { selector: '.serve-paragraph .line3', key: 'serve-p3' },
+    { selector: '.serve-paragraph .line4', key: 'serve-p4' },
+    { selector: '.serve-paragraph .line5', key: 'serve-p5' },
+    { selector: '.serve-btn', key: 'learn-more-btn' },
+    // JOIN US SECTION
+    { selector: 'section:nth-child(7) > div > h2', key: 'join-us-heading' },
+    { selector: '.join-btn-green', key: 'learn-more-btn' },
+    { selector: '.join-btn-blue', key: 'learn-more-btn' },
+    // STAY CONNECTED SECTION
+    { selector: 'section:nth-child(8) > div > h2', key: 'social-heading' },
+    { selector: 'section:nth-child(8) > div > p:nth-of-type(1)', key: 'social-sub', innerHTML: true },
+    { selector: 'section:nth-child(8) > div > div > div:nth-child(1) p', key: 'org-line1-2', innerHTML: true },
+    { selector: 'section:nth-child(8) > div > div > div:nth-child(2) p', key: 'org-line1-2', innerHTML: true },
+    { selector: 'section:nth-child(8) > div > div > div:nth-child(3) p', key: 'org-line1-2', innerHTML: true },
+    { selector: 'section:nth-child(8) > div > div > div:nth-child(4) p', key: 'org-line1-2', innerHTML: true },
+    { selector: 'section:nth-child(8) > div > div > div:nth-child(5) p', key: 'org-line1-2', innerHTML: true },
+
+    // ABOUT US PAGE (Headings & Body)
+    { selector: '#aboutPage .about-main-title', key: 'about-main-title' },
+    { selector: '#aboutPage .about-block:nth-child(2) h3', key: 'about-who' },
+    { selector: '#aboutPage .about-block:nth-child(2) p', key: 'about-who-body' },
+    { selector: '#aboutPage .about-block:nth-child(3) h3', key: 'about-mission' },
+    { selector: '#aboutPage .about-block:nth-child(3) p', key: 'about-mission-body' },
+    { selector: '#aboutPage .about-block:nth-child(4) h3', key: 'about-vision' },
+    { selector: '#aboutPage .about-block:nth-child(4) p', key: 'about-vision-body' },
+    { selector: '#aboutPage .about-block:nth-child(5) h3', key: 'about-what' },
+    { selector: '#aboutPage .about-block:nth-child(5) p', key: 'about-what-body' },
+    { selector: '#aboutPage .floatHomeBtn', key: 'join-home-btn', attribute: 'aria-label' },
+
+    // FOCUS PAGE (Hero and Body)
+    { selector: '#focusPage .focus-hero h2', key: 'focus-main-title' },
+    { selector: '#focusPage .focus-hero p', key: 'focus-sub' },
+    { selector: '#focusPage .focus-card:nth-child(1) .focus-ribbon', key: 'focus-education' },
+    { selector: '#focusPage .focus-card:nth-child(1) h3', key: 'focus-education' },
+    { selector: '#focusPage .focus-card:nth-child(1) p', key: 'focus-education-body' },
+    { selector: '#focusPage .focus-card:nth-child(2) .focus-ribbon', key: 'focus-environment' },
+    { selector: '#focusPage .focus-card:nth-child(2) h3', key: 'focus-environment' },
+    { selector: '#focusPage .focus-card:nth-child(2) p', key: 'focus-environment-body' },
+    { selector: '#focusPage .focus-card:nth-child(3) .focus-ribbon', key: 'focus-health' },
+    { selector: '#focusPage .focus-card:nth-child(3) h3', key: 'focus-health' },
+    { selector: '#focusPage .focus-card:nth-child(3) p', key: 'focus-health-body' },
+    { selector: '#focusPage .focus-card:nth-child(4) .focus-ribbon', key: 'focus-humanitarian' },
+    { selector: '#focusPage .focus-card:nth-child(4) h3', key: 'focus-humanitarian' },
+    { selector: '#focusPage .focus-card:nth-child(4) p', key: 'focus-humanitarian-body' },
+    { selector: '#focusPage .focus-card:nth-child(5) .focus-ribbon', key: 'focus-youth' },
+    { selector: '#focusPage .focus-card:nth-child(5) h3', key: 'focus-youth' },
+    { selector: '#focusPage .focus-card:nth-child(5) p', key: 'focus-youth-body' },
+    { selector: '#focusPage .floatHomeBtn', key: 'join-home-btn', attribute: 'aria-label' },
+
+    // JOIN/LOGIN PAGE
+    { selector: '#joinPage .join-title', key: 'join-title' },
+    { selector: '#joinPage .join-sub', key: 'join-sub' },
+    { selector: '#joinPage #logoutBtn', key: 'join-logout' },
+    { selector: '#joinPage .join-card:nth-child(4) h3', key: 'join-email-login' },
+    { selector: '#joinPage #emailInput', key: 'join-email-input', attribute: 'placeholder' },
+    { selector: '#joinPage #passwordInput', key: 'join-password-input', attribute: 'placeholder' },
+    { selector: '#joinPage #emailLoginBtn', key: 'join-login-btn' },
+    { selector: '#joinPage #emailSignupBtn', key: 'join-signup-btn' },
+    { selector: '#joinPage .join-card:nth-child(5) h3', key: 'join-social-or' },
+    { selector: '#joinPage #googleBtn', key: 'join-google-btn' },
+    { selector: '#joinPage .floating-home-btn', key: 'join-home-btn', attribute: 'aria-label' },
+
+    // FOOTER
+    { selector: 'footer h4:nth-child(1)', key: 'news-footer-title' },
+    { selector: 'footer p a:nth-child(1)', key: 'news-updates' },
+    { selector: 'footer p a:nth-child(2)', key: 'news-announcements' },
+    
+    { selector: 'footer h4:nth-child(4)', key: 'media-footer-title' },
+    { selector: 'footer p a:nth-child(3)', key: 'media-gallery' },
+    { selector: 'footer p a:nth-child(4)', key: 'media-downloads' },
+    
+    { selector: 'footer h4:nth-child(7)', key: 'connect-footer-title' },
+    { selector: 'footer p a:nth-child(5)', key: 'connect-contact' },
+    { selector: 'footer p a:nth-child(6)', key: 'connect-involved' },
+    { selector: 'footer p a:nth-child(7)', key: 'connect-privacy' },
+    
+    { selector: 'footer > div > div > div:nth-child(2) > p', key: 'org-line1-2-address', innerHTML: true },
+
+    { selector: 'footer > div > div:nth-child(2) > div > span', key: 'interest-footer-title' },
+    { selector: 'footer > div > div:nth-child(2) > div > a:nth-child(2)', key: 'interest-work' },
+    { selector: 'footer > div > div:nth-child(2) > div > a:nth-child(3)', key: 'interest-donate' },
+    { selector: 'footer > div > div:nth-child(2) > div > a:nth-child(4)', key: 'interest-volunteer' },
+
+    { selector: 'footer > div > p:nth-child(6)', key: 'disclaimer-text' },
+    { selector: 'footer > span:last-child', key: 'footer-copyright-full' }
+];
+
+
+
+function switchLanguage(langCode) {
+    const languageData = translations[langCode];
+    if (!languageData) return;
+
+    // Update desktop language toggle
+    const langToggle = document.getElementById('langToggle');
+    if (langToggle) {
+        langToggle.textContent = langCode.toUpperCase() + " ▾";
+        langToggle.setAttribute('data-lang', langCode);
+    }
+
+    // 1. Translate elements using textMappings
+    textMappings.forEach(mapping => {
+        document.querySelectorAll(mapping.selector).forEach(element => {
+            const translation = languageData[mapping.key];
+            if (!translation) return;
+
+            // Handle translations with HTML
+            if (
+                mapping.key === 'social-sub' ||
+                mapping.key === 'org-line1-2-address' ||
+                mapping.key === 'org-line1-2'
+            ) {
+                element.innerHTML = translation;
+            }
+
+            // Footer copyright with dynamic year
+            else if (mapping.key === 'footer-copyright-full') {
+                const year = new Date().getFullYear();
+                element.textContent = translation.replace('{{year}}', year);
+            }
+
+            // Normal translations
+            else {
+                // Keep Google button image safe
+                if (element.id === 'googleBtn') return;
+
+                if (mapping.attribute) {
+                    element.setAttribute(mapping.attribute, translation);
+                } else {
+                    element.textContent = translation;
+                }
+            }
+        });
+    });
+
+    // 2. Update MOBILE menu translations
+    const inner = document.getElementById('mobileMenuInner');
+    if (inner && inner.innerHTML.trim() !== "") {
+        const mobileLinks = inner.querySelectorAll('a');
+
+        mobileLinks.forEach(link => {
+            const dataKey = link.getAttribute('data-key');
+
+            if (link.id === 'mobileLangToggle') {
+                link.textContent = langCode.toUpperCase() + " ▾";
+            }
+            else if (dataKey && languageData[dataKey]) {
+                link.textContent = languageData[dataKey];
+            }
+            else if (link.textContent === 'A.I' || link.textContent === 'Portal') {
+                // Leave static items unchanged
+            }
+        });
+    }
+} 
+// END OF switchLanguage FUNCTION
+
+
+
+
+
+// Initial language load based on user preference or default to English
+document.addEventListener('DOMContentLoaded', () => {
+    const savedLang = localStorage.getItem('userLang') || 'en';
+    switchLanguage(savedLang);
+
+    // Initialize the year for the footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+});
+
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  
+  /* ============================================================
+     ELEMENT REFERENCES
+  ============================================================ */
+  const aboutPage = document.getElementById("aboutPage");
+  const focusPage = document.getElementById("focusPage");
+  const floatHomeBtns = document.querySelectorAll(".floatHomeBtn");
+
+  /* ============================================================
+     KEEP HEADER & FOOTER, HIDE EVERYTHING ELSE
+  ============================================================ */
+  function hideAllExceptPage(activePageId) {
+
+    const elements = document.querySelectorAll(
+      "body > *:not(header):not(footer):not(#aboutPage):not(#focusPage)"
+    );
+
+    // Hide all normal content
+    elements.forEach(el => el.style.display = "none");
+
+    // Hide both overlays first
+    aboutPage.style.display = "none";
+    focusPage.style.display = "none";
+
+    // Show only the requested overlay
+    const page = document.getElementById(activePageId);
+    if (page) page.style.display = "block";
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  /* ============================================================
+     RESTORE ALL CONTENT (HOME VIEW)
+  ============================================================ */
+  function restoreAll() {
+    const elements = document.querySelectorAll(
+      "body > *:not(header):not(footer):not(#aboutPage):not(#focusPage)"
+    );
+
+    elements.forEach(el => el.style.display = "");
+
+    aboutPage.style.display = "none";
+    focusPage.style.display = "none";
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  /* ============================================================
+     NAVIGATION HANDLERS (CLICK DELEGATION)
+  ============================================================ */
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest("a[data-key]");
+    if (!a) return;
+
+    const key = a.dataset.key;
+
+    if (key === "about-us-nav") {
+      e.preventDefault();
+      hideAllExceptPage("aboutPage");
+    }
+
+    if (key === "focus-nav") {
+      e.preventDefault();
+      hideAllExceptPage("focusPage");
+    }
+
+    if (key === "home") {
+      e.preventDefault();
+      restoreAll();
+    }
+  });
+
+  /* ============================================================
+     FLOATING HOME BUTTONS (BOTH ABOUT + FOCUS)
+  ============================================================ */
+  floatHomeBtns.forEach(btn => {
+    btn.addEventListener("click", () => restoreAll());
+  });
+
+});
+
+
+
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const joinPage = document.getElementById("joinPage");
+  const floatHomeBtns = document.querySelectorAll(".floatHomeBtn");
+
+  function hideMainSite(hide) {
+    const elements = document.querySelectorAll(
+      "body > *:not(header):not(footer):not(#joinPage):not(#focusPage):not(#aboutPage)"
+    );
+    elements.forEach(el => el.style.display = hide ? "none" : "");
+  }
+
+  // OPEN JOIN PAGE
+  document.querySelectorAll("[data-key='join-nav']").forEach(btn => {
+    btn.addEventListener("click", e => {
+      e.preventDefault();
+
+      hideMainSite(true);
+
+      joinPage.style.display = "block";
+
+      window.scrollTo(0, 0);
+    });
+  });
+
+  // CLOSE (home button)
+  floatHomeBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+
+      joinPage.style.display = "none";
+
+      hideMainSite(false);
+
+      window.scrollTo(0, 0);
+    });
+  });
+});
+
+
+
+
+
+const firebaseConfig = {
+    apiKey: "AIzaSyAQNayCzqw8NwIRaky4o21TPMXvL1ED5Mc",
+    authDomain: "swissaid-1e9c9.firebaseapp.com",
+    databaseURL: "https://swissaid-1e9c9-default-rtdb.firebaseio.com",
+    projectId: "swissaid-1e9c9",
+    storageBucket: "swissaid-1e9c9.firebasestorage.app",
+    messagingSenderId: "598813811284",
+    appId: "1:598813811284:web:d4a9ebf46da0fb290043c1"
+  };
+
+  // Initialize Firebase (compat)
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+
+
+
+
+
+// LOGIN
+document.getElementById("emailLoginBtn").addEventListener("click", async () => {
+  const email = document.getElementById("emailInput").value;
+  const pass  = document.getElementById("passwordInput").value;
+
+  try {
+    await auth.signInWithEmailAndPassword(email, pass);
+
+    // REDIRECT TO MEMBERS DASHBOARD
+    window.location.href = "/members/dashboard.html";
+
+  } catch (err) {
+    alert(err.message);
+  }
+});
+
+
+// SIGNUP
+document.getElementById("emailSignupBtn").addEventListener("click", async () => {
+  const email = document.getElementById("emailInput").value;
+  const pass  = document.getElementById("passwordInput").value;
+
+  try {
+    await auth.createUserWithEmailAndPassword(email, pass);
+
+    // REDIRECT TO MEMBERS DASHBOARD
+    window.location.href = "/members/dashboard.html";
+
+  } catch (err) {
+    alert(err.message);
+  }
+});
+
+
+// GOOGLE LOGIN
+const googleProvider = new firebase.auth.GoogleAuthProvider();
+
+document.getElementById("googleBtn").addEventListener("click", async () => {
+  try {
+    await auth.signInWithPopup(googleProvider);
+
+    // REDIRECT TO MEMBERS DASHBOARD
+    window.location.href = "/members/dashboard.html";
+
+  } catch (err) {
+    alert(err.message);
+  }
+});
+
+
+
+
+document.getElementById("logoutBtn").addEventListener("click", async () => {
+  try {
+    await auth.signOut();
+    alert("Logged out!");
+  } catch (err) {
+    alert(err.message);
+  }
+});
+
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    // user logged in
+    document.getElementById("logoutBtn").style.display = "block";
+  } else {
+    // user logged out
+    document.getElementById("logoutBtn").style.display = "none";
+  }
+});
+
+
+
+
+
+
+
+  
+</script>
+
+
+
+
+</body>
+</html>
