@@ -4,70 +4,129 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hybrid Education Centre | NGO</title>
+
 <style>
-/* --- SAME CSS AS YOUR ORIGINAL (UNCHANGED) --- */
+/* ================= ROOT ================= */
 :root{
-    --blue:#0b61b6;
-    --yellow:#f5c400;
-    --purple:#7a2fa6;
-    --green:#2a9d8f;
-    --orange:#f4a261;
-    --text:#333;
-    --max-width:1200px;
+  --blue:#0b61b6;
+  --yellow:#f5c400;
+  --purple:#7a2fa6;
+  --green:#2a9d8f;
+  --orange:#f4a261;
+  --text:#333;
+  --max-width:1200px;
 }
+
+/* ================= BASE ================= */
 body{
-    margin:0;
-    font-family:Arial, Helvetica, sans-serif;
-    background:#fafafa;
-    color:var(--text);
-    line-height:1.6;
+  margin:0;
+  font-family:Arial, Helvetica, sans-serif;
+  background:#fafafa;
+  color:var(--text);
+  line-height:1.7;
 }
+
+/* ================= HEADER ================= */
 header{
-    background:var(--blue);
-    color:#fff;
-    padding:20px;
-    display:grid;
-    grid-template-columns:1fr auto 1fr auto; /* extended safely */
-    align-items:center;
+  background:var(--blue);
+  color:#fff;
+  padding:20px;
+  display:grid;
+  grid-template-columns:1fr auto 1fr auto;
+  align-items:center;
 }
 .logo{ height:70px; }
-.page-title{ margin:0; font-size:32px; text-align:center; }
+.page-title{
+  margin:0;
+  font-size:32px;
+  text-align:center;
+}
 .empty{ height:70px; }
 
+/* ================= SECTIONS ================= */
 .section{
-    max-width:var(--max-width);
-    margin:60px auto;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:40px;
-    padding:60px 20px;
-    border-radius:20px;
-    min-height:350px;
-}
-.section:nth-child(even){ flex-direction:row-reverse; }
-.text{ width:50%; }
-.text h2{ margin-top:0; font-size:28px; }
-.shape-round{ width:50%; border-radius:50%; }
-.shape-rounded{ width:50%; border-radius:20px; }
-.shape-diagonal{ width:50%; clip-path:polygon(0 0, 100% 10%, 100% 100%, 0 90%); }
-.shape-hexagon{ width:50%; clip-path:polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%); }
-.shape-leaf{ width:50%; clip-path:ellipse(50% 40% at 50% 50%); }
-.center-section{ text-align:center; flex-direction:column; }
-footer{ background:#222; color:#eee; padding:30px; text-align:center; margin-top:60px; }
-
-@media(max-width:900px){
-    .section{ flex-direction:column !important; text-align:center; }
-    .section img, .text{ width:100%; }
+  max-width:var(--max-width);
+  margin:60px auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:40px;
+  padding:60px 40px;
+  border-radius:20px;
+  min-height:350px;
 }
 
-.section:nth-of-type(1){ background:linear-gradient(135deg, #0b61b6, #1a75d1); color:#fff; }
-.section:nth-of-type(2){ background:linear-gradient(135deg, #2a9d8f, #21867a); color:#fff; }
-.section:nth-of-type(3){ background:linear-gradient(135deg, #f4a261, #e07b39); }
-.section:nth-of-type(4){ background:linear-gradient(135deg, #7a2fa6, #5e2080); color:#fff; }
-.section:nth-of-type(5){ background:linear-gradient(135deg, #f5c400, #d4a500); }
-.section.swiss{ background:linear-gradient(135deg, #004080, #0066cc); color:#fff; }
+/* alternate layout */
+.section:nth-child(even){
+  flex-direction:row-reverse;
+}
 
+/* ================= TEXT ================= */
+.text{
+  width:50%;
+}
+
+.text h2{
+  margin-top:0;
+  font-size:28px;
+  text-align:left;
+}
+
+.text p{
+  max-width:640px;
+  text-align:left;
+}
+
+/* ================= SHAPES ================= */
+.shape-round,
+.shape-rounded,
+.shape-diagonal,
+.shape-hexagon,
+.shape-leaf{
+  width:50%;
+}
+
+.shape-round{ border-radius:50%; }
+.shape-rounded{ border-radius:20px; }
+.shape-diagonal{ clip-path:polygon(0 0, 100% 10%, 100% 100%, 0 90%); }
+.shape-hexagon{ clip-path:polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%); }
+.shape-leaf{ clip-path:ellipse(50% 40% at 50% 50%); }
+
+/* ================= CENTER SECTIONS ================= */
+.center-section{
+  flex-direction:column;
+  text-align:center;
+}
+
+.center-section .text{
+  width:100%;
+}
+
+.center-section .text h2,
+.center-section .text p{
+  text-align:center;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+/* ================= FOOTER ================= */
+footer{
+  background:#222;
+  color:#eee;
+  padding:30px;
+  text-align:center;
+  margin-top:60px;
+}
+
+/* ================= COLORS ================= */
+.section:nth-of-type(1){ background:linear-gradient(135deg,#0b61b6,#1a75d1); color:#fff; }
+.section:nth-of-type(2){ background:linear-gradient(135deg,#2a9d8f,#21867a); color:#fff; }
+.section:nth-of-type(3){ background:linear-gradient(135deg,#f4a261,#e07b39); }
+.section:nth-of-type(4){ background:linear-gradient(135deg,#7a2fa6,#5e2080); color:#fff; }
+.section:nth-of-type(5){ background:linear-gradient(135deg,#f5c400,#d4a500); }
+.section.swiss{ background:linear-gradient(135deg,#004080,#0066cc); color:#fff; }
+
+/* ================= FLOAT BUTTON ================= */
 .floating-home-btn{
   position:fixed;
   bottom:28px;
@@ -79,28 +138,21 @@ footer{ background:#222; color:#eee; padding:30px; text-align:center; margin-top
   color:white;
 }
 
-/* ================================================= */
-/* ========== LANGUAGE DROPDOWN (ADDED) ============= */
-/* ================================================= */
-
+/* ================= LANGUAGE DROPDOWN ================= */
 .lang-dropdown{
   position:relative;
   justify-self:end;
   z-index:1000;
 }
-
 #langToggle{
-  background:#ffffff;
+  background:#fff;
   color:#000;
   padding:6px 10px;
   border-radius:8px;
-  text-decoration:none;
   font-weight:bold;
   font-size:14px;
   cursor:pointer;
-  display:inline-block;
 }
-
 .lang-menu{
   position:absolute;
   top:110%;
@@ -110,45 +162,40 @@ footer{ background:#222; color:#eee; padding:30px; text-align:center; margin-top
   border-radius:10px;
   box-shadow:0 10px 30px rgba(0,0,0,0.2);
   display:none;
-  overflow:hidden;
 }
-
 .lang-menu a{
   display:block;
   padding:10px 14px;
   text-decoration:none;
   color:#000;
-  font-size:14px;
 }
+.lang-menu a:hover{ background:#f2f2f2; }
+.lang-menu.open{ display:block; }
 
-.lang-menu a:hover{
-  background:#f2f2f2;
-}
+/* ================= MOBILE ================= */
+@media(max-width:900px){
 
-.lang-menu.open{
-  display:block;
-}
-
-
-
-  /* ===== MOBILE TEXT READABILITY FIX ===== */
-@media (max-width: 900px) {
-
-  .section .text {
-    max-width: 680px;
-    margin-left: auto;
-    margin-right: auto;
+  .section{
+    flex-direction:column !important;
+    text-align:center;
+    padding:50px 20px;
   }
 
-  .section .text p,
-  .section .text h2 {
-    text-align: center;
-    line-height: 1.7;
+  .text,
+  .section img{
+    width:100%;
   }
 
+  .text h2,
+  .text p{
+    text-align:center;
+    margin-left:auto;
+    margin-right:auto;
+    max-width:640px;
+  }
 }
-  
 </style>
+
 
 </head>
 <body>
