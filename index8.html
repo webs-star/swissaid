@@ -1363,23 +1363,30 @@ footer.site-footer{
 }
 
 
-
+/* ===== GLOBAL MOBILE TEXT FIX ===== */
 @media (max-width: 780px) {
 
-  * {
-    text-align: center !important;
+  body {
+    text-align: center;
   }
 
-  p, span, li, div, h1, h2, h3, h4, h5, h6 {
-    max-width: 560px !important;
+  h1, h2, h3, h4, h5, h6,
+  p, span, li, div {
+    max-width: 92%;
     margin-left: auto !important;
     margin-right: auto !important;
-    line-height: 1.75 !important;
-    float: none !important;
-    transform: none !important;
+    text-align: center !important;
+    line-height: 1.7;
+    word-wrap: break-word;
   }
 
+  /* Fix flex/grid parents */
+  section, article, main, .container, .card {
+    display: block !important;
+    text-align: center;
+  }
 }
+
 
 
   
