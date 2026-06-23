@@ -1364,7 +1364,50 @@ footer.site-footer{
 }
 
 
+.modal{
+    display:none;
+    position:fixed;
+    z-index:9999;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.6);
+}
 
+.modal-content{
+    background:#fff;
+    width:90%;
+    max-width:600px;
+    margin:60px auto;
+    padding:30px;
+    border-radius:12px;
+    position:relative;
+}
+
+.close-btn{
+    position:absolute;
+    top:10px;
+    right:15px;
+    font-size:30px;
+    cursor:pointer;
+}
+
+.bank-details{
+    background:#f8f9fa;
+    padding:15px;
+    border-left:4px solid #28a745;
+    margin:20px 0;
+}
+
+.bank-details button{
+    background:#28a745;
+    color:#fff;
+    border:none;
+    padding:5px 10px;
+    border-radius:4px;
+    cursor:pointer;
+}
 </style>
 </head>
 <body>
@@ -1411,12 +1454,14 @@ footer.site-footer{
     <!-- Row 2: Join + Donate -->
     <div class="nav-actions">
       <a class="btn btn-join" href="#" data-key="join-nav">Join</a>
-<a class="btn btn-donate"
-   href="https://www.paypal.com/ncp/payment/7ATRH8ZXLAHTE"
-   target="_blank"
-   rel="noopener noreferrer">
-   Donate
-</a>
+
+      <div class="nav-actions">
+    <a class="btn btn-join" href="#" data-key="join-nav">Join</a>
+
+    <button class="btn btn-donate" onclick="openDonateModal()">
+        Donate
+    </button>
+</div>
       
     </div>
 
@@ -1956,8 +2001,75 @@ footer.site-footer{
   </script>
 </footer>
 
+<div id="donateModal" class="modal">
 
+    <div class="modal-content">
 
+        <span class="close-btn" onclick="closeDonateModal()">&times;</span>
+
+        <h2>💝 Support SwissAid Connect Foundation</h2>
+
+        <p>
+            Your donation supports education, youth empowerment,
+            humanitarian assistance, environmental conservation,
+            and community development projects across Kenya.
+        </p>
+
+        <div class="bank-details">
+
+            <p>
+                <strong>Account Name:</strong>
+                SwissAid Connect Foundation
+            </p>
+
+            <p>
+                <strong>Bank:</strong>
+                Equity Bank Kenya
+            </p>
+
+            <p>
+                <strong>Account Number:</strong>
+                <span id="accountNumber">0220187480186</span>
+
+                <button
+                    type="button"
+                    onclick="copyAccount()"
+                    style="margin-left:10px;">
+                    Copy
+                </button>
+            </p>
+
+            <p>
+                <strong>SWIFT Code:</strong>
+                EQBLKENAXXX
+            </p>
+
+            <p>
+                <strong>Branch:</strong>
+                Murang'a Branch
+            </p>
+
+            <p>
+                <strong>Reference:</strong>
+                Donation
+            </p>
+
+        </div>
+
+        <p>
+            After making your donation, kindly email your transaction
+            reference to:
+        </p>
+
+        <p>
+            <a href="mailto:info@swissaidconnectfoundation.com">
+                info@swissaidconnectfoundation.com
+            </a>
+        </p>
+
+    </div>
+
+</div>
 <script>
 // ---------------- MOBILE MENU HANDLER ----------------
 const btnMenu = document.getElementById('btnMenu');
@@ -3117,7 +3229,30 @@ onAuthStateChanged(auth, (user) => {
 
 
 
+function openDonateModal() {
+    document.getElementById("donateModal").style.display = "block";
+}
 
+function closeDonateModal() {
+    document.getElementById("donateModal").style.display = "none";
+}
+
+function copyAccount() {
+    const account =
+        document.getElementById("accountNumber").innerText;
+
+    navigator.clipboard.writeText(account);
+
+    alert("Account number copied!");
+}
+
+window.onclick = function(event) {
+    const modal = document.getElementById("donateModal");
+
+    if (event.target === modal) {
+        modal.style.display = "none";
+    }
+}
 
 
   
